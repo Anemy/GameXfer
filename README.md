@@ -1,18 +1,18 @@
 GameXfer
 =========
-[gamexfer](http://gamexfer.com)
+[Gamexfer.com](http://gamexfer.com)
 
 Installation
 ------------
 
 Install node js from https://nodejs.org/en/download/
+
 Install mongodb from https://docs.mongodb.com/getting-started/shell/installation/
 
 ```bash
 $ npm install
 $ npm install -g eslint
 $ npm install -g nodemon
-$ 
 ```
 
 Deployment
