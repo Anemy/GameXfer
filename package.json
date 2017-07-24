@@ -1,0 +1,34 @@
+{
+  "name": "GameXfer",
+  "version": "1.0.0",
+  "description": "Trading pixels like they're cowrie shells",
+  "scripts": {
+    "start": "echo \"Error: You must specify dev or prod, ex: npm run start:dev\"",
+    "start:dev": "gulp dev",
+    "start:prod": "gulp prod"
+  },
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "repository": "https://github.com/Anemy/GameXfer",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "connect-mongo": "^1.3.2",
+    "express": "^4.15.3",
+    "express-session": "^1.15.4",
+    "pug": "^2.0.0-rc.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-loader": "^7.1.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "eslint": "^4.3.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-eslint": "^4.0.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-sass": "^3.1.0",
+    "webpack-stream": "^3.2.0"
+  }
+}

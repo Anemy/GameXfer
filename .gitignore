@@ -1,0 +1,10 @@
+node_modules
+
+# Mac OS
+.DS_Store
+
+local
+
+# Built files
+public/js/build.js
+public/style/index.css

@@ -1,0 +1,3 @@
+Copyright (C) Rhys Howell 2016-2017 - All Rights Reserved
+Unauthorized copying of any files present in the gamexfer codebase (the parent directory to this license file), via any medium is strictly prohibited
+Proprietary and confidential
