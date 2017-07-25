@@ -1,0 +1,1 @@
+// Fetches all of the forums for viewing.

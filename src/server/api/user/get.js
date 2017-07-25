@@ -1,0 +1,1 @@
+// Sends a user's information. Used for viewing profiles.

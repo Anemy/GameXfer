@@ -1,8 +1,11 @@
 import express from 'express';
 
-import login from './api/login';
-import logout from './api/logout';
-import signup from './api/signup';
+// User
+import login from './api/user/login';
+import logout from './api/user/logout';
+import signup from './api/user/signup';
+
+import requireAuth from './requireAuth';
 
 const router = express.Router();
 
@@ -13,10 +16,9 @@ router.get('/', (req, res) => {
   });
 });
 
-
+// User
 router.post('/login', login);
-router.post('/logout', logout);
-
+router.post('/logout', requireAuth, logout);
 router.post('/signup', signup);
 
 router.get('*', (req, res) => {

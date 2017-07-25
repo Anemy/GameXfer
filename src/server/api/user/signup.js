@@ -2,10 +2,10 @@
 
 import sync from 'synchronize';
 
-import bcrypt from '../bcrypt/Bcrypt';
-import Constants from '../ServerConstants';
-import db from '../Database';
-import Utils from '../../Shared/Utils';
+import bcrypt from '../../bcrypt/Bcrypt';
+import Constants from '../../ServerConstants';
+import db from '../../Database';
+import Utils from '../../../Shared/Utils';
 
 export default (req, res) => {
   if (!req || !req.body) {
@@ -90,7 +90,9 @@ export default (req, res) => {
         const createdUser = sync.await(db.collection('users').insert({
           username: username,
           email: email,
-          password: hash, 
+          password: hash,
+
+          xferCoin: 0,
 
           createdAt: currentTime,
           savedAt: currentTime
