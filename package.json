@@ -10,11 +10,15 @@
   "license": "SEE LICENSE IN LICENSE.txt",
   "repository": "https://github.com/Anemy/GameXfer",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
     "connect-mongo": "^1.3.2",
     "express": "^4.15.3",
     "express-session": "^1.15.4",
-    "pug": "^2.0.0-rc.2"
+    "mongojs": "^2.4.0",
+    "pug": "^2.0.0-rc.2",
+    "synchronize": "^2.0.0",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

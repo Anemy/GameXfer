@@ -107,7 +107,7 @@ function nodemonServer(environment) {
     args: ['--presets', 'es2015,stage-2'],
     watch: [config.serverJsPath, config.sharedJsPath],
     env: { 
-      'GAMEXFER_ENV': environment
+      'NODE_ENV': environment
     }
   }).on('restart', () => {
     setTimeout(() => {

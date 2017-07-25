@@ -7,6 +7,9 @@ Entrypoint of running the server.
 import bodyParser from 'body-parser';
 import connectMongo from 'connect-mongo';
 import express from 'express';
+import fs from 'fs';
+import http from 'http';
+import https from 'https';
 import path from 'path';
 import session from 'express-session';
 
@@ -17,9 +20,25 @@ import ServerUtils from './ServerUtils';
 const PORT = 3000;
 
 const app = express();
-const http = require('http').Server(app);
 
 const MongoStore = connectMongo(session);
+
+let certOptions;
+
+if (Environment.isDev()) {
+  certOptions = {
+    key: fs.readFileSync('./key.pem'),
+    cert: fs.readFileSync('./cert.pem'),
+    requestCert: false,
+    rejectUnauthorized: false
+  };
+} else if(Environment.isProd()) {
+  // TODO: Prod https certificate.
+  certOptions = {
+    key: fs.readFileSync('./key.pem'),
+    cert: fs.readFileSync('./cert.pem')
+  };
+}
 
 // Set up session storing.
 app.use(session({
@@ -42,6 +61,14 @@ app.set('view engine', 'pug');
 
 app.use('/', router);
 
-http.listen(PORT, () => {
+https.createServer(certOptions, app).listen(PORT, () => {
   console.log(Environment.get(), 'server listening on port', PORT);
 });
+
+// Redirect from http port 80 to https.
+if (Environment.isProd()) {
+  http.createServer((req, res) => {
+    res.writeHead(301, { 'Location': 'https://' + req.headers['host'] + req.url });
+    res.end();
+  }).listen(80);
+}
