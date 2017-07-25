@@ -1,4 +1,4 @@
-// Handles the request to send a message.
+// Handles the request to create/send a message.
 
 import sync from 'synchronize';
 import uuidv1 from 'uuid/v1';

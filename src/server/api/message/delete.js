@@ -23,7 +23,7 @@ export default (req, res) => {
   }
 
   sync.fiber(() => {
-    // Save the new message into the destination user's inbox.
+    // Delete the messages from the user's inbox.
     const updatedUser = sync.await(db.collection('users').findAndModify({
       query: {
         username: req.username,
@@ -61,7 +61,8 @@ export default (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
     res.status(200);
-    // TODO: Render the user's inbox after sending a message, or the page they were just at.
+    
+    // TODO: Render the user's inbox after deleting a message, or the page they were just at.
     res.redirect('/');
   });
 };
