@@ -87,7 +87,7 @@ export default (req, res) => {
       sync.fiber(() => {
         // Save the new user.
         const currentTime = new Date();
-        const createdUser = sync.await(db.insert({
+        const createdUser = sync.await(db.collection('users').insert({
           username: username,
           email: email,
           password: hash, 
@@ -107,9 +107,8 @@ export default (req, res) => {
         req.session.username = createdUser.username;
 
         res.setHeader('Content-Type', 'application/json');
-        res.status(200).send({
-          err: createdUser ? false /* No error. */ : 'Server error.'
-        });
+        res.status(200);
+        res.render('index');
       });
     });
   });
