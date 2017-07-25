@@ -8,6 +8,7 @@ import signup from './api/user/signup';
 
 // Messages
 import getMessages from './api/message/get';
+import readMessage from './api/message/read';
 import sendMessage from './api/message/create';
 import deleteMessages from './api/message/delete';
 
@@ -56,6 +57,7 @@ router.get('/', (req, res) => {
 // Messages
 router.get('/message', basicLimiter, requireAuth, getMessages);
 router.post('/message', sendMessageLimiter, requireAuth, sendMessage);
+router.post('/message/read', basicLimiter, requireAuth, readMessage);
 router.post('/message/delete', basicLimiter, requireAuth, deleteMessages);
 
 // User
