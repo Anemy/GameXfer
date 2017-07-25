@@ -1,6 +1,7 @@
 // Handles the request to send a message.
 
 import sync from 'synchronize';
+import uuidv1 from 'uuid/v1';
 
 import Constants from '../../../shared/Constants';
 import db from '../../Database';
@@ -46,9 +47,14 @@ export default (req, res) => {
     const currentTime = new Date();
 
     const newMessage = {
+      // Give the message a unique id to reference.
+      messageId: uuidv1(),
+
       sender: req.username,
+
       subject: subject,
       text: text,
+
       sentAt: currentTime
     };
 

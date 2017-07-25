@@ -8,8 +8,16 @@ import signup from './api/user/signup';
 
 // Messages
 import sendMessage from './api/message/create';
+import deleteMessage from './api/message/delete';
 
 import requireAuth from './requireAuth';
+
+// 100 messages max over 10 minutes.
+const basicLimiter = new RateLimit({
+  windowMs: 10*60*1000, // 10 minute window.
+  delayMs: 0,
+  max: 100
+});
 
 const loginLimiter = new RateLimit({
   windowMs: 10*60*1000, // 10 minute window.
@@ -46,6 +54,7 @@ router.get('/', (req, res) => {
 
 // Messages
 router.post('/message', sendMessageLimiter, requireAuth, sendMessage);
+router.post('/message/delete', basicLimiter, requireAuth, deleteMessage);
 
 // User
 router.post('/login', loginLimiter, login);
