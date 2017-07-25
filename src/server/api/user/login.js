@@ -52,7 +52,6 @@ export default (req, res) => {
       return;
     }
 
-    // TODO: Rate limit this - it's a very expensive procedure.
     // Hash the password and see if it matches.
     bcrypt.getBCryptHash(Constants.LOGIN_HASH, [password, user.password] , (response) => {
       // This is not async/await because it uses promises
@@ -64,8 +63,6 @@ export default (req, res) => {
         });
         return;
       }
-
-      // TODO: Check to see if the user is currently logged in.
 
       // Success! Sign the new user in.
       req.session.username = user.username;
