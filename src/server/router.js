@@ -1,6 +1,16 @@
 import express from 'express';
 import RateLimit from 'express-rate-limit';
 
+// User
+import login from './api/user/login';
+import logout from './api/user/logout';
+import signup from './api/user/signup';
+
+// Messages
+import sendMessage from './api/message/create';
+
+import requireAuth from './requireAuth';
+
 const loginLimiter = new RateLimit({
   windowMs: 10*60*1000, // 10 minute window.
   delayAfter: 1, // Begin slowing down responses after the first request.
@@ -17,13 +27,13 @@ const signupLimiter = new RateLimit({
   message: 'Too many accounts created from this IP, please try again in an hour.'
 });
 
-
-// User
-import login from './api/user/login';
-import logout from './api/user/logout';
-import signup from './api/user/signup';
-
-import requireAuth from './requireAuth';
+const sendMessageLimiter = new RateLimit({
+  windowMs: 10*60*1000, // 10 minute window.
+  delayAfter: 1, // Begin slowing down responses after the first request.
+  delayMs: 1000, // Slow down subsequent responses by 1 second per request.
+  max: 10, // Start blocking after 3 requests.
+  message: 'Too many messages sent from this IP, you may try again in 10 minutes.'
+});
 
 const router = express.Router();
 
@@ -33,6 +43,9 @@ router.get('/', (req, res) => {
     username: req.session.username
   });
 });
+
+// Messages
+router.post('/message', sendMessageLimiter, requireAuth, sendMessage);
 
 // User
 router.post('/login', loginLimiter, login);

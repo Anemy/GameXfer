@@ -94,6 +94,9 @@ export default (req, res) => {
 
           xferCoin: 0,
 
+          messages: [],
+          messagesLength: 0,
+
           createdAt: currentTime,
           savedAt: currentTime
         }, sync.defer()));
@@ -110,7 +113,7 @@ export default (req, res) => {
 
         res.setHeader('Content-Type', 'application/json');
         res.status(200);
-        res.render('index');
+        res.redirect('/');
       });
     });
   });

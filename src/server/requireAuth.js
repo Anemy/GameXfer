@@ -14,5 +14,7 @@ export default (req, res, next) => {
     }
   }
 
+  req.username = req.session.username;
+
   next();
 };

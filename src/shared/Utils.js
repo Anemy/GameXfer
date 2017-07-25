@@ -2,6 +2,8 @@
  * Utility functions shared by multiple classes.
  **/
 
+import Constants from './Constants';
+
 class Utils {
   /**
    * @return {boolean} - true or false half the time.
@@ -36,6 +38,17 @@ class Utils {
     return !(!password ||
       password.length < 2 ||
       password.length > 16);
+  }
+
+  // @return {Boolean} - If the supplied subject is valid for a message.
+  static validMessageSubject(subject) {
+    return subject && subject.length > 0 && subject.length < Constants.MESSAGE_SUBJECT_MAX_LENGTH;
+  }
+
+  // @return {Boolean} - If the supplied text is valid for a message.
+  static validMessageText(text) {
+    return text && text.length > 0 && text.length < Constants.MESSAGE_TEXT_MAX_LENGTH;
+
   }
 }
 
