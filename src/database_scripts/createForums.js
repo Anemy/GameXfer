@@ -8,15 +8,15 @@ import { FORUM_TYPES } from '../shared/Constants';
 import db from '../server/Database.js';
 
 const forumList = [{
-  forumId: 'test',
+  forumId: 0,
   title: 'Test Game_Name',
   type: FORUM_TYPES.TRADING // Trading forum.
 }, {
-  forumId: 'csgo',
+  forumId: 1,
   title: 'Counter Strike',
   type: FORUM_TYPES.TRADING // Trading forum.
 }, {
-  forumId: 'pc',
+  forumId: 2,
   title: 'PC Discussion',
   type: FORUM_TYPES.DISCUSSION // Discussion forum.
 }];

@@ -14,7 +14,7 @@ export default (req, res) => {
         $exists: false
       }
     }, {
-      forumName: 1,
+      title: 1,
       type: 1,
       threadsCreatedTotal: 1,
       mostRecentCommentTime: 1,

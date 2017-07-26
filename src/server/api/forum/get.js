@@ -10,8 +10,8 @@ import db from '../../Database';
 import Utils from '../../../shared/Utils';
 
 export default (req, res) => {
-  const forumId = req.params.forumId;
-  const forumPage = req.params.forumPage; // Optional.
+  let forumId = req.params.forumId;
+  let forumPage = req.params.forumPage; // Optional.
 
   // Ensure the request has the proper attributes.
   if (!forumId) {
@@ -21,26 +21,28 @@ export default (req, res) => {
     return;
   }
 
-  let page = 0;
-  if (forumPage && Utils.isNumber(forumPage)) {
-    const newNumber = Number(forumPage);
+  if (Utils.isNumber(forumId)) {
+    forumId = Number(forumId);
+  }
 
-    if (newNumber > 0) {
-      page = newNumber;
-    }
+  if (forumPage && Utils.isNumber(forumPage)) {
+    forumPage = Number(forumPage);
+  } else {
+    forumPage = 0;
   }
 
   sync.fiber(() => {
     // When we've successfully deleted a message then we update the new messages length.
-    const forum = sync.await(db.collection('forums').find({
-      _id: forumId
+    const forum = sync.await(db.collection('forums').findOne({
+      forumId: forumId
     }, {
-      forumName: 1,
+      forumId: forumId,
+      title: 1,
       type: 1,
       threadsCreatedTotal: 1,
       threadHeaders: {
         // Get the Constants.AMOUNT_OF_THREADS_PER_PAGE threads based on the page number.
-        $slice: [page * Constants.AMOUNT_OF_THREADS_PER_PAGE, Constants.AMOUNT_OF_THREADS_PER_PAGE]
+        $slice: [forumPage * Constants.AMOUNT_OF_THREADS_PER_PAGE, Constants.AMOUNT_OF_THREADS_PER_PAGE]
       }
     }, sync.defer()));
 
