@@ -33,23 +33,41 @@ $ browser https://localhost:3000
   - password `String` - Hashed via bcrypt
   - xferCoin `Number`
   - createdAt `Date`
-  - lastActivity `Date`
+  - messagesRecievedTotal `Number`
   - messagesLength `Number` - The amount of messages in the user's inbox. Saves counting operation time.
   - messages `Array` - An array of the user's messages. Can hold up to 100 messages at a time.
+    - messageId `String` - Just incremented by 1 everytime a new message is recieved.
     - sender `String` - The _id of the user who sent the message.
     - subject `String`
     - text `String`
     - sentAt `Date`
     - readAt `Date` - Set when the message has been read.
-  - sentMessages `Array` - An array of the user's last 10 sent messages.
-    - destination `String` the _id of the destination user.
-    - subject `String`
-    - text `String`
-    - sentAt `Date`
 
-#### forums
+#### Forums
 
 - forum
+  - forumId `String` - These need to be unique, and try to keep them low (look at other forums when creating them).
   - title `String`
   - type `String` - Discussion, trading, services, etc.
-  - threads `Array`
+  - threadHeaders `Array` - Sorted by 
+    - threadId `String`
+    - threadTitle `String`
+    - mostRecentCommentTime `Date`
+    - mostRecentCommentAuthor `String`
+    - mostRecentThreadTime `Date`
+    - mostRecentThreadAuthor `String`
+
+#### Threads
+
+- thread
+  - threadId `String`
+  - forumId `String`
+  - subject `String`
+  - commentsLength `String`
+  - mostRecentCommentTime `Date`
+  - mostRecentCommentAuthor `String` - Their username.
+  - comments `Array`
+   - commentId `String`
+   - author `String`
+   - text `String`
+   - createdAt `Date`

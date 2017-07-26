@@ -95,6 +95,7 @@ export default (req, res) => {
           xferCoin: 0,
 
           messages: [],
+          messagesRecievedTotal: 0,
           messagesLength: 0,
 
           createdAt: currentTime,

@@ -46,9 +46,22 @@ export default (req, res) => {
   sync.fiber(() => {
     const currentTime = new Date();
 
+    const user = sync.await(db.collection('users').find({
+      username: destination
+    }, {
+      messsagesRecievedTotal: 1
+    }, sync.defer()));
+
+    if (!user) {
+      res.status(400).send({
+        err: 'Unable to send message: That user does not exist.'
+      });
+      return;
+    }
+
     const newMessage = {
       // Give the message a unique id to reference.
-      messageId: uuidv1(),
+      messageId: Utils.isNumber(user.messsagesRecievedTotal) ? Number(user.messsagesRecievedTotal) : uuidv1(),
 
       sender: req.username,
 
@@ -71,7 +84,8 @@ export default (req, res) => {
         messages: newMessage 
       },
       $inc: { 
-        messagesLength: 1
+        messagesLength: 1,
+        messagesRecievedTotal: 1
       }
     }, sync.defer()));
 

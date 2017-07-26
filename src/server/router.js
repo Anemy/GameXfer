@@ -1,6 +1,10 @@
 import express from 'express';
 import RateLimit from 'express-rate-limit';
 
+// Forum
+import getForum from './api/forum/get';
+import getAllForums from './api/forum/getAll';
+
 // User
 import login from './api/user/login';
 import logout from './api/user/logout';
@@ -54,8 +58,12 @@ router.get('/', (req, res) => {
   });
 });
 
+// Forum
+router.get('/forum/:id', getForum);
+router.get('/forums', getAllForums);
+
 // Messages
-router.get('/message', basicLimiter, requireAuth, getMessages);
+router.get('/inbox', basicLimiter, requireAuth, getMessages);
 router.post('/message', sendMessageLimiter, requireAuth, sendMessage);
 router.post('/message/read', basicLimiter, requireAuth, readMessage);
 router.post('/message/delete', basicLimiter, requireAuth, deleteMessages);

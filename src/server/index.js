@@ -5,11 +5,13 @@ Entrypoint of running the server.
 */
 
 import bodyParser from 'body-parser';
+import cluster from 'cluster';
 import connectMongo from 'connect-mongo';
 import express from 'express';
 import fs from 'fs';
 import http from 'http';
 import https from 'https';
+import os from 'os';
 import path from 'path';
 import session from 'express-session';
 
@@ -17,58 +19,78 @@ import Environment from '../shared/Environment';
 import router from './router';
 import ServerUtils from './ServerUtils';
 
-const PORT = 3000;
+let numCPUs = os.cpus().length;
 
-const app = express();
-
-const MongoStore = connectMongo(session);
-
-let certOptions;
-
-if (Environment.isDev()) {
-  certOptions = {
-    key: fs.readFileSync('./key.pem'),
-    cert: fs.readFileSync('./cert.pem'),
-    requestCert: false,
-    rejectUnauthorized: false
-  };
-} else if(Environment.isProd()) {
-  // TODO: Prod https certificate.
-  certOptions = {
-    key: fs.readFileSync('./key.pem'),
-    cert: fs.readFileSync('./cert.pem')
-  };
+// We decrease the number of processes to run by one in order to leave an open spot for the bcrypt server.
+if (numCPUs > 1) {
+  numCPUs--;
 }
 
-// Set up session storing.
-app.use(session({
-  secret: 'GameXfer...SECRET_12321!...kittens',
-  saveUninitialized: false,
-  resave: true,
-  store: new MongoStore({
-    url: ServerUtils.getMongoDBURL(),
-    ttl: 24 * 60 * 60 * 365 // 1 Year expiration.
-  })
-}));
+if (!Environment.isDev() && cluster.isMaster) {
+  console.log(`Master ${process.pid} is running.`);
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+  // Fork workers.
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
 
-app.use(express.static(path.join(__dirname + '/../..', 'public')));
+  cluster.on('exit', (worker) => {
+    console.log(`Worker ${worker.process.pid} died.`);
+  });
+} else {
+  const PORT = 3000;
 
-app.set('views', path.join(__dirname, '/../client/views'));
-app.set('view engine', 'pug');
+  const app = express();
 
-app.use('/', router);
+  const MongoStore = connectMongo(session);
 
-https.createServer(certOptions, app).listen(PORT, () => {
-  console.log(Environment.get(), 'server listening on port', PORT);
-});
+  let certOptions;
 
-// Redirect from http port 80 to https.
-if (Environment.isProd()) {
-  http.createServer((req, res) => {
-    res.writeHead(301, { 'Location': 'https://' + req.headers['host'] + req.url });
-    res.end();
-  }).listen(80);
+  if (Environment.isDev()) {
+    certOptions = {
+      key: fs.readFileSync('./key.pem'),
+      cert: fs.readFileSync('./cert.pem'),
+      requestCert: false,
+      rejectUnauthorized: false
+    };
+  } else if(Environment.isProd()) {
+    // TODO: Prod https certificate.
+    certOptions = {
+      key: fs.readFileSync('./key.pem'),
+      cert: fs.readFileSync('./cert.pem')
+    };
+  }
+
+  // Set up session storing.
+  app.use(session({
+    secret: 'GameXfer...SECRET_12321!...kittens',
+    saveUninitialized: false,
+    resave: true,
+    store: new MongoStore({
+      url: ServerUtils.getMongoDBURL(),
+      ttl: 24 * 60 * 60 * 365 // 1 Year expiration.
+    })
+  }));
+
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.json());
+
+  app.use(express.static(path.join(__dirname + '/../..', 'public')));
+
+  app.set('views', path.join(__dirname, '/../client/views'));
+  app.set('view engine', 'pug');
+
+  app.use('/', router);
+
+  https.createServer(certOptions, app).listen(PORT, () => {
+    console.log('Pid', process.pid, Environment.get(), 'server listening on port', PORT);
+  });
+
+  // Redirect from http port 3001 (redirected from 80) to https.
+  if (Environment.isProd()) {
+    http.createServer((req, res) => {
+      res.writeHead(301, { 'Location': 'https://' + req.headers['host'] + req.url });
+      res.end();
+    }).listen(3001);
+  }
 }
