@@ -1,6 +1,10 @@
 import express from 'express';
 import RateLimit from 'express-rate-limit';
 
+// Thread
+import getThread from './api/thread/get';
+import createThread from './api/thread/create';
+
 // Forum
 import getForum from './api/forum/get';
 import getAllForums from './api/forum/getAll';
@@ -34,11 +38,19 @@ const loginLimiter = new RateLimit({
 });
 
 const signupLimiter = new RateLimit({
-  windowMs: 60*60*1000, // 1 hour window.
+  windowMs: 15*60*1000, // 15 minute window.
   delayAfter: 1, // Begin slowing down responses after the first request.
   delayMs: 3*1000, // Slow down subsequent responses by 3 seconds per request.
-  max: 4, // Start blocking after 3 requests.
-  message: 'Too many accounts created from this IP, please try again in an hour.'
+  max: 6, // Start blocking after 6 requests.
+  message: 'Too many signup account attempts created from this IP, please try again in fifteen minutes.'
+});
+
+const createThreadLimiter = new RateLimit({
+  windowMs: 10*60*1000, // 10 minute window.
+  delayAfter: 1, // Begin slowing down responses after the first request.
+  delayMs: 1000, // Slow down subsequent responses by 1 second per request.
+  max: 3, // Start blocking after 3 requests.
+  message: 'Too many thread creation requests from this IP, you may try again in 10 minutes.'
 });
 
 const sendMessageLimiter = new RateLimit({
@@ -58,8 +70,12 @@ router.get('/', (req, res) => {
   });
 });
 
+// Thread 
+router.get('/forum/:forumId/:threadId', getThread);
+router.post('/forums/:forumId', createThreadLimiter, requireAuth, createThread);
+
 // Forum
-router.get('/forum/:id', getForum);
+router.get('/forum/:forumId', getForum);
 router.get('/forums', getAllForums);
 
 // Messages

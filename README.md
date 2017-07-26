@@ -10,6 +10,7 @@ Install mongodb from https://docs.mongodb.com/getting-started/shell/installation
 ```bash
 $ npm install
 $ npm install -g eslint
+$ npm install -g babel-cli # for scripts
 $ npm install -g nodemon
 ```
 
@@ -28,11 +29,15 @@ $ browser https://localhost:3000
 #### Users
 
 - user
-  - _id `String`
-  - username `String`
+  - username `String` - Unique.
   - password `String` - Hashed via bcrypt
   - xferCoin `Number`
   - createdAt `Date`
+  - posts: `Number`
+  - mostRecentCommentTime `Date`
+  - mostRecentCommentId `String`
+  - mostRecentCommentThreadId `String`
+  - mostRecentCommentForumId `String`
   - messagesRecievedTotal `Number`
   - messagesLength `Number` - The amount of messages in the user's inbox. Saves counting operation time.
   - messages `Array` - An array of the user's messages. Can hold up to 100 messages at a time.
@@ -46,26 +51,29 @@ $ browser https://localhost:3000
 #### Forums
 
 - forum
-  - forumId `String` - These need to be unique, and try to keep them low (look at other forums when creating them).
+  - forumId `String` or `Number` - Unique. Try to keep ids low (look at other forums when creating them).
   - title `String`
   - type `String` - Discussion, trading, services, etc.
-  - threadHeaders `Array` - Sorted by 
-    - threadId `String`
-    - threadTitle `String`
-    - mostRecentCommentTime `Date`
-    - mostRecentCommentAuthor `String`
-    - mostRecentThreadTime `Date`
-    - mostRecentThreadAuthor `String`
+  - threadsCreatedTotal `Number`
+  - mostRecentThreadId `String` - The id of the most recently created thread. Not necessarily the most recently commented.
+  - mostRecentThreadTime `Date`
+  - mostRecentThreadAuthor `String`
+  - mostRecentCommentId `String`
+  - mostRecentCommentTime `Date`
+  - mostRecentCommentAuthor `String`
+  - mostRecentCommentThreadId `String`
 
 #### Threads
 
 - thread
-  - threadId `String`
-  - forumId `String`
-  - subject `String`
-  - commentsLength `String`
+  - threadId `String` or `Number` - Unique in combination with forumId.
+  - forumId `String` - Unique in combination with threadId.
+  - title `String`
+  - description `String`
+  - views `Number`
   - mostRecentCommentTime `Date`
   - mostRecentCommentAuthor `String` - Their username.
+  - commentsLength `String`
   - comments `Array`
    - commentId `String`
    - author `String`

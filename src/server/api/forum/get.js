@@ -10,8 +10,8 @@ import db from '../../Database';
 import Utils from '../../../shared/Utils';
 
 export default (req, res) => {
-  // This will be a param?
-  const forumId = req.body.forumId;
+  const forumId = req.params.forumId;
+  const forumPage = req.params.forumPage; // Optional.
 
   // Ensure the request has the proper attributes.
   if (!forumId) {
@@ -22,8 +22,8 @@ export default (req, res) => {
   }
 
   let page = 0;
-  if (req.body.forumPage && Utils.isNumber(req.body.forumPage)) {
-    const newNumber = Number(req.body.forumPage);
+  if (forumPage && Utils.isNumber(forumPage)) {
+    const newNumber = Number(forumPage);
 
     if (newNumber > 0) {
       page = newNumber;
@@ -33,10 +33,11 @@ export default (req, res) => {
   sync.fiber(() => {
     // When we've successfully deleted a message then we update the new messages length.
     const forum = sync.await(db.collection('forums').find({
-      forumId: forumId
+      _id: forumId
     }, {
       forumName: 1,
       type: 1,
+      threadsCreatedTotal: 1,
       threadHeaders: {
         // Get the Constants.AMOUNT_OF_THREADS_PER_PAGE threads based on the page number.
         $slice: [page * Constants.AMOUNT_OF_THREADS_PER_PAGE, Constants.AMOUNT_OF_THREADS_PER_PAGE]
@@ -50,11 +51,9 @@ export default (req, res) => {
       return;
     }
 
-    res.setHeader('Content-Type', 'application/json');
     res.status(200);
-    res.send({
-      err: false,
-      msg: forum
+    res.render('forum', {
+      forum: forum
     });
   });
 };

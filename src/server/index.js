@@ -72,8 +72,13 @@ if (!Environment.isDev() && cluster.isMaster) {
     })
   }));
 
-  app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({
+    extended: true,
+    limit: '100mb'
+  }));
+  app.use(bodyParser.json({
+    limit: '100mb'
+  }));
 
   app.use(express.static(path.join(__dirname + '/../..', 'public')));
 
@@ -83,7 +88,7 @@ if (!Environment.isDev() && cluster.isMaster) {
   app.use('/', router);
 
   https.createServer(certOptions, app).listen(PORT, () => {
-    console.log('Pid', process.pid, Environment.get(), 'server listening on port', PORT);
+    console.log('Pid', process.pid, Environment.get(), 'server listening on port', PORT, '\\o/');
   });
 
   // Redirect from http port 3001 (redirected from 80) to https.

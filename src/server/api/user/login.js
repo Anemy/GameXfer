@@ -17,6 +17,8 @@ export default (req, res) => {
     return;
   }
 
+  console.log('db on login', db);
+
   let email = req.body.email;
   let password = req.body.password;
 
@@ -53,11 +55,11 @@ export default (req, res) => {
     }
 
     // Hash the password and see if it matches.
-    bcrypt.getBCryptHash(Constants.LOGIN_HASH, [password, user.password] , (response) => {
+    bcrypt.getBCryptHash(Constants.LOGIN_HASH, [password, user.password], (response) => {
       // This is not async/await because it uses promises
       // https://github.com/alexeypetrushin/synchronize/issues/56
 
-      if (!response) { 
+      if (!response) {
         res.status(400).send({
           err: misMatchMessage
         });
@@ -75,4 +77,3 @@ export default (req, res) => {
     });
   });
 };
-

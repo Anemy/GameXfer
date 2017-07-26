@@ -16,6 +16,7 @@ export default (req, res) => {
     }, {
       forumName: 1,
       type: 1,
+      threadsCreatedTotal: 1,
       mostRecentCommentTime: 1,
       mostRecentCommentAuthor: 1,
       mostRecentThreadTime: 1,
@@ -29,11 +30,9 @@ export default (req, res) => {
       return;
     }
 
-    res.setHeader('Content-Type', 'application/json');
     res.status(200);
-    res.send({
-      err: false,
-      msg: forums
+    res.render('forums', {
+      forums: forums
     });
   });
 };

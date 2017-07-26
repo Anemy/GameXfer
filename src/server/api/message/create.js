@@ -36,7 +36,7 @@ export default (req, res) => {
   }
 
   // Ensure the message conforms to the message guidelines. 
-  if (!Utils.validMessageSubject(subject)) {
+  if (!Utils.validMessageText(text)) {
     res.status(400).send({
       err: 'Invalid message text to send.'
     });

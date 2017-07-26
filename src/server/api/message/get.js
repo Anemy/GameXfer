@@ -8,7 +8,7 @@ export default (req, res) => {
   sync.fiber(() => {
     // Try to retrieve the user's messages.
     const user = sync.await(db.collection('users').findOne({
-      username: req.username,
+      username: req.username
     }, {
       messages: 1
     }, sync.defer()));
@@ -20,11 +20,9 @@ export default (req, res) => {
       return;
     }
 
-    res.setHeader('Content-Type', 'application/json');
     res.status(200);
 
-    // TODO: Render the user's inbox after finding the messages.
-    res.send({
+    res.render('inbox', {
       messages: user.messages
     });
   });
