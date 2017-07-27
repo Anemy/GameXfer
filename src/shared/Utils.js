@@ -48,7 +48,18 @@ class Utils {
   // @return {Boolean} - If the supplied text is valid for a message.
   static validMessageText(text) {
     return text && text.length > 0 && text.length < Constants.MESSAGE_TEXT_MAX_LENGTH;
+  }
 
+  static validThreadTitle(title) {
+    return title && title.length > 0 && title.length < Constants.THREAD_TITLE_MAX_LENGTH;
+  }
+
+  static validThreadDescription(description) {
+    return description && description.length > 0 && description.length < Constants.THREAD_DESCRIPTION_MAX_LENGTH;
+  }
+
+  static validCommentText(text) {
+    return text && text.length > 0 && text.length < Constants.COMMENT_TEXT_MAX_LENGTH;
   }
 }
 

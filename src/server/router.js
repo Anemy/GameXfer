@@ -30,7 +30,7 @@ const basicLimiter = new RateLimit({
 });
 
 const loginLimiter = new RateLimit({
-  windowMs: 10*60*1000, // 10 minute window.
+  windowMs: 10*60*1000, // 10 minute window. 
   delayAfter: 1, // Begin slowing down responses after the first request.
   delayMs: 1000, // Slow down subsequent responses by 1 second per request.
   max: 10, // Start blocking after 3 requests.
@@ -71,11 +71,11 @@ router.get('/', (req, res) => {
 });
 
 // Thread 
-router.get('/forum/:forumId/:threadId', getThread);
-router.post('/forums/:forumId', createThreadLimiter, requireAuth, createThread);
+router.get('/f/:forumId/t/:threadId', getThread);
+router.post('/thread/create', createThreadLimiter, requireAuth, createThread);
 
 // Forum
-router.get('/forum/:forumId', getForum);
+router.get('/f/:forumId', getForum);
 router.get('/forums', getAllForums);
 
 // Messages

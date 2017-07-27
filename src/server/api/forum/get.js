@@ -36,7 +36,7 @@ export default (req, res) => {
     const forum = sync.await(db.collection('forums').findOne({
       forumId: forumId
     }, {
-      forumId: forumId,
+      forumId: 1,
       title: 1,
       type: 1,
       threadsCreatedTotal: 1,

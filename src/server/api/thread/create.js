@@ -8,12 +8,12 @@ import Utils from '../../../shared/Utils';
 export default (req, res) => {
   if (!req || !req.body) {
     res.status(400).send({
-      err: 'Invalid message request.'
+      err: 'Invalid thread creation request.'
     });
     return;
   }
 
-  const forumId = req.body.forumId;
+  let forumId = req.body.forumId;
   const title = req.body.title;
   const description = req.body.description;
   const text = req.body.text;
@@ -21,9 +21,13 @@ export default (req, res) => {
   // Ensure the message has the proper attributes.
   if (!forumId || !title || !text) {
     res.status(400).send({
-      err: 'Invalid message to send.'
+      err: 'Invalid thread creation request.'
     });
     return;
+  }
+
+  if (Utils.isNumber(forumId)) {
+    forumId = Number(forumId);
   }
   
   // Ensure the title of the message conforms to the guidelines. 
@@ -68,9 +72,17 @@ export default (req, res) => {
       new: 1,
     }, sync.defer()));
 
+    if (!forum) {
+      res.status(400).send({
+        err: 'Unable to find forum to create the thread in please refresh and try again.'
+      });
+      return;
+    }
+
     const newThread = {
       // Give the thread a unique id to reference.
       threadId: forum.threadsCreatedTotal,
+      forumId: forumId,
 
       creator: req.username,
 
@@ -81,7 +93,7 @@ export default (req, res) => {
       views: 0,
 
       comments: [],
-      commentesLength: 0,
+      commentsLength: 0,
 
       createdAt: currentTime
     };
@@ -89,7 +101,9 @@ export default (req, res) => {
     // Try to save the thread.
     const newThreadResult = sync.await(db.collection('threads').insert(newThread, sync.defer()));
 
-    if (!newThreadResult || newThreadResult.nInserted !== 1) { 
+    console.log('tried to save:', newThread, 'result:', newThreadResult);
+
+    if (!newThreadResult) { 
       res.status(400).send({
         err: 'Unable to create thread please refresh and try again.'
       });
@@ -157,7 +171,7 @@ export default (req, res) => {
     res.status(200);
 
     // Redirect to the newly posted thread.
-    res.redirect(`/${forumId}/${newThread.threadId}`);
+    res.redirect(`/f/${forumId}/t/${newThread.threadId}`);
   });
 };
 

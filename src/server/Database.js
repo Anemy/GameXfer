@@ -14,17 +14,19 @@ db.collection('threads').ensureIndex({
   threadId: 1,
   forumId: 1
 }, {
-  unique:true
+  unique: true
 });
 
 db.collection('users').ensureIndex({ 
   username: 1 
 }, {
-  unique:true
+  unique: true
 });
 
 db.collection('forums').ensureIndex({
   forumId: 1
+}, {
+  unique: true
 });
 
 export default db;
