@@ -9,7 +9,7 @@ import ServerUtils from './ServerUtils';
 // Connect to the database.
 const db = mongojs(ServerUtils.getMongoDBURL());
 
-// Ensure the indexes of the database. This keeps duplicates out.
+// Ensure the indexes of the database. This keeps duplicates out and speeds up the process.
 db.collection('threads').ensureIndex({ 
   threadId: 1,
   forumId: 1

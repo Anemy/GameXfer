@@ -149,7 +149,7 @@ export default (req, res) => {
     res.status(200);
 
     // Redirect to the newly posted thread.
-    res.redirect(`/${forumId}/${threadId}/${newComment.commentId}`);
+    res.redirect(`/f/${forumId}/t/${threadId}/c/${newComment.commentId}`);
   });
 };
 

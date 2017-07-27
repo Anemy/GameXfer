@@ -17,8 +17,6 @@ export default (req, res) => {
     return;
   }
 
-  console.log('db on login', db);
-
   let email = req.body.email;
   let password = req.body.password;
 

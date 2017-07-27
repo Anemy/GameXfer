@@ -10,6 +10,7 @@ import getForum from './api/forum/get';
 import getAllForums from './api/forum/getAll';
 
 // User
+import getUser from './api/user/get';
 import login from './api/user/login';
 import logout from './api/user/logout';
 import signup from './api/user/signup';
@@ -85,6 +86,7 @@ router.post('/message/read', basicLimiter, requireAuth, readMessage);
 router.post('/message/delete', basicLimiter, requireAuth, deleteMessages);
 
 // User
+router.get('/u/:username', basicLimiter, requireAuth, getUser);
 router.post('/login', loginLimiter, login);
 router.post('/logout', requireAuth, logout);
 router.post('/signup', signupLimiter, signup);
