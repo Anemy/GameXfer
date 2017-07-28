@@ -15,7 +15,7 @@ export default (req, res) => {
   const messageId = req.body.messageId;
 
   // Ensure the request has the proper attributes.
-  if (!messageId) {
+  if (messageId === undefined) {
     res.status(400).send({
       err: 'Invalid message to send.'
     });

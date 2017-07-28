@@ -1,6 +1,10 @@
 import express from 'express';
 import RateLimit from 'express-rate-limit';
 
+// Comment
+import editComment from './api/thread/comment/edit';
+import createComment from './api/thread/comment/create';
+
 // Thread
 import getThread from './api/thread/get';
 import createThread from './api/thread/create';
@@ -46,6 +50,14 @@ const signupLimiter = new RateLimit({
   message: 'Too many signup account attempts created from this IP, please try again in fifteen minutes.'
 });
 
+const createCommentLimiter = new RateLimit({
+  windowMs: 10*60*1000, // 10 minute window.
+  delayAfter: 1, // Begin slowing down responses after the first request.
+  delayMs: 1000, // Slow down subsequent responses by 1 second per request.
+  max: 5, // Start blocking after 3 requests.
+  message: 'Too many comment creation requests from this IP, you may try again in 10 minutes.'
+});
+
 const createThreadLimiter = new RateLimit({
   windowMs: 10*60*1000, // 10 minute window.
   delayAfter: 1, // Begin slowing down responses after the first request.
@@ -71,8 +83,13 @@ router.get('/', (req, res) => {
   });
 });
 
+// Comment 
+router.post('/comment/edit', createCommentLimiter, requireAuth, editComment);
+router.post('/comment/create', createCommentLimiter, requireAuth, createComment);
+
 // Thread 
 router.get('/f/:forumId/t/:threadId', getThread);
+router.get('/f/:forumId/t/:threadId/c/:commentId', getThread);
 router.post('/thread/create', createThreadLimiter, requireAuth, createThread);
 
 // Forum

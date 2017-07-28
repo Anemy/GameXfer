@@ -14,7 +14,7 @@ export default (req, res) => {
   let forumPage = req.params.forumPage; // Optional.
 
   // Ensure the request has the proper attributes.
-  if (!forumId) {
+  if (forumId === undefined) {
     res.status(400).send({
       err: 'Invalid forum get. Please specify a forumId.'
     });

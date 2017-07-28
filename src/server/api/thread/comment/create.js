@@ -2,13 +2,13 @@
 
 import sync from 'synchronize';
 
-import db from '../../Database';
-import Utils from '../../../shared/Utils';
+import db from '../../../Database';
+import Utils from '../../../../shared/Utils';
 
 export default (req, res) => {
   if (!req || !req.body) {
     res.status(400).send({
-      err: 'Invalid comment request.'
+      err: 'Invalid create comment request.'
     });
     return;
   }
@@ -18,9 +18,9 @@ export default (req, res) => {
   const text = req.body.text;
 
   // Ensure the comment has the proper attributes.
-  if (!forumId || !threadId || !text) {
+  if (forumId === undefined || threadId === undefined || !text) {
     res.status(400).send({
-      err: 'Invalid comment request data.'
+      err: 'Invalid create comment request data.'
     });
     return;
   }
@@ -63,7 +63,7 @@ export default (req, res) => {
     const newComment = {
       commentId: thread.commentsLength,
 
-      creator: req.username,
+      author: req.username,
 
       text: text,
 

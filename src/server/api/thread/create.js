@@ -19,7 +19,7 @@ export default (req, res) => {
   const text = req.body.text;
 
   // Ensure the message has the proper attributes.
-  if (!forumId || !title || !text) {
+  if (forumId === undefined || !title || !text) {
     res.status(400).send({
       err: 'Invalid thread creation request.'
     });
@@ -84,24 +84,25 @@ export default (req, res) => {
       threadId: forum.threadsCreatedTotal,
       forumId: forumId,
 
-      creator: req.username,
-
       title: title,
       description: description,
-      text: text,
 
       views: 0,
 
-      comments: [],
-      commentsLength: 0,
+      commentsLength: 1,
+      comments: [{
+        commentId: 1,
+        createdAt: currentTime,
+        
+        text: text,
+        author: req.username
+      }],
 
       createdAt: currentTime
     };
 
     // Try to save the thread.
     const newThreadResult = sync.await(db.collection('threads').insert(newThread, sync.defer()));
-
-    console.log('tried to save:', newThread, 'result:', newThreadResult);
 
     if (!newThreadResult) { 
       res.status(400).send({

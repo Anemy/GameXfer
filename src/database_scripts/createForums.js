@@ -12,7 +12,7 @@ const forumList = [{
   title: 'Test Game_Name',
   type: FORUM_TYPES.TRADING // Trading forum.
 }, {
-  forumId: 1,
+  forumId: 'csgo',
   title: 'Counter Strike',
   type: FORUM_TYPES.TRADING // Trading forum.
 }, {
