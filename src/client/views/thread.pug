@@ -3,9 +3,11 @@ html(lang="en")
   head
     link(rel="stylesheet" href="style/index.css")
     script(src="js/build.js")
-    title="Game Xfer"
+    title.
+      #{thread.title} - GameXfer
 
     link(rel="icon" type="image/png" href="/images/treasure.png")
   body
+    include header
     h1.
-      Game Xfer Thread #{thread}
+      Game Xfer Thread #{thread.title} by #{thread.comments[0].user.username} on #{thread.createdAt}

@@ -63,7 +63,7 @@ export default (req, res) => {
     const newComment = {
       commentId: thread.commentsLength,
 
-      author: req.username,
+      author: req.user,
 
       text: text,
 
@@ -81,7 +81,7 @@ export default (req, res) => {
       $set: {
         mostRecentCommentTime: currentTime,
         mostRecentCommentId: newComment.commentId,
-        mostRecentCommentAuthor: req.username
+        mostRecentCommentAuthor: req.user
       }
     }, sync.defer()));
 
@@ -120,7 +120,7 @@ export default (req, res) => {
       $set: {
         mostRecentCommentTime: currentTime,
         mostRecentCommentId: newComment.commentId,
-        mostRecentCommentAuthor: req.username,
+        mostRecentCommentAuthor: req.user,
         mostRecentCommentThreadId: threadId,
       },
       $inc: {

@@ -72,7 +72,7 @@ $ browser https://localhost:3000
   - description `String`
   - views `Number`
   - mostRecentCommentTime `Date`
-  - mostRecentCommentAuthor `String` - Their username.
+  - mostRecentCommentAuthor `String`
   - commentsLength `String`
   - comments `Array`
    - commentId `String`

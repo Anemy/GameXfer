@@ -1,1 +1,3 @@
-console.log('hi');
+import auth from './auth';
+
+auth.enable();

@@ -95,7 +95,7 @@ export default (req, res) => {
         createdAt: currentTime,
         
         text: text,
-        author: req.username
+        author: req.user
       }],
 
       createdAt: currentTime
@@ -139,11 +139,11 @@ export default (req, res) => {
       $set: {
         mostRecentThreadId: newThread.threadId,
         mostRecentThreadTime: currentTime,
-        mostRecentThreadAuthor: req.username,
+        mostRecentThreadAuthor: req.user,
 
         mostRecentCommentTime: currentTime,
         mostRecentCommentId: 0 /* It was the first comment on the thread. */,
-        mostRecentCommentAuthor: req.username,
+        mostRecentCommentAuthor: req.user,
         mostRecentCommentThreadId: newThread.threadId,
       },
       $inc: {

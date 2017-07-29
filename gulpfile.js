@@ -16,6 +16,9 @@ const config = {
   cssDestDir: 'public/style',
   jsToLintPath: [
     'src/**/*.js',
+
+    '!src/**/lib/**/*.js' /* Ignore external libraries. */ ,
+
     'gulpfile.js',
   ],
   publicFilesToLiveReload: [

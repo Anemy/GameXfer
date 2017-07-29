@@ -1,14 +1,15 @@
 // Get a thread to view.
 
 // Sends the user thread with an optional commentId.
-// TODO: Build pages of the forums to get a certain range of threadHeaders.
 
 // TODO: Decide if it's worth caching these.
 
+import _ from 'underscore'; 
 import sync from 'synchronize';
 
 import Constants from '../../../shared/Constants';
 import db from '../../Database';
+import ServerUtils from '../../ServerUtils';
 import Utils from '../../../shared/Utils';
 
 export default (req, res) => {
@@ -75,9 +76,16 @@ export default (req, res) => {
       return;
     }
 
+    _.each(thread.comments, (comment) => {
+      if (comment && comment.author) {
+        comment.user = ServerUtils.getLightUserObjectForUsername(comment.author);
+      }
+    });
+
     res.status(200);
     res.render('thread', {
-      thread: thread
+      thread: thread, 
+      user: ServerUtils.getLightUserObjectForUsername(req.username)
     });
   });
 };

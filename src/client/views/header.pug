@@ -1,0 +1,12 @@
+.header
+  .site-title.
+    GameXfer ~
+  if user
+    .header-username.
+      #{user.username}
+    .header-xfer-coin
+      #{user.xferCoin}
+  else
+    a(href="/login")
+      p.
+        login

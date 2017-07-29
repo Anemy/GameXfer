@@ -8,8 +8,8 @@ export default (req, res, next) => {
       return;
     } else {
       // If the request was not xhr we should show them the login page so they can get authed.
-      // TODO: Render the login page to the user.
-      res.status(403).send('You must be logged in to perfom this action.');
+      const requestedUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+      res.status(403).redirect('/login?redirect=' + requestedUrl);
       return;
     }
   }

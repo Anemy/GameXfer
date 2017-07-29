@@ -1,3 +1,6 @@
+import sync from 'synchronize';
+
+import db from './Database';
 import Environment from '../shared/Environment';
 import ServerConstants from './ServerConstants';
 
@@ -10,5 +13,18 @@ export default {
     } else {
       return ServerConstants.TEST_MONGODB_URL;
     }
+  },
+
+  getLightUserObjectForUsername: (username) => {
+    const lightUser = sync.await(db.collection('users').findOne({
+      username: username
+    }, {
+      username: 1,
+
+      posts: 1,
+      xferCoin: 1
+    }, sync.defer()));
+
+    return lightUser;
   }
 };

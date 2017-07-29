@@ -1,5 +1,6 @@
 import express from 'express';
 import RateLimit from 'express-rate-limit';
+import sync from 'synchronize';
 
 // Comment
 import editComment from './api/thread/comment/edit';
@@ -13,7 +14,7 @@ import createThread from './api/thread/create';
 import getForum from './api/forum/get';
 import getAllForums from './api/forum/getAll';
 
-// User
+// User requests
 import getUser from './api/user/get';
 import login from './api/user/login';
 import logout from './api/user/logout';
@@ -26,6 +27,8 @@ import sendMessage from './api/message/create';
 import deleteMessages from './api/message/delete';
 
 import requireAuth from './requireAuth';
+
+import ServerUtils from './ServerUtils';
 
 // 100 messages max over 10 minutes.
 const basicLimiter = new RateLimit({
@@ -78,9 +81,15 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   // Send the rendered HTML page and attach the user's username if they are sessioned.
-  res.render('index', {
-    username: req.session.username
-  });
+  if (req.session.username) {
+    sync.fiber(() => {
+      res.render('index', {
+        user: ServerUtils.getLightUserObjectForUsername(req.session.username)
+      });
+    });
+  } else {
+    res.render('index');
+  }
 });
 
 // Comment 
@@ -107,6 +116,14 @@ router.get('/u/:username', basicLimiter, requireAuth, getUser);
 router.post('/login', loginLimiter, login);
 router.post('/logout', requireAuth, logout);
 router.post('/signup', signupLimiter, signup);
+
+// User pages
+router.get('/login', (req, res) => {
+  res.render('login');
+});
+router.get('/signup', (req, res) => {
+  res.render('signup');
+});
 
 router.get('*', (req, res) => {
   res.render('404');

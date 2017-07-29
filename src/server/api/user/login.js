@@ -17,11 +17,11 @@ export default (req, res) => {
     return;
   }
 
-  let email = req.body.email;
+  let username = req.body.username;
   let password = req.body.password;
 
   // Validify the email.
-  if (!Utils.validEmail(email)) {
+  if (!Utils.validUsername(username)) {
     res.status(400).send({
       err: misMatchMessage
     });
@@ -32,13 +32,13 @@ export default (req, res) => {
   if (!Utils.validPassword(password)) {
     res.status(400).send({
       err: misMatchMessage
-    });
+    }); 
     return;
   }
 
   sync.fiber(() => {
     const user = sync.await(db.collection('users').findOne({
-      email: email
+      username: username
     }, {
       password: 1,
       username: 1
@@ -70,7 +70,7 @@ export default (req, res) => {
       res.setHeader('Content-Type', 'application/json');
       res.status(200).send({
         err: false,
-        username: user.username
+        sucess: true
       });
     });
   });
