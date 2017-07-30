@@ -1,0 +1,10 @@
+.header-link {
+  font: normal x-small verdana,arial,helvetica,sans-serif;
+  color: $link-text;
+
+  text-decoration: none;
+}
+.header-link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

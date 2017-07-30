@@ -7,6 +7,7 @@ import sync from 'synchronize';
 
 import Constants from '../../../shared/Constants';
 import db from '../../Database';
+import ServerUtils from '../../ServerUtils';
 import Utils from '../../../shared/Utils';
 
 export default (req, res) => {
@@ -55,7 +56,8 @@ export default (req, res) => {
 
     res.status(200);
     res.render('forum', {
-      forum: forum
+      forum: forum,
+      user: req.session.username ? ServerUtils.getLightUserObjectForUsername(req.session.username) : null
     });
   });
 };

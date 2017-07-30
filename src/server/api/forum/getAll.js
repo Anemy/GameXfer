@@ -5,6 +5,7 @@
 import sync from 'synchronize';
 
 import db from '../../Database';
+import ServerUtils from '../../ServerUtils';
 
 export default (req, res) => {
   sync.fiber(() => {
@@ -33,7 +34,8 @@ export default (req, res) => {
 
     res.status(200);
     res.render('forumsList', {
-      forums: forums.toString()
+      forums: forums.toString(),
+      user: req.session.username ? ServerUtils.getLightUserObjectForUsername(req.session.username) : null
     });
   });
 };

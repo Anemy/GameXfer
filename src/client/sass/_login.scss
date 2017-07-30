@@ -2,6 +2,13 @@
   background-color: #dee0e3;
 }
 
+.logout-link-button {
+  color: $link-text;
+  text-decoration: none;
+
+  font-weight: bold;
+}
+
 .auth-ui-panel {
   // Center middle top screen.
   position: absolute;
@@ -81,6 +88,12 @@
 }
 .login-button:hover {
   cursor: pointer;
+
+  background-color: $flat-orange-1-dark-1;
+}
+.login-button:active {
+  cursor: pointer;
+  background-color: $flat-orange-1-dark-2;
 }
 
 .message-success {

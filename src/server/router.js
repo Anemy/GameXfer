@@ -79,17 +79,21 @@ const sendMessageLimiter = new RateLimit({
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+function renderWithUser(req, res, template) {
   // Send the rendered HTML page and attach the user's username if they are sessioned.
   if (req.session.username) {
     sync.fiber(() => {
-      res.render('index', {
+      res.render(template, {
         user: ServerUtils.getLightUserObjectForUsername(req.session.username)
       });
     });
   } else {
-    res.render('index');
+    res.render(template);
   }
+}
+
+router.get('/', (req, res) => {
+  renderWithUser(req, res, 'index');
 });
 
 // Comment 
@@ -119,10 +123,10 @@ router.post('/signup', signupLimiter, signup);
 
 // User pages
 router.get('/login', (req, res) => {
-  res.render('login');
+  renderWithUser(req, res, 'login');
 });
 router.get('/signup', (req, res) => {
-  res.render('signup');
+  renderWithUser(req, res, 'signup');
 });
 
 router.get('*', (req, res) => {

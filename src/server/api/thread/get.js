@@ -85,7 +85,7 @@ export default (req, res) => {
     res.status(200);
     res.render('thread', {
       thread: thread, 
-      user: ServerUtils.getLightUserObjectForUsername(req.username)
+      user: req.session.username ? ServerUtils.getLightUserObjectForUsername(req.session.username) : null
     });
   });
 };

@@ -28,6 +28,8 @@ export default (req, res) => {
     return;
   }
 
+  username = username.toLowerCase();
+
   // Validify the password.
   if (!Utils.validPassword(password)) {
     res.status(400).send({

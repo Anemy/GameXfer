@@ -3,10 +3,12 @@
     GameXfer ~
   if user
     .header-username.
-      #{user.username}
+      #{user.displayUsername}
     .header-xfer-coin
       #{user.xferCoin}
+    .logout-button(class="js-logout  header-link").
+      Logout
+    include logout
   else
-    a(href="/login")
-      p.
-        login
+    a(href="/login" class="header-link  bold-text").
+      login

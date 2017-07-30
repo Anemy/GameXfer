@@ -7,5 +7,7 @@ html(lang="en")
 
     link(rel="icon" type="image/png" href="/images/treasure.png")
   body
-    h1.
-      Game Xfer Forum #{forum}
+    include header
+    a(href="javascript:window.location.href=window.location.href")
+      h1.
+        #{forum.title}

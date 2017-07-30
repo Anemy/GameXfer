@@ -18,6 +18,7 @@ class Login {
   }
 
   hideStatusMessage() {
+    this.messageShown = false;
     $('.js-login-status-message').addClass('hide');
   }
 
@@ -27,11 +28,24 @@ class Login {
 
       this.showStatusMessage('Working...', 'message-working');
 
+      // Basic validation before making a request.
+      if (!$('.js-login-username-input').val() || !$('.js-login-password-input').val()) {
+        this.performingAction = false;
+        this.showStatusMessage('Error: Please fill out both of the fields.', 'message-failure');
+        return;
+      }
+
       $.post('/login', {
         username: $('.js-login-username-input').val(),
         password: $('.js-login-password-input').val(),
       }).done(() => {
         this.showStatusMessage('Success! Redirecting in 3 seconds.', 'message-success');
+        setTimeout(() => {
+          this.showStatusMessage('Success! Redirecting in 2 seconds.', 'message-success');
+        }, 1000 /* 1s */);
+        setTimeout(() => {
+          this.showStatusMessage('Success! Redirecting in 1 second.', 'message-success');
+        }, 2000 /* 2s */);
         setTimeout(() => {
           // TODO: Replace with an optional redirect string param.
           window.location.replace('/');

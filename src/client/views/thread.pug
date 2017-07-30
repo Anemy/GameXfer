@@ -10,4 +10,4 @@ html(lang="en")
   body
     include header
     h1.
-      Game Xfer Thread #{thread.title} by #{thread.comments[0].user.username} on #{thread.createdAt}
+      Game Xfer Thread #{thread.title} by #{thread.comments[0].user ? thread.comments[0].user.displayUsername : 'unknown'} on #{thread.createdAt}

@@ -20,6 +20,7 @@ export default {
       username: username
     }, {
       username: 1,
+      displayUsername: 1,
 
       posts: 1,
       xferCoin: 1

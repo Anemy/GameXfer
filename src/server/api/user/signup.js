@@ -27,6 +27,12 @@ export default (req, res) => {
     return;
   }
 
+  // Strip leading and trailing spaces.
+  username = username.trim();
+
+  const displayUsername = username;
+  username = username.toLowerCase();
+
   // Validify the email.
   if (!Utils.validEmail(email)) {
     res.status(400).send({
@@ -69,9 +75,6 @@ export default (req, res) => {
       return;
     }
 
-    // Strip leading and trailing spaces.
-    username = username.trim();
-
     // Get the hash of the password to save.
     bcrypt.getBCryptHash(Constants.SIGNUP_HASH, password, (hash) => {
       // This is not async/await because it uses promises.
@@ -89,6 +92,7 @@ export default (req, res) => {
         const currentTime = new Date();
         const createdUser = sync.await(db.collection('users').insert({
           username: username,
+          displayUsername: displayUsername,
           email: email,
           password: hash,
 

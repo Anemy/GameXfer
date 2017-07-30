@@ -3,6 +3,7 @@
 import sync from 'synchronize';
 
 import db from '../../Database';
+import ServerUtils from '../../ServerUtils';
 
 export default (req, res) => {
   sync.fiber(() => {
@@ -23,7 +24,8 @@ export default (req, res) => {
     res.status(200);
 
     res.render('inbox', {
-      messages: user.messages
+      messages: user.messages,
+      user: ServerUtils.getLightUserObjectForUsername(req.username)
     });
   });
 };
