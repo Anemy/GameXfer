@@ -33,8 +33,8 @@ export default (req, res) => {
     }
 
     res.status(200);
-    res.render('forumsList', {
-      forums: forums.toString(),
+    res.render('forum-list', {
+      forums: forums,
       user: req.session.username ? ServerUtils.getLightUserObjectForUsername(req.session.username) : null
     });
   });

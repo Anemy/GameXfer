@@ -128,6 +128,9 @@ router.get('/login', (req, res) => {
 router.get('/signup', (req, res) => {
   renderWithUser(req, res, 'signup');
 });
+router.get('/reset-password', (req, res) => {
+  renderWithUser(req, res, 'reset-password');
+});
 
 router.get('*', (req, res) => {
   res.render('404');

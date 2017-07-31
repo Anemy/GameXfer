@@ -70,7 +70,7 @@
   margin-bottom: 20px;
 }
 
-.login-button {
+.submit-auth-button {
   float: right;
 
   color: white;
@@ -79,6 +79,8 @@
 
   padding: 10px;
 
+  outline: none;
+
   margin-top: -10px;
   margin-right: 10px;
   border: 1px solid #dee0e3;
@@ -86,12 +88,12 @@
 
   background-color: $flat-orange-1;
 }
-.login-button:hover {
+.submit-auth-button:hover {
   cursor: pointer;
 
   background-color: $flat-orange-1-dark-1;
 }
-.login-button:active {
+.submit-auth-button:active {
   cursor: pointer;
   background-color: $flat-orange-1-dark-2;
 }

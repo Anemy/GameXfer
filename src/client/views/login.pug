@@ -11,7 +11,6 @@ html
 
     link(rel='icon' type='image/png' href='/images/treasure.png')
   body
-    include header
     .login-page
       .auth-ui-panel
         .auth-entry-header
@@ -25,6 +24,6 @@ html
         .auth-entry-footer
           a(href='/forgotPassword' class='left').
             Forgot your password?
-          a(class='login-button js-login').
+          a(class='submit-auth-button js-login').
             Login
         div(class='auth-display-message animated fadeIn hide js-login-status-message')

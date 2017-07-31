@@ -1,0 +1,20 @@
+doctype html
+html(lang='en')
+  head
+    link(rel='stylesheet' href='style/index.css')
+    script(src='js/build.js')
+    title='Forums - GameXfer'
+
+    link(rel='icon' type='image/png' href='/images/treasure.png')
+  body
+    include header
+    h1.
+      GameXfer Forums 
+    ul
+      each forum in forums.length ? forums : ['No forums found.']
+        li
+          #{forum}
+          a(href='/f/' + forum.forumId).
+            #{forum.title}
+          p.
+            posts: #{forum.threadsCreatedTotal}

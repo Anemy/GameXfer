@@ -8,3 +8,28 @@
   cursor: pointer;
   text-decoration: underline;
 }
+
+.page-header {
+  border-bottom: 1px solid #ddd;
+
+  background-color: #eee;
+
+  width: 100%;
+  height-min: 60px;
+
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.gamexfer-title {
+  color: #99c;
+  font-weight: bold;
+  font-size: 1.5em;
+
+  padding-top: 4px;
+
+  span {
+    color: #FF8F56;
+  }
+}
+

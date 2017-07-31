@@ -1,14 +1,19 @@
-.header
-  .site-title.
-    GameXfer ~
-  if user
-    .header-username.
-      #{user.displayUsername}
-    .header-xfer-coin
-      #{user.xferCoin}
-    .logout-button(class="js-logout  header-link").
-      Logout
-    include logout
-  else
-    a(href="/login" class="header-link  bold-text").
-      login
+.page-header
+  a(href="/" class="gamexfer-title").
+    Game<span>Xfer</span>
+  .right
+    if user
+      .header-username.
+        #{user.displayUsername}
+      .header-xfer-coin
+        #{user.xferCoin}
+      .logout-button(class="js-logout  header-link").
+        Logout
+      include logout
+    else
+      a(href="/login" class="header-link  bold-text").
+        login
+      p.
+        or
+      a(href="/signup" class="header-link  bold-text").
+        register

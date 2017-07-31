@@ -1,12 +1,15 @@
 doctype html
-html(lang="en")
+html(lang='en')
   head
-    link(rel="stylesheet" href="style/index.css")
-    script(src="js/build.js")
-    title="GameXfer Forum & Exchange Homepage"
+    link(rel='stylesheet' href='style/index.css')
+    script(src='js/build.js')
+    title='GameXfer Forum & Exchange Homepage'
 
-    link(rel="icon" type="image/png" href="/images/treasure.png")
+    link(rel='icon' type='image/png' href='/images/treasure.png')
   body
     include header
     h1.
-      Game Xfer Homepage
+      GameXfer Homepage
+    .homepage-body
+      a(href='/forums').
+        forums
