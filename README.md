@@ -79,3 +79,15 @@ $ browser https://localhost:3000
    - author `String`
    - text `String`
    - createdAt `Date`
+
+#### Transactions
+
+- transaction
+  - destination `String` - Their username.
+  - sender `String` - Username.
+  - message `String`
+  - status `String` - The status of the transaction - 'initiated', 'sent', or 'recieved'.
+  - amount `Number` - The number of xferCoin sent.
+  - createdAt `Date`
+  - sentAt `Date`
+  - completedAt `Date`

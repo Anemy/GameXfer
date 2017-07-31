@@ -14,11 +14,14 @@ import createThread from './api/thread/create';
 import getForum from './api/forum/get';
 import getAllForums from './api/forum/getAll';
 
-// User requests
+// User
 import getUser from './api/user/get';
 import login from './api/user/login';
 import logout from './api/user/logout';
 import signup from './api/user/signup';
+
+// XferCoin
+import sendCoin from './api/coin/send';
 
 // Messages
 import getMessages from './api/message/get';
@@ -37,6 +40,14 @@ const basicLimiter = new RateLimit({
   max: 100
 });
 
+const sendCoinLimiter = new RateLimit({
+  windowMs: 10*60*1000, // 10 minute window.
+  delayAfter: 3, // Begin slowing down responses after two requests.
+  delayMs: 1000, // Slow down subsequent responses by 1 second per request.
+  max: 5, // Start blocking after 5 requests.
+  message: 'Too many send coin requests from this IP, you may try again in 10 minutes.'
+});
+
 const loginLimiter = new RateLimit({
   windowMs: 10*60*1000, // 10 minute window. 
   delayAfter: 1, // Begin slowing down responses after the first request.
@@ -48,7 +59,7 @@ const loginLimiter = new RateLimit({
 const signupLimiter = new RateLimit({
   windowMs: 15*60*1000, // 15 minute window.
   delayAfter: 1, // Begin slowing down responses after the first request.
-  delayMs: 3*1000, // Slow down subsequent responses by 3 seconds per request.
+  delayMs: 1000, // Slow down subsequent responses by 1 second per request.
   max: 6, // Start blocking after 6 requests.
   message: 'Too many signup account attempts created from this IP, please try again in fifteen minutes.'
 });
@@ -57,7 +68,7 @@ const createCommentLimiter = new RateLimit({
   windowMs: 10*60*1000, // 10 minute window.
   delayAfter: 1, // Begin slowing down responses after the first request.
   delayMs: 1000, // Slow down subsequent responses by 1 second per request.
-  max: 5, // Start blocking after 3 requests.
+  max: 5, // Start blocking after 5 requests.
   message: 'Too many comment creation requests from this IP, you may try again in 10 minutes.'
 });
 
@@ -115,6 +126,9 @@ router.post('/message', sendMessageLimiter, requireAuth, sendMessage);
 router.post('/message/read', basicLimiter, requireAuth, readMessage);
 router.post('/message/delete', basicLimiter, requireAuth, deleteMessages);
 
+// XferCoin
+router.post('/send-coin', sendCoinLimiter, requireAuth, sendCoin);
+
 // User
 router.get('/u/:username', basicLimiter, requireAuth, getUser);
 router.post('/login', loginLimiter, login);
@@ -128,8 +142,8 @@ router.get('/login', (req, res) => {
 router.get('/signup', (req, res) => {
   renderWithUser(req, res, 'signup');
 });
-router.get('/reset-password', (req, res) => {
-  renderWithUser(req, res, 'reset-password');
+router.get('/forgot-password', (req, res) => {
+  renderWithUser(req, res, 'forgot-password');
 });
 
 router.get('*', (req, res) => {

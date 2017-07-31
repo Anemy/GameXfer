@@ -13,7 +13,6 @@ html(lang='en')
     ul
       each forum in forums.length ? forums : ['No forums found.']
         li
-          #{forum}
           a(href='/f/' + forum.forumId).
             #{forum.title}
           p.
