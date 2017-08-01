@@ -1,15 +1,15 @@
 // Sends a user's information. Used for viewing profiles.
 
-// Handles the request to login.
-
 import sync from 'synchronize';
 
 import db from '../../Database';
+import ServerUtils from '../../ServerUtils';
 
 export default (req, res) => {
   let username = req.params.username;
 
   if (!username) {
+    res.setHeader('Content-Type', 'application/json');
     res.status(400).send({
       err: 'Invalid get user info request. Please specify a username.'
     });
@@ -17,7 +17,7 @@ export default (req, res) => {
   }
 
   sync.fiber(() => {
-    const user = sync.await(db.collection('users').findOne({
+    const profile = sync.await(db.collection('users').findOne({
       username: username
     }, {
       username: 1,
@@ -26,18 +26,12 @@ export default (req, res) => {
       xferCoin: 1
     }, sync.defer()));
 
-    // Check if the user exists.
-    if (!user) {
-      res.status(400).send({
-        err: 'That user wasn\'t found. Please try again.'
-      });
-      return;
-    }
+    // When the user doesn't exist we just shoot them null for the profile and let the template handle it.
 
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).send({
+    res.status(200).render('profile', {
       err: false,
-      user: user
+      profile: profile,
+      user: req.session.username ? ServerUtils.getLightUserObjectForUsername(req.session.username) : null
     });
-  });
+  }); 
 };

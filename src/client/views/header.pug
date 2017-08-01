@@ -3,11 +3,11 @@
     Game<span>Xfer</span>
   .right
     if user
-      .a(href='/u/'+user.username class='bold-text  header-link  header-username').
+      a(href='/u/'+user.username class='bold-text  header-link  header-username').
         #{user.displayUsername}
       .header-xfer-coin
         #{user.xferCoin}
-      .logout-button(class='js-logout  header-link').
+      a(class='logout-button  js-logout  header-link').
         Logout
       include logout
     else
