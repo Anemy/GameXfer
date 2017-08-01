@@ -13,8 +13,9 @@ html(lang='en')
     link(rel='icon' type='image/png' href='/images/treasure.png')
   body
     include header
-    if profile.
-      Profile of #{profile.displayUsername}
+    if profile
+      p.
+        Profile of #{profile.displayUsername}
     else
       p.
         Error: User not found.
