@@ -1,13 +1,25 @@
 doctype html
-html(lang="en")
+html(lang='en')
   head
-    link(rel="stylesheet" href="/style/index.css")
-    script(src="/js/build.js")
+    link(rel='stylesheet' href='/style/index.css')
+    script(src='/js/build.js')
     title.
       #{thread.title} - GameXfer
 
-    link(rel="icon" type="image/png" href="/images/treasure.png")
+    link(rel='icon' type='image/png' href='/images/treasure.png')
   body
     include header
-    h1.
-      Game Xfer Thread #{thread.title} by #{thread.comments[0].user ? thread.comments[0].user.displayUsername : 'unknown'} on #{thread.createdAt}
+    .thread-title-header
+      a(href='/f/'+thread.forumId).
+        #{thread.forumId}
+      p.
+        &gt; 
+      a(href='/f/'+thread.forumId+'/t/'+thread.threadId).
+        #{thread.title}
+    h2.
+      Posted by #{thread.comments[0].user ? thread.comments[0].user.displayUsername : 'unknown'} on #{thread.createdAt}
+    each comment in thread.comments.length ? thread.comments : ['No comments found.']
+      p.
+        #{comment.author} -
+      p.
+        #{comment.text}

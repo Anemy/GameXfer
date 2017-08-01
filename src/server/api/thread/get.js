@@ -49,7 +49,10 @@ export default (req, res) => {
         threadId: threadId,
       }, 
       fields: {
-        subject: 1,
+        title: 1,
+        forumId: 1,
+        threadId: 1,
+        description: 1,
         type: 1,
         author: 1,
         views: 1,

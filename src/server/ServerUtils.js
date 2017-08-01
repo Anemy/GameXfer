@@ -15,6 +15,7 @@ export default {
     }
   },
 
+  // NEEDS TO BE IN A FIBER.
   getLightUserObjectForUsername: (username) => {
     const lightUser = sync.await(db.collection('users').findOne({
       username: username
