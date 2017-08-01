@@ -29,7 +29,8 @@ $ browser https://localhost:3000
 #### Users
 
 - user
-  - username `String` - Unique.
+  - username `String` - Unique, lower case.
+  - displayUsername `String` - Username with upper case available.
   - password `String` - Hashed via bcrypt
   - xferCoin `Number`
   - createdAt `Date`
@@ -83,7 +84,7 @@ $ browser https://localhost:3000
 #### Transactions
 
 - transaction
-  - destination `String` - Their username.
+  - destination `String` - Username.
   - sender `String` - Username.
   - message `String`
   - status `String` - The status of the transaction - 'initiated', 'sent', or 'recieved'.

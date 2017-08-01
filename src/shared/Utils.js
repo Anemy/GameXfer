@@ -25,7 +25,7 @@ class Utils {
   // @return {Boolean} - If the supplied username is valid.
   static validUsername(username) {
     return !(!username ||
-      (username !== username.replace(/[^\w\s]/gi, '')) || // Only allow characters, numbers, spaces, underscore and dash.
+      username !== username.replace(/[^\w\s]/gi, '') || // Only allow characters, numbers, spaces, underscore and dash.
       username.match(/\s{2,}/g) || // Double spaces
       username.length < 1 || 
       username.length > 16 ||

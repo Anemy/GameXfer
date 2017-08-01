@@ -2,8 +2,8 @@ doctype html
 html(lang='en')
   head
     link(rel='stylesheet' href='/style/index.css')
-    script(src='js/build.js')
-    title=forum.title + ' GameXfer'
+    script(src='/js/build.js')
+    title=forum.title+' GameXfer'
 
     link(rel='icon' type='image/png' href='/images/treasure.png')
   body
@@ -11,3 +11,7 @@ html(lang='en')
     a(href='javascript:window.location.href=window.location.href')
       h1.
         #{forum.title}
+    each thread in threads.length ? threads : ['No threads found.']
+      a(href='/f/'+forum.forumId+'/t/'+thread.threadId)
+        h2.
+          #{thread.title}

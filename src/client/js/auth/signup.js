@@ -31,15 +31,15 @@ class Signup {
       this.showStatusMessage('Working...', 'message-working');
 
       // Basic validation before making a request.
-      if (Utils.validUsername($('.js-signup-username-input').val())) {
+      if (!Utils.validUsername($('.js-signup-username-input').val())) {
         this.performingAction = false;
         this.showStatusMessage('Error: Invalid username.', 'message-failure');
         return;
-      } else if (Utils.validEmail($('.js-signup-email-input').val())) {
+      } else if (!Utils.validEmail($('.js-signup-email-input').val())) {
         this.performingAction = false;
         this.showStatusMessage('Error: Invalid email.', 'message-failure');
         return;
-      } else if (Utils.validEmail($('.js-signup-password-input').val())) {
+      } else if (!Utils.validPassword($('.js-signup-password-input').val())) {
         this.performingAction = false;
         this.showStatusMessage('Error: Invalid password. Please choose a better one.', 'message-failure');
         return;

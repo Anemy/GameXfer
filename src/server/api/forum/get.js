@@ -1,7 +1,6 @@
 // Sends the user a page with a forum's information and all of its threads.
-// TODO: Build pages of the forums to get a certain range of threadHeaders.
 
-// TODO: Cache this.
+// TODO: Cache queries.
 
 import sync from 'synchronize';
 
@@ -33,18 +32,14 @@ export default (req, res) => {
   }
 
   sync.fiber(() => {
-    // When we've successfully deleted a message then we update the new messages length.
+    // Retrieve the requested forum.
     const forum = sync.await(db.collection('forums').findOne({
       forumId: forumId
     }, {
       forumId: 1,
       title: 1,
       type: 1,
-      threadsCreatedTotal: 1,
-      threadHeaders: {
-        // Get the Constants.AMOUNT_OF_THREADS_PER_PAGE threads based on the page number.
-        $slice: [forumPage * Constants.AMOUNT_OF_THREADS_PER_PAGE, Constants.AMOUNT_OF_THREADS_PER_PAGE]
-      }
+      threadsCreatedTotal: 1
     }, sync.defer()));
 
     if (!forum) { 
@@ -54,9 +49,29 @@ export default (req, res) => {
       return;
     }
 
+    // Find the threads for that forum.
+    const threads = sync.await(db.collection('threads').find({
+      forumId: forumId
+    }, {
+      threadId: 1,
+      forumId: 1,
+      title: 1,
+      description: 1,
+      views: 1,
+      mostRecentCommentTime: 1,
+      mostRecentCommentAuthor: 1,
+      commentsLength: 1
+    }).sort({
+      mostRecentCommentTime: 1
+    })
+      // Get the Constants.AMOUNT_OF_THREADS_PER_PAGE threads based on the page number.
+      .skip(forumPage * Constants.AMOUNT_OF_THREADS_PER_PAGE)
+      .limit(Constants.AMOUNT_OF_THREADS_PER_PAGE).toArray(sync.defer()));
+
     res.status(200);
     res.render('forum', {
       forum: forum,
+      threads: threads,
       user: req.session.username ? ServerUtils.getLightUserObjectForUsername(req.session.username) : null
     });
   });
