@@ -63,8 +63,6 @@ export default (req, res) => {
       return;
     }
 
-    const currentTime = new Date();
-
     const newTransaction = {
       sender: req.username,
       destination: destination,
@@ -72,8 +70,19 @@ export default (req, res) => {
       amount: amount,
       message: message,
 
-      createdAt: currentTime
+      status: 'initiated',
+      createdAt: new Date() // The current time.
     };
+
+    // Save the new transaction.
+    const transaction = sync.await(db.collection('transactions').insert(newTransaction, sync.defer()));
+
+    if (!transaction) {
+      res.status(400).send({
+        err: 'Unable to initiate transaction.'
+      });
+      return;
+    }
 
     // Remove the coin from the sender's wallet.
     const fundsSent = sync.await(db.collection('users').update({
@@ -84,9 +93,6 @@ export default (req, res) => {
     }, { 
       $inc: {
         xferCoin: -amount
-      },
-      $push: {
-        transactions: newTransaction
       }
     }, sync.defer()));
 
@@ -97,24 +103,47 @@ export default (req, res) => {
       return;
     }
 
+    const transactionUpdate = sync.await(db.collection('transactions').update({
+      _id: transaction._id
+    }, { 
+      $set: {
+        status: 'sent',
+        sentAt: new Date()
+      }
+    }, sync.defer()));
+
+    if (!transactionUpdate || transactionUpdate.nModified !== 1) {
+      res.status(500).send({
+        err: 'Error: Unable to update xferCoin transaction status. Please contact an admin. Your funds were sent and not recieved.'
+      });
+      return;
+    }
+
     // Send the coin to the destination's wallet.
     const fundsRecieved = sync.await(db.collection('users').update({
       username: destination
     }, { 
       $inc: {
         xferCoin: amount
-      },
-      $push: {
-        transactions: newTransaction
       }
     }, sync.defer()));
 
     if (!fundsRecieved || fundsRecieved.nModified !== 1) {
       res.status(500).send({
-        err: 'ERROR: Unable to add the xferCoin to the destination user\'s wallet. Please contact an admin.'
+        err: 'Error: Unable to recieve xferCoin. Please contact an admin.'
       });
       return;
     }
+
+    // Now that the transaction has occured we're going to update the status of the transaction.
+    sync.await(db.collection('transactions').update({
+      _id: transaction._id
+    }, { 
+      $set: {
+        status: 'completed',
+        completedAt: new Date()
+      }
+    }, sync.defer()));
 
     res.status(200);
     res.send({

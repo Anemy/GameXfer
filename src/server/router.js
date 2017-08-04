@@ -113,6 +113,9 @@ router.post('/comment/create', createCommentLimiter, requireAuth, createComment)
 
 // Thread 
 router.get('/f/:forumId/t/:threadId', getThread);
+router.get('/f/:forumId/create-thread', requireAuth, (req, res) => {
+  renderWithUser(req, res, 'create-thread');
+});
 router.get('/f/:forumId/t/:threadId/c/:commentId', getThread);
 router.post('/thread/create', createThreadLimiter, requireAuth, createThread);
 
@@ -128,6 +131,9 @@ router.post('/message/delete', basicLimiter, requireAuth, deleteMessages);
 
 // XferCoin
 router.post('/send-coin', sendCoinLimiter, requireAuth, sendCoin);
+router.get('/coins', requireAuth, (req, res) => {
+  renderWithUser(req, res, 'coins');
+});
 
 // User
 router.get('/u/:username', basicLimiter, requireAuth, getUser);

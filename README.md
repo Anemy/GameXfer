@@ -48,12 +48,6 @@ $ browser https://localhost:3000
     - text `String`
     - sentAt `Date`
     - readAt `Date` - Set when the message has been read.
-  - transactions `Array`
-    - destination `String` - Username.
-    - sender `String` - Username.
-    - message `String`
-    - amount `Number` - The number of xferCoin sent.
-    - createdAt `Date`
 
 #### Forums
 
@@ -86,3 +80,15 @@ $ browser https://localhost:3000
    - author `String`
    - text `String`
    - createdAt `Date`
+
+#### Transactions
+
+- transaction
+  - destination `String` - Username.
+  - sender `String` - Username.
+  - message `String`
+  - status `String` - The status of the transaction - 'initiated', 'sent', or 'recieved'.
+  - amount `Number` - The number of xferCoin sent.
+  - createdAt `Date`
+  - sentAt `Date`
+  - completedAt `Date`

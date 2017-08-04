@@ -1,19 +1,28 @@
 .page-header
   a(href='/' class='gamexfer-title').
     Game<span>Xfer</span>
-  .right
-    if user
-      a(href='/u/'+user.username class='bold-text  header-link  header-username').
-        #{user.displayUsername}
-      .header-xfer-coin
-        #{user.xferCoin}
-      a(class='logout-button  js-logout  header-link').
-        Logout
-      include logout
-    else
-      a(href='/login' class='header-link  bold-text').
-        login
-      p.
-        or
-      a(href='/signup' class='header-link  bold-text').
-        register
+  if user
+    include logout
+    ul(class='bar-list  right')
+      li
+        a(href='/u/'+user.username class='bold-text  header-link  header-username').
+          #{user.displayUsername}
+      li
+        a(href='/coins' class='header-link  header-xfer-coin').
+          #{user.xferCoin}
+      li
+        a(href='/coins')
+          img(src='/images/coins-32.png' class='xfer-coin-image')
+      li
+        a(class='logout-button  js-logout  header-link  header-small-text').
+          Logout
+  else
+    ul(class='bar-list  right')
+      li
+        a(href='/login' class='header-link  bold-text').
+          login
+      li.
+          or
+      li
+        a(href='/signup' class='header-link  bold-text').
+          register

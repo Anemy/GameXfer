@@ -1,35 +1,72 @@
+$header-height: 50px;
+
+.page-header {
+  border-bottom: 1px solid #EEE;
+
+  background-color: white;
+
+  width: 100%;
+  height: $header-height;
+  line-height: $header-height;
+}
+
+.gamexfer-title {
+  color: #99c;
+  font-weight: bold;
+  font-size: 24px;
+
+  margin-left: 40px;
+
+  span {
+    color: $accent;
+  }
+}
+
+.header-xfer-coin {
+  font-weight: bold !important;
+
+  font-size: 20px !important;
+  vertical-align: middle;
+
+  margin-right: -8px;
+}
+
+.header-small-text {
+  font-size: 12px !important;
+}
+
+.xfer-coin-image {
+  vertical-align: middle;
+
+  height: 16px;
+  width: 16px;
+}
+
 .header-link {
   font: normal x-small verdana,arial,helvetica,sans-serif;
+  font-size: 16px;
   color: $link-text;
 
   text-decoration: none;
+
+  vertical-align: middle;
 }
 .header-link:hover {
   cursor: pointer;
   text-decoration: underline;
 }
 
-.page-header {
-  border-bottom: 1px solid #ddd;
+.bar-list {
+  margin-right: 20px;
 
-  background-color: #eee;
+  li {
+    display: inline-block;
 
-  width: 100%;
-  height-min: 60px;
-
-  padding-left: 4px;
-  padding-right: 4px;
+    margin-right: 10px;
+  }
 }
 
-.gamexfer-title {
-  color: #99c;
-  font-weight: bold;
-  font-size: 1.5em;
-
-  padding-top: 4px;
-
-  span {
-    color: #FF8F56;
-  }
+.xfer-coin-text {
+  color: #115;
 }
 
