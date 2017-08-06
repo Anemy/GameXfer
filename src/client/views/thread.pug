@@ -9,15 +9,13 @@ html(lang='en')
     link(rel='icon' type='image/png' href='/images/treasure-64.png')
   body
     include header
+    include thread-header
     .thread-title-header
       a(href='/f/'+thread.forumId).
         #{thread.forumId}
       p.
-        &gt; 
-      a(href='/f/'+thread.forumId+'/t/'+thread.threadId).
-        #{thread.title}
-    h2.
-      Posted by #{thread.comments[0].user ? thread.comments[0].user.displayUsername : 'unknown'} on #{thread.createdAt}
+        &gt;
+    +thread-header(thread)
     each comment in thread.comments.length ? thread.comments : ['No comments found.']
       p.
         #{comment.author} -

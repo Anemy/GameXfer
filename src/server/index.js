@@ -11,6 +11,7 @@ import express from 'express';
 import fs from 'fs';
 import http from 'http';
 import https from 'https';
+import moment from 'moment';
 import os from 'os';
 import path from 'path';
 import session from 'express-session';
@@ -41,6 +42,8 @@ if (!Environment.isDev() && cluster.isMaster) {
   const PORT = 3000;
 
   const app = express();
+
+  app.locals.moment = moment;
 
   const MongoStore = connectMongo(session);
 

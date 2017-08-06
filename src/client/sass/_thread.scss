@@ -1,0 +1,30 @@
+.thread-header {
+  margin: 10px;
+
+  padding: 10px;
+
+  border: 1px solid $flat-clouds;
+  background-color: #FBFBFB;
+
+  max-height: 150px;
+}
+
+.thread-title {
+  // color: $link-text;
+
+  font-size: 16px;
+}
+
+.thread-title:hover {
+  // color: $link-text-dark;
+  // cursor: pointer;
+  // text-decoration: underline;
+}
+
+.thread-header-info {
+  color: $text-secondary;
+}
+
+.thread-header-author {
+  text-decoration: underline;
+}

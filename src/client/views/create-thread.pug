@@ -1,6 +1,6 @@
 html
   head
-    title='Signup - GameXfer'
+    title='Post a Thread - GameXfer'
     link(href='/style/index.css' rel='stylesheet' type='text/css')
 
     script(src='/js/build.js' async='true')
@@ -11,21 +11,27 @@ html
 
     link(rel='icon' type='image/png' href='/images/treasure-64.png')
   body
-    .signup-page
-      .auth-ui-panel
-        .auth-entry-header
-          div(class='left logo').
-            <span>Game</span>Xfer
-        form.js-signup-form
-          .auth-entry-form
-            .subtitle.
-              Register or <a href='/login'>Login</a>
-            input(class='js-signup-username-input' type='text' placeholder='Username')
-            input(class='js-signup-email-input' type='email' placeholder='Email')
-            input(class='js-signup-password-input' type='password' placeholder='Password')
-            input(class='js-signup-password-confirmation-input' type='password' placeholder='Re-Enter Password')
-          .auth-entry-footer
-            a(href='/forgot-password' class='left').
-              Forgot your password?
-            input(class='submit-auth-button js-signup' type='submit' value='Submit')
-        div(class='auth-display-message animated fadeIn hide js-signup-status-message')
+    include header
+    if forum
+      .create-thread-page
+        .auth-ui-panel
+          .auth-entry-header
+            div(class='left logo').
+              <span>Game</span>Xfer
+          form.js-signup-form
+            .auth-entry-form
+              .subtitle.
+                Create a thread in <a href='/f/'+forum.forumId>#{forum.title}</a>
+              input(class='js-create-thread-title' type='text' placeholder='Title')
+              input(class='js-create-thread-description' type='email' placeholder='Description')
+              input(class='js-create-thread-text' type='text' placeholder='Text')
+            .auth-entry-footer
+              a(href='/f/'+forum.forumId class='left').
+                Back
+              input(class='submit-auth-button js-signup' type='submit' value='Submit')
+          div(class='auth-display-message animated fadeIn hide js-signup-status-message')
+      .preview.
+        previewww
+    else
+      p.
+        Invalid thread.

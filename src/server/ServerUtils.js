@@ -15,7 +15,7 @@ export default {
     }
   },
 
-  // NEEDS TO BE IN A FIBER.
+  // Needs to be in a fiber.
   getLightUserObjectForUsername: (username) => {
     const lightUser = sync.await(db.collection('users').findOne({
       username: username
@@ -28,5 +28,18 @@ export default {
     }, sync.defer()));
 
     return lightUser;
+  },
+
+  // Needs to be in a fiber.
+  // @returns Light forum object with data.
+  getLightForumById: (forumId) => {
+    const lightForum = sync.await(db.collection('forums').findOne({
+      forumId: forumId
+    }, {
+      title: 1,
+      forumId: 1
+    }, sync.defer()));
+
+    return lightForum;
   }
 };

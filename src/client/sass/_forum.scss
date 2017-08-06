@@ -1,0 +1,43 @@
+$forum-top-padding: 5px;
+
+.forum-title {
+  font-size: 22px;
+
+  margin-left: 20px;
+
+  color: $text-primary;
+  text-decoration: none;
+
+  border: 0;
+  outline: 0;
+}
+
+.forum-ui-button {
+  position: absolute;
+
+  top: $forum-top-padding;
+  right: 10px;
+
+  border-radius: 3px;
+
+  text-decoration: none;
+  color: $text-primary;
+
+  border: 1px solid $text-secondary;
+
+  padding: 4px;
+}
+
+.forum-ui-button:hover {
+  cursor: pointer;
+
+  border: 1px solid $text-primary;
+
+  color: black;
+}
+
+.forum-page {
+  position: relative;
+
+  padding-top: $forum-top-padding;
+}

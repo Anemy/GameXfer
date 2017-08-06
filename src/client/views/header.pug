@@ -8,10 +8,9 @@
         a(href='/u/'+user.username class='bold-text  header-link  header-username').
           #{user.displayUsername}
       li
-        a(href='/coins' class='header-link  header-xfer-coin').
-          #{user.xferCoin}
-      li
-        a(href='/coins')
+        a(href='/coins'  class='header-link  header-xfer-coin')
+          p(class='header-coin-text').
+            #{user.xferCoin}        
           img(src='/images/coins-32.png' class='xfer-coin-image')
       li
         a(class='logout-button  js-logout  header-link  header-small-text').

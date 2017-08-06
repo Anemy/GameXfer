@@ -88,6 +88,7 @@ export default (req, res) => {
       description: description,
 
       views: 0,
+      author: req.user,
 
       commentsLength: 1,
       comments: [{

@@ -114,7 +114,13 @@ router.post('/comment/create', createCommentLimiter, requireAuth, createComment)
 // Thread 
 router.get('/f/:forumId/t/:threadId', getThread);
 router.get('/f/:forumId/create-thread', requireAuth, (req, res) => {
-  renderWithUser(req, res, 'create-thread');
+  // Send the rendered HTML page and attach the user's username if they are sessioned.
+  sync.fiber(() => {
+    res.render('create-thread', {
+      user: ServerUtils.getLightUserObjectForUsername(req.session.username),
+      forum: req.params.forumId ? ServerUtils.getLightForumById(req.params.forumId) : null
+    });
+  });
 });
 router.get('/f/:forumId/t/:threadId/c/:commentId', getThread);
 router.post('/thread/create', createThreadLimiter, requireAuth, createThread);
@@ -148,7 +154,7 @@ router.get('/login', (req, res) => {
 router.get('/signup', (req, res) => {
   renderWithUser(req, res, 'signup');
 });
-router.get('/forgot-password', (req, res) => {
+router.get('/forgot-password', requireAuth, (req, res) => {
   renderWithUser(req, res, 'forgot-password');
 });
 
