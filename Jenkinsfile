@@ -1,5 +1,4 @@
 pipeline {
-
     agent {
         docker {
             image 'node'
@@ -13,6 +12,10 @@ pipeline {
                 echo 'Building...'
                 sh 'npm install'
             }
+        }
+        stage('Kickoff') {
+          echo 'Kicking it off...'
+          export NODE_ENV=production 
         }
     }
 }
