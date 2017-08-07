@@ -4,11 +4,7 @@ html
     link(href='/style/index.css' rel='stylesheet' type='text/css')
 
     script(src='/js/build.js' async='true')
-
-    link(href='//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet')
-
-    link(href='https://s3-us-west-2.amazonaws.com/s.cdpn.io/67239/animate.min.css' rel='stylesheet')
-
+      
     link(rel='icon' type='image/png' href='/images/treasure-64.png')
   body
     include header
@@ -18,7 +14,8 @@ html
           .auth-entry-header
             div(class='left logo').
               <span>Game</span>Xfer
-          form.js-signup-form
+          form.js-create-thread-form
+            .js-forum-id(class='hide' data-forum-id=forum.forumId)
             .auth-entry-form
               .subtitle.
                 Create a thread in <a href='/f/'+forum.forumId>#{forum.title}</a>
@@ -28,10 +25,10 @@ html
             .auth-entry-footer
               a(href='/f/'+forum.forumId class='left').
                 Back
-              input(class='submit-auth-button js-signup' type='submit' value='Submit')
-          div(class='auth-display-message animated fadeIn hide js-signup-status-message')
+              input(class='submit-auth-button js-create-thread' type='submit' value='Submit')
+          div(class='auth-display-message animated fadeIn hide js-create-thread-message')
       .preview.
-        previewww
+        Created thread preview
     else
       p.
         Invalid thread.

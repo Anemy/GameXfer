@@ -2,7 +2,9 @@
 @import 'reset';
 
 // Libraries
-@import 'animate';
+@import 'lib/animate';
+@import 'lib/bootstrap';
+@import 'lib/font-awesome';
 
 @import 'variables';
 @import 'rules';
@@ -14,3 +16,4 @@
 @import 'coins';
 @import 'forum';
 @import 'thread';
+@import 'comment';

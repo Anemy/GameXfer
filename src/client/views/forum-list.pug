@@ -10,6 +10,8 @@ html(lang='en')
     include header
     h1.
       GameXfer Forums 
+    .forum-category.
+      Category
     ul
       each forum in forums.length ? forums : ['No forums found.']
         li
@@ -17,3 +19,4 @@ html(lang='en')
             #{forum.title}
           p.
             posts: #{forum.threadsCreatedTotal}
+    include footer

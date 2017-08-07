@@ -103,10 +103,6 @@ function renderWithUser(req, res, template) {
   }
 }
 
-router.get('/', (req, res) => {
-  renderWithUser(req, res, 'index');
-});
-
 // Comment 
 router.post('/comment/edit', createCommentLimiter, requireAuth, editComment);
 router.post('/comment/create', createCommentLimiter, requireAuth, createComment);
@@ -128,6 +124,7 @@ router.post('/thread/create', createThreadLimiter, requireAuth, createThread);
 // Forum
 router.get('/f/:forumId', getForum);
 router.get('/forums', getAllForums);
+router.get('/', getAllForums);
 
 // Messages
 router.get('/inbox', basicLimiter, requireAuth, getMessages);
@@ -156,6 +153,16 @@ router.get('/signup', (req, res) => {
 });
 router.get('/forgot-password', requireAuth, (req, res) => {
   renderWithUser(req, res, 'forgot-password');
+});
+router.get('/posts', requireAuth, (req, res) => {
+  renderWithUser(req, res, 'posts');
+});
+router.get('/tracker', requireAuth, (req, res) => {
+  renderWithUser(req, res, 'tracker');
+});
+
+router.get('/contact', (req, res) => {
+  res.render('contact');
 });
 
 router.get('*', (req, res) => {

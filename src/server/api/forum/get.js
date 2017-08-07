@@ -2,6 +2,7 @@
 
 // TODO: Cache queries.
 
+import _ from 'underscore';
 import sync from 'synchronize';
 
 import Constants from '../../../shared/Constants';
@@ -50,7 +51,7 @@ export default (req, res) => {
     }
 
     // Find the threads for that forum.
-    const threads = sync.await(db.collection('threads').find({
+    let threads = sync.await(db.collection('threads').find({
       forumId: forumId
     }, {
       threadId: 1,
@@ -58,8 +59,10 @@ export default (req, res) => {
       title: 1,
       description: 1,
       views: 1,
+      author: 1,
       mostRecentCommentTime: 1,
       mostRecentCommentAuthor: 1,
+      mostRecentCommentId: 1,
       commentsLength: 1
     }).sort({
       mostRecentCommentTime: 1
@@ -67,6 +70,15 @@ export default (req, res) => {
       // Get the Constants.AMOUNT_OF_THREADS_PER_PAGE threads based on the page number.
       .skip(forumPage * Constants.AMOUNT_OF_THREADS_PER_PAGE)
       .limit(Constants.AMOUNT_OF_THREADS_PER_PAGE).toArray(sync.defer()));
+
+    _.each(threads, (thread) => {
+      if (thread && thread.mostRecentCommentAuthor) {
+        thread.mostRecentCommentAuthor = ServerUtils.getLightUserObjectForUsername(thread.mostRecentCommentAuthor);
+      }
+      if (thread && thread.author) {
+        thread.author = ServerUtils.getLightUserObjectForUsername(thread.author);
+      }
+    });
 
     res.status(200);
     res.render('forum', {

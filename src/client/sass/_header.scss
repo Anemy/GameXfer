@@ -1,4 +1,16 @@
-$header-height: 50px;
+$header-height: 46px;
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 16px;
+  padding: 2px;
+
+  text-align: center;
+
+  font-size: 12px;  
+}
 
 .page-header {
   border-bottom: 1px solid #EEE;
@@ -11,7 +23,7 @@ $header-height: 50px;
 }
 
 .gamexfer-title {
-  color: #99c;
+  color: #111;
   font-weight: bold;
   font-size: 24px;
 
@@ -22,13 +34,11 @@ $header-height: 50px;
   margin-left: 40px;
 
   span {
-    color: $accent;
+    // color: $accent;
+    color: #f1c40f;
   }
 }
 
-.header-xfer-coin {
-  vertical-align: middle;
-}
 .header-xfer-coin:hover {
   border-bottom: 1px solid $link-text;
   text-decoration: none !important;
@@ -41,6 +51,8 @@ $header-height: 50px;
 .header-coin-text {
   font-size: 20px !important;
   font-weight: bold;
+
+  line-height: 1;
 
   display: inline-block;
 }
@@ -71,8 +83,6 @@ $header-height: 50px;
     display: inline-block;
 
     margin-right: 8px;
-
-    vertical-align: middle;
 
     height: $header-height;
   }

@@ -9,15 +9,27 @@ html(lang='en')
     link(rel='icon' type='image/png' href='/images/treasure-64.png')
   body
     include header
-    include thread-header
-    .thread-title-header
-      a(href='/f/'+thread.forumId).
+    .nav-bar
+      a.inline-block(href='/forums').
+        forums
+      p.inline-block.
+        &nbsp;&gt;&nbsp;
+      a.inline-block(href='/f/'+thread.forumId).
         #{thread.forumId}
-      p.
-        &gt;
-    +thread-header(thread)
+      p.inline-block.
+        &nbsp;&gt;&nbsp;
+      a.inline-block(href='/f/'+thread.forumId+'/t/'+thread.threadId).
+        #{thread.threadId}
+    .thread-page-title.
+      #{thread.title}
+    .thread-page-description.
+      #{thread.description}
     each comment in thread.comments.length ? thread.comments : ['No comments found.']
-      p.
-        #{comment.author} -
-      p.
-        #{comment.text}
+      .comment-panel
+        if comment.author
+          p
+            a(href='/u/'+comment.author.username).
+              #{comment.author.displayUsername}
+        p.
+          #{comment.text}
+    include footer

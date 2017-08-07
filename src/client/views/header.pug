@@ -1,6 +1,12 @@
 .page-header
   a(href='/' class='gamexfer-title').
     Game<span>Xfer</span>
+  a(href='/forums' class='header-link ml-4').
+    Forums
+  a(href='/tracker' class='header-link ml-4').
+    Tracker
+  a(href='/posts' class='header-link ml-4').
+    Posts
   if user
     include logout
     ul(class='bar-list  right')
@@ -12,6 +18,11 @@
           p(class='header-coin-text').
             #{user.xferCoin}        
           img(src='/images/coins-32.png' class='xfer-coin-image')
+      li
+        if user.hasUnread
+          i(class='fa  envelope-o  fa-lg')
+        else
+          i(class='fa  envelope  fa-lg')
       li
         a(class='logout-button  js-logout  header-link  header-small-text').
           Logout

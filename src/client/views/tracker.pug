@@ -1,18 +1,15 @@
 doctype html
 html(lang='en')
   head
-    script(src='https://cdn.ravenjs.com/3.17.0/raven.min.js' crossorigin='anonymous')
-
     link(rel='stylesheet' href='/style/index.css')
     script(src='/js/build.js')
-
-    title='GameXfer Forum & Exchange Homepage'
+    title='Posts - GameXfer'
 
     link(rel='icon' type='image/png' href='/images/treasure-64.png')
   body
     include header
     h1.
-      GameXfer Homepage
-    .homepage-body
-      a(href='/forums').
-        forums
+      GameXfer Posts  
+    p.
+      This will show all of your tracked posts.
+    include footer

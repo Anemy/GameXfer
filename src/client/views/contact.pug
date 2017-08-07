@@ -1,0 +1,23 @@
+html
+  head
+    title='Contact - GameXfer'
+    link(href='/style/index.css' rel='stylesheet' type='text/css')
+
+    script(src='/js/build.js' async='true')
+
+    link(rel='icon' type='image/png' href='/images/treasure-64.png')
+  body
+    .contact-page
+      .auth-ui-panel
+        .auth-entry-header
+          div(class='left logo')
+            <span>Game</span>Xfer
+        .auth-entry-form
+          .subtitle.
+            Send us a message
+          input.js-contact-email-input(type='email' name='_replyto' placeholder='Email')
+          textarea.js-contact-text-input(class='big-message' type='text' name='name' placeholder='Message')
+        .auth-entry-footer
+          a(class='submit-auth-button  js-contact-submit').
+            Send
+        div(class='auth-display-message  animated  fadeIn  hide  js-contact-status-message')

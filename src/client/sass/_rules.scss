@@ -13,6 +13,18 @@
   font-weight: bold !important;
 }
 
+.text-mute {
+  color: $text-secondary;
+}
+
+.center-text {
+  text-align: center;
+}
+
 .inline-block {
   display: inline-block;
+}
+
+.wrap-text {
+  word-wrap: break-word;
 }

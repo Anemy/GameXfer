@@ -53,7 +53,11 @@
     font-size: 0.92em; 
     line-height: 1.25em;
   }
-  input {
+  .big-message {
+    line-height: 1.05em;
+    min-height: 5em;
+  }
+  input, textarea {
     font-size: 1.05em;
     font-weight: 300;
     margin-top: 18px;

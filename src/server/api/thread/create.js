@@ -88,7 +88,7 @@ export default (req, res) => {
       description: description,
 
       views: 0,
-      author: req.user,
+      author: req.username,
 
       commentsLength: 1,
       comments: [{
@@ -96,8 +96,11 @@ export default (req, res) => {
         createdAt: currentTime,
         
         text: text,
-        author: req.user
+        author: req.username
       }],
+
+      mostRecentCommentTime: currentTime,
+      mostRecentCommentAuthor: req.username,
 
       createdAt: currentTime
     };
@@ -140,11 +143,11 @@ export default (req, res) => {
       $set: {
         mostRecentThreadId: newThread.threadId,
         mostRecentThreadTime: currentTime,
-        mostRecentThreadAuthor: req.user,
+        mostRecentThreadAuthor: req.username,
 
         mostRecentCommentTime: currentTime,
         mostRecentCommentId: 0 /* It was the first comment on the thread. */,
-        mostRecentCommentAuthor: req.user,
+        mostRecentCommentAuthor: req.username,
         mostRecentCommentThreadId: newThread.threadId,
       },
       $inc: {
@@ -172,8 +175,10 @@ export default (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200);
 
-    // Redirect to the newly posted thread.
-    res.redirect(`/f/${forumId}/t/${newThread.threadId}`);
+    res.send({
+      forumId: forumId,
+      threadId: newThread.threadId
+    });
   });
 };
 

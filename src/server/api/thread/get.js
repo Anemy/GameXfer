@@ -57,6 +57,9 @@ export default (req, res) => {
         author: 1,
         views: 1,
         createdAt: 1,
+        mostRecentCommentAuthor: 1,
+        mostRecentCommentTime: 1,
+        mostRecentCommentId: 1,
         commentsLength: 1,
         comments: {
           // Get the Constants.AMOUNT_OF_COMMENTS_PER_PAGE threads based on the page number.
@@ -79,9 +82,13 @@ export default (req, res) => {
       return;
     }
 
+    if (thread.mostRecentCommentAuthor) {
+      thread.mostRecentCommentAuthor = ServerUtils.getLightUserObjectForUsername(thread.mostRecentCommentAuthor);
+    }
+
     _.each(thread.comments, (comment) => {
       if (comment && comment.author) {
-        comment.user = ServerUtils.getLightUserObjectForUsername(comment.author);
+        comment.author = ServerUtils.getLightUserObjectForUsername(comment.author);
       }
     });
 

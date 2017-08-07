@@ -16,7 +16,15 @@ module.exports = {
   AMOUNT_OF_COMMENTS_PER_PAGE: 15,
 
   FORUM_TYPES: {
-    TRADING: 1,
+    TRADING: 0,
     DISCUSSION: 1
+  },
+
+  THREAD_TYPES: {
+    FT: 0,
+    ISO: 1,
+    WTB: 1,
+    DISCUSSION: 2,
+    
   }
 };
