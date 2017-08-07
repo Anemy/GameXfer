@@ -13,9 +13,17 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage('Kickoff') {
-          echo 'Kicking it off...'
-          export NODE_ENV=production 
+        stage('Test') {
+          steps {
+            echo 'Yeah... about those tests...'
+            echo 'Were gonna have to have you come in on Saturday...'
+          }
+        }
+        stage('Deploy') {
+          steps {
+            echo 'Taking off...'
+            export NODE_ENV=production 
+          }
         }
     }
 }

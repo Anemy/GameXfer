@@ -58,8 +58,8 @@ class CreateComment {
           this.showStatusMessage('Success! Redirecting in 1 seconds.', 'message-success');
         }, 1000 /* 1s */);
         setTimeout(() => {
-          // TODO: Add a url feature for getting to the most recent comment.
-          window.location.replace(`/f/${forumId}/t/${threadId}`);
+          // Redirect to the most recent comment.
+          window.location.replace(`/f/${forumId}/t/${threadId}/c/mr`);
         }, 2000 /* 2s */);
       }).fail((err) => {
         this.showStatusMessage('Error: ' + err.responseJSON.err, 'message-failure');

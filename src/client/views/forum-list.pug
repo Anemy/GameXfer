@@ -36,8 +36,8 @@ html(lang='en')
                 p.inline-block.
                   &nbsp;
         .forums-list-panel
-          .forums-table-header.text-mute
-            .col-md-8.pl-m.
+          .forums-table-header
+            .col-md-8.
               Forum Title
             .col-md-2.
               Thread Count
@@ -62,5 +62,4 @@ html(lang='en')
                         #{forum.mostRecentCommentAuthor.displayUsername}
                   if forum.mostRecentCommentTime
                     p(class='forum-header-info')=moment(forum.mostRecentCommentTime).fromNow()
-                <div style="clear: both"></div>
     include footer

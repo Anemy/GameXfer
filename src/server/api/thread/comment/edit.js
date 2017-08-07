@@ -77,8 +77,12 @@ export default (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200);
 
-    // Redirect to the newly posted thread.
-    res.redirect(`/f/${forumId}/t/${threadId}/c/${commentId}`);
+    res.send({
+      err: false,
+      threadId: threadId,
+      forumId: forumId,
+      editedAt: currentTime
+    });
   });
 };
 

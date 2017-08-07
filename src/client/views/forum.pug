@@ -8,20 +8,21 @@ html(lang='en')
     link(rel='icon' type='image/png' href='/images/treasure-64.png')
   body
     include header
-    .nav-bar
-      a.inline-block(href='/forums').
-        forums
-      p.inline-block.
-        &nbsp;&gt;&nbsp;
-      a.inline-block(href='/f/'+forum.forumId).
-        #{forum.forumId}
+    ul.nav-bar
+      li
+        a(href='/forums').
+          forums
+      li
+        a(href='/f/'+forum.forumId).
+          #{forum.forumId}
+          
     .forum-page
       a.forum-title(href='/f/'+forum.forumId).
         #{forum.title}
       a(href='/f/'+forum.forumId+'/create-thread' class='forum-ui-button').
         Create Thread
-      .thread-table-header.text-mute
-        .col-md-8.pl-m.
+      .thread-table-header
+        .col-md-8.pl-4.
           Title &amp; Description
         .col-md-1.
           Comments

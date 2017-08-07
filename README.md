@@ -74,7 +74,7 @@ $ browser https://localhost:3000
   - mostRecentCommentAuthor `String`
   - commentsLength `String`
   - comments `Array`
-   - commentId `String`
+   - commentId `Number` - Incremented by each new comment.
    - author `String`
    - text `String`
    - createdAt `Date`

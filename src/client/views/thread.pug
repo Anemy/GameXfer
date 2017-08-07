@@ -9,17 +9,16 @@ html(lang='en')
     link(rel='icon' type='image/png' href='/images/treasure-64.png')
   body
     include header
-    .nav-bar
-      a.inline-block(href='/forums').
-        forums
-      p.inline-block.
-        &nbsp;&gt;&nbsp;
-      a.inline-block(href='/f/'+thread.forumId).
-        #{thread.forumId}
-      p.inline-block.
-        &nbsp;&gt;&nbsp;
-      a.inline-block(href='/f/'+thread.forumId+'/t/'+thread.threadId).
-        #{thread.threadId}
+    ul.nav-bar
+      li
+        a(href='/forums').
+          forums
+      li
+        a(href='/f/'+thread.forumId).
+          #{thread.forumId}
+      li
+        a(href='/f/'+thread.forumId+'/t/'+thread.threadId).
+          #{thread.threadId}
     .thread-page
       .thread-page-title.
         #{thread.title}

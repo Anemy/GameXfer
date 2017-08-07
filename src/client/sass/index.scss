@@ -26,6 +26,8 @@ html {
 
 body {
   margin-bottom: 16px;
+
+  font-family: "Source Sans Pro", Tahoma, Arial;
 }
 .footer {
   position: absolute;
@@ -39,4 +41,32 @@ body {
   text-align: center;
 
   font-size: 12px;  
+}
+
+.nav-bar {
+  margin-left: 14px;
+  margin-top: 3px;
+
+  // Nice color gg.
+  color: #666; 
+  font-size: 14px;
+
+  li {
+    display: inline-block;
+  }
+
+  a {
+    color: #666;
+    text-decoration: none;
+  }
+  a:hover {
+    cursor: pointer;
+    color: $gold;
+  }
+
+  li+li:before {
+    content: " » ";
+    display: inline-block;
+    margin: 0 3px;
+  }
 }
