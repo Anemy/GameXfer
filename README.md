@@ -21,7 +21,7 @@ $ npm install -g nodemon
 ```bash
 $ mongod # Ensure mongodb is running on the system.
 $ npm run start:dev
-$ browser https://localhost:8080
+$ browser https://localhost:3000
 ```
 
 ## Database Schemas

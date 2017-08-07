@@ -19,10 +19,11 @@
             #{user.xferCoin}        
           img(src='/images/coins-32.png' class='xfer-coin-image')
       li
-        if user.hasUnread
-          i(class='fa  fa-envelope  fa-lg')
-        else
-          i(class='fa  fa-envelope-o  fa-lg')
+        a(href='/inbox')
+          if user.hasUnread
+            i(class='fa  fa-envelope')
+          else
+            i(class='fa  fa-envelope-o')
       li
         a(class='logout-button  js-logout  header-link  header-small-text').
           Logout
