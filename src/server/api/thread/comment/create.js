@@ -34,7 +34,7 @@ export default (req, res) => {
   }
 
   sync.fiber(() => {
-    const currentTime = new Date();
+    console.log('going for thread:', threadId,' in forum', forumId);
 
     // Update the amount of comments created in the thread. We use this a key for the comment in combination with the thread id and forum id.
     const thread = sync.await(db.collection('threads').findAndModify({
@@ -60,8 +60,11 @@ export default (req, res) => {
       return;
     }
 
+    const currentTime = new Date();
+
     const newComment = {
-      commentId: thread.commentsLength,
+      // Give the comment an id string.
+      commentId: thread.commentsLength + '',
 
       author: req.username,
 
@@ -148,8 +151,10 @@ export default (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200);
 
-    // Redirect to the newly posted thread.
-    res.redirect(`/f/${forumId}/t/${threadId}/c/${newComment.commentId}`);
+    res.send({
+      newCommentId: newComment.commentId,
+      err: false
+    });
   });
 };
 

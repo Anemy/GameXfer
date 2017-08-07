@@ -101,6 +101,7 @@ export default (req, res) => {
           messages: [],
           messagesRecievedTotal: 0,
           messagesLength: 0,
+          hasUnread: false,
 
           createdAt: currentTime,
           savedAt: currentTime

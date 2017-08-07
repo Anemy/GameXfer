@@ -13,7 +13,7 @@ export default (req, res) => {
     return;
   }
 
-  let forumId = req.body.forumId;
+  const forumId = req.body.forumId;
   const title = req.body.title;
   const description = req.body.description;
   const text = req.body.text;
@@ -24,10 +24,6 @@ export default (req, res) => {
       err: 'Invalid thread creation request.'
     });
     return;
-  }
-
-  if (Utils.isNumber(forumId)) {
-    forumId = Number(forumId);
   }
   
   // Ensure the title of the message conforms to the guidelines. 
@@ -80,8 +76,8 @@ export default (req, res) => {
     }
 
     const newThread = {
-      // Give the thread a unique id to reference.
-      threadId: forum.threadsCreatedTotal,
+      // Give the thread a unique id to reference (In string form).
+      threadId: forum.threadsCreatedTotal + '',
       forumId: forumId,
 
       title: title,

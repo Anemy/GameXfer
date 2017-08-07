@@ -13,8 +13,8 @@ import ServerUtils from '../../ServerUtils';
 import Utils from '../../../shared/Utils';
 
 export default (req, res) => {
-  let forumId = req.params.forumId;
-  let threadId = req.params.threadId;
+  const forumId = req.params.forumId;
+  const threadId = req.params.threadId;
 
   let commentId = req.params.commentId;
 
@@ -31,14 +31,6 @@ export default (req, res) => {
   } else {
     // Default the searched for comment to 0.
     commentId = 0;
-  }
-
-  if (Utils.isNumber(threadId)) {
-    threadId = Number(threadId);
-  }
-
-  if (Utils.isNumber(forumId)) {
-    forumId = Number(forumId);
   }
 
   sync.fiber(() => {

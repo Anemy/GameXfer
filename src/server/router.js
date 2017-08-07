@@ -5,6 +5,7 @@ import sync from 'synchronize';
 // Comment
 import editComment from './api/thread/comment/edit';
 import createComment from './api/thread/comment/create';
+import createCommentPage from './api/thread/comment/createCommentPage';
 
 // Thread
 import getThread from './api/thread/get';
@@ -107,6 +108,7 @@ function renderWithUser(req, res, template) {
 // Comment 
 router.post('/comment/edit', createCommentLimiter, requireAuth, editComment);
 router.post('/comment/create', createCommentLimiter, requireAuth, createComment);
+router.get('/f/:forumId/t/:threadId/create-comment', requireAuth, createCommentPage);
 
 // Thread 
 router.get('/f/:forumId/t/:threadId', getThread);

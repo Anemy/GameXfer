@@ -24,7 +24,9 @@ export default {
       displayUsername: 1,
 
       posts: 1,
-      xferCoin: 1
+      xferCoin: 1,
+
+      hasUnread: 1
     }, sync.defer()));
 
     return lightUser;
@@ -41,5 +43,21 @@ export default {
     }, sync.defer()));
 
     return lightForum;
+  },
+
+  // Needs to be in a fiber.
+  // @returns Light forum object with data.
+  getLightThreadById: (forumId, threadId) => {
+    const lightThread = sync.await(db.collection('threads').findOne({
+      forumId: forumId,
+      threadId: threadId
+    }, {
+      threadId: 1,
+      forumId: 1,
+      title: 1,
+      description: 1
+    }, sync.defer()));
+
+    return lightThread;
   }
 };

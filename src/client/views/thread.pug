@@ -20,16 +20,19 @@ html(lang='en')
         &nbsp;&gt;&nbsp;
       a.inline-block(href='/f/'+thread.forumId+'/t/'+thread.threadId).
         #{thread.threadId}
-    .thread-page-title.
-      #{thread.title}
-    .thread-page-description.
-      #{thread.description}
-    each comment in thread.comments.length ? thread.comments : ['No comments found.']
-      .comment-panel
-        if comment.author
-          p
-            a(href='/u/'+comment.author.username).
-              #{comment.author.displayUsername}
-        p.
-          #{comment.text}
+    .thread-page
+      .thread-page-title.
+        #{thread.title}
+      .thread-page-description.
+        #{thread.description}
+      a(href='/f/'+thread.forumId+'/t/'+thread.threadId+'/create-comment' class='forum-ui-button').
+        Comment
+      each comment in thread.comments.length ? thread.comments : ['No comments found.']
+        .comment-panel
+          if comment.author
+            p
+              a(href='/u/'+comment.author.username).
+                #{comment.author.displayUsername}
+          p.
+            #{comment.text}
     include footer

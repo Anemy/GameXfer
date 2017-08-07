@@ -61,7 +61,7 @@ export default (req, res) => {
 
     const newMessage = {
       // Give the message a unique id to reference.
-      messageId: Utils.isNumber(user.messsagesRecievedTotal) ? Number(user.messsagesRecievedTotal) : uuidv1(),
+      messageId: uuidv1(),
 
       sender: req.username,
 
@@ -80,6 +80,9 @@ export default (req, res) => {
         $lt: Constants.MAX_INBOX_LENGTH
       }
     }, {
+      $set: {
+        hasUnread: true
+      },
       $push: { 
         messages: newMessage 
       },

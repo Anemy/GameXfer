@@ -42,7 +42,7 @@ $ browser https://localhost:8080
   - messagesRecievedTotal `Number`
   - messagesLength `Number` - The amount of messages in the user's inbox. Saves counting operation time.
   - messages `Array` - An array of the user's messages. Can hold up to 100 messages at a time.
-    - messageId `String` - Just incremented by 1 everytime a new message is recieved.
+    - messageId `String` - Uuid timestamped.
     - sender `String` - The _id of the user who sent the message.
     - subject `String`
     - text `String`
@@ -52,7 +52,7 @@ $ browser https://localhost:8080
 #### Forums - The info about certain forums is contained in `src/shared/Forums.js`
 
 - forum
-  - forumId `String` or `Number` - Unique. Try to keep ids low (look at other forums when creating them).
+  - forumId `String`
   - threadsCreatedTotal `Number`
   - mostRecentThreadId `String` - The id of the most recently created thread. Not necessarily the most recently commented.
   - mostRecentThreadTime `Date`
@@ -65,7 +65,7 @@ $ browser https://localhost:8080
 #### Threads
 
 - thread
-  - threadId `String` or `Number` - Unique in combination with forumId.
+  - threadId `String` - Unique in combination with forumId. It's the count of the actual forum in that thread.
   - forumId `String` - Unique in combination with threadId.
   - title `String`
   - description `String`

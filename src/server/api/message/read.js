@@ -37,7 +37,7 @@ export default (req, res) => {
       $set: {
         'messages.$.readAt': currentTime
       }
-    }, sync.defer()));
+    }, sync.defer()));    
 
     if (!updatedUser || updatedUser.nModified !== 1) { 
       res.status(400).send({
@@ -45,6 +45,24 @@ export default (req, res) => {
       });
       return;
     }
+
+    // Try to mark all as unread
+    sync.await(db.collection('users').update({
+      username: req.username,
+      messages: {
+        $not: {
+          $elemMatch: {
+            readAt: {
+              $exists: false
+            }
+          }
+        }
+      }
+    }, {
+      $set: {
+        hasUnread: false
+      }
+    }, sync.defer()));
 
     res.setHeader('Content-Type', 'application/json');
     res.status(200);

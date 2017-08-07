@@ -1,10 +1,14 @@
+require('./lib/bootstrap-markdown');
+
 import auth from './auth';
-import thread from './thread';
+import comment from './comment';
 import forum from './forum';
+import thread from './thread';
 
 auth.enable();
-thread.enable();
+comment.enable();
 forum.enable();
+thread.enable();
 
 // if (Raven) {
 // Raven.config('https://5ed37515bfdc49afa08a347506af29e8@sentry.io/197712').install();

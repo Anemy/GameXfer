@@ -1,0 +1,37 @@
+html
+  head
+    title='Post a Comment - GameXfer'
+    link(href='/style/index.css' rel='stylesheet' type='text/css')
+
+    script(src='/js/build.js' async='true')
+      
+    link(rel='icon' type='image/png' href='/images/treasure-64.png')
+  body
+    include header
+    if thread
+      .create-comment-page
+        .auth-ui-panel
+          .auth-entry-header
+            div(class='left logo').
+              <span>Game</span>Xfer
+          .create-comment-form
+            .js-forum-id(class='hide' data-forum-id=thread.forumId)
+            .js-thread-id(class='hide' data-thread-id=thread.threadId)
+            .auth-entry-form
+              .subtitle
+                p.inline-block.
+                  Post a comment in&nbsp;
+                a(href='/f/'+thread.forumId+'/t/'+thread.threadId).
+                  #{thread.title}
+              textarea(class='js-create-comment-text' data-provide='markdown' type='text' placeholder='Text')
+            .auth-entry-footer
+              a(href='/f/'+thread.forumId+'/t/'+thread.threadId class='left').
+                Back
+              input(class='submit-auth-button js-create-comment' type='submit' value='Submit')
+          div(class='auth-display-message animated fadeIn hide js-create-comment-message')
+      .preview.
+        Created comment preview
+    else
+      p.
+        Invalid thread to comment on. Please try again.
+    include footer

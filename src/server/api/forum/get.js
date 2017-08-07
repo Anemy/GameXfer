@@ -23,10 +23,6 @@ export default (req, res) => {
     return;
   }
 
-  if (Utils.isNumber(forumId)) {
-    forumId = Number(forumId);
-  }
-
   if (forumPage && Utils.isNumber(forumPage)) {
     forumPage = Number(forumPage);
   } else {
