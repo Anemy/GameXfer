@@ -1,6 +1,8 @@
 .thread-header {
   position: relative;
 
+  overflow: hidden;
+
   padding: 4px;
   margin: 4px;
 
@@ -8,7 +10,6 @@
   background-color: #FBFBFB;
 
   max-height: 120px;
-  min-height: 60px;
 }
 
 .thread-header-title {
@@ -16,7 +17,7 @@
 }
 
 .thread-header-description {
-  color: $text-secondary;
+  margin-left: 2px;
 
   font-size: 14px;
 }
@@ -28,23 +29,3 @@
 .thread-header-author {
   text-decoration: underline;
 }
-
-// .thread-header-right {
-//   position: absolute;
-//   top: 0;
-//   right: 0;
-
-//   height: 100%;
-
-//   li {
-//     display:inline-block;
-
-//     text-align: left;
-
-//     height: 100%;
-
-//     border-right: 1px solid $flat-clouds;
-
-//     overflow: hidden;
-//   }
-// }

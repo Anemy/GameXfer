@@ -21,7 +21,7 @@ html(lang='en')
       a(href='/f/'+forum.forumId+'/create-thread' class='forum-ui-button').
         Create Thread
       .thread-table-header.text-mute
-        .col-md-8.
+        .col-md-8.pl-m.
           Title &amp; Description
         .col-md-1.
           Comments
@@ -30,20 +30,25 @@ html(lang='en')
         .col-md-2.
           Last Comment
       if threads ? threads.length === 0 : false
-        .thread-header.center-text.
-          No threads found
+        .thread-header.center-text
+          p.
+            No threads found :'(
+          br
+          a(href='/f/'+forum.forumId+'/create-thread')
+            p.
+              Create a new thread :D
+
       else
         each thread in threads
           .thread-header
             .col-md-8
-              p(class='thread-header-title')
-                a(href='/f/'+thread.forumId+'/t/'+thread.threadId).
+              a(href='/f/'+thread.forumId+'/t/'+thread.threadId)
+                p(class='thread-header-title').
                   #{thread.title}
-              p(class='thread-header-description')
-                a(href='/f/'+thread.forumId+'/t/'+thread.threadId).
+                p(class='thread-header-description').
                   #{thread.description}
               if thread.author
-                a(href='/u/'+thread.author)
+                a(href='/u/'+thread.author.username)
                   p(class='thread-header-author inline-block').
                     #{thread.author.displayUsername}
                 p.inline-block.
@@ -59,4 +64,5 @@ html(lang='en')
                   p.thread-header-author.
                     #{thread.mostRecentCommentAuthor.displayUsername}
                 p(class='thread-header-info')=moment(thread.mostRecentCommentTime).fromNow()
+
     include footer

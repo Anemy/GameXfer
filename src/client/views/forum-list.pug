@@ -9,8 +9,8 @@ html(lang='en')
   body
     include header
     .forums-page
-      .forums-page-title-area
-        div(class='forums-title  js-forums-info-selector')
+      .forums-page-title-area.js-forums-info-selector
+        .forums-title
           p.inline-block.
             GameXfer Forums&nbsp;
           p(class='forums-title-dropdown-icon  js-forums-info-selector-icon').
@@ -37,7 +37,7 @@ html(lang='en')
                   &nbsp;
         .forums-list-panel
           .forums-table-header.text-mute
-            .col-md-8.
+            .col-md-8.pl-m.
               Forum Title
             .col-md-2.
               Thread Count
@@ -49,17 +49,18 @@ html(lang='en')
           else
             each forum in forums
               .forum-header
-                .col-md-8
+                .col-md-8.forum-header-col
                   p(class='forum-header-title')
                     a(href='/f/'+forum.forumId).
                       #{forum.title}
-                .col-md-2.
+                .col-md-2.forum-header-col.
                   #{forum.threadsCreatedTotal}
-                .col-md-2
+                .col-md-2.forum-header-col
                   if forum.mostRecentCommentAuthor
                     a(href='/u/'+forum.mostRecentCommentAuthor.username)
                       p.forum-header-author.
                         #{forum.mostRecentCommentAuthor.displayUsername}
                   if forum.mostRecentCommentTime
                     p(class='forum-header-info')=moment(forum.mostRecentCommentTime).fromNow()
+                <div style="clear: both"></div>
     include footer

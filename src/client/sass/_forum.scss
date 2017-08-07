@@ -64,8 +64,29 @@ $forum-top-padding: 5px;
   position: relative;
 }
 
+.forum-header {
+  overflow: hidden;
+
+  display: flex;
+
+  padding: 6px;
+  margin: 6px;
+  margin-left: 10px;
+  margin-right: 10px;
+
+  border: 1px solid $flat-clouds;
+  background-color: #FBFBFB;
+}
+.forum-header:hover {
+  background-color: #F8F8F8;
+}
+
+.forum-header-col {
+  border-right: 1px dotted lightgrey;
+}
+
 .forum-category-panel {
-  position: relative;
+  overflow: hidden;
 
   padding-left: 6px;
   padding-right: 6px;

@@ -32,12 +32,19 @@ export default (req, res) => {
       return;
     }
 
-    // Add the additional static info into the forums.
+    // Add the additional info into the forums.
     _.each(forums, (forum) => {
-      // Copy all of the data about the forum onto our locally pulled one.
+      // Copy all of the static data about the forum onto our locally pulled one.
       _.extend(forum, Forums.getForumInfoById(forum.forumId));
-    });
 
+      if (forum && forum.mostRecentCommentAuthor) {
+        forum.mostRecentCommentAuthor = ServerUtils.getLightUserObjectForUsername(forum.mostRecentCommentAuthor);
+      }
+      if (forum && forum.author) {
+        forum.author = ServerUtils.getLightUserObjectForUsername(forum.author);
+      }
+    });
+    
     res.status(200);
     res.render('forum-list', {
       forums: forums,

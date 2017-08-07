@@ -63,6 +63,7 @@ export default (req, res) => {
       description: 1,
       views: 1,
       author: 1,
+      createdAt: 1,
       mostRecentCommentTime: 1,
       mostRecentCommentAuthor: 1,
       mostRecentCommentId: 1,
