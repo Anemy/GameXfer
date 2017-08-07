@@ -9,6 +9,7 @@ import createComment from './api/thread/comment/create';
 // Thread
 import getThread from './api/thread/get';
 import createThread from './api/thread/create';
+import createThreadPage from './api/thread/createThreadPage';
 
 // Forum
 import getForum from './api/forum/get';
@@ -109,15 +110,7 @@ router.post('/comment/create', createCommentLimiter, requireAuth, createComment)
 
 // Thread 
 router.get('/f/:forumId/t/:threadId', getThread);
-router.get('/f/:forumId/create-thread', requireAuth, (req, res) => {
-  // Send the rendered HTML page and attach the user's username if they are sessioned.
-  sync.fiber(() => {
-    res.render('create-thread', {
-      user: ServerUtils.getLightUserObjectForUsername(req.session.username),
-      forum: req.params.forumId ? ServerUtils.getLightForumById(req.params.forumId) : null
-    });
-  });
-});
+router.get('/f/:forumId/create-thread', requireAuth, createThreadPage);
 router.get('/f/:forumId/t/:threadId/c/:commentId', getThread);
 router.post('/thread/create', createThreadLimiter, requireAuth, createThread);
 

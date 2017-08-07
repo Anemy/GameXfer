@@ -17,8 +17,11 @@ html
           form.js-create-thread-form
             .js-forum-id(class='hide' data-forum-id=forum.forumId)
             .auth-entry-form
-              .subtitle.
-                Create a thread in <a href='/f/'+forum.forumId>#{forum.title}</a>
+              .subtitle
+                p.inline-block.
+                  Create a thread in&nbsp;
+                a(href='/f/'+forum.forumId).
+                  #{forum.title}
               input(class='js-create-thread-title' type='text' placeholder='Title')
               input(class='js-create-thread-description' type='email' placeholder='Description')
               input(class='js-create-thread-text' type='text' placeholder='Text')
@@ -32,3 +35,4 @@ html
     else
       p.
         Invalid thread.
+    include footer

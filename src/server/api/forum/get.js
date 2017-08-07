@@ -7,6 +7,7 @@ import sync from 'synchronize';
 
 import Constants from '../../../shared/Constants';
 import db from '../../Database';
+import Forums from '../../../shared/Forums';
 import ServerUtils from '../../ServerUtils';
 import Utils from '../../../shared/Utils';
 
@@ -34,12 +35,10 @@ export default (req, res) => {
 
   sync.fiber(() => {
     // Retrieve the requested forum.
-    const forum = sync.await(db.collection('forums').findOne({
+    let forum = sync.await(db.collection('forums').findOne({
       forumId: forumId
     }, {
       forumId: 1,
-      title: 1,
-      type: 1,
       threadsCreatedTotal: 1
     }, sync.defer()));
 
@@ -49,6 +48,10 @@ export default (req, res) => {
       });
       return;
     }
+
+    const forumInfo = Forums.getForumInfoById(forumId);
+    // Copy all of the data about the forum onto our locally pulled one.
+    _.extend(forum, forumInfo);
 
     // Find the threads for that forum.
     let threads = sync.await(db.collection('threads').find({

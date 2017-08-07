@@ -4,42 +4,32 @@
 import _ from 'underscore';
 import sync from 'synchronize';
 
-import { FORUM_TYPES } from '../shared/Constants';
+import Forums from '../shared/Forums';
 import db from '../server/Database.js';
-
-const forumList = [{
-  forumId: 'steam',
-  title: 'Steam Trading',
-  type: FORUM_TYPES.TRADING // Trading forum.
-}, {
-  forumId: 'csgo',
-  title: 'Counter Strike',
-  type: FORUM_TYPES.TRADING // Trading forum.
-}, {
-  forumId: 'pc',
-  title: 'PC Discussion',
-  type: FORUM_TYPES.DISCUSSION // Discussion forum.
-}];
 
 sync.fiber(() => {
   console.log('Script starting: Updating and inserting the new/updated forums.');
 
-  _.each(forumList, (forum) => {
+  const forumIds = Forums.getAllForumIds();
+
+  _.each(forumIds, (forumId) => {
     // Update or insert the forum.
     const updateInsertResult = sync.await(db.collection('forums').update({
-      forumId: forum.forumId
+      forumId: forumId
     }, {
-      $set: forum
+      $set: {
+        forumId: forumId
+      }
     }, {
       upsert: true
     }, sync.defer()));
 
     if (updateInsertResult && (updateInsertResult.n === 1 || updateInsertResult.nModified === 1 || updateInsertResult.nInserted === 1)) {
-      console.log('Inserted or updated forum:', forum.title);
+      console.log('Inserted or updated forum:', forumId);
     } else {
-      console.log('Error with forum:', forum, 'updateInsertResult:', updateInsertResult, 'no update occured. This already exists or database error.');
+      console.log('Error with forum:', forumId, 'updateInsertResult:', updateInsertResult, ' No update occured. This already exists or database error.');
     }
   });
 
-  console.log('Script complete.');
+  console.log('Script complete. You may safely ctrl+c to close.');
 });

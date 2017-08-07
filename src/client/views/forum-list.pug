@@ -8,15 +8,58 @@ html(lang='en')
     link(rel='icon' type='image/png' href='/images/treasure-64.png')
   body
     include header
-    h1.
-      GameXfer Forums 
-    .forum-category.
-      Category
-    ul
-      each forum in forums.length ? forums : ['No forums found.']
-        li
-          a(href='/f/' + forum.forumId).
-            #{forum.title}
+    .forums-page
+      .forums-page-title-area
+        div(class='forums-title  js-forums-info-selector')
+          p.inline-block.
+            GameXfer Forums&nbsp;
+          p(class='forums-title-dropdown-icon  js-forums-info-selector-icon').
+            v
+        div(class='forums-info  hide  js-forums-info')
           p.
-            posts: #{forum.threadsCreatedTotal}
+            GameXfer is a forums and trading community for digital items and services. We strive to offer a positive and inclusive atmosphere for online discussions.
+          br
+          p.
+            Come <a href='/signup'>join</a> us! We use a currency called XferCoin to facilitate trades across a wide variety of games from our many users.
+      if !categories
+        p.center-text.
+          Error: Unable to find forums and categories. Please refresh.
+      else
+        .categories-selection-page
+          each category, categoryId in categories
+            .forum-category-panel
+              p.forum-category-title.
+                #{categoryId}
+              each forum in category.length ? category : ['No forums found.']
+                a(href='/f/' + forum.forumId class='inline-block  forum-in-category').
+                  #{forum.title}
+                p.inline-block.
+                  &nbsp;
+        .forums-list-panel
+          .forums-table-header.text-mute
+            .col-md-8.
+              Forum Title
+            .col-md-2.
+              Thread Count
+            .col-md-2.
+              Last Comment
+          if forums ? forums.length === 0 : false
+            .forum-header.center-text.
+              No forums found
+          else
+            each forum in forums
+              .forum-header
+                .col-md-8
+                  p(class='forum-header-title')
+                    a(href='/f/'+forum.forumId).
+                      #{forum.title}
+                .col-md-2.
+                  #{forum.threadsCreatedTotal}
+                .col-md-2
+                  if forum.mostRecentCommentAuthor
+                    a(href='/u/'+forum.mostRecentCommentAuthor.username)
+                      p.forum-header-author.
+                        #{forum.mostRecentCommentAuthor.displayUsername}
+                  if forum.mostRecentCommentTime
+                    p(class='forum-header-info')=moment(forum.mostRecentCommentTime).fromNow()
     include footer

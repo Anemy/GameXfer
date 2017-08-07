@@ -49,12 +49,10 @@ $ browser https://localhost:3000
     - sentAt `Date`
     - readAt `Date` - Set when the message has been read.
 
-#### Forums
+#### Forums - The info about certain forums is contained in `src/shared/Forums.js`
 
 - forum
   - forumId `String` or `Number` - Unique. Try to keep ids low (look at other forums when creating them).
-  - title `String`
-  - type `String` - Discussion, trading, services, etc.
   - threadsCreatedTotal `Number`
   - mostRecentThreadId `String` - The id of the most recently created thread. Not necessarily the most recently commented.
   - mostRecentThreadTime `Date`
