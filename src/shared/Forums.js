@@ -142,10 +142,8 @@ _.each(forums, (forum, index) => {
   forum.forumId = index;
 });
 
-// Currently does some data dupe but that's okay.
-// TODO: Remove data dupe.
-//
 // Sends back an array of the all of the forum categories with and array of title and id of the forums in the category.
+// TODO: Remove data duplication.
 function getAllForumsByCategory() {
   let forumsByCategory = {};
 
