@@ -1,8 +1,10 @@
+import { markdown } from 'markdown';
 import sync from 'synchronize';
 
 import db from './Database';
 import Environment from '../shared/Environment';
 import ServerConstants from './ServerConstants';
+import Utils from '../shared/Utils';
 
 export default {
   getMongoDBURL: () => {
@@ -59,5 +61,13 @@ export default {
     }, sync.defer()));
 
     return lightThread;
+  },
+
+  // Converts the passed comment to html and prevents against xss.
+  formatComment: (comment) => {
+    const sanitizedComment = Utils.sanitize(comment);
+    const markdownComment = markdown.toHTML(sanitizedComment);
+
+    return markdownComment;
   }
 };

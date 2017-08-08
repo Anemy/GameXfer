@@ -24,7 +24,7 @@ html
                   #{forum.title}
               input(class='js-create-thread-title' type='text' placeholder='Title')
               input(class='js-create-thread-description' type='email' placeholder='Description')
-              input(class='js-create-thread-text' type='text' placeholder='Text')
+              textarea(class='js-create-thread-text' data-provide='markdown' type='text' placeholder='Text')
             .auth-entry-footer
               a(href='/f/'+forum.forumId class='left').
                 Back

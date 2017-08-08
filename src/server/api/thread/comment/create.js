@@ -3,6 +3,7 @@
 import sync from 'synchronize';
 
 import db from '../../../Database';
+import ServerUtils from '../../../ServerUtils';
 import Utils from '../../../../shared/Utils';
 
 export default (req, res) => {
@@ -15,7 +16,7 @@ export default (req, res) => {
 
   const forumId = req.body.forumId;
   const threadId = req.body.threadId;
-  const text = req.body.text;
+  let text = req.body.text;
 
   // Ensure the comment has the proper attributes.
   if (forumId === undefined || threadId === undefined || !text) {
@@ -26,6 +27,17 @@ export default (req, res) => {
   }
   
   // Ensure the comment text conforms to the guidelines. 
+  if (!Utils.validCommentText(text)) {
+    res.status(400).send({
+      err: 'Invalid thread comment attempt. Please try again and follow the guidelines.'
+    });
+    return;
+  }
+
+  // Format the comment.
+  text = ServerUtils.formatComment(text);
+
+  // Ensure the comment still conforms to the guidelines after being formatted.
   if (!Utils.validCommentText(text)) {
     res.status(400).send({
       err: 'Invalid thread comment attempt. Please try again and follow the guidelines.'

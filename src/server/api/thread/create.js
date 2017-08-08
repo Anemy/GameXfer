@@ -145,9 +145,6 @@ export default (req, res) => {
         mostRecentCommentId: 0 /* It was the first comment on the thread. */,
         mostRecentCommentAuthor: req.username,
         mostRecentCommentThreadId: newThread.threadId,
-      },
-      $inc: {
-        threadsCreatedTotal: 1
       }
     }, sync.defer()));
 

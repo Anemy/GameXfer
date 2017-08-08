@@ -3,6 +3,7 @@
 import sync from 'synchronize';
 
 import db from '../../../Database';
+import ServerUtils from '../../../ServerUtils';
 import Utils from '../../../../shared/Utils';
 
 export default (req, res) => {
@@ -13,8 +14,8 @@ export default (req, res) => {
     return;
   }
 
-  let forumId = req.body.forumId;
-  let threadId = req.body.threadId;
+  const forumId = req.body.forumId;
+  const threadId = req.body.threadId;
   let commentId = req.body.commentId;
   let text = req.body.text;
 
@@ -27,6 +28,17 @@ export default (req, res) => {
   }
   
   // Ensure the comment text conforms to the guidelines. 
+  if (!Utils.validCommentText(text)) {
+    res.status(400).send({
+      err: 'Invalid edit comment attempt. Please try again and follow the guidelines.'
+    });
+    return;
+  }
+
+  // Format the comment.
+  text = ServerUtils.formatComment(text);
+
+  // Ensure the comment still conforms to the guidelines after being formatted.
   if (!Utils.validCommentText(text)) {
     res.status(400).send({
       err: 'Invalid edit comment attempt. Please try again and follow the guidelines.'

@@ -9,6 +9,7 @@ import sync from 'synchronize';
 
 import Constants from '../../../shared/Constants';
 import db from '../../Database';
+import Forums from '../../../shared/Forums';
 import ServerUtils from '../../ServerUtils';
 import Utils from '../../../shared/Utils';
 
@@ -94,6 +95,10 @@ export default (req, res) => {
       thread.mostRecentCommentAuthor = ServerUtils.getLightUserObjectForUsername(thread.mostRecentCommentAuthor);
     }
 
+    if (thread.author) {
+      thread.author = ServerUtils.getLightUserObjectForUsername(thread.author);
+    }
+
     _.each(thread.comments, (comment) => {
       if (comment && comment.author) {
         comment.author = ServerUtils.getLightUserObjectForUsername(comment.author);
@@ -102,6 +107,7 @@ export default (req, res) => {
 
     res.status(200);
     res.render('thread', {
+      forum: thread ? Forums.getForumInfoById(thread.forumId) : null,
       thread: thread, 
       user: req.session.username ? ServerUtils.getLightUserObjectForUsername(req.session.username) : null
     });

@@ -12,14 +12,39 @@
   max-height: 120px;
 }
 
+.thread-title {
+  font-size: 22px;
+  font-weight: 300;
+
+  color: $text-primary;
+}
+
+.thread-page-description {
+  font-size: 12px;
+  margin-top: 2px;
+  padding-left: 2px;
+
+  color: $text-primary;
+}
+
+
+.thread-page-information {
+  margin-top: 2px;
+  padding-left: 2px;
+
+  color: $text-secondary;
+}
+
+.thread-page-header {
+  position: relative;
+  padding-top: 2px;
+  padding-left: 20px;
+}
+
 .thread-page {
   padding-top: 5px;
 
   position: relative;
-}
-
-.thread-page-title {
-  font-size: 18px;
 }
 
 .thread-header-title {
@@ -27,9 +52,7 @@
 }
 
 .thread-header-description {
-  margin-left: 2px;
-
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .thread-header-info {

@@ -17,25 +17,48 @@ html(lang='en')
         a(href='/f/'+thread.forumId).
           #{thread.forumId}
       li
-        a(href='/f/'+thread.forumId+'/t/'+thread.threadId).
-          #{thread.threadId}
+        a(href='/f/'+thread.forumId+'/t/'+thread.threadId)
+          p.inline-block.
+            #{thread.title}
     .thread-page
-      p.thread-page-title.
-        #{thread.title}
-      p.thread-page-description.
-        #{thread.description}
+      .thread-page-header
+        p.thread-title.
+          #{thread.title}
+        p.thread-page-description.
+          #{thread.description}
+        .thread-page-information
+          p.inline-block.
+            Thread in&nbsp;
+          a.inline-block(href='/f/'+thread.forumId)
+            p.
+              #{forum.title}
+          p.inline-block.
+            &nbsp;posted&nbsp;
+          p.inline-block=moment(thread.createdAt).fromNow()
+          p.inline-block.
+            &nbsp;
+          a.inline-block(href='/u/'+thread.author)
+            p.
+              #{thread.author.displayUsername}
       a(href='/f/'+thread.forumId+'/t/'+thread.threadId+'/create-comment' class='forum-ui-button').
-        Comment
+        Add Comment
+      a(href='/f/'+thread.forumId+'/create-thread' class='forum-ui-button').
+        New Thread
       if thread.comments && thread.comments.length > 0
         each comment in thread.comments
           .comment-panel
             if comment.author
-              a(href='/u/'+comment.author.username)
-                p.
-                  #{comment.author.displayUsername}
-            p.
-              #{comment.text}
+              .comment-author
+                a(href='/u/'+comment.author.username)
+                  p.inline-block.
+                    #{comment.author.displayUsername}
+                p.inline-block.comment-time.
+                  &nbsp;-&nbsp;
+                p.inline-block.comment-time=moment(comment.createdAt).format('MMMM Do YYYY, h:mm:ss a')
+            .comment-inner-panel
+              p.comment-text.
+                #{comment.text}
       else 
         .comment-panel.center-text.
-          No comments found :'(
+          Comments not found :'(
     include footer

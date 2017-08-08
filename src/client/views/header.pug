@@ -18,6 +18,7 @@
           p(class='header-coin-text').
             #{user.xferCoin}        
           img(src='/images/coins-32.png' class='xfer-coin-image')
+          .coin-underline
       li
         a(href='/inbox')
           if user.hasUnread
@@ -30,10 +31,10 @@
   else
     ul(class='bar-list  right')
       li
-        a(href='/login' class='header-link  bold-text').
+        a(href='/login' class='header-link').
           login
       li.
           or
       li
-        a(href='/signup' class='header-link  bold-text').
+        a(href='/signup' class='header-link').
           register
