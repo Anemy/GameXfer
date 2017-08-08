@@ -15,8 +15,7 @@ pipeline {
         }
         stage('Test') {
           steps {
-            echo 'Yeah... about those tests...'
-            echo 'Were gonna have to have you come in on Saturday...'
+            echo 'lol'
           }
         }
         stage('Deploy') {

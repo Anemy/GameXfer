@@ -27,7 +27,7 @@ html {
 body {
   margin-bottom: 16px;
 
-  font-family: "Source Sans Pro", Tahoma, Arial;
+  font-family: 'Source Sans Pro', Tahoma, Arial;
 }
 .footer {
   position: absolute;
@@ -44,8 +44,8 @@ body {
 }
 
 .nav-bar {
-  margin-left: 14px;
-  margin-top: 3px;
+  margin-left: 20px;
+  margin-top: 6px;
 
   // Nice color gg.
   color: #666; 
@@ -65,7 +65,7 @@ body {
   }
 
   li+li:before {
-    content: " » ";
+    content: ' » ';
     display: inline-block;
     margin: 0 3px;
   }

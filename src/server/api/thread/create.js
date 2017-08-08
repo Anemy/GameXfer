@@ -25,7 +25,7 @@ export default (req, res) => {
     });
     return;
   }
-  
+
   // Ensure the title of the message conforms to the guidelines. 
   if (!Utils.validThreadTitle(title)) {
     res.status(400).send({

@@ -46,7 +46,7 @@ const clientWebpackConfig = {
       query: {
         cacheDirectory: true,
         presets: ['es2015']
-      }
+      },
     }]
   }
 };

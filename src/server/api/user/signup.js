@@ -30,6 +30,10 @@ export default (req, res) => {
   // Strip leading and trailing spaces.
   username = username.trim();
 
+  // Don't let them inject html.
+  username = Utils.sanitize(username);
+  password = Utils.sanitize(password);
+
   const displayUsername = username;
   username = username.toLowerCase();
 

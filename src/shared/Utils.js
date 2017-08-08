@@ -1,6 +1,7 @@
 /**
  * Utility functions shared by multiple classes.
  **/
+import xss from 'xss';
 
 import Constants from './Constants';
 
@@ -60,6 +61,10 @@ class Utils {
 
   static validCommentText(text) {
     return text && text.length > 0 && text.length < Constants.COMMENT_TEXT_MAX_LENGTH;
+  }
+
+  static sanitize(text) {
+    return xss(text);
   }
 }
 

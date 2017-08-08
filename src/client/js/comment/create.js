@@ -1,5 +1,6 @@
 import $ from 'jquery';
 
+import Constants from '../../../shared/Constants';
 import Utils from '../../../shared/Utils';
 
 class CreateComment {
@@ -59,7 +60,7 @@ class CreateComment {
         }, 1000 /* 1s */);
         setTimeout(() => {
           // Redirect to the most recent comment.
-          window.location.replace(`/f/${forumId}/t/${threadId}/c/mr`);
+          window.location.replace(`/f/${forumId}/t/${threadId}/c/${Constants.MOST_RECENT_COMMENT}`);
         }, 2000 /* 2s */);
       }).fail((err) => {
         this.showStatusMessage('Error: ' + err.responseJSON.err, 'message-failure');

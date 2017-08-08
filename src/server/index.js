@@ -9,7 +9,6 @@ import cluster from 'cluster';
 import connectMongo from 'connect-mongo';
 import express from 'express';
 import fs from 'fs';
-import http from 'http';
 import https from 'https';
 import moment from 'moment';
 import os from 'os';
@@ -49,18 +48,13 @@ if (!Environment.isDev() && cluster.isMaster) {
 
   let certOptions;
 
+  // Use the local cert in dev.
   if (Environment.isDev()) {
     certOptions = {
       key: fs.readFileSync('./key.pem'),
       cert: fs.readFileSync('./cert.pem'),
       requestCert: false,
       rejectUnauthorized: false
-    };
-  } else if(Environment.isProd()) {
-    // TODO: Prod https certificate.
-    certOptions = {
-      key: fs.readFileSync('./key.pem'),
-      cert: fs.readFileSync('./cert.pem')
     };
   }
 
@@ -93,12 +87,4 @@ if (!Environment.isDev() && cluster.isMaster) {
   https.createServer(certOptions, app).listen(PORT, () => {
     console.log('Pid', process.pid, Environment.get(), 'server listening on port', PORT, '\\o/');
   });
-
-  // Redirect from http port 3001 (redirected from 80) to https.
-  if (Environment.isProd()) {
-    http.createServer((req, res) => {
-      res.writeHead(301, { 'Location': 'https://' + req.headers['host'] + req.url });
-      res.end();
-    }).listen(3001);
-  }
 }

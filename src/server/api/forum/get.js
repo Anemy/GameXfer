@@ -67,9 +67,9 @@ export default (req, res) => {
     }).sort({
       mostRecentCommentTime: 1
     })
-      // Get the Constants.AMOUNT_OF_THREADS_PER_PAGE threads based on the page number.
-      .skip(forumPage * Constants.AMOUNT_OF_THREADS_PER_PAGE)
-      .limit(Constants.AMOUNT_OF_THREADS_PER_PAGE).toArray(sync.defer()));
+      // Get the Constants.THREADS_PER_PAGE threads based on the page number.
+      .skip(forumPage * Constants.THREADS_PER_PAGE)
+      .limit(Constants.THREADS_PER_PAGE).toArray(sync.defer()));
 
     _.each(threads, (thread) => {
       if (thread && thread.mostRecentCommentAuthor) {

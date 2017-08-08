@@ -12,8 +12,10 @@ module.exports = {
 
   MAX_INBOX_LENGTH: 100,
 
-  AMOUNT_OF_THREADS_PER_PAGE: 100,
-  AMOUNT_OF_COMMENTS_PER_PAGE: 4,
+  THREADS_PER_PAGE: 100,
+  COMMENTS_PER_PAGE: 4,
+
+  MOST_RECENT_COMMENT: 'mr',
 
   FORUM_TYPES: {
     TRADING: 0,
@@ -25,6 +27,5 @@ module.exports = {
     ISO: 1,
     WTB: 1,
     DISCUSSION: 2,
-    
   }
 };

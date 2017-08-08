@@ -20,18 +20,22 @@ html(lang='en')
         a(href='/f/'+thread.forumId+'/t/'+thread.threadId).
           #{thread.threadId}
     .thread-page
-      .thread-page-title.
+      p.thread-page-title.
         #{thread.title}
-      .thread-page-description.
+      p.thread-page-description.
         #{thread.description}
       a(href='/f/'+thread.forumId+'/t/'+thread.threadId+'/create-comment' class='forum-ui-button').
         Comment
-      each comment in thread.comments.length ? thread.comments : ['No comments found.']
-        .comment-panel
-          if comment.author
-            p
-              a(href='/u/'+comment.author.username).
-                #{comment.author.displayUsername}
-          p.
-            #{comment.text}
+      if thread.comments && thread.comments.length > 0
+        each comment in thread.comments
+          .comment-panel
+            if comment.author
+              a(href='/u/'+comment.author.username)
+                p.
+                  #{comment.author.displayUsername}
+            p.
+              #{comment.text}
+      else 
+        .comment-panel.center-text.
+          No comments found :'(
     include footer

@@ -26,14 +26,30 @@ export default (req, res) => {
     return;
   }
 
-  if (Utils.isNumber(commentId)) {
-    commentId = Number(commentId);
-  } else {
-    // Default the searched for comment to 0.
-    commentId = 0;
-  }
-
   sync.fiber(() => {
+    if (Utils.isNumber(commentId)) {
+      commentId = Math.floor(Number(commentId));
+
+      // Round to the nearest page amount of comments so we return the page's items.
+      commentId = Math.floor(commentId / Constants.COMMENTS_PER_PAGE) * Constants.COMMENTS_PER_PAGE;
+    } else if (commentId === Constants.MOST_RECENT_COMMENT) {
+      const thread = sync.await(db.collection('threads').findOne({
+        forumId: forumId,
+        threadId: threadId,
+      }, {
+        commentsLength: 1,
+      }, sync.defer()));
+
+      if (thread) {
+        commentId = Math.floor((Number(thread.commentsLength)-1) / Constants.COMMENTS_PER_PAGE) * Constants.COMMENTS_PER_PAGE;
+      } else {
+        commentId = 0;
+      }
+    } else {
+      // Default the searched for comment to 0.
+      commentId = 0;
+    }
+
     // Get the requested thread and update the views on it.
     const thread = sync.await(db.collection('threads').findAndModify({
       query: {
@@ -51,11 +67,11 @@ export default (req, res) => {
         createdAt: 1,
         mostRecentCommentAuthor: 1,
         mostRecentCommentTime: 1,
-        mostRecentCommentId: 1,
+        mostRecentcommentId: 1,
         commentsLength: 1,
         comments: {
-          // Get the Constants.AMOUNT_OF_COMMENTS_PER_PAGE threads based on the page number.
-          $slice: [commentId * Constants.AMOUNT_OF_COMMENTS_PER_PAGE, Constants.AMOUNT_OF_COMMENTS_PER_PAGE]
+          // Get the Constants.COMMENTS_PER_PAGE comments based on the comment number.
+          $slice: [commentId, Constants.COMMENTS_PER_PAGE]
         }
       },
       update: {

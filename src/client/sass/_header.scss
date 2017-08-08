@@ -42,6 +42,13 @@ $header-height: 46px;
   display: inline-block;
 }
 
+.header-envelope {
+  color: $link-text;
+}
+.header-envelope:hover {
+  color: black;
+}
+
 .xfer-coin-image {
   height: 16px;
   width: 16px;

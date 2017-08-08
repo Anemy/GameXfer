@@ -16,7 +16,7 @@ export default (req, res) => {
   let forumId = req.body.forumId;
   let threadId = req.body.threadId;
   let commentId = req.body.commentId;
-  const text = req.body.text;
+  let text = req.body.text;
 
   // Ensure the comment has the proper attributes.
   if (!forumId || !threadId || !text || !commentId) {
@@ -32,14 +32,6 @@ export default (req, res) => {
       err: 'Invalid edit comment attempt. Please try again and follow the guidelines.'
     });
     return;
-  }
-
-  if (Utils.isNumber(threadId)) {
-    threadId = Number(threadId);
-  }
-
-  if (Utils.isNumber(forumId)) {
-    forumId = Number(forumId);
   }
 
   if (Utils.isNumber(commentId)) {
@@ -79,8 +71,6 @@ export default (req, res) => {
 
     res.send({
       err: false,
-      threadId: threadId,
-      forumId: forumId,
       editedAt: currentTime
     });
   });

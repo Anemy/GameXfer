@@ -15,9 +15,9 @@ export default (req, res) => {
     return;
   }
 
-  const destination = req.body.destination;
-  const subject = req.body.subject;
-  const text = req.body.text;
+  let destination = req.body.destination;
+  let subject = req.body.subject;
+  let text = req.body.text;
 
   // Ensure the message has the proper attributes.
   if (!destination || !subject || !text) {
@@ -42,6 +42,9 @@ export default (req, res) => {
     });
     return;
   }
+
+  // Make sure the username is lowercase for the search.
+  destination = destination.toLowerCase();
 
   sync.fiber(() => {
     const currentTime = new Date();
