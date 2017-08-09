@@ -25,7 +25,7 @@ export default (req, res) => {
 
     res.render('inbox', {
       messages: user.messages,
-      user: ServerUtils.getLightUserObjectForUsername(req.username)
+      user: ServerUtils.getLightUserForUsername(req.username)
     });
   });
 };

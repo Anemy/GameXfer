@@ -1,4 +1,10 @@
+/*
+ * This is an edited and slimmed version of bootstrap.
+ * This contains the grid layout for bootstrap.
+ */
+
 .mt-a{margin-top:auto !important}.mr-a{margin-right:auto !important}.mb-a{margin-bottom:auto !important}.ml-a{margin-left:auto !important}.mh-a{margin-left:auto !important;margin-right:auto !important}.mv-a{margin-top:auto !important;margin-bottom:auto !important}.m-a{margin:auto !important}.mt-0{margin-top:0 !important}.mr-0{margin-right:0 !important}.mb-0{margin-bottom:0 !important}.ml-0{margin-left:0 !important}.mh-0{margin-left:0 !important;margin-right:0 !important}.mv-0{margin-top:0 !important;margin-bottom:0 !important}.m-0{margin:0 !important}.mt-1{margin-top:4px !important}.mr-1{margin-right:4px !important}.mb-1{margin-bottom:4px !important}.ml-1{margin-left:4px !important}.mh-1{margin-left:4px !important;margin-right:4px !important}.mv-1{margin-top:4px !important;margin-bottom:4px !important}.m-1{margin:4px !important}.mt-2{margin-top:8px !important}.mr-2{margin-right:8px !important}.mb-2{margin-bottom:8px !important}.ml-2{margin-left:8px !important}.mh-2{margin-left:8px !important;margin-right:8px !important}.mv-2{margin-top:8px !important;margin-bottom:8px !important}.m-2{margin:8px !important}.mt-3{margin-top:16px !important}.mr-3{margin-right:16px !important}.mb-3{margin-bottom:16px !important}.ml-3{margin-left:16px !important}.mh-3{margin-left:16px !important;margin-right:16px !important}.mv-3{margin-top:16px !important;margin-bottom:16px !important}.m-3{margin:16px !important}.mt-4{margin-top:24px !important}.mr-4{margin-right:24px !important}.mb-4{margin-bottom:24px !important}.ml-4{margin-left:24px !important}.mh-4{margin-left:24px !important;margin-right:24px !important}.mv-4{margin-top:24px !important;margin-bottom:24px !important}.m-4{margin:24px !important}.mt-m{margin-top:36px !important}.mr-m{margin-right:36px !important}.mb-m{margin-bottom:36px !important}.ml-m{margin-left:36px !important}.mh-m{margin-left:36px !important;margin-right:36px !important}.mv-m{margin-top:36px !important;margin-bottom:36px !important}.m-m{margin:36px !important}.mt-l{margin-top:48px !important}.mr-l{margin-right:48px !important}.mb-l{margin-bottom:48px !important}.ml-l{margin-left:48px !important}.mh-l{margin-left:48px !important;margin-right:48px !important}.mv-l{margin-top:48px !important;margin-bottom:48px !important}.m-l{margin:48px !important}.mt-xl{margin-top:60px !important}.mr-xl{margin-right:60px !important}.mb-xl{margin-bottom:60px !important}.ml-xl{margin-left:60px !important}.mh-xl{margin-left:60px !important;margin-right:60px !important}.mv-xl{margin-top:60px !important;margin-bottom:60px !important}.m-xl{margin:60px !important}.mt-xxl{margin-top:96px !important}.mr-xxl{margin-right:96px !important}.mb-xxl{margin-bottom:96px !important}.ml-xxl{margin-left:96px !important}.mh-xxl{margin-left:96px !important;margin-right:96px !important}.mv-xxl{margin-top:96px !important;margin-bottom:96px !important}.m-xxl{margin:96px !important}.mt-xxxl{margin-top:144px !important}.mr-xxxl{margin-right:144px !important}.mb-xxxl{margin-bottom:144px !important}.ml-xxxl{margin-left:144px !important}.mh-xxxl{margin-left:144px !important;margin-right:144px !important}.mv-xxxl{margin-top:144px !important;margin-bottom:144px !important}.m-xxxl{margin:144px !important}.mt--1{margin-top:-4px !important}.mr--1{margin-right:-4px !important}.mb--1{margin-bottom:-4px !important}.ml--1{margin-left:-4px !important}.mh--1{margin-left:-4px !important;margin-right:-4px !important}.mv--1{margin-top:-4px !important;margin-bottom:-4px !important}.m--1{margin:-4px !important}.mt--2{margin-top:-8px !important}.mr--2{margin-right:-8px !important}.mb--2{margin-bottom:-8px !important}.ml--2{margin-left:-8px !important}.mh--2{margin-left:-8px !important;margin-right:-8px !important}.mv--2{margin-top:-8px !important;margin-bottom:-8px !important}.m--2{margin:-8px !important}.mt--3{margin-top:-16px !important}.mr--3{margin-right:-16px !important}.mb--3{margin-bottom:-16px !important}.ml--3{margin-left:-16px !important}.mh--3{margin-left:-16px !important;margin-right:-16px !important}.mv--3{margin-top:-16px !important;margin-bottom:-16px !important}.m--3{margin:-16px !important}.mt--4{margin-top:-24px !important}.mr--4{margin-right:-24px !important}.mb--4{margin-bottom:-24px !important}.ml--4{margin-left:-24px !important}.mh--4{margin-left:-24px !important;margin-right:-24px !important}.mv--4{margin-top:-24px !important;margin-bottom:-24px !important}.m--4{margin:-24px !important}.mt--m{margin-top:-36px !important}.mr--m{margin-right:-36px !important}.mb--m{margin-bottom:-36px !important}.ml--m{margin-left:-36px !important}.mh--m{margin-left:-36px !important;margin-right:-36px !important}.mv--m{margin-top:-36px !important;margin-bottom:-36px !important}.m--m{margin:-36px !important}.mt--l{margin-top:-48px !important}.mr--l{margin-right:-48px !important}.mb--l{margin-bottom:-48px !important}.ml--l{margin-left:-48px !important}.mh--l{margin-left:-48px !important;margin-right:-48px !important}.mv--l{margin-top:-48px !important;margin-bottom:-48px !important}.m--l{margin:-48px !important}.mt--xl{margin-top:-60px !important}.mr--xl{margin-right:-60px !important}.mb--xl{margin-bottom:-60px !important}.ml--xl{margin-left:-60px !important}.mh--xl{margin-left:-60px !important;margin-right:-60px !important}.mv--xl{margin-top:-60px !important;margin-bottom:-60px !important}.m--xl{margin:-60px !important}.mt--xxl{margin-top:-96px !important}.mr--xxl{margin-right:-96px !important}.mb--xxl{margin-bottom:-96px !important}.ml--xxl{margin-left:-96px !important}.mh--xxl{margin-left:-96px !important;margin-right:-96px !important}.mv--xxl{margin-top:-96px !important;margin-bottom:-96px !important}.m--xxl{margin:-96px !important}.mt--xxxl{margin-top:-144px !important}.mr--xxxl{margin-right:-144px !important}.mb--xxxl{margin-bottom:-144px !important}.ml--xxxl{margin-left:-144px !important}.mh--xxxl{margin-left:-144px !important;margin-right:-144px !important}.mv--xxxl{margin-top:-144px !important;margin-bottom:-144px !important}.m--xxxl{margin:-144px !important}.pt-a{padding-top:auto !important}.pr-a{padding-right:auto !important}.pb-a{padding-bottom:auto !important}.pl-a{padding-left:auto !important}.ph-a{padding-left:auto !important;padding-right:auto !important}.pv-a{padding-top:auto !important;padding-bottom:auto !important}.p-a{padding:auto !important}.pt-0{padding-top:0 !important}.pr-0{padding-right:0 !important}.pb-0{padding-bottom:0 !important}.pl-0{padding-left:0 !important}.ph-0{padding-left:0 !important;padding-right:0 !important}.pv-0{padding-top:0 !important;padding-bottom:0 !important}.p-0{padding:0 !important}.pt-1{padding-top:4px !important}.pr-1{padding-right:4px !important}.pb-1{padding-bottom:4px !important}.pl-1{padding-left:4px !important}.ph-1{padding-left:4px !important;padding-right:4px !important}.pv-1{padding-top:4px !important;padding-bottom:4px !important}.p-1{padding:4px !important}.pt-2{padding-top:8px !important}.pr-2{padding-right:8px !important}.pb-2{padding-bottom:8px !important}.pl-2{padding-left:8px !important}.ph-2{padding-left:8px !important;padding-right:8px !important}.pv-2{padding-top:8px !important;padding-bottom:8px !important}.p-2{padding:8px !important}.pt-3{padding-top:16px !important}.pr-3{padding-right:16px !important}.pb-3{padding-bottom:16px !important}.pl-3{padding-left:16px !important}.ph-3{padding-left:16px !important;padding-right:16px !important}.pv-3{padding-top:16px !important;padding-bottom:16px !important}.p-3{padding:16px !important}.pt-4{padding-top:24px !important}.pr-4{padding-right:24px !important}.pb-4{padding-bottom:24px !important}.pl-4{padding-left:24px !important}.ph-4{padding-left:24px !important;padding-right:24px !important}.pv-4{padding-top:24px !important;padding-bottom:24px !important}.p-4{padding:24px !important}.pt-m{padding-top:36px !important}.pr-m{padding-right:36px !important}.pb-m{padding-bottom:36px !important}.pl-m{padding-left:36px !important}.ph-m{padding-left:36px !important;padding-right:36px !important}.pv-m{padding-top:36px !important;padding-bottom:36px !important}.p-m{padding:36px !important}.pt-l{padding-top:48px !important}.pr-l{padding-right:48px !important}.pb-l{padding-bottom:48px !important}.pl-l{padding-left:48px !important}.ph-l{padding-left:48px !important;padding-right:48px !important}.pv-l{padding-top:48px !important;padding-bottom:48px !important}.p-l{padding:48px !important}.pt-xl{padding-top:60px !important}.pr-xl{padding-right:60px !important}.pb-xl{padding-bottom:60px !important}.pl-xl{padding-left:60px !important}.ph-xl{padding-left:60px !important;padding-right:60px !important}.pv-xl{padding-top:60px !important;padding-bottom:60px !important}.p-xl{padding:60px !important}.pt-xxl{padding-top:96px !important}.pr-xxl{padding-right:96px !important}.pb-xxl{padding-bottom:96px !important}.pl-xxl{padding-left:96px !important}.ph-xxl{padding-left:96px !important;padding-right:96px !important}.pv-xxl{padding-top:96px !important;padding-bottom:96px !important}.p-xxl{padding:96px !important}.pt-xxxl{padding-top:144px !important}.pr-xxxl{padding-right:144px !important}.pb-xxxl{padding-bottom:144px !important}.pl-xxxl{padding-left:144px !important}.ph-xxxl{padding-left:144px !important;padding-right:144px !important}.pv-xxxl{padding-top:144px !important;padding-bottom:144px !important}.p-xxxl{padding:144px !important}.wa{width:auto !important}.w0{width:0 !important}.w5{width:5% !important}.w10{width:10% !important}.w25{width:25% !important}.w33{width:33.33333% !important}.w50{width:50% !important}.w66{width:66.66667% !important}.w100{width:100% !important}
+
 
 @-ms-viewport {
   width: device-width;
@@ -913,3 +919,465 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+// End grid
+
+// Start buttons
+// Buttons
+//
+// For each of Bootstrap's buttons, define text, background and border color.
+
+// $font-weight-normal: 300;
+
+// $input-btn-padding-y:       .5rem !default;
+// $input-btn-padding-x:       .75rem !default;
+// $input-btn-line-height:     1.25 !default;
+
+// $input-btn-padding-y-sm:    .25rem !default;
+// $input-btn-padding-x-sm:    .5rem !default;
+// $input-btn-line-height-sm:  1.5 !default;
+
+// $input-btn-padding-y-lg:    .5rem !default;
+// $input-btn-padding-x-lg:    1rem !default;
+// $input-btn-line-height-lg:  1.5 !default;
+
+// $font-size-base: 16px;
+// $font-size-sm: 12px;
+// $font-size-md: 16px;
+// $font-size-lg: 24px;
+
+// $btn-font-weight:                $font-weight-normal !default;
+// $btn-box-shadow:                 inset 0 1px 0 rgba(white,.15), 0 1px 1px rgba(black,.075) !default;
+// $btn-focus-box-shadow:           0 0 0 3px rgba(#66afe9, .25) !default;
+// $btn-active-box-shadow:          inset 0 3px 5px rgba(black,.125) !default;
+
+// $btn-link-disabled-color:        #666 !default;
+
+// $btn-block-spacing-y:            .5rem !default;
+
+// // Allows for customizing button radius independently from global border radius
+// $btn-border-radius:              1 !default;
+// $btn-border-radius-lg:           1 !default;
+// $btn-border-radius-sm:           1 !default;
+
+// $input-btn-border-width:        1 !default;
+
+// $btn-transition:                 all .15s ease-in-out !default;
+
+// $line-height-sm: 16px;
+
+
+// @mixin button-variant($background, $border, $active-background: darken($background, 7.5%), $active-border: darken($border, 10%)) {
+//   @include color-yiq($background);
+//   background-color: $background;
+//   border-color: $border;
+//   box-shadow: $btn-box-shadow;
+
+//   &:hover {
+//     @include color-yiq($background);
+//     background-color: $active-background;
+//     border-color: $active-border;
+//   }
+
+//   &:focus,
+//   &.focus {
+//     // Avoid using mixin so we can pass custom focus shadow properly
+//     @if $enable-shadows {
+//       box-shadow: $btn-box-shadow, 0 0 0 3px rgba($border, .5);
+//     } @else {
+//       box-shadow: 0 0 0 3px rgba($border, .5);
+//     }
+//   }
+
+//   // Disabled comes first so active can properly restyle
+//   &.disabled,
+//   &:disabled {
+//     background-color: $background;
+//     border-color: $border;
+//   }
+
+//   &:active,
+//   &.active,
+//   .show > &.dropdown-toggle {
+//     background-color: $active-background;
+//     background-image: none; // Remove the gradient for the pressed/active state
+//     border-color: $active-border;
+//     box-shadow: $btn-active-box-shadow;
+//   }
+// }
+
+// @mixin button-outline-variant($color, $color-hover: #fff) {
+//   color: $color;
+//   background-color: transparent;
+//   background-image: none;
+//   border-color: $color;
+
+//   @include hover {
+//     color: $color-hover;
+//     background-color: $color;
+//     border-color: $color;
+//   }
+
+//   &:focus,
+//   &.focus {
+//     box-shadow: 0 0 0 3px rgba($color, .5);
+//   }
+
+//   &.disabled,
+//   &:disabled {
+//     color: $color;
+//     background-color: transparent;
+//   }
+
+//   &:active,
+//   &.active,
+//   .show > &.dropdown-toggle {
+//     color: $color-hover;
+//     background-color: $color;
+//     border-color: $color;
+//   }
+// }
+
+// // Button sizes
+// @mixin button-size($padding-y, $padding-x, $font-size, $line-height, $border-radius) {
+//   padding: $padding-y $padding-x;
+//   font-size: $font-size;
+//   line-height: $line-height;
+//   border-radius: $border-radius;
+// }
+
+// // Make the div behave like a button
+// .btn-group,
+// .btn-group-vertical {
+//   position: relative;
+//   display: inline-flex;
+//   vertical-align: middle; // match .btn alignment given font-size hack above
+
+//   > .btn {
+//     position: relative;
+//     flex: 0 1 auto;
+//     margin-bottom: 0;
+//   } 
+//     // Bring the hover, focused, and "active" buttons to the front to overlay
+//     // the borders properly
+//     &:hover {
+//       z-index: 2;
+//     }
+//     &:focus,
+//     &:active,
+//     &.active {
+//       z-index: 2;
+//     }
+
+//   // Prevent double borders when buttons are next to each other
+//   .btn + .btn,
+//   .btn + .btn-group,
+//   .btn-group + .btn,
+//   .btn-group + .btn-group {
+//     margin-left: -$input-btn-border-width;
+//   }
+// }
+
+// // Optional: Group multiple button groups together for a toolbar
+// .btn-toolbar {
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: flex-start;
+
+//   .input-group {
+//     width: auto;
+//   }
+// }
+
+// .btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+//   border-radius: 0;
+// }
+
+// // Set corners individual because sometimes a single button can be in a .btn-group and we need :first-child and :last-child to both match
+// .btn-group > .btn:first-child {
+//   margin-left: 0;
+
+//   &:not(:last-child):not(.dropdown-toggle) {
+//     border-right-radius: 0;
+//   }
+// }
+// // Need .dropdown-toggle since :last-child doesn't apply given a .dropdown-menu immediately after it
+// .btn-group > .btn:last-child:not(:first-child),
+// .btn-group > .dropdown-toggle:not(:first-child) {
+//   border-left-radius: 0;
+// }
+
+// // Custom edits for including btn-groups within btn-groups (useful for including dropdown buttons within a btn-group)
+// .btn-group > .btn-group {
+//   float: left;
+// }
+// .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {
+//   border-radius: 0;
+// }
+// .btn-group > .btn-group:first-child:not(:last-child) {
+//   > .btn:last-child,
+//   > .dropdown-toggle {
+//     border-right-radius: 0;
+//   }
+// }
+// .btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child {
+//   border-left-radius: 0;
+// }
+
+
+// // Sizing
+// //
+// // Remix the default button sizing classes into new ones for easier manipulation.
+
+// .btn-group-sm > .btn { @extend .btn-sm; }
+// .btn-group-lg > .btn { @extend .btn-lg; }
+
+
+// //
+// // Split button dropdowns
+// //
+
+// .btn + .dropdown-toggle-split {
+//   padding-right: $input-btn-padding-x * .75;
+//   padding-left: $input-btn-padding-x * .75;
+
+//   &::after {
+//     margin-left: 0;
+//   }
+// }
+
+// .btn-sm + .dropdown-toggle-split {
+//   padding-right: $input-btn-padding-x-sm * .75;
+//   padding-left: $input-btn-padding-x-sm * .75;
+// }
+
+// .btn-lg + .dropdown-toggle-split {
+//   padding-right: $input-btn-padding-x-lg * .75;
+//   padding-left: $input-btn-padding-x-lg * .75;
+// }
+
+
+// // The clickable button for toggling the menu
+// // Set the same inset shadow as the :active state
+// .btn-group.show .dropdown-toggle {
+//   box-shadow: $btn-active-box-shadow;
+
+//   // Show no shadow for `.btn-link` since it has no other button styles.
+//   &.btn-link {
+//     box-shadow: none;
+//   }
+// }
+
+
+// //
+// // Vertical button groups
+// //
+
+// .btn-group-vertical {
+//   display: inline-flex;
+//   flex-direction: column;
+//   align-items: flex-start;
+//   justify-content: center;
+
+//   .btn,
+//   .btn-group {
+//     width: 100%;
+//   }
+
+//   > .btn + .btn,
+//   > .btn + .btn-group,
+//   > .btn-group + .btn,
+//   > .btn-group + .btn-group {
+//     margin-top: -$input-btn-border-width;
+//     margin-left: 0;
+//   }
+// }
+
+// .btn-group-vertical > .btn {
+//   &:not(:first-child):not(:last-child) {
+//     border-radius: 0;
+//   }
+//   &:first-child:not(:last-child) {
+//     border-bottom-radius: 0;
+//   }
+//   &:last-child:not(:first-child) {
+//     border-top-radius: 0;
+//   }
+// }
+// .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn {
+//   border-radius: 0;
+// }
+// .btn-group-vertical > .btn-group:first-child:not(:last-child) {
+//   > .btn:last-child,
+//   > .dropdown-toggle {
+//     border-bottom-radius: 0;
+//   }
+// }
+// .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child {
+//   border-top-radius: 0;
+// }
+
+
+// // Checkbox and radio options
+// //
+// // In order to support the browser's form validation feedback, powered by the
+// // `required` attribute, we have to "hide" the inputs via `clip`. We cannot use
+// // `display: none;` or `visibility: hidden;` as that also hides the popover.
+// // Simply visually hiding the inputs via `opacity` would leave them clickable in
+// // certain cases which is prevented by using `clip` and `pointer-events`.
+// // This way, we ensure a DOM element is visible to position the popover from.
+// //
+// // See https://github.com/twbs/bootstrap/pull/12794 and
+// // https://github.com/twbs/bootstrap/pull/14559 for more information.
+
+// [data-toggle="buttons"] {
+//   > .btn,
+//   > .btn-group > .btn {
+//     input[type="radio"],
+//     input[type="checkbox"] {
+//       position: absolute;
+//       clip: rect(0,0,0,0);
+//       pointer-events: none;
+//     }
+//   }
+// }
+
+// //
+// // Base styles
+// //
+
+// .btn {
+//   display: inline-block;
+//   font-weight: $btn-font-weight;
+//   text-align: center;
+//   white-space: nowrap;
+//   vertical-align: middle;
+//   user-select: none;
+//   border: $input-btn-border-width solid transparent;
+//   @include button-size($input-btn-padding-y, $input-btn-padding-x, $font-size-base, $input-btn-line-height, $btn-border-radius);
+//   transition: $btn-transition;
+
+//   // Share hover and focus styles
+//   &:hover {
+//     text-decoration: none;
+//   }
+//   &:focus,
+//   &.focus {
+//     outline: 0;
+//     box-shadow: $btn-focus-box-shadow;
+//   }
+
+//   // Disabled comes first so active can properly restyle
+//   &.disabled,
+//   &:disabled {
+//     opacity: .65;
+//     box-shadow: none;
+//   }
+
+//   &:active,
+//   &.active {
+//     background-image: none;
+//     box-shadow: $btn-focus-box-shadow, $btn-active-box-shadow;
+//   }
+// }
+
+// // Future-proof disabling of clicks on `<a>` elements
+// a.btn.disabled,
+// fieldset[disabled] a.btn {
+//   pointer-events: none;
+// }
+
+
+// //
+// // Alternate buttons
+// //
+
+// // @each $color, $value in $theme-colors {
+// //   .btn-#{$color} {
+// //     @include button-variant($value, $value);
+// //   }
+// // }
+
+// // @each $color, $value in $theme-colors {
+// //   .btn-outline-#{$color} {
+// //     @include button-outline-variant($value, #fff);
+// //   }
+// // }
+
+
+// //
+// // Link buttons
+// //
+
+// // Make a button look and behave like a link
+// .btn-link {
+//   font-weight: $font-weight-normal;
+//   color: #369;
+//   border-radius: 0;
+
+//   &,
+//   &:active,
+//   &.active,
+//   &:disabled {
+//     background-color: transparent;
+//     box-shadow: none;
+//   }
+//   &,
+//   &:focus,
+//   &:active {
+//     border-color: transparent;
+//     box-shadow: none;
+//   }
+//   &:hover {
+//     border-color: transparent;
+//   }
+//   &:hover, &:focus {
+//     color: #367777;
+//     text-decoration: underline;
+//     background-color: transparent;
+//   }
+//   &:disabled {
+//     color: $btn-link-disabled-color;
+
+//     &:hover {
+//       text-decoration: none;
+//     }
+//   }
+// }
+
+
+// //
+// // Button Sizes
+// //
+
+// // .btn-lg {
+// //   @include button-size($input-btn-padding-y-lg, $input-btn-padding-x-lg, $font-size-lg, $line-height-lg, $btn-border-radius-lg);
+// // }
+
+// .btn-sm {
+//   @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, $font-size-sm, $line-height-sm, $btn-border-radius-sm);
+// }
+
+
+// //
+// // Block button
+// //
+
+// .btn-block {
+//   display: block;
+//   width: 100%;
+// }
+
+// // Vertically space out multiple block buttons
+// .btn-block + .btn-block {
+//   margin-top: $btn-block-spacing-y;
+// }
+
+// // Specificity overrides
+// input[type="submit"],
+// input[type="reset"],
+// input[type="button"] {
+//   &.btn-block {
+//     width: 100%;
+//   }
+// }

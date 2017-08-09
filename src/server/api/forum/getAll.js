@@ -21,6 +21,7 @@ export default (req, res) => {
       threadsCreatedTotal: 1,
       mostRecentCommentTime: 1,
       mostRecentCommentAuthor: 1,
+      mostRecentCommentThreadId: 1,
       mostRecentThreadTime: 1,
       mostRecentThreadAuthor: 1
     }).sort({
@@ -39,11 +40,13 @@ export default (req, res) => {
       // Copy all of the static data about the forum onto our locally pulled one.
       _.extend(forum, Forums.getForumInfoById(forum.forumId));
 
-      if (forum && forum.mostRecentCommentAuthor) {
-        forum.mostRecentCommentAuthor = ServerUtils.getLightUserObjectForUsername(forum.mostRecentCommentAuthor);
+      if (forum && forum.mostRecentCommentThreadId) {
+        let threadInfo = ServerUtils.getLightThreadById(forum.forumId, forum.mostRecentCommentThreadId);
+        forum.mostRecentCommentThreadTitle = threadInfo ? threadInfo.title : null;
       }
-      if (forum && forum.author) {
-        forum.author = ServerUtils.getLightUserObjectForUsername(forum.author);
+
+      if (forum && forum.mostRecentCommentAuthor) {
+        forum.mostRecentCommentAuthor = ServerUtils.getLightUserForUsername(forum.mostRecentCommentAuthor);
       }
     });
     
@@ -51,7 +54,7 @@ export default (req, res) => {
     res.render('forum-list', {
       forums: forums,
       categories: Forums.forumsAndCategories,
-      user: req.session.username ? ServerUtils.getLightUserObjectForUsername(req.session.username) : null
+      user: req.session.username ? ServerUtils.getLightUserForUsername(req.session.username) : null
     });
   });
 };

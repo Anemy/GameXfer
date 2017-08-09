@@ -72,10 +72,10 @@ export default (req, res) => {
 
     _.each(threads, (thread) => {
       if (thread && thread.mostRecentCommentAuthor) {
-        thread.mostRecentCommentAuthor = ServerUtils.getLightUserObjectForUsername(thread.mostRecentCommentAuthor);
+        thread.mostRecentCommentAuthor = ServerUtils.getLightUserForUsername(thread.mostRecentCommentAuthor);
       }
       if (thread && thread.author) {
-        thread.author = ServerUtils.getLightUserObjectForUsername(thread.author);
+        thread.author = ServerUtils.getLightUserForUsername(thread.author);
       }
     });
 
@@ -85,7 +85,7 @@ export default (req, res) => {
       forumPage: forumPage + 1 /* Add one so it's no longer 0 indexed. */,
       forum: forum,
       threads: threads,
-      user: req.session.username ? ServerUtils.getLightUserObjectForUsername(req.session.username) : null
+      user: req.session.username ? ServerUtils.getLightUserForUsername(req.session.username) : null
     });
   });
 };

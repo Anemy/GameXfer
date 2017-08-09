@@ -90,16 +90,16 @@ export default (req, res) => {
     }
 
     if (thread.mostRecentCommentAuthor) {
-      thread.mostRecentCommentAuthor = ServerUtils.getLightUserObjectForUsername(thread.mostRecentCommentAuthor);
+      thread.mostRecentCommentAuthor = ServerUtils.getLightUserForUsername(thread.mostRecentCommentAuthor);
     }
 
     if (thread.author) {
-      thread.author = ServerUtils.getLightUserObjectForUsername(thread.author);
+      thread.author = ServerUtils.getLightUserForUsername(thread.author);
     }
 
     _.each(thread.comments, (comment) => {
       if (comment && comment.author) {
-        comment.author = ServerUtils.getLightUserObjectForUsername(comment.author);
+        comment.author = ServerUtils.getLightUserForUsername(comment.author);
       }
     });
 
@@ -111,7 +111,7 @@ export default (req, res) => {
       COMMENTS_PER_PAGE: Constants.COMMENTS_PER_PAGE,
       forum: thread ? Forums.getForumInfoById(thread.forumId) : null,
       thread: thread, 
-      user: req.session.username ? ServerUtils.getLightUserObjectForUsername(req.session.username) : null
+      user: req.session.username ? ServerUtils.getLightUserForUsername(req.session.username) : null
     });
   });
 };

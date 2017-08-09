@@ -17,7 +17,7 @@ export default (req, res) => {
     }
 
     res.render('create-comment', {
-      user: ServerUtils.getLightUserObjectForUsername(req.session.username),
+      user: ServerUtils.getLightUserForUsername(req.session.username),
       thread: ServerUtils.getLightThreadById(forumId, threadId)
     });
   });

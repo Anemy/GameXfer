@@ -97,7 +97,7 @@ function renderWithUser(req, res, template) {
   if (req.session.username) {
     sync.fiber(() => {
       res.render(template, {
-        user: ServerUtils.getLightUserObjectForUsername(req.session.username)
+        user: ServerUtils.getLightUserForUsername(req.session.username)
       });
     });
   } else {

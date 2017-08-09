@@ -42,7 +42,7 @@ html(lang='en')
             .col-md-2.
               Thread Count
             .col-md-2.
-              Last Comment
+              Recent Activity
           if forums ? forums.length === 0 : false
             .forum-header.center-text.
               No forums found
@@ -56,10 +56,16 @@ html(lang='en')
                 .col-md-2.forum-header-col.
                   #{forum.threadsCreatedTotal}
                 .col-md-2.forum-header-col
-                  if forum.mostRecentCommentAuthor
-                    a(href='/u/'+forum.mostRecentCommentAuthor.username)
-                      p.forum-header-author.
-                        #{forum.mostRecentCommentAuthor.displayUsername}
-                  if forum.mostRecentCommentTime
-                    p(class='forum-header-info')=moment(forum.mostRecentCommentTime).fromNow()
+                  .forum-most-recent-thread
+                    if forum.mostRecentCommentThreadTitle
+                      a(href='/f/'+forum.forumId+'/t/'+forum.mostRecentCommentThreadId)
+                        p.most-recent-comment-thread-title.
+                          #{forum.mostRecentCommentThreadTitle}
+                    if forum.mostRecentCommentAuthor
+                      a(href='/u/'+forum.mostRecentCommentAuthor.username)
+                        p.inline-block.
+                          #{forum.mostRecentCommentAuthor.displayUsername}
+                    if forum.mostRecentCommentTime
+                      p(class='inline-block  forum-header-info').
+                        &nbsp;#{moment(forum.mostRecentCommentTime).fromNow()}
     include footer

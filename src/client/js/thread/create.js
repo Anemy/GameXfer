@@ -94,13 +94,9 @@ class CreateThread {
 
   startListening() {
     // When the users type into the text fields, hide the last shown message, unless we are currently performing an action.
-    $('.js-create-thread-title, .js-create-thread-description, .js-create-thread-text').keypress((e) => {
+    $('.js-create-thread-title, .js-create-thread-description, .js-create-thread-text').keypress(() => {
       if (!this.performingAction) {
         this.hideStatusMessage();
-
-        if (e.keyCode === 13) {
-          this.performCreateThreadRequest();
-        }
       }
     });
     

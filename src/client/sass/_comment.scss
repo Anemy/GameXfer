@@ -5,10 +5,6 @@
   margin: 4px;
 }
 
-.create-comment-area {
-  margin-top: 18px;
-}
-
 .comment-panel:hover .comment-author {
   border: 1px solid #bbb;
   border-bottom: 0;
@@ -75,4 +71,85 @@
   margin-top: -1px;
 
   z-index: 4;
+}
+
+
+.create-comment-area {
+  margin-top: 18px;
+
+  textarea {
+    font-size: 16px;
+    padding: 10px 8px;
+  }
+}
+
+$btn-border-radius: 3px;
+
+// .btn-toolbar {
+//   display: block;
+//   padding: 6px 10px;
+//   background: #f5f5f5;
+// }
+.btn-group {
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.btn-group>.btn {
+  outline: 0;
+
+  position: relative;
+}
+
+.btn-group>.btn:first-child {
+  border-top-left-radius: $btn-border-radius;
+  border-bottom-left-radius: $btn-border-radius;
+}
+.btn-group>.btn:last-child {
+  border-top-right-radius: $btn-border-radius;
+  border-bottom-right-radius: $btn-border-radius;
+}
+
+.btn-primary {
+  background-color: #428bca;
+  color: #fff;
+  border: 1px solid #357ebd !important;
+
+  &:hover {
+    cursor: pointer;
+
+    background-color: #3276b1;
+    border-color: #285e8e;
+    color: #fff;
+  }
+}
+
+.btn-default {
+  color: #333;
+  background-color: #fff;
+
+  border: 1px solid #ccc;
+
+  &:hover {
+    cursor: pointer;
+
+    // Push their borders in front.
+    z-index: 2;
+
+    color: #333;
+    background-color: #ebebeb;
+    border-color: #adadad;
+  }
+}
+
+
+.btn-sm {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 0;
+  border: 1px solid lightgrey;//$flat-clouds;
+}
+.btn-sm+.btn-sm {
+  margin-left: -1px;
 }

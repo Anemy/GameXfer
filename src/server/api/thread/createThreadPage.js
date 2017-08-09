@@ -7,7 +7,7 @@ export default (req, res) => {
   // Send the rendered HTML page and attach the user's username if they are sessioned.
   sync.fiber(() => {
     res.render('create-thread', {
-      user: ServerUtils.getLightUserObjectForUsername(req.session.username),
+      user: ServerUtils.getLightUserForUsername(req.session.username),
       forum: Forums.getForumInfoById(req.params.forumId)
     });
   });

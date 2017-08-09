@@ -785,6 +785,7 @@ Markdown.prototype = {
   },
   keyup: function(e) {
     var blocked = false;
+
     switch (e.keyCode) {
       case 40: // down arrow
       case 38: // up arrow

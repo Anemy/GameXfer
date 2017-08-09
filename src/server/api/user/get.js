@@ -31,7 +31,7 @@ export default (req, res) => {
     res.status(200).render('profile', {
       err: false,
       profile: profile,
-      user: req.session.username ? ServerUtils.getLightUserObjectForUsername(req.session.username) : null
+      user: req.session.username ? ServerUtils.getLightUserForUsername(req.session.username) : null
     });
   }); 
 };
