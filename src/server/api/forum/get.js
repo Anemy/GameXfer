@@ -65,7 +65,7 @@ export default (req, res) => {
       mostRecentCommentId: 1,
       commentsLength: 1
     }).sort({
-      mostRecentCommentTime: 1
+      mostRecentCommentTime: -1
     })
       // Get the Constants.THREADS_PER_PAGE threads based on the page number.
       .skip(forumPage * Constants.THREADS_PER_PAGE)

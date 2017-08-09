@@ -60,7 +60,7 @@ html(lang='en')
                   p.
                     Posts: #{comment.author.posts}
                   p.inline-block.
-                    Coin: #{comment.author.xferCoin}
+                    Coins: #{comment.author.xferCoin}
                   img(src='/images/coins-32.png' class='inline-block  xfer-coin-image')
               .comment-text(class=comment.author?'col-md-10':'col-md-12')!=comment.text
       else 
@@ -75,16 +75,27 @@ html(lang='en')
               Thread start page.
       .thread-bottom-bar
         .page-selector
+          - const lastPage = Math.floor((thread.commentsLength-1)/COMMENTS_PER_PAGE)+1;
+          - const currentPage = Math.floor(commentId/COMMENTS_PER_PAGE)+1;
           p.page-selection-text.
-            Page: #{Math.floor(commentId/COMMENTS_PER_PAGE)+1} of #{Math.floor((thread.commentsLength-1)/COMMENTS_PER_PAGE)+1}
-          if thread.commentsLength > COMMENTS_PER_PAGE*5
-            //- There are a lot of pages in the thread we need to show a ... somewhere
-            p.
-              ...
-          else if thread.commentsLength > COMMENTS_PER_PAGE
-            //- Limited amount of pages, we can display them all.
-            - let pageNumber = 1;
-            while pageNumber < Math.ceil(thread.commentsLength/COMMENTS_PER_PAGE)+1
+            Page: #{currentPage} of #{lastPage}
+          if thread.commentsLength > COMMENTS_PER_PAGE
+            a(href='/f/'+thread.forumId+'/t/'+thread.threadId)
+                p.page-selection-item(class=(commentId===0)?'page-selected':null).
+                  1
+            if currentPage > 5
+              p.inline-block.
+                ...
+            - let pageNumber = (currentPage-3 > 1) ? (currentPage-3) : 2;
+            - let pagesDisplayedEnd = (currentPage+3 < lastPage) ? (currentPage+3) : lastPage;
+            while pageNumber < pagesDisplayedEnd
               a(href='/f/'+thread.forumId+'/t/'+thread.threadId+'/c/'+((pageNumber-1)*COMMENTS_PER_PAGE))
-                p.page-selection-item(class=((pageNumber-1)*COMMENTS_PER_PAGE)===commentId?'page-selected':null)=pageNumber++
+                p.page-selection-item(class=(pageNumber===currentPage)?'page-selected':null).
+                  #{pageNumber++}
+            if currentPage < lastPage - 3
+              p.inline-block.
+                ...
+            a(href='/f/'+thread.forumId+'/t/'+thread.threadId+'/c/'+((lastPage-1)*COMMENTS_PER_PAGE))
+                p.page-selection-item(class=(currentPage===lastPage)?'page-selected':null).
+                  #{lastPage}
     include footer
