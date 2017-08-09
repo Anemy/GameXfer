@@ -78,7 +78,11 @@ class CreateThread {
         this.showStatusMessage('Success! Redirecting...', 'message-success');
         window.location.replace(`/f/${forumId}/t/${msg.threadId}`);
       }).fail((err) => {
-        this.showStatusMessage('Error: ' + err.responseJSON.err, 'message-failure');
+        if (err && err.responseJSON) {
+          this.showStatusMessage('Error: ' + err.responseJSON.err, 'message-failure');
+        } else {
+          this.showStatusMessage('Error: ' + err.responseText || 'unknown. Please check console', 'message-failure');
+        }
         this.performingAction = false;
       });
     }

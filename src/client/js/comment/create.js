@@ -58,7 +58,11 @@ class CreateComment {
         // Redirect to the most recent comment.
         window.location.replace(`/f/${forumId}/t/${threadId}/c/${Constants.MOST_RECENT_COMMENT}`);
       }).fail((err) => {
-        this.showStatusMessage('Error: ' + err.responseJSON.err, 'message-failure');
+        if (err && err.responseJSON) {
+          this.showStatusMessage('Error: ' + err.responseJSON.err, 'message-failure');
+        } else {
+          this.showStatusMessage('Error: ' + err.responseText || 'unknown. Please check console.', 'message-failure');
+        }
         this.performingAction = false;
       });
     }
@@ -70,8 +74,11 @@ class CreateComment {
       if ($('.js-inline-comment-creator').hasClass('hide')) {
         $('.js-inline-comment-creator').removeClass('hide');
       }
-      $('.js-inline-comment-creator').scrollTop();
-    })
+      setTimeout(() => {
+        $(window).scrollTop($('.js-inline-comment-creator').offset().top);
+        $('.js-create-comment-text').focus();
+      });
+    });
 
     // When the users type into the text fields, hide the last shown message, unless we are currently performing an action.
     $('.js-create-comment-text').keypress(() => {

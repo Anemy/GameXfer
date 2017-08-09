@@ -63,7 +63,11 @@ class Signup {
           window.location.replace('/');
         }, 250 /* 250ms */);
       }).fail((err) => {
-        this.showStatusMessage('Error: ' + err.responseJSON.err, 'message-failure');
+        if (err && err.responseJSON) {
+          this.showStatusMessage('Error: ' + err.responseJSON.err, 'message-failure');
+        } else {
+          this.showStatusMessage('Error: ' + err.responseText || 'unknown. Please check console', 'message-failure');
+        }
         this.performingAction = false;
       });
     }

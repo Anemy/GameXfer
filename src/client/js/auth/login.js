@@ -51,7 +51,11 @@ class Login {
           window.location.replace('/');
         }, 3000 /* 3s */);
       }).fail((err) => {
-        this.showStatusMessage('Error: ' + err.responseJSON.err, 'message-failure');
+        if (err && err.responseJSON) {
+          this.showStatusMessage('Error: ' + err.responseJSON.err, 'message-failure');
+        } else {
+          this.showStatusMessage('Error: ' + err.responseText || 'unknown. Please check console', 'message-failure');
+        }
         this.performingAction = false;
       });
     }

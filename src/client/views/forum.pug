@@ -19,6 +19,8 @@ html(lang='en')
     .forum-page
       p.forum-title.
         #{forum.title}
+      p.forum-information.
+        #{forum.threadsCreatedTotal} threads
       .forum-action-buttons
         a(href='/f/'+forum.forumId+'/create-thread' class='forum-ui-button').
           Create Thread
@@ -81,7 +83,7 @@ html(lang='en')
                 ...
             - let pageNumber = (forumPage-3 > 1) ? (forumPage-3) : 2;
             - let pagesDisplayedEnd = (forumPage+3 < lastPage) ? (forumPage+3) : lastPage;
-            while pageNumber < pagesDisplayedEnd
+            while pageNumber <= pagesDisplayedEnd
               a(href='/f/'+forum.forumId+'/p/'+pageNumber)
                 p.page-selection-item(class=(pageNumber===forumPage)?'page-selected':null).
                   #{pageNumber++}

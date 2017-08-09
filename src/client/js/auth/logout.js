@@ -34,7 +34,11 @@ class Logout {
         this.showStatusMessage('Logged out. Refreshing...', 'message-success');
         window.location.replace('/');
       }).fail((err) => {
-        this.showStatusMessage('Error: ' + err.responseJSON ? err.responseJSON.err : 'unknown', 'message-failure');
+        if (err && err.responseJSON) {
+          this.showStatusMessage('Error: ' + err.responseJSON.err, 'message-failure');
+        } else {
+          this.showStatusMessage('Error: ' + err.responseText || 'unknown. Please check console', 'message-failure');
+        }
         this.performingAction = false;
       });
     }

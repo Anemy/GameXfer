@@ -41,13 +41,16 @@ body {
   bottom: 0;
 
   width: 100%;
-  height: 16px;
 
-  padding: 2px;
+  height: 20px;
+  line-height: 20px;
+
+  font-size: 12px;
+  vertical-align: bottom;
+
+  margin-bottom: 2px;
 
   text-align: center;
-
-  font-size: 12px;  
 }
 
 .nav-bar {

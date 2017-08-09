@@ -99,18 +99,19 @@ html(lang='en')
             a(href='/f/'+thread.forumId+'/t/'+thread.threadId+'/c/'+((lastPage-1)*COMMENTS_PER_PAGE))
                 p.page-selection-item(class=(currentPage===lastPage)?'page-selected':null).
                   #{lastPage}
-        .right.mr-3
-            p(class='js-create-new-comment  forum-ui-button').
-              Add Comment
-            a(href='/f/'+thread.forumId+'/create-thread' class='forum-ui-button').
-              New Thread
+        .thread-action-buttons.mr-3
+          p(class='js-create-new-comment  forum-ui-button').
+            Add Comment
+          a(href='/f/'+thread.forumId+'/create-thread' class='forum-ui-button').
+            New Thread
       .js-inline-comment-creator.hide
         .js-forum-id(class='hide' data-forum-id=thread.forumId)
         .js-thread-id(class='hide' data-thread-id=thread.threadId)
         .inline-create-comment-container
           .comment-author.
-            Your New Comment
+            New Comment
           textarea.inline-create-comment(class='js-create-comment-text' data-provide='markdown' type='text' placeholder='Comment')
+          div(class='ui-panel-display-message animated fadeIn hide js-create-comment-message')
           .center-text
             p(class='js-create-comment  forum-ui-button  inline-add-comment-button').
               Add Comment
