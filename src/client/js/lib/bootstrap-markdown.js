@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import marked from 'marked';
 
 const Markdown = function(element, options) {
   // @TODO : remove this BC on next major release
@@ -500,7 +501,10 @@ Markdown.prototype = {
     } else if (typeof markdown == 'object') {
       content = markdown.toHTML(val);
     } else if (typeof marked == 'function') {
-      content = marked(val);
+      content = marked(val, {
+        sanitize: true,
+        breaks: true // Don't double enter for new lines.
+      });
     } else {
       content = val;
     }
