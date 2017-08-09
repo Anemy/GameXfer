@@ -4,6 +4,7 @@ This file manages the database connection and manages the database tasks.
 
 import mongojs from 'mongojs';
 
+import ensureDatabaseCollections from './database/ensureDatabaseCollections';
 import ServerUtils from './ServerUtils';
 
 // Connect to the database.
@@ -27,6 +28,10 @@ db.collection('forums').ensureIndex({
   forumId: 1
 }, {
   unique: true
+});
+
+setTimeout(() => {
+  ensureDatabaseCollections.populateForums();
 });
 
 export default db;
