@@ -62,8 +62,7 @@ html(lang='en')
                   p.inline-block.
                     Coin: #{comment.author.xferCoin}
                   img(src='/images/coins-32.png' class='inline-block  xfer-coin-image')
-              p.comment-text(class=comment.author?'col-md-10':'col-md-12').
-                #{comment.text}
+              .comment-text(class=comment.author?'col-md-10':'col-md-12')!=comment.text
       else 
         .comment-panel.center-text
           p.
@@ -85,7 +84,7 @@ html(lang='en')
           else if thread.commentsLength > COMMENTS_PER_PAGE
             //- Limited amount of pages, we can display them all.
             - let pageNumber = 1;
-            while pageNumber < Math.floor(thread.commentsLength/COMMENTS_PER_PAGE)+1
+            while pageNumber < Math.ceil(thread.commentsLength/COMMENTS_PER_PAGE)+1
               a(href='/f/'+thread.forumId+'/t/'+thread.threadId+'/c/'+((pageNumber-1)*COMMENTS_PER_PAGE))
                 p.page-selection-item(class=((pageNumber-1)*COMMENTS_PER_PAGE)===commentId?'page-selected':null)=pageNumber++
     include footer

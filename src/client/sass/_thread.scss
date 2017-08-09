@@ -1,15 +1,22 @@
 .thread-header {
   position: relative;
-
+  display: flex;
   overflow: hidden;
 
   padding: 4px;
   margin: 4px;
 
   border: 1px solid $flat-clouds;
-  background-color: #FBFBFB;
+  background-color: white;
 
   max-height: 120px;
+
+  div+div {
+    border-left: 1px dotted $flat-clouds;
+  }
+}
+.thread-header:hover {
+  background-color: #FAFAFA;
 }
 
 .thread-action-buttons {

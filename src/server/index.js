@@ -12,7 +12,7 @@ import fs from 'fs';
 import https from 'https';
 import moment from 'moment';
 import os from 'os';
-import path from 'path';
+import path from 'path'; 
 import session from 'express-session';
 
 import Environment from '../shared/Environment';
@@ -42,6 +42,7 @@ if (!Environment.isDev() && cluster.isMaster) {
 
   const app = express();
 
+  // Set view engine tools into the locals for use in pug template files.
   app.locals.moment = moment;
 
   const MongoStore = connectMongo(session);

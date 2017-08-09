@@ -33,12 +33,13 @@ html(lang='en')
           Last Comment
       if threads ? threads.length === 0 : false
         .thread-header.center-text
-          p.
-            No threads found :'(
-          br
-          a(href='/f/'+forum.forumId+'/create-thread')
+          .col-md-12
             p.
-              Create a new thread :D
+              No threads found :'(
+            br
+            a(href='/f/'+forum.forumId+'/create-thread')
+              p.
+                Create a new thread :D
       else
         each thread in threads
           .thread-header
