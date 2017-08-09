@@ -21,7 +21,6 @@ pipeline {
         stage('Deploy') {
           steps {
             echo 'Taking off...'
-            export NODE_ENV=production 
           }
         }
     }
