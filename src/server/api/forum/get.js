@@ -12,8 +12,8 @@ import ServerUtils from '../../ServerUtils';
 import Utils from '../../../shared/Utils';
 
 export default (req, res) => {
-  let forumId = req.params.forumId;
-  let forumPage = req.params.forumPage; // Optional.
+  const forumId = req.params.forumId;
+  const requestedForumPage = req.params.forumPage; // Optional.
 
   // Ensure the request has the proper attributes.
   if (forumId === undefined) {
@@ -23,10 +23,9 @@ export default (req, res) => {
     return;
   }
 
-  if (forumPage && Utils.isNumber(forumPage)) {
-    forumPage = Number(forumPage);
-  } else {
-    forumPage = 0;
+  let forumPage = 0;
+  if (requestedForumPage && Utils.isNumber(requestedForumPage)) {
+    forumPage = Number(requestedForumPage)-1 /* Subtract 1 so the forum is 0 indexed. */;
   }
 
   sync.fiber(() => {
@@ -82,6 +81,8 @@ export default (req, res) => {
 
     res.status(200);
     res.render('forum', {
+      THREADS_PER_PAGE: Constants.THREADS_PER_PAGE,
+      forumPage: forumPage + 1 /* Add one so it's no longer 0 indexed. */,
       forum: forum,
       threads: threads,
       user: req.session.username ? ServerUtils.getLightUserObjectForUsername(req.session.username) : null

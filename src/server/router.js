@@ -117,6 +117,7 @@ router.get('/f/:forumId/t/:threadId/c/:commentId', getThread);
 router.post('/thread/create', createThreadLimiter, requireAuth, createThread);
 
 // Forum
+router.get('/f/:forumId/p/:forumPage', getForum);
 router.get('/f/:forumId', getForum);
 router.get('/forums', getAllForums);
 router.get('/', getAllForums);

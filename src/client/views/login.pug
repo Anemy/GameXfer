@@ -8,18 +8,18 @@ html
     link(rel='icon' type='image/png' href='/images/treasure-64.png')
   body
     .login-page
-      .auth-ui-panel
-        .auth-entry-header
+      .ui-panel.small-ui-panel
+        .ui-panel-header
           div(class='left logo')
             <span>Game</span>Xfer
-        .auth-entry-form
-          .subtitle.
+        .ui-panel-body
+          .ui-panel-subtitle.
             Login or <a href='/signup'>Register</a>
           input(class="js-login-username-input" type='text' placeholder='Username')
           input(class="js-login-password-input" type='password' placeholder='Password')
-        .auth-entry-footer
+        .ui-panel-footer
           a(href='/forgot-password' class='left').
             Forgot your password?
-          a(class='submit-auth-button js-login').
+          a(class='submit-ui-panel-button js-login').
             Login
-        div(class='auth-display-message animated fadeIn hide js-login-status-message')
+        div(class='ui-panel-display-message animated fadeIn hide js-login-status-message')

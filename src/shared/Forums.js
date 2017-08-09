@@ -8,18 +8,38 @@ import _ from 'underscore';
 
 import { FORUM_TYPES } from './Constants';
 
-// const ForumCategories = [
-//   'Trending', // What's lit.
-//   'Gaming',
-//   'Trading',
-//   'Computer',
-//   'Miscellaneous',
-//   'Steam',
-//   'Markets',
-//   'Guides',
-//   'Graphics',
-//   'GameXfer'
-// ];
+// const ForumCategories = {
+//   'Trending': { // What's lit.
+//     icon: 'bolt'
+//   }, 
+//   'Gaming': {
+//     icon: 'gamepad'
+//   },
+//   'Trading': {
+//     icon: 'exchange'
+//   },
+//   'Computer': {
+//     icon: 'laptop'
+//   },
+//   'Miscellaneous': {
+//     icon: 'bolt'
+//   },
+//   'Steam': {
+//     icon: 'bolt'
+//   },
+//   'Markets': {
+//     icon: 'bolt'
+//   },
+//   'Guides': {
+//     icon: 'question-circle'
+//   },
+//   'Graphics': {
+//     icon: 'bolt'
+//   },
+//   'GameXfer': {
+//     icon: 'bolt'
+//   }
+// };
 
 const forums = {
   // Games

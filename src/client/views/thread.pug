@@ -78,7 +78,7 @@ html(lang='en')
           - const lastPage = Math.floor((thread.commentsLength-1)/COMMENTS_PER_PAGE)+1;
           - const currentPage = Math.floor(commentId/COMMENTS_PER_PAGE)+1;
           p.page-selection-text.
-            Page: #{currentPage} of #{lastPage}
+            Page #{currentPage} of #{lastPage}
           if thread.commentsLength > COMMENTS_PER_PAGE
             a(href='/f/'+thread.forumId+'/t/'+thread.threadId)
                 p.page-selection-item(class=(commentId===0)?'page-selected':null).

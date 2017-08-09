@@ -10,27 +10,25 @@ html
     include header
     if thread
       .create-comment-page
-        .auth-ui-panel
-          .auth-entry-header
+        .ui-panel.small-ui-panel
+          .ui-panel-header
             div(class='left logo').
               <span>Game</span>Xfer
           .create-comment-form
             .js-forum-id(class='hide' data-forum-id=thread.forumId)
             .js-thread-id(class='hide' data-thread-id=thread.threadId)
-            .auth-entry-form
-              .subtitle
+            .ui-panel-body
+              .ui-panel-subtitle
                 p.inline-block.
                   Post a comment in&nbsp;
                 a(href='/f/'+thread.forumId+'/t/'+thread.threadId).
                   #{thread.title}
-              textarea(class='js-create-comment-text' data-provide='markdown' type='text' placeholder='Text')
-            .auth-entry-footer
+              textarea(class='js-create-comment-text' data-provide='markdown' type='text' placeholder='Comment')
+            .ui-panel-footer
               a(href='/f/'+thread.forumId+'/t/'+thread.threadId class='left').
                 Back
-              input(class='submit-auth-button js-create-comment' type='submit' value='Submit')
-          div(class='auth-display-message animated fadeIn hide js-create-comment-message')
-      .preview.
-        Created comment preview
+              input(class='submit-ui-panel-button js-create-comment' type='submit' value='Submit')
+          div(class='ui-panel-display-message animated fadeIn hide js-create-comment-message')
     else
       p.
         Invalid thread to comment on. Please try again.

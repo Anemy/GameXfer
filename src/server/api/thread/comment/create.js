@@ -133,7 +133,7 @@ export default (req, res) => {
       $set: {
         mostRecentCommentTime: currentTime,
         mostRecentCommentId: newComment.commentId,
-        mostRecentCommentAuthor: req.user,
+        mostRecentCommentAuthor: req.username,
         mostRecentCommentThreadId: threadId,
       }
     }, sync.defer()));

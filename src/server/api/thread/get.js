@@ -17,7 +17,7 @@ export default (req, res) => {
   const forumId = req.params.forumId;
   const threadId = req.params.threadId;
 
-  let commentId = req.params.commentId;
+  const requestedCommentId = req.params.commentId;
 
   // Ensure the request has the proper attributes.
   if (forumId === undefined || threadId === undefined) {
@@ -28,12 +28,13 @@ export default (req, res) => {
   }
 
   sync.fiber(() => {
-    if (Utils.isNumber(commentId)) {
-      commentId = Math.floor(Number(commentId));
+    let commentId = 0;
+    if (Utils.isNumber(requestedCommentId)) {
+      commentId = Math.floor(Number(requestedCommentId));
 
       // Round to the nearest page amount of comments so we return the page's items.
       commentId = Math.floor(commentId / Constants.COMMENTS_PER_PAGE) * Constants.COMMENTS_PER_PAGE;
-    } else if (commentId === Constants.MOST_RECENT_COMMENT) {
+    } else if (requestedCommentId === Constants.MOST_RECENT_COMMENT) {
       const thread = sync.await(db.collection('threads').findOne({
         forumId: forumId,
         threadId: threadId,
@@ -46,9 +47,6 @@ export default (req, res) => {
       } else {
         commentId = 0;
       }
-    } else {
-      // Default the searched for comment to 0.
-      commentId = 0;
     }
 
     // Get the requested thread and update the views on it.

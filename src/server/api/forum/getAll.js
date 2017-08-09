@@ -22,8 +22,10 @@ export default (req, res) => {
       mostRecentCommentTime: 1,
       mostRecentCommentAuthor: 1,
       mostRecentThreadTime: 1,
-      mostRecentThreadAuthor: 1,
-    }, sync.defer()));
+      mostRecentThreadAuthor: 1
+    }).sort({
+      mostRecentCommentTime: -1
+    }).toArray(sync.defer()));
 
     if (!forums) { 
       res.status(400).send({

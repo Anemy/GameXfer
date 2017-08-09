@@ -69,7 +69,14 @@
 }
 
 .thread-header-info {
+  font-size: 14px;
+  margin-top: 1px;
+
   color: $text-secondary;
+}
+
+.thread-header-author-time {
+  margin-top: 2px;
 }
 
 .thread-header-author {

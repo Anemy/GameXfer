@@ -8,16 +8,18 @@ html
     link(rel='icon' type='image/png' href='/images/treasure-64.png')
   body
     .contact-page
-      .auth-ui-panel
-        .auth-entry-header
+      .ui-panel.medium-ui-panel
+        .ui-panel-header
           div(class='left logo')
             <span>Game</span>Xfer
-        .auth-entry-form
-          .subtitle.
+        .ui-panel-body
+          .ui-panel-subtitle.
             Send us a message
           input.js-contact-email-input(type='email' name='_replyto' placeholder='Email')
           textarea.js-contact-text-input(class='big-message' type='text' name='name' placeholder='Message')
-        .auth-entry-footer
-          a(class='submit-auth-button  js-contact-submit').
+        .ui-panel-footer
+          a(href='/' class='left').
+            Home
+          a(class='submit-ui-panel-button  js-contact-submit').
             Send
-        div(class='auth-display-message  animated  fadeIn  hide  js-contact-status-message')
+        div(class='ui-panel-display-message  animated  fadeIn  hide  js-contact-status-message')
