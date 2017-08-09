@@ -43,6 +43,11 @@ import { FORUM_TYPES } from './Constants';
 
 const forums = {
   // Games
+  'bazaar': {
+    title: 'The Bazaar',
+    type: FORUM_TYPES.TRADING,
+    categories: ['Trending', 'Trading', 'Markets', 'GameXfer']
+  },
   'csgo': {
     title: 'Counter Strike: Global Offensive',
     type: FORUM_TYPES.TRADING,
