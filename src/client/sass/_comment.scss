@@ -73,28 +73,37 @@
   z-index: 4;
 }
 
-
-.create-comment-area {
-  margin-top: 18px;
+.inline-create-comment-container {
+  margin-top: 20px;
+  position: relative;
+  padding-left: 8px;
+  padding-right: 8px;
 
   textarea {
-    width: 100%;
-    min-height: 130px;
-
-    border: 1px solid $flat-clouds;
-
-    font-size: 16px;
-    padding: 10px 8px;
+    min-height: 164px !important;
   }
+}
+
+.inline-add-comment-button {
+  margin-top: 3px;
+}
+
+.create-comment-container {
+  margin-top: 18px;
+}
+
+.create-comment-container textarea, .inline-create-comment-container textarea {
+  width: 100%;
+  min-height: 130px;
+
+  border: 1px solid $flat-clouds;
+
+  font-size: 16px;
+  padding: 10px 8px;
 }
 
 $btn-border-radius: 3px;
 
-// .btn-toolbar {
-//   display: block;
-//   padding: 6px 10px;
-//   background: #f5f5f5;
-// }
 .btn-group {
   display: inline-block;
   margin-right: 6px;

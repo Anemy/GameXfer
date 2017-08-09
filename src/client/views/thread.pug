@@ -33,12 +33,13 @@ html(lang='en')
             p.
               #{forum.title}
           p.inline-block.
-            &nbsp;posted #{moment(thread.createdAt).fromNow()}&nbsp;
-          a.inline-block(href='/u/'+thread.author)
-            p.
-              #{thread.author.displayUsername}
-      .thread-action-buttons
-        a(href='/f/'+thread.forumId+'/t/'+thread.threadId+'/create-comment' class='forum-ui-button').
+            &nbsp;posted #{moment(thread.createdAt).fromNow()} by&nbsp;
+          if thread.author
+            a.inline-block(href='/u/'+thread.author.username)
+              p.
+                #{thread.author.displayUsername}
+      .thread-action-buttons.mr-3
+        p(class='js-create-new-comment  forum-ui-button').
           Add Comment
         a(href='/f/'+thread.forumId+'/create-thread' class='forum-ui-button').
           New Thread
@@ -98,4 +99,19 @@ html(lang='en')
             a(href='/f/'+thread.forumId+'/t/'+thread.threadId+'/c/'+((lastPage-1)*COMMENTS_PER_PAGE))
                 p.page-selection-item(class=(currentPage===lastPage)?'page-selected':null).
                   #{lastPage}
+        .right.mr-3
+            p(class='js-create-new-comment  forum-ui-button').
+              Add Comment
+            a(href='/f/'+thread.forumId+'/create-thread' class='forum-ui-button').
+              New Thread
+      .js-inline-comment-creator.hide
+        .js-forum-id(class='hide' data-forum-id=thread.forumId)
+        .js-thread-id(class='hide' data-thread-id=thread.threadId)
+        .inline-create-comment-container
+          .comment-author.
+            Your New Comment
+          textarea.inline-create-comment(class='js-create-comment-text' data-provide='markdown' type='text' placeholder='Comment')
+          .center-text
+            p(class='js-create-comment  forum-ui-button  inline-add-comment-button').
+              Add Comment
     include footer

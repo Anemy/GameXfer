@@ -57,17 +57,11 @@ class Signup {
         email: $('.js-signup-email-input').val(),
         password: $('.js-signup-password-input').val(),
       }).done(() => {
-        this.showStatusMessage('Success! Redirecting in 3 seconds.', 'message-success');
-        setTimeout(() => {
-          this.showStatusMessage('Success! Redirecting in 2 seconds.', 'message-success');
-        }, 1000 /* 1s */);
-        setTimeout(() => {
-          this.showStatusMessage('Success! Redirecting in 1 second.', 'message-success');
-        }, 2000 /* 2s */);
+        this.showStatusMessage('Success! Redirecting...', 'message-success');
         setTimeout(() => {
           // TODO: Replace with an optional redirect string param.
           window.location.replace('/');
-        }, 3000 /* 3s */);
+        }, 250 /* 250ms */);
       }).fail((err) => {
         this.showStatusMessage('Error: ' + err.responseJSON.err, 'message-failure');
         this.performingAction = false;

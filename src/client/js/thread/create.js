@@ -75,16 +75,8 @@ class CreateThread {
           return;
         }
 
-        this.showStatusMessage('Success! Redirecting in 3 seconds.', 'message-success');
-        setTimeout(() => {
-          this.showStatusMessage('Success! Redirecting in 2 seconds.', 'message-success');
-        }, 1000 /* 1s */);
-        setTimeout(() => {
-          this.showStatusMessage('Success! Redirecting in 1 second.', 'message-success');
-        }, 2000 /* 2s */);
-        setTimeout(() => {
-          window.location.replace(`/f/${forumId}/t/${msg.threadId}`);
-        }, 3000 /* 3s */);
+        this.showStatusMessage('Success! Redirecting...', 'message-success');
+        window.location.replace(`/f/${forumId}/t/${msg.threadId}`);
       }).fail((err) => {
         this.showStatusMessage('Error: ' + err.responseJSON.err, 'message-failure');
         this.performingAction = false;

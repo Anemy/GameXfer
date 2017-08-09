@@ -54,14 +54,9 @@ class CreateComment {
         threadId: threadId,
         text: text
       }).done(() => {
-        this.showStatusMessage('Success! Redirecting in 2 seconds.', 'message-success');
-        setTimeout(() => {
-          this.showStatusMessage('Success! Redirecting in 1 seconds.', 'message-success');
-        }, 1000 /* 1s */);
-        setTimeout(() => {
-          // Redirect to the most recent comment.
-          window.location.replace(`/f/${forumId}/t/${threadId}/c/${Constants.MOST_RECENT_COMMENT}`);
-        }, 2000 /* 2s */);
+        this.showStatusMessage('Success! Refreshing...', 'message-success');
+        // Redirect to the most recent comment.
+        window.location.replace(`/f/${forumId}/t/${threadId}/c/${Constants.MOST_RECENT_COMMENT}`);
       }).fail((err) => {
         this.showStatusMessage('Error: ' + err.responseJSON.err, 'message-failure');
         this.performingAction = false;
@@ -70,6 +65,14 @@ class CreateComment {
   }
 
   startListening() {
+    // Activate the inline comment creation when the user clicks the button.
+    $('.js-create-new-comment').on('click', () => {
+      if ($('.js-inline-comment-creator').hasClass('hide')) {
+        $('.js-inline-comment-creator').removeClass('hide');
+      }
+      $('.js-inline-comment-creator').scrollTop();
+    })
+
     // When the users type into the text fields, hide the last shown message, unless we are currently performing an action.
     $('.js-create-comment-text').keypress(() => {
       if (!this.performingAction) {
