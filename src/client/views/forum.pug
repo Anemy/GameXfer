@@ -19,8 +19,9 @@ html(lang='en')
     .forum-page
       a.forum-title(href='/f/'+forum.forumId).
         #{forum.title}
-      a(href='/f/'+forum.forumId+'/create-thread' class='forum-ui-button').
-        Create Thread
+      .forum-action-buttons
+        a(href='/f/'+forum.forumId+'/create-thread' class='forum-ui-button').
+          Create Thread
       .thread-table-header
         .col-md-8.pl-4.
           Title &amp; Description
@@ -64,5 +65,4 @@ html(lang='en')
                   p.thread-header-author.
                     #{thread.mostRecentCommentAuthor.displayUsername}
                 p(class='thread-header-info')=moment(thread.mostRecentCommentTime).fromNow()
-
     include footer

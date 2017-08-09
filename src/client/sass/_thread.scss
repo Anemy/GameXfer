@@ -12,6 +12,13 @@
   max-height: 120px;
 }
 
+.thread-action-buttons {
+  position: absolute;
+
+  top: 8px;
+  right: 10px;
+}
+
 .thread-title {
   font-size: 22px;
   font-weight: 300;
@@ -26,7 +33,6 @@
 
   color: $text-primary;
 }
-
 
 .thread-page-information {
   margin-top: 2px;
@@ -61,4 +67,38 @@
 
 .thread-header-author {
   text-decoration: underline;
+}
+
+.page-selector {
+  font-size: 14px;
+}
+
+.page-selection-text {
+  display: inline-block;
+
+  margin-left: 12px;
+  margin-right: 2px;
+}
+
+.page-selection-item {
+  display: inline-block;
+
+  border: 1px solid #aaa;
+  border-radius: 2px;
+  margin: 2px;
+
+  background-color: white;
+  color: #333;
+
+  padding: 3px;
+}
+.page-selected {
+  background-color: #aaa;
+  color: white;
+}
+.page-selection-item:hover {
+  cursor: pointer;
+
+  text-decoration: underline;
+  border-color: #333;
 }

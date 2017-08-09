@@ -68,7 +68,7 @@ export default (req, res) => {
         createdAt: 1,
         mostRecentCommentAuthor: 1,
         mostRecentCommentTime: 1,
-        mostRecentcommentId: 1,
+        mostRecentCommentId: 1,
         commentsLength: 1,
         comments: {
           // Get the Constants.COMMENTS_PER_PAGE comments based on the comment number.
@@ -107,6 +107,10 @@ export default (req, res) => {
 
     res.status(200);
     res.render('thread', {
+      // This is a user supplied param so we need to be careful with how we use it.
+      // Currently it's sanitized though so we're okay.
+      commentId: commentId,
+      COMMENTS_PER_PAGE: Constants.COMMENTS_PER_PAGE,
       forum: thread ? Forums.getForumInfoById(thread.forumId) : null,
       thread: thread, 
       user: req.session.username ? ServerUtils.getLightUserObjectForUsername(req.session.username) : null

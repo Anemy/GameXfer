@@ -94,12 +94,7 @@ $forum-top-padding: 8px;
 }
 
 .forums-table-header {
-  padding-left: 34px;
   color: $text-secondary;
-
-  div {
-    padding: 0;
-  }
 }
 
 .forum-category-title {
@@ -125,6 +120,13 @@ $forum-top-padding: 8px;
   color: $text-secondary;
 }
 
+.forum-action-buttons {
+  position: absolute;
+
+  top: 0;
+  right: 10px;
+}
+
 .forum-title {
   font-size: 22px;
   font-weight: 300;
@@ -137,10 +139,8 @@ $forum-top-padding: 8px;
 }
 
 .forum-ui-button {
-  position: absolute;
-
-  top: $forum-top-padding;
-  right: 10px;
+  display: inline-block;
+  margin-left: 4px;
 
   border-radius: 3px;
 
@@ -150,6 +150,8 @@ $forum-top-padding: 8px;
   border: 1px solid $text-secondary;
 
   padding: 4px;
+  padding-left: 6px;
+  padding-right: 6px;
 }
 
 .forum-ui-button:hover {

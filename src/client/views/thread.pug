@@ -33,32 +33,59 @@ html(lang='en')
             p.
               #{forum.title}
           p.inline-block.
-            &nbsp;posted&nbsp;
-          p.inline-block=moment(thread.createdAt).fromNow()
-          p.inline-block.
-            &nbsp;
+            &nbsp;posted #{moment(thread.createdAt).fromNow()}&nbsp;
           a.inline-block(href='/u/'+thread.author)
             p.
               #{thread.author.displayUsername}
-      a(href='/f/'+thread.forumId+'/t/'+thread.threadId+'/create-comment' class='forum-ui-button').
-        Add Comment
-      a(href='/f/'+thread.forumId+'/create-thread' class='forum-ui-button').
-        New Thread
+      .thread-action-buttons
+        a(href='/f/'+thread.forumId+'/t/'+thread.threadId+'/create-comment' class='forum-ui-button').
+          Add Comment
+        a(href='/f/'+thread.forumId+'/create-thread' class='forum-ui-button').
+          New Thread
       if thread.comments && thread.comments.length > 0
         each comment in thread.comments
           .comment-panel
             if comment.author
               .comment-author
                 a(href='/u/'+comment.author.username)
-                  p.inline-block.
+                  p.inline-block.underline.
                     #{comment.author.displayUsername}
                 p.inline-block.comment-time.
-                  &nbsp;-&nbsp;
-                p.inline-block.comment-time=moment(comment.createdAt).format('MMMM Do YYYY, h:mm:ss a')
+                  &nbsp;-&nbsp;#{moment(comment.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
             .comment-inner-panel
-              p.comment-text.
+              if comment.author
+                .comment-author-information.col-md-2
+                  p.inline-block.
+                    Joined:&nbsp;#{moment(comment.author.createdAt).format('MMMM Do, YYYY')}
+                  p.
+                    Posts: #{comment.author.posts}
+                  p.inline-block.
+                    Coin: #{comment.author.xferCoin}
+                  img(src='/images/coins-32.png' class='inline-block  xfer-coin-image')
+              p.comment-text(class=comment.author?'col-md-10':'col-md-12').
                 #{comment.text}
       else 
-        .comment-panel.center-text.
-          Comments not found :'(
+        .comment-panel.center-text
+          p.
+            Comments not found :'(
+          br
+          p.inline-block.
+            Try this:&nbsp;
+          a.inline-block(href='/f/'+thread.forumId+'/t/'+thread.threadId)
+            p.
+              Thread start page.
+      .thread-bottom-bar
+        .page-selector
+          p.page-selection-text.
+            Page: #{Math.floor(commentId/COMMENTS_PER_PAGE)+1} of #{Math.floor((thread.commentsLength-1)/COMMENTS_PER_PAGE)+1}
+          if thread.commentsLength > COMMENTS_PER_PAGE*5
+            //- There are a lot of pages in the thread we need to show a ... somewhere
+            p.
+              ...
+          else if thread.commentsLength > COMMENTS_PER_PAGE
+            //- Limited amount of pages, we can display them all.
+            - let pageNumber = 1;
+            while pageNumber < Math.floor(thread.commentsLength/COMMENTS_PER_PAGE)+1
+              a(href='/f/'+thread.forumId+'/t/'+thread.threadId+'/c/'+((pageNumber-1)*COMMENTS_PER_PAGE))
+                p.page-selection-item(class=((pageNumber-1)*COMMENTS_PER_PAGE)===commentId?'page-selected':null)=pageNumber++
     include footer
