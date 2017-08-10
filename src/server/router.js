@@ -21,6 +21,9 @@ import getUser from './api/user/get';
 import login from './api/user/login';
 import logout from './api/user/logout';
 import signup from './api/user/signup';
+import settings from './api/user/settings';
+
+import signS3 from './api/signS3';
 
 // XferCoin
 import sendCoin from './api/coin/send';
@@ -40,6 +43,13 @@ const basicLimiter = new RateLimit({
   windowMs: 10*60*1000, // 10 minute window.
   delayMs: 0,
   max: 100
+});
+
+const imageUploadLimiter = new RateLimit({
+  windowMs: 10*60*1000, // 10 minute window.
+  delayMs: 0, // Slow down subsequent responses by 1 second per request.
+  max: 3, // Start blocking after 5 requests.
+  message: 'Too many image change requests from this IP, you may try again in 10 minutes.'
 });
 
 const sendCoinLimiter = new RateLimit({
@@ -92,12 +102,12 @@ const sendMessageLimiter = new RateLimit({
 
 const router = express.Router();
 
-function renderWithUser(req, res, template) {
+function renderWithUser(req, res, template, options) {
   // Send the rendered HTML page and attach the user's username if they are sessioned.
   if (req.session.username) {
     sync.fiber(() => {
       res.render(template, {
-        user: ServerUtils.getLightUserForUsername(req.session.username)
+        user: ServerUtils.getLightUserForUsername(req.session.username, options)
       });
     });
   } else {
@@ -139,6 +149,7 @@ router.get('/u/:username', basicLimiter, requireAuth, getUser);
 router.post('/login', loginLimiter, login);
 router.post('/logout', requireAuth, logout);
 router.post('/signup', signupLimiter, signup);
+router.post('/settings', basicLimiter, requireAuth, settings);
 
 // User pages
 router.get('/login', (req, res) => {
@@ -156,6 +167,12 @@ router.get('/posts', requireAuth, (req, res) => {
 router.get('/tracker', requireAuth, (req, res) => {
   renderWithUser(req, res, 'tracker');
 });
+router.get('/settings', requireAuth, (req, res) => {
+  renderWithUser(req, res, 'settings', {
+    biography: 1
+  });
+});
+router.get('/sign-s3', imageUploadLimiter, requireAuth, signS3);
 
 router.get('/contact', (req, res) => {
   res.render('contact');

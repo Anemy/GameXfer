@@ -8,6 +8,7 @@ import bodyParser from 'body-parser';
 import cluster from 'cluster';
 import connectMongo from 'connect-mongo';
 import express from 'express';
+import dotenv from 'dotenv';
 import fs from 'fs';
 import https from 'https';
 import moment from 'moment';
@@ -18,6 +19,9 @@ import session from 'express-session';
 import Environment from '../shared/Environment';
 import router from './router';
 import ServerUtils from './ServerUtils';
+
+// Load in the environment variables.
+dotenv.load();
 
 let numCPUs = os.cpus().length;
 

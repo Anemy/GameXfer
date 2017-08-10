@@ -20,11 +20,14 @@
           img(src='/images/coins-32.png' class='xfer-coin-image')
           .coin-underline
       li
-        a(href='/inbox')
+        a.header-envelope(href='/inbox')
           if user.hasUnread
             i(class='fa  fa-envelope  header-envelope')
           else
             i(class='fa  fa-envelope-o  header-envelope')
+      li
+        a(href='/settings' class='header-link  header-small-text').
+          Settings
       li
         a(class='logout-button  js-logout  header-link  header-small-text').
           Logout

@@ -1,11 +1,14 @@
 # GameXfer
 [Gamexfer.com](http://gamexfer.com)
+See `LICENSE.txt` for the license.
 
 ## Installation
 
 Install node js from https://nodejs.org/en/download/
 
 Install mongodb from https://docs.mongodb.com/getting-started/shell/installation/
+
+We use `dotenv` for storing environment variables around confidential/secret tokens. Message Rhys for for that file.
 
 ```bash
 $ npm install
@@ -31,6 +34,8 @@ $ browser https://localhost:3000
 - user
   - username `String` - Unique, lower case.
   - displayUsername `String` - Username with upper case available.
+  - avatarURL `String` - S3 CDN url.
+  - biography `String`
   - password `String` - Hashed via bcrypt
   - xferCoin `Number`
   - createdAt `Date`

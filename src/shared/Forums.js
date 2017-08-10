@@ -108,6 +108,11 @@ const forums = {
     type: FORUM_TYPES.TRADING,
     categories: ['Trending', 'Trading', 'Gaming']
   },
+  'vg': {
+    title: 'Video Game Trading',
+    type: FORUM_TYPES.TRADING,
+    categories: ['Markets', 'Trading', 'Gaming']
+  },
 
   // Markets
   'steam': {
@@ -136,6 +141,11 @@ const forums = {
     title: 'Real Life',
     type: FORUM_TYPES.DISCUSSION,
     categories: ['Miscellaneous']
+  },
+  'bg': {
+    title: 'Board Games',
+    type: FORUM_TYPES.DISCUSSION,
+    categories: ['Miscellaneous', 'Gaming']
   },
   'ot': {
     title: 'Off Topic',

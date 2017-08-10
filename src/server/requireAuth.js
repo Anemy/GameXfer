@@ -8,8 +8,8 @@ export default (req, res, next) => {
       return;
     } else {
       // If the request was not xhr we should show them the login page so they can get authed.
-      const requestedUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-      res.status(403).redirect('/login?redirect=' + requestedUrl);
+      const requestedUrl = req.originalUrl; // For full url include before originalUrl: req.protocol + '://' + req.get('host') + 
+      res.status(403).redirect('/login?re=' + requestedUrl);
       return;
     }
   }

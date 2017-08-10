@@ -1,5 +1,7 @@
 import $ from 'jquery';
 
+import Utils from '../../../shared/Utils';
+
 class Login {
   constructor() {
     this.performingAction = false;
@@ -39,17 +41,12 @@ class Login {
         username: $('.js-login-username-input').val(),
         password: $('.js-login-password-input').val(),
       }).done(() => {
-        this.showStatusMessage('Success! Redirecting in 3 seconds.', 'message-success');
-        setTimeout(() => {
-          this.showStatusMessage('Success! Redirecting in 2 seconds.', 'message-success');
-        }, 1000 /* 1s */);
-        setTimeout(() => {
-          this.showStatusMessage('Success! Redirecting in 1 second.', 'message-success');
-        }, 2000 /* 2s */);
-        setTimeout(() => {
-          // TODO: Replace with an optional redirect string param.
-          window.location.replace('/');
-        }, 3000 /* 3s */);
+        this.showStatusMessage('Success! Redirecting...', 'message-success');
+        
+        const redirectUrl = Utils.getParameterByName('re');
+
+        // Redirect to home unless they have a specified redirect string.
+        window.location.replace(redirectUrl ? redirectUrl : '/');
       }).fail((err) => {
         if (err && err.responseJSON) {
           this.showStatusMessage('Error: ' + err.responseJSON.err, 'message-failure');
@@ -62,6 +59,12 @@ class Login {
   }
 
   startListening() {
+    // When the page first loads, check if they were redirected from somewhere requiring auth so we can display a message.
+    const redirectUrl = Utils.getParameterByName('re');
+    if (redirectUrl) {
+      this.showStatusMessage('Please sign in to view that page.', 'message-failure');
+    }
+
     // When the users type into the text fields, hide the last shown message, unless we are currently performing an action.
     $('.js-login-username-input, .js-login-password-input').keypress((e) => {
       if (!this.performingAction) {

@@ -1,8 +1,6 @@
 /**
  * Utility functions shared by multiple classes.
  **/
-import xss from 'xss';
-
 import Constants from './Constants';
 
 class Utils {
@@ -41,6 +39,10 @@ class Utils {
       password.length > 16);
   }
 
+  static validBiography(text) {
+    return text && text.length > 0 && text.length < Constants.BIOGRAPHY_TEXT_MAX_LENGTH;
+  }
+
   // @return {Boolean} - If the supplied subject is valid for a message.
   static validMessageSubject(subject) {
     return subject && subject.length > 0 && subject.length < Constants.MESSAGE_SUBJECT_MAX_LENGTH;
@@ -63,8 +65,17 @@ class Utils {
     return text && text.length > 0 && text.length < Constants.COMMENT_TEXT_MAX_LENGTH;
   }
 
-  static sanitize(text) {
-    return xss(text);
+  static getParameterByName(name, url) {
+    if (!url) {
+      url = window.location.href;
+    }
+    const variableName = name.replace(/[[\]]/g, '\\$&');
+
+    const regex = new RegExp('[?&]' + variableName + '(=([^&#]*)|&|#|$)');
+    let results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
   }
 }
 

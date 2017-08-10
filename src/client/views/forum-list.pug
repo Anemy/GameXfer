@@ -37,11 +37,11 @@ html(lang='en')
                   &nbsp;
         .forums-list-panel
           .forums-table-header
-            .col-md-8.pl-m.
+            .col-md-7.pl-m.
               Forum Title
             .col-md-2.
               Thread Count
-            .col-md-2.
+            .col-md-3.
               Recent Activity
           if forums ? forums.length === 0 : false
             .forum-header.center-text.
@@ -49,13 +49,13 @@ html(lang='en')
           else
             each forum in forums
               .forum-header
-                .col-md-8.forum-header-col
+                .col-md-7.forum-header-col
                   p(class='forum-header-title')
                     a(href='/f/'+forum.forumId).
                       #{forum.title}
                 .col-md-2.forum-header-col.
                   #{forum.threadsCreatedTotal}
-                .col-md-2.forum-header-col
+                .col-md-3.forum-header-col
                   .forum-most-recent-thread
                     if forum.mostRecentCommentThreadTitle
                       a(href='/f/'+forum.forumId+'/t/'+forum.mostRecentCommentThreadId)

@@ -36,7 +36,7 @@ export default (req, res) => {
   }
 
   // Format the comment.
-  text = ServerUtils.formatComment(text);
+  text = ServerUtils.sanitizeAndMarkdown(text);
 
   // Ensure the comment still conforms to the guidelines after being formatted.
   if (!Utils.validCommentText(text)) {

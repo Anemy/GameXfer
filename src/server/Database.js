@@ -30,6 +30,7 @@ db.collection('forums').ensureIndex({
   unique: true
 });
 
+// TODO: Remove this hack.
 setTimeout(() => {
   ensureDatabaseCollections.populateForums();
 });

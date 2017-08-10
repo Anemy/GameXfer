@@ -17,7 +17,7 @@ export default {
   },
 
   // Needs to be in a fiber.
-  getLightUserForUsername: (username) => {
+  getLightUserForUsername: (username, options) => {
     const lightUser = sync.await(db.collection('users').findOne({
       username: username
     }, {
@@ -27,7 +27,9 @@ export default {
       posts: 1,
       xferCoin: 1,
 
-      hasUnread: 1
+      hasUnread: 1,
+      avatarURL: 1,
+      biography: (options.biography || 0)
     }, sync.defer()));
 
     return lightUser;
@@ -62,9 +64,9 @@ export default {
     return lightThread;
   },
 
-  // Converts the passed comment to html and prevents against xss.
-  formatComment: (comment) => {
-    const sanitizedMarkdownComment = marked(comment, {
+  // Converts the passed text to html and prevents against xss.
+  sanitizeAndMarkdown: (text) => {
+    const sanitizedMarkdownComment = marked(text, {
       sanitize: true
     });
 

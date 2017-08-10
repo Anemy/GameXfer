@@ -1,0 +1,37 @@
+
+.profile-username {
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.settings-option-title {
+  font-size: 16px;
+  font-weight: 400;
+
+  margin-top: 20px;
+  margin-bottom: 1px;
+}
+
+.save-settings-button {
+  border-radius: 3px;
+
+  font-weight: 600;
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+
+  background-color: #26a646;
+  background-image: -webkit-linear-gradient(270deg, #35d057 0%, #26a646 90%);
+  background-image: linear-gradient(-180deg, #35d057 0%, #26a646 90%);
+  border: 1px solid $flat-green-2;
+
+  padding: 6px 12px;
+}
+
+.save-settings-button:hover {
+  cursor: pointer;
+
+  background-color: #2aaa4a;
+  background-image: -webkit-linear-gradient(270deg, #2aaa4a 0%, #16b626 90%);
+  background-image: linear-gradient(-180deg, #2aaa4a 0%, #16b626 90%);
+}

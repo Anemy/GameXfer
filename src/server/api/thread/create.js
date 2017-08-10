@@ -3,6 +3,7 @@
 import sync from 'synchronize';
 
 import db from '../../Database';
+import ServerUtils from '../../ServerUtils';
 import Utils from '../../../shared/Utils';
 
 export default (req, res) => {
@@ -16,7 +17,7 @@ export default (req, res) => {
   const forumId = req.body.forumId;
   const title = req.body.title;
   const description = req.body.description;
-  const text = req.body.text;
+  let text = req.body.text;
 
   // Ensure the message has the proper attributes.
   if (forumId === undefined || !title || !text) {
@@ -48,6 +49,8 @@ export default (req, res) => {
     });
     return;
   }
+
+  text = ServerUtils.sanitizeAndMarkdown(text);
 
   sync.fiber(() => {
     const currentTime = new Date();

@@ -1,0 +1,30 @@
+doctype html
+html(lang='en')
+  head
+    link(rel='stylesheet' href='/style/index.css')
+    script(src='/js/build.js')
+    title.
+      Settings #{user.displayUsername} - GameXfer
+    link(rel='icon' type='image/png' href='/images/treasure-64.png')
+  body
+    include header
+    .settings-page.row.mt-l
+      .col-md-2
+        //- Empty
+      .col-md-8
+        h2.
+          Settings
+        p.settings-option-title.
+          Profile Picture<span class='text-small  text-mute'> 1 MB max, resized to 64x64</span>
+        img(id='js-avatar-preview' src=user.avatarURL)
+        input(type='file' id='js-avatar-input' accept='image/*')
+        form.js-settings-form
+          input(type='hidden' id='js-avatar-url' name='avatarURL')
+          p.settings-option-title.
+            Biography
+          textarea.js-settings-biography-input(type='text' data-provide='markdown' name='biography' placeholder='Tell us a bit about yourself')!=user.biography
+          input.js-settings-submit.mt-2(type='submit' value='Save Settings' class='save-settings-button')
+        div(class='ui-panel-display-message animated fadeIn hide js-settings-status-message')
+      .col-md-2
+        //- Empty
+    include footer
