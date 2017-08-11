@@ -1,3 +1,4 @@
+import _ from 'underscore';
 import marked from 'marked';
 import sync from 'synchronize';
 
@@ -18,9 +19,7 @@ export default {
 
   // Needs to be in a fiber.
   getLightUserForUsername: (username, options) => {
-    const lightUser = sync.await(db.collection('users').findOne({
-      username: username
-    }, {
+    let fields = {
       username: 1,
       displayUsername: 1,
 
@@ -28,9 +27,14 @@ export default {
       xferCoin: 1,
 
       hasUnread: 1,
-      avatarURL: 1,
-      biography: (options.biography || 0)
-    }, sync.defer()));
+      avatarURL: 1
+    };
+
+    _.extend(fields, options);
+
+    const lightUser = sync.await(db.collection('users').findOne({
+      username: username
+    }, fields, sync.defer()));
 
     return lightUser;
   },

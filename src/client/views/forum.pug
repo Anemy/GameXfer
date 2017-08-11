@@ -87,11 +87,7 @@ html(lang='en')
               a(href='/f/'+forum.forumId+'/p/'+pageNumber)
                 p.page-selection-item(class=(pageNumber===forumPage)?'page-selected':null).
                   #{pageNumber++}
-            //- We don't need to show the last page for forums.
-            //- if forumPage < lastPage - 3
-            //-   p.inline-block.
-            //-     ...
-            //- a(href='/f/'+forum.forumId+'/p/'+lastPage)
-            //-     p.page-selection-item(class=(forumPage===lastPage)?'page-selected':null).
-            //-       #{lastPage}
+        .forum-action-buttons
+          a(href='/f/'+forum.forumId+'/create-thread' class='forum-ui-button').
+            Create Thread
     include footer

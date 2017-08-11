@@ -1,0 +1,155 @@
+$unchecked-color: white;
+$checked-color: $flat-clouds;
+$checkbox-border-color: #a3b9c3;
+$check-color: #333;
+
+.inbox-page {
+  margin-top: 16px;
+
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.inbox-message-col {
+  padding: 4px 4px;
+}
+
+.inbox-messages-panel {
+  position:relative;
+
+  margin-top: 10px;
+  border: 1px solid $flat-clouds;
+
+  background-color: white;
+
+  border-radius: 4px;
+
+  -webkit-box-shadow: 0 10px 6px -6px $flat-clouds;
+   -moz-box-shadow: 0 10px 6px -6px $flat-clouds;
+        box-shadow: 0 10px 6px -6px $flat-clouds;
+}
+
+
+.message-sent-time {
+  color: $text-secondary;
+  font-size: 14px;
+}
+
+.message-selector:hover {
+  cursor: pointer;
+}
+
+.messages-table-headers {
+  display: flex;
+
+  padding: 6px 0;
+  padding-bottom: 2px;
+
+  border-bottom: 1px solid $flat-clouds;
+}
+
+.inbox-header-col {
+  padding: 2px 6px;
+  display: flex;
+
+  overflow: hidden;
+}
+
+.inbox-message-row {
+  padding: 2px 0;
+  display: flex;
+
+  overflow: hidden;
+
+  &:hover {
+    background-color: $flat-clouds;
+    border-color: grey;
+  }
+  &:hover .inbox-message-col+.inbox-message-col {
+    border-left: 1px dotted $checkbox-border-color;
+  }
+}
+.inbox-message-row+.inbox-message-row {
+  border-top: 1px dotted $flat-clouds;
+}
+
+.inbox-message-col+.inbox-message-col {
+  border-left: 1px dotted $flat-clouds;
+}
+
+.message-trash {
+  color: grey;
+  &:hover {
+    cursor: pointer;
+    color: red;
+  }
+}
+
+.top-checkbox-container {
+  position: relative;
+  text-align: center;
+  top: -4px;
+}
+
+.inbox-checkbox {
+  position: relative;
+
+  cursor: pointer;
+  padding: 0;
+
+  &:before {
+    position: absolute;
+    left: -2px;
+    top: -2px;
+
+    content: '';
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: text-top;
+    width: 20px;
+    height: 20px;
+    background: $unchecked-color;
+
+    border: 1px solid $checkbox-border-color;
+    outline:none;
+  }
+
+  &:hover:before {
+    background: $checked-color;
+    border: 1px solid #333;
+  }
+  
+  &:disabled {
+    color: #b8b8b8;
+    cursor: auto;
+  }
+
+  &:disabled:before {
+    box-shadow: none;
+    background: #ddd;
+  }
+
+  &:checked:before {
+    background: $checked-color;
+    border-color: $check-color;
+  }
+
+  &:checked:after {
+    position: absolute;
+    left: 3px;
+    top: 7px;
+
+    content: '';
+    background: $check-color;
+    width: 2px;
+    height: 2px;
+    box-shadow: 
+      2px 0 0 $check-color,
+      4px 0 0 $check-color,
+      4px -2px 0 $check-color,
+      4px -4px 0 $check-color,
+      4px -6px 0 $check-color,
+      4px -8px 0 $check-color;
+    transform: rotate(45deg);
+  }
+}

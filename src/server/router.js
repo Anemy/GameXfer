@@ -169,7 +169,11 @@ router.get('/tracker', requireAuth, (req, res) => {
 });
 router.get('/settings', requireAuth, (req, res) => {
   renderWithUser(req, res, 'settings', {
-    biography: 1
+    biography: 1,
+    mostRecentCommentTime: 1,
+    mostRecentCommentId: 1,
+    mostRecentCommentThreadId: 1,
+    mostRecentCommentForumId: 1
   });
 });
 router.get('/sign-s3', imageUploadLimiter, requireAuth, signS3);

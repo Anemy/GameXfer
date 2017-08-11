@@ -35,7 +35,7 @@ $ browser https://localhost:3000
   - username `String` - Unique, lower case.
   - displayUsername `String` - Username with upper case available.
   - avatarURL `String` - S3 CDN url.
-  - biography `String`
+  - biography `String` - Stored as HTML, edited as markdown.
   - password `String` - Hashed via bcrypt
   - xferCoin `Number`
   - createdAt `Date`
@@ -53,6 +53,7 @@ $ browser https://localhost:3000
     - text `String`
     - sentAt `Date`
     - readAt `Date` - Set when the message has been read.
+  - deletedMessages - `Array of messages ^` - Stores last 5 deleted messages in a queue.
 
 #### Forums - The info about certain forums is contained in `src/shared/Forums.js`
 
@@ -81,7 +82,7 @@ $ browser https://localhost:3000
   - comments `Array`
    - commentId `Number` - Incremented by each new comment.
    - author `String`
-   - text `String`
+   - text `String` - Stored as HTML, edited as markdown.
    - createdAt `Date`
 
 #### Transactions

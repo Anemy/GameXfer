@@ -1,14 +1,22 @@
-
 .profile-username {
   font-size: 36px;
   font-weight: 600;
+}
+
+.profile-information {
+  font-size: 14px;
+}
+
+.avatar-image {
+  width: 64px;
+  height: 64px;
 }
 
 .settings-option-title {
   font-size: 16px;
   font-weight: 400;
 
-  margin-top: 20px;
+  margin-top: 24px;
   margin-bottom: 1px;
 }
 
@@ -24,6 +32,8 @@
   background-image: -webkit-linear-gradient(270deg, #35d057 0%, #26a646 90%);
   background-image: linear-gradient(-180deg, #35d057 0%, #26a646 90%);
   border: 1px solid $flat-green-2;
+
+  outline: 0;
 
   padding: 6px 12px;
 }

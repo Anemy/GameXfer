@@ -9,6 +9,7 @@ import Constants from '../../shared/Constants';
 class Settings {
   constructor() {
     this.performingAction = false;
+    this.hasParsedBiography = false;
 
     this.messageShown = false;
   }
@@ -34,9 +35,11 @@ class Settings {
 
       this.showStatusMessage('Working...', 'message-working');
 
-      let data = {
-        biography: $('.js-settings-biography-input').val()
-      };
+      let data = {};
+
+      if (this.hasParsedBiography) {
+        data.biography = $('.js-settings-biography-input').val();
+      }
 
       if ($('#js-avatar-url').val()) {
         data.avatarURL = $('#js-avatar-url').val();
@@ -44,7 +47,7 @@ class Settings {
 
       $.post('/settings', data).done(() => {
         this.showStatusMessage('Success! Settings saved.', 'message-success');
-        this.performingAction = false;
+        window.location.replace('/settings');
       }).fail((err) => {
         if (err && err.responseJSON) {
           this.showStatusMessage('Error: ' + err.responseJSON.err, 'message-failure');
@@ -116,11 +119,11 @@ class Settings {
       if (file == null) {
         alert('No file selected.');
         return;
-      }
+      } 
 
       // Ensure the file isn't a cray size.
       if (file.size > Constants.AVATAR_MAX_FILE_SIZE || file.fileSize > Constants.AVATAR_MAX_FILE_SIZE) {
-        alert('That image is too large. Please keep your filesize under 1MB.');
+        alert('That image is too large. Please keep your filesize under 500 KB.');
 
         // Reset the input.
         $(e.target).val('');
@@ -142,6 +145,20 @@ export default {
       const settings = new Settings();
 
       settings.startListening();
+
+      const und = new upndown();
+      const biographyText = $('.js-settings-biography-input').val();
+      und.convert(biographyText || '', (err, markdown) => {
+        if (err) {
+          console.log('Error from parsing the biography:');
+          console.log(err); 
+          settings.showStatusMessage('Unable parse your biography. Try refreshing. Contact us if that doesn\'t solve it.', 'message-failure');
+        } else { 
+          settings.hasParsedBiography = true;
+          $('.js-settings-biography-input').removeClass('hide');
+          $('.js-settings-biography-input').val(markdown);
+        }
+      });
     });
   }
 };

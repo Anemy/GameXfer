@@ -3,6 +3,7 @@ html(lang='en')
   head
     link(rel='stylesheet' href='/style/index.css')
     script(src='/js/build.js')
+    script(src='/js/upndown.bundle.min.js')
     title.
       Settings #{user.displayUsername} - GameXfer
     link(rel='icon' type='image/png' href='/images/treasure-64.png')
@@ -15,16 +16,23 @@ html(lang='en')
         h2.
           Settings
         p.settings-option-title.
-          Profile Picture<span class='text-small  text-mute'> 1 MB max, resized to 64x64</span>
-        img(id='js-avatar-preview' src=user.avatarURL)
+          Profile Picture<span class='text-small  text-mute'> 500 KB max, shown at 64x64</span>
+        if user.avatarURL
+          img.avatar-image(id='js-avatar-preview' src=user.avatarURL)
+          br
+        else
+          p.text-mute.text-small.
+            You do not have a picture.
         input(type='file' id='js-avatar-input' accept='image/*')
         form.js-settings-form
           input(type='hidden' id='js-avatar-url' name='avatarURL')
           p.settings-option-title.
             Biography
-          textarea.js-settings-biography-input(type='text' data-provide='markdown' name='biography' placeholder='Tell us a bit about yourself')!=user.biography
+          //- This is hidden at first so that we parse html > markdown.
+          .create-comment-container
+            textarea.js-settings-biography-input(type='text' class='hide' data-provide='markdown' name='biography' placeholder='Tell us a bit about yourself')!=user.biography
           input.js-settings-submit.mt-2(type='submit' value='Save Settings' class='save-settings-button')
-        div(class='ui-panel-display-message animated fadeIn hide js-settings-status-message')
+        div(class='mt-2  ui-panel-display-message  animated  fadeIn  hide  js-settings-status-message')
       .col-md-2
         //- Empty
     include footer

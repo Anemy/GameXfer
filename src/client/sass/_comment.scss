@@ -74,14 +74,10 @@
 }
 
 .inline-create-comment-container {
-  margin-top: 20px;
+  margin-top: 16px;
   position: relative;
   padding-left: 8px;
   padding-right: 8px;
-
-  textarea {
-    min-height: 164px !important;
-  }
 }
 
 .inline-add-comment-button {
@@ -94,7 +90,7 @@
 
 .create-comment-container textarea, .inline-create-comment-container textarea {
   width: 100%;
-  min-height: 130px;
+  min-height: 164px;
 
   border: 1px solid $flat-clouds;
 

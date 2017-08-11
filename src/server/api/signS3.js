@@ -20,6 +20,7 @@ export default (req, res) => {
 
   // Ensure the file extension is allowed.
   const regex = /^((jpg)|(png)|(jpeg)|(gif))$/gi;
+  // Ensure the type of the file is valid.
   if (!regex.test(fileExtension)) {
     res.status(400).send({
       err: 'Invalid image type. Please try a different image or save it as a jpg, png, or gif.'
@@ -29,14 +30,11 @@ export default (req, res) => {
 
   const avatarURL = `avatar/${req.username}.${fileExtension}`;
 
-  // Ensure the type of the file is valid.
-  console.log('Sign s3 for filetype:', fileType);
-
   const s3Params = {
     Bucket: S3_BUCKET,
     Key: avatarURL,
     Expires: 60,
-    // ContentType: fileType,
+    ContentType: fileType,
     ACL: 'public-read'
   };
 

@@ -25,7 +25,11 @@ export default (req, res) => {
       posts: 1,
       xferCoin: 1,
       biography: 1,
-      avatarURL: 1
+      avatarURL: 1,
+      mostRecentCommentTime: 1,
+      mostRecentCommentId: 1,
+      mostRecentCommentThreadId: 1,
+      mostRecentCommentForumId: 1
     }, sync.defer()));
 
     // When the user doesn't exist we just shoot them null for the profile and let the template handle it.

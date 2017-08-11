@@ -20,6 +20,7 @@
 @import 'comment';
 @import 'panel';
 @import 'profile';
+@import 'inbox';
 
 html {
   position: relative;
@@ -36,6 +37,11 @@ body {
   font-family: Tahoma, Arial;
   // For titles: 'Source Sans Pro', '.SFNSText-Regular'
   -webkit-font-smoothing: subpixel-antialiased;
+}
+.footer-spacer {
+  postion: relative;
+  margin-top: 40px;
+  height: 1px;
 }
 .footer {
   position: absolute;

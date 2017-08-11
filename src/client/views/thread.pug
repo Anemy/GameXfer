@@ -56,6 +56,9 @@ html(lang='en')
             .comment-inner-panel
               if comment.author
                 .comment-author-information.col-md-2
+                  if comment.author.avatarURL
+                    img.avatar-image(id='js-avatar-preview' src=comment.author.avatarURL)
+                    br
                   p.inline-block.
                     Joined:&nbsp;#{moment(comment.author.createdAt).format('MMMM Do, YYYY')}
                   p.
@@ -114,5 +117,5 @@ html(lang='en')
           div(class='ui-panel-display-message animated fadeIn hide js-create-comment-message')
           .center-text
             p(class='js-create-comment  forum-ui-button  inline-add-comment-button').
-              Add Comment
+              Post Comment
     include footer
