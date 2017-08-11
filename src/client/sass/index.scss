@@ -6,6 +6,7 @@
 @import 'lib/bootstrap';
 @import 'lib/font-awesome';
 @import 'lib/bootstrap-markdown';
+@import 'lib/quill-snow';
 
 @import 'variables';
 @import 'rules';
@@ -21,6 +22,7 @@
 @import 'panel';
 @import 'profile';
 @import 'inbox';
+@import 'miscellaneous';
 
 html {
   position: relative;
@@ -37,57 +39,4 @@ body {
   font-family: Tahoma, Arial;
   // For titles: 'Source Sans Pro', '.SFNSText-Regular'
   -webkit-font-smoothing: subpixel-antialiased;
-}
-.footer-spacer {
-  position: relative;
-  margin-top: 40px;
-  height: 1px;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
-
-  width: 100%;
-
-  height: 20px;
-  line-height: 20px;
-
-  font-size: 12px;
-  vertical-align: bottom;
-
-  margin-bottom: 2px;
-
-  text-align: center;
-}
-
-.nav-bar {
-  margin-left: 20px;
-  margin-top: 6px;
-
-  // Nice color gg.
-  color: #666; 
-  font-size: 14px;
-
-  li {
-    display: inline-block;
-  }
-
-  a {
-    color: #666;
-    text-decoration: none;
-  }
-  a:hover {
-    cursor: pointer;
-    color: $gold;
-  }
-
-  li+li:before {
-    content: ' » ';
-    display: inline-block;
-    margin: 0 3px;
-  }
-}
-
-.no-text-decoration {
-  text-decoration: none;
 }

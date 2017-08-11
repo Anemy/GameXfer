@@ -102,6 +102,8 @@ $forum-top-padding: 8px;
 
 .categories-selection-page {
   position: relative;
+
+  margin-top: 4px;
 }
 
 .forum-header {
@@ -110,9 +112,7 @@ $forum-top-padding: 8px;
   display: flex;
 
   padding: 6px;
-  margin: 6px;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-top: 4px;
 
   border: 1px solid $flat-clouds;
   background-color: #FBFBFB;
@@ -128,12 +128,10 @@ $forum-top-padding: 8px;
 .forum-category-panel {
   overflow: hidden;
 
-  padding-left: 6px;
-  padding-right: 6px;
+  padding: 6px 4px;
   padding-top: 2px;
-  padding-bottom: 2px;
 
-  margin: 10px;
+  margin-top: 4px;
 
   border: 1px solid $flat-clouds;
   border-radius: 3px;
@@ -141,6 +139,10 @@ $forum-top-padding: 8px;
 }
 .forum-category-panel:hover {
   background-color: #FAFAFA;
+}
+
+.forums-list-panel {
+  margin-top: 6px;
 }
 
 .forums-table-header {
@@ -152,7 +154,7 @@ $forum-top-padding: 8px;
 
   margin-bottom: 4px;
 
-  border-bottom: 1px dotted $flat-clouds;
+  border-bottom: 1px dotted $accent-dark;
 }
 
 .forum-in-category {

@@ -39,7 +39,10 @@ html(lang='en')
         .col-md-6
           p.profile-bio!=profile.biography
         .col-md-2
-          //- empty
+          if user && user.username === profile.username
+            a(href='/settings')
+              p.
+                Settings
     else
       .center-text
         h3.mt-4.

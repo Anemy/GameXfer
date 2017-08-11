@@ -1,5 +1,6 @@
 {
   "globals": {
-    "upndown": false
+    "upndown": false,
+    "Quill": false
   }
 }

@@ -20,7 +20,7 @@ html(lang='en')
               each leaderboardUser, index in topPosters
                 li
                   p.inline-block.
-                    <span class='text-mute text-small'>#{index}.</span>&nbsp;
+                    <span class='text-mute text-small'>#{index+1}.</span>&nbsp;
                   a(href='/u/'+leaderboardUser.username)
                     p.inline-block.text-underline.
                       #{leaderboardUser.displayUsername}
@@ -33,7 +33,7 @@ html(lang='en')
               each leaderboardUser, index in topCoin
                 li
                   p.inline-block.
-                    <span class='text-mute text-small'>#{index}.</span>&nbsp;
+                    <span class='text-mute text-small'>#{index+1}.</span>&nbsp;
                   a(href='/u/'+leaderboardUser.username)
                     p.inline-block.text-underline.
                       #{leaderboardUser.displayUsername}
