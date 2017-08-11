@@ -2,6 +2,9 @@
 
 // We export it this way so we can pull certain aspects of the constants in files.
 module.exports = {
+  USERS_IN_LEADERBOARD: 50,
+  LEADERBOARD_UPDATE_FREQUENCY_MS: 1000 * 60 * 5 /* 5 minutes */,
+
   MESSAGE_SUBJECT_MAX_LENGTH: 240,
   MESSAGE_TEXT_MAX_LENGTH: 1000,
 

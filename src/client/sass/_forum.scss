@@ -14,6 +14,35 @@ $forum-top-padding: 8px;
   margin-bottom: -10px;
 }
 
+.leaderboard-title {
+  border-bottom: 1px solid $accent-dark;
+  font-size: 16px;
+}
+
+.leaderboard-panel-container {
+  margin-top: 16px;
+}
+
+.leaderboard-panel {
+  position: relative;
+
+  margin: 4px;
+  padding: 6px;
+
+  border: 1px solid $flat-clouds;
+  background-color: white;
+
+  ol {
+    li {
+      padding: 4px 0;
+      font-size: 14px;
+    }
+    li+li {
+      border-top: 1px dotted $accent-dark;
+    }
+  }
+}
+
 .forums-page-title-area:hover {
   cursor: pointer;
 }
@@ -31,11 +60,16 @@ $forum-top-padding: 8px;
 }
 
 .forums-title {
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 600;
 
   margin-top: 6px;
 
   color: $text-primary;
+
+  span {
+    color: $gold;
+  }
 }
 
 .forums-title-dropdown-icon {
@@ -186,6 +220,9 @@ $forum-top-padding: 8px;
 }
 
 .forums-page {
+  position: relative;
+  display: flex;
+
   padding-left: 4px;
   padding-right: 6px;
 }

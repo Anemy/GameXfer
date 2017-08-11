@@ -7,6 +7,7 @@ import sync from 'synchronize';
 
 import db from '../../Database';
 import Forums from '../../../shared/Forums';
+import LeaderboardCache from '../../database/LeaderboardCache';
 import ServerUtils from '../../ServerUtils';
 
 export default (req, res) => {
@@ -53,6 +54,8 @@ export default (req, res) => {
     res.status(200);
     res.render('forum-list', {
       forums: forums,
+      topCoin: LeaderboardCache.getTopCoin(),
+      topPosters: LeaderboardCache.getTopPosters(),
       categories: Forums.forumsAndCategories,
       user: req.session.username ? ServerUtils.getLightUserForUsername(req.session.username) : null
     });

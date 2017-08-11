@@ -24,11 +24,34 @@ $header-height: 46px;
   }
 }
 
+@keyframes blink {
+    0% { box-shadow: none; }
+    50% { box-shadow: 0 0 3px rgba($link-text, 0.5); }
+    100% { box-shadow: none; }
+}
+
+@-webkit-keyframes blink {
+    0% { box-shadow: 0 0 0; }
+    50% { box-shadow: 0 0 3px rgba($link-text, 0.5); }
+    100% { box-shadow: 0 0 0; }
+}
+
 .header-envelope {
   position: relative;
   top: -1px;
   height: 14px;
   width: 14px;
+
+  color: $link-text;
+
+  &:hover {
+    color: #333;
+    // animation: blink 0.5s linear infinite;
+    //   -o-animation: blink 0.5s linear infinite;
+    //   -ms-animation: blink 0.5s linear infinite;
+    //   -moz-animation: blink 0.5s linear infinite;
+    //   -webkit-animation: blink 0.5s linear infinite;
+  }
 }
 
 .coin-underline {
@@ -55,13 +78,6 @@ $header-height: 46px;
   font-weight: bold;
 
   display: inline-block;
-}
-
-.header-envelope {
-  color: $link-text;
-}
-.header-envelope:hover {
-  color: black;
 }
 
 .xfer-coin-image {
