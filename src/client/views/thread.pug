@@ -62,7 +62,7 @@ html(lang='en')
                 Quote
             .comment-inner-panel
               if comment.author
-                .comment-author-information.col-md-2
+                .comment-author-information.col-md-4
                   if comment.author.avatarURL
                     img.avatar-image(id='js-avatar-preview' src=comment.author.avatarURL)
                     br
@@ -73,7 +73,7 @@ html(lang='en')
                   p.inline-block.
                     Coins: #{comment.author.xferCoin}
                   img(src='/images/coins-32.png' class='inline-block  xfer-coin-image')
-              .comment-text(class=comment.author?'col-md-10':'col-md-12')!=comment.text
+              .comment-text(class=comment.author?'col-md-20':'col-md-24')!=comment.text
       else 
         .comment-panel.center-text
           p.

@@ -57,6 +57,7 @@ export default (req, res) => {
       title: 1,
       description: 1,
       views: 1,
+      type: 1,
       author: 1,
       createdAt: 1,
       mostRecentCommentTime: 1,

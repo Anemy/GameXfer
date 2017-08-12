@@ -53,6 +53,22 @@ class Utils {
     return text && text.length > 10 && text.length < Constants.MESSAGE_TEXT_MAX_LENGTH;
   }
 
+  static validThreadType(type) {
+    if (type === undefined) {
+      return false;
+    }
+
+    let validType = false;
+
+    Object.keys(Constants.THREAD_TYPES).forEach((THREAD_TYPE) => {
+      if (type === Constants.THREAD_TYPES[THREAD_TYPE].abrv) {
+        validType = true;
+      }
+    });
+
+    return validType;
+  }
+
   static validThreadTitle(title) {
     return title && title.length > 10 && title.length < Constants.THREAD_TITLE_MAX_LENGTH;
   }

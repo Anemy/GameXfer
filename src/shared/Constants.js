@@ -29,9 +29,29 @@ module.exports = {
   },
 
   THREAD_TYPES: {
-    FT: 0,
-    ISO: 1,
-    WTB: 1,
-    DISCUSSION: 2,
+    WTS: {
+      abrv: 'wts',
+      title: 'Want to sell'
+    },
+    WTB: {
+      abrv: 'wtb',
+      title: 'Want to buy'
+    },
+    WTT: {
+      abrv: 'wtt',
+      title: 'Want to trade'
+    },
+    PRC: {
+      abrv: 'prc',
+      title: 'Price check'
+    },
+    SERVICE: {
+      abrv: 'serv',
+      title: 'Service'
+    },
+    DISCUSSION: {
+      abrv: 'disc',
+      title: 'Discussion'
+    }
   }
 };

@@ -9,9 +9,9 @@ html(lang='en')
   body
     include header
     .settings-page.row.mt-l
-      .col-md-2
+      .col-md-4
         //- Empty
-      .col-md-8
+      .col-md-16
         h2.
           Settings
         p.settings-option-title.
@@ -19,6 +19,8 @@ html(lang='en')
         img.avatar-image(id='js-avatar-preview' src=user.avatarURL)
         br
         input(type='file' id='js-avatar-input' accept='image/*')
+        label.choose-avatar-label(for='js-avatar-input').
+          Upload new picture
         form.js-settings-form
           input(type='hidden' id='js-avatar-url' name='avatarURL')
           p.settings-option-title.
@@ -28,6 +30,6 @@ html(lang='en')
             div#editor(data-placeholder='Tell us a bit about yourself')!=user.biography
           input.js-settings-submit.mt-2(type='submit' value='Save Settings' class='save-settings-button')
         div(class='mt-2  ui-panel-display-message  animated  fadeIn  hide  js-settings-status-message')
-      .col-md-2
+      .col-md-4
         //- Empty
     include footer

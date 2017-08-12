@@ -16,6 +16,7 @@ export default (req, res) => {
 
   const forumId = req.body.forumId;
   const title = req.body.title;
+  let threadType = req.body.threadType;
   const description = req.body.description;
   let text = req.body.text;
 
@@ -31,6 +32,14 @@ export default (req, res) => {
   if (!Utils.validThreadTitle(title)) {
     res.status(400).send({
       err: 'Invalid thread title.'
+    });
+    return;
+  }
+
+  // Ensure the thread type is valid.
+  if (!Utils.validThreadType(threadType)) {
+    res.status(400).send({
+      err: 'Invalid thread type.'
     });
     return;
   }
@@ -85,6 +94,8 @@ export default (req, res) => {
 
       title: title,
       description: description,
+
+      type: threadType,
 
       views: 0,
       author: req.username,

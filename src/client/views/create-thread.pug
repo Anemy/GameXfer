@@ -24,6 +24,17 @@ html
                 a(href='/f/'+forum.forumId).
                   #{forum.title}
               input(class='js-create-thread-title' type='text' placeholder='Title')
+              .ui-panel-dropdown
+                .ui-panel-dropdown-descriptor.js-chosen-thread-type
+                  p.inline-block.
+                    Thread Type
+                  i(class='inline-block  fa  fa-caret-down  ml-2')
+                .ui-panel-dropdown-content.js-thread-type-dropdown
+                  for threadType in THREAD_TYPES
+                    .js-thread-type-choice.ui-panel-dropdown-item(data-thread-type=threadType.abrv)
+                      img.choose-thread-type-img(src='/images/thread-types/'+threadType.abrv+'-32.png')
+                      p.inline-block.ml-2.
+                        #{threadType.title} <span class='text-mute'>(#{threadType.abrv})</span>
               input(class='js-create-thread-description' type='email' placeholder='Description')
               .create-comment-container
                 div#editor(data-placeholder='First comment - 10 character minimum.')

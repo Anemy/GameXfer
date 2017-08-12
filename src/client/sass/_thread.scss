@@ -23,6 +23,23 @@
   position: relative;
 }
 
+.choose-thread-type-img {
+  height: 14px;
+  width: 14px;
+}
+
+.thread-type-img {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 24px;
+  width: 24px;
+}
+
 .thread-action-buttons {
   position: absolute;
 

@@ -147,6 +147,8 @@ $forum-top-padding: 8px;
 
 .forums-table-header {
   color: $text-secondary;
+
+  display: flex;
 }
 
 .forum-category-title {
@@ -164,7 +166,8 @@ $forum-top-padding: 8px;
 .thread-table-header {
   position: relative;
 
-  margin-bottom: 30px;
+  display: flex;
+
   margin-top: 6px;
 
   text-align: left;

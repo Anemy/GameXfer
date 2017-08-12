@@ -2,6 +2,8 @@ import $ from 'jquery';
 
 import Utils from '../../../shared/Utils';
 
+const threadTypeAttribute = 'data-thread-type';
+
 class CreateThread {
   constructor() {
     this.performingAction = false;
@@ -40,6 +42,7 @@ class CreateThread {
       const title = $('.js-create-thread-title').val();
       const description = $('.js-create-thread-description').val();
       const text = $('.ql-editor').html();
+      const type = $('.js-chosen-thread-type').attr(threadTypeAttribute);
       const forumId = $('.js-forum-id').attr('data-forum-id');
 
       // Ensure the title of the message conforms to the guidelines. 
@@ -55,6 +58,18 @@ class CreateThread {
         return;
       }
 
+      if (!type) {
+        this.performingAction = false;
+        this.showStatusMessage('Error: Please choose a thread type.', 'message-failure');
+        return;
+      }
+
+      if (!Utils.validThreadType(type)) {
+        this.performingAction = false;
+        this.showStatusMessage('Error: That\'s an invalid thread type.', 'message-failure');
+        return;
+      }
+
       // Ensure the message conforms to the message guidelines. 
       if (!Utils.validCommentText(text)) {
         this.performingAction = false;
@@ -66,6 +81,7 @@ class CreateThread {
         forumId: forumId,
         title: title,
         description: description,
+        threadType: type,
         text: text
       }).done((msg) => {
         if (!msg || !msg.threadId) {
@@ -100,6 +116,11 @@ class CreateThread {
       e.preventDefault();
 
       this.performCreateThreadRequest();
+    });
+
+    $('.js-thread-type-choice').on('click', (e) => {
+      $('.js-chosen-thread-type').attr(threadTypeAttribute, $(e.currentTarget).attr(threadTypeAttribute));
+      $('.js-chosen-thread-type').html($(e.currentTarget).html());
     });
   }
 }

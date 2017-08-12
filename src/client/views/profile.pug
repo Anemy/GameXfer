@@ -13,10 +13,10 @@ html(lang='en')
   body
     include header
     if profile
-      .row.mt-m
-        .col-md-1
-          //- empty
-        .col-md-3
+      .profile-page.mt-m
+        .col-md-2
+          //- Empty
+        .col-md-6
           if profile.avatarURL
             img.avatar-image(id='js-avatar-preview' src=profile.avatarURL)
           p.profile-username.
@@ -36,9 +36,9 @@ html(lang='en')
               a(href='/f/'+profile.mostRecentCommentForumId+'/t/'+profile.mostRecentCommentThreadId+'/c/'+profile.mostRecentCommentId)
                 p.inline-block.text-underline.
                   #{moment(profile.mostRecentCommentTime).format('MMMM Do, YYYY')}
-        .col-md-6
+        .col-md-12
           .profile-bio!=profile.biography
-        .col-md-2
+        .col-md-4
           if user && user.username === profile.username
             a(href='/settings')
               p.

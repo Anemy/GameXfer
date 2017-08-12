@@ -76,7 +76,7 @@ class CreateComment {
       }
       setTimeout(() => {
         $(window).scrollTop($('.js-inline-comment-creator').offset().top);
-        $('.js-create-comment-text').focus();
+        $('.ql-editor').focus();
       });
     });
 

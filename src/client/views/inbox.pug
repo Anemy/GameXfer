@@ -18,33 +18,33 @@ html(lang='en')
       .inbox-messages-panel
         if messages && messages.length > 0
           .messages-table-headers
-            .col-md-1
+            .col-md-2
               .top-checkbox-container
                 input(class='inbox-checkbox' type='checkbox')
-            .col-md-2.inbox-header-col.
+            .col-md-4.inbox-header-col.
               Sender
-            .col-md-5.inbox-header-col.
+            .col-md-10.inbox-header-col.
               Subject
-            .col-md-3.inbox-header-col.
+            .col-md-6.inbox-header-col.
               Sent At
-            .col-md-1.center-text.
+            .col-md-2.center-text.
               Delete
           .messages-table
             each message in messages
               .inbox-message-row
-                .col-md-1.center-text
+                .col-md-2.center-text
                   input(class='inbox-checkbox' type='checkbox')
-                .col-md-2.inbox-message-col
+                .col-md-4.inbox-message-col
                   a.inline-block(href='/u/'+message.sender)
                     p.
                       #{message.sender}
-                .col-md-5.inbox-message-col.js-select-message.message-selector
+                .col-md-10.inbox-message-col.js-select-message.message-selector
                   p.
                     #{message.subject}
-                .col-md-3.inbox-message-col
+                .col-md-6.inbox-message-col
                   p.message-sent-time.
                     #{moment(message.sentAt).format('MMMM Do YYYY, h:mm a')}
-                .col-md-1.inbox-message-col.center-text
+                .col-md-2.inbox-message-col.center-text
                   i(class='fa  fa-trash  fa-md  message-trash')
         else 
           p.center-text.mt-2.mb-2.

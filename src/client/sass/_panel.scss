@@ -57,9 +57,10 @@
     width: 100%;
 
     outline: 0;
-  }
-  input:focus {
-    outline: 1px solid #66afe9;// $flat-green-1;
+
+    &:focus {
+      outline: 1px solid $outline;// $flat-green-1;
+    }
   }
 }
 
@@ -71,6 +72,71 @@
   padding: 22px 20px 40px 28px;
 
   font-size: 16px;
+}
+
+.ui-panel-dropdown {
+  font-size: 16px;
+  font-weight: 300;
+  color: #333;
+  font-family: system-ui;
+  margin-top: 18px;
+
+  outline: 0;
+
+  border: 1px solid lightgrey;
+
+  .ui-panel-dropdown-descriptor {
+    padding: 10px 8px;
+  }
+
+  &:hover {
+    border-color: $outline;
+  }
+
+  .ui-panel-dropdown-content {
+    overflow: hidden;
+    height: 0;
+
+    -webkit-transition:height 0.2s ease-in;
+    -moz-transition:height 0.2s ease-in;
+    -o-transition:height 0.2s ease-in;
+    transition:height 0.2s ease-in;
+  }
+
+  &:hover .ui-panel-dropdown-content {
+    height: 223px;
+  }
+
+  .ui-panel-dropdown-item {
+    position: relative;
+    margin-top: -1px;
+
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+    z-index: 1;
+
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    padding: 10px 8px;
+
+    &:hover {
+      cursor: pointer;
+
+      background-color: #F5F5F5;
+
+      border-color: $outline;
+      z-index: 2;
+    }
+
+    &:active {
+      background-color: $flat-clouds;
+    }
+  }
 }
 
 .submit-ui-panel-button {
@@ -121,3 +187,4 @@
   padding: 16px;
   border-top: 1px solid #dee0e3;
 }
+

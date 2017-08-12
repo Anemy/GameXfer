@@ -76,6 +76,7 @@ $ browser https://localhost:3000
   - title `String`
   - description `String`
   - views `Number`
+  - type `String` The type of thread. The types are defined in the shared constants.
   - mostRecentCommentTime `Date`
   - mostRecentCommentAuthor `String`
   - commentsLength `String`
