@@ -86,17 +86,19 @@
 
 .create-comment-container {
   margin-top: 18px;
+
+  min-height: 90px;
 }
 
-.create-comment-container textarea, .inline-create-comment-container textarea {
-  width: 100%;
-  min-height: 164px;
+// .create-comment-container textarea, .inline-create-comment-container textarea {
+//   width: 100%;
+//   min-height: 164px;
 
-  border: 1px solid $flat-clouds;
+//   border: 1px solid $flat-clouds;
 
-  font-size: 16px;
-  padding: 10px 8px;
-}
+//   font-size: 16px;
+//   padding: 10px 8px;
+// }
 
 $btn-border-radius: 3px;
 

@@ -146,19 +146,19 @@ export default {
 
       settings.startListening();
 
-      const und = new upndown();
-      const biographyText = $('.js-settings-biography-input').val();
-      und.convert(biographyText || '', (err, markdown) => {
-        if (err) {
-          console.log('Error from parsing the biography:');
-          console.log(err); 
-          settings.showStatusMessage('Unable parse your biography. Try refreshing. Contact us if that doesn\'t solve it.', 'message-failure');
-        } else { 
-          settings.hasParsedBiography = true;
-          $('.js-settings-biography-input').removeClass('hide');
-          $('.js-settings-biography-input').val(markdown);
-        }
-      });
+      // const und = new upndown();
+      // const biographyText = $('.js-settings-biography-input').val();
+      // und.convert(biographyText || '', (err, markdown) => {
+      //   if (err) {
+      //     console.log('Error from parsing the biography:');
+      //     console.log(err); 
+      //     settings.showStatusMessage('Unable parse your biography. Try refreshing. Contact us if that doesn\'t solve it.', 'message-failure');
+      //   } else { 
+      //     settings.hasParsedBiography = true;
+      //     $('.js-settings-biography-input').removeClass('hide');
+      //     $('.js-settings-biography-input').val(markdown);
+      //   }
+      // });
     });
   }
 };

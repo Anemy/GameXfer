@@ -1,6 +1,3 @@
 {
-  "globals": {
-    "upndown": false,
-    "Quill": false
-  }
+  "globals": {}
 }

@@ -1,5 +1,5 @@
 require('./lib/bootstrap-markdown');
-require('./lib/quill.min');
+// require('./lib/quill.min');
 
 import auth from './auth';
 import comment from './comment';

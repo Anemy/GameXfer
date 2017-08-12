@@ -12,6 +12,9 @@ html(lang='en')
       h1.center-text.
         📮 Inbox
       .message-actions
+        .right
+          p.
+            Filled: #{messages ? messages.length : 0}/#{MAX_INBOX_LENGTH}
       .inbox-messages-panel
         if messages && messages.length > 0
           .messages-table-headers

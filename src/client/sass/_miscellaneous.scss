@@ -1,3 +1,23 @@
+.top-right-accent {
+  position: absolute;
+
+  top: 0;
+  right: -15px;
+
+  width: 64px;
+  height: 64px;
+}
+
+.top-left-accent {
+  position: absolute;
+
+  top: 0;
+  left: -14px;
+
+  width: 64px;
+  height: 64px;
+}
+
 .contact-message-textarea {
   margin-top: 8px;
   width: 100%;

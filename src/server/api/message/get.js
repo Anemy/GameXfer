@@ -2,6 +2,7 @@
 
 import sync from 'synchronize';
 
+import Constants from '../../../shared/Constants';
 import db from '../../Database';
 import ServerUtils from '../../ServerUtils';
 
@@ -24,6 +25,7 @@ export default (req, res) => {
     res.status(200);
 
     res.render('inbox', {
+      MAX_INBOX_LENGTH: Constants.MAX_INBOX_LENGTH,
       messages: user.messages,
       user: ServerUtils.getLightUserForUsername(req.username)
     });

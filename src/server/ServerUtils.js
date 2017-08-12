@@ -1,6 +1,6 @@
 import _ from 'underscore';
-import marked from 'marked';
 import sync from 'synchronize';
+import xss from 'xss';
 
 import db from './Database';
 import Environment from '../shared/Environment';
@@ -70,10 +70,8 @@ export default {
 
   // Converts the passed text to html and prevents against xss.
   sanitizeAndMarkdown: (text) => {
-    const sanitizedMarkdownComment = marked(text, {
-      sanitize: true
-    });
+    const sanitizedText = xss(text);
 
-    return sanitizedMarkdownComment;
+    return sanitizedText;
   }
 };

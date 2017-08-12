@@ -1,15 +1,15 @@
 // Remove the vanilla css rules.
 @import 'reset';
 
+@import 'variables';
+@import 'rules';
+
 // Libraries
 @import 'lib/animate';
 @import 'lib/bootstrap';
 @import 'lib/font-awesome';
 @import 'lib/bootstrap-markdown';
 @import 'lib/quill-snow';
-
-@import 'variables';
-@import 'rules';
 
 // Components and small pages.
 @import 'header';

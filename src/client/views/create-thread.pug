@@ -11,6 +11,7 @@ html
     if forum
       .create-thread-page
         .ui-panel.medium-ui-panel
+          
           .ui-panel-header
             div(class='left logo').
               <span>Game</span>Xfer
@@ -25,7 +26,9 @@ html
               input(class='js-create-thread-title' type='text' placeholder='Title')
               input(class='js-create-thread-description' type='email' placeholder='Description')
               .create-comment-container
-                textarea(class='js-create-thread-text' data-provide='markdown' type='text' placeholder='Comment')
+                div#editor(data-placeholder='First comment - 10 character minimum.')
+                  p.
+                    http://i.imgur.com/ek99npw.jpg
             .ui-panel-footer
               a(href='/f/'+forum.forumId class='left').
                 Back

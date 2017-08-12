@@ -31,7 +31,7 @@ class CreateThread {
       this.showStatusMessage('Working...', 'message-working');
 
       // Basic validation before making a request.
-      if (!$('.js-create-thread-title').val() || !$('.js-create-thread-description').val() || !$('.js-create-thread-text').val()) {
+      if (!$('.js-create-thread-title').val() || !$('.js-create-thread-description').val() || !$('.ql-editor').html()) {
         this.performingAction = false;
         this.showStatusMessage('Error: Please fill out all of the fields.', 'message-failure');
         return;
@@ -39,7 +39,7 @@ class CreateThread {
 
       const title = $('.js-create-thread-title').val();
       const description = $('.js-create-thread-description').val();
-      const text = $('.js-create-thread-text').val();
+      const text = $('.ql-editor').html();
       const forumId = $('.js-forum-id').attr('data-forum-id');
 
       // Ensure the title of the message conforms to the guidelines. 
@@ -90,7 +90,7 @@ class CreateThread {
 
   startListening() {
     // When the users type into the text fields, hide the last shown message, unless we are currently performing an action.
-    $('.js-create-thread-title, .js-create-thread-description, .js-create-thread-text').keypress(() => {
+    $('.js-create-thread-title, .js-create-thread-description, .ql-editor').keypress(() => {
       if (!this.performingAction) {
         this.hideStatusMessage();
       }
