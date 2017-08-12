@@ -23,7 +23,8 @@ html
                   Post a comment in&nbsp;
                 a(href='/f/'+thread.forumId+'/t/'+thread.threadId).
                   #{thread.title}
-              textarea(class='js-create-comment-text' data-provide='markdown' type='text' placeholder='Comment')
+              .create-comment-container
+                div#editor(data-placeholder='Compose a comment')
             .ui-panel-footer
               a(href='/f/'+thread.forumId+'/t/'+thread.threadId class='left').
                 Back

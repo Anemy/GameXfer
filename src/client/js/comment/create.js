@@ -32,13 +32,13 @@ class CreateComment {
       this.showStatusMessage('Working...', 'message-working');
 
       // Basic validation before making a request.
-      if (!$('.js-create-comment-text').val()) {
+      if (!$('.ql-editor').html()) {
         this.performingAction = false;
         this.showStatusMessage('Error: Please fill out the comment field.', 'message-failure');
         return;
       }
 
-      const text = $('.js-create-comment-text').val();
+      const text = $('.ql-editor').html();
       const forumId = $('.js-forum-id').attr('data-forum-id');
       const threadId = $('.js-thread-id').attr('data-thread-id');
 
@@ -81,7 +81,7 @@ class CreateComment {
     });
 
     // When the users type into the text fields, hide the last shown message, unless we are currently performing an action.
-    $('.js-create-comment-text').keypress(() => {
+    $('.ql-editor').keypress(() => {
       if (!this.performingAction) {
         this.hideStatusMessage();
       }

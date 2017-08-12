@@ -5,11 +5,11 @@
 import $ from 'jquery';
 
 import Constants from '../../shared/Constants';
+import Utils from '../../shared/Utils';
 
 class Settings {
   constructor() {
     this.performingAction = false;
-    this.hasParsedBiography = false;
 
     this.messageShown = false;
   }
@@ -37,9 +37,12 @@ class Settings {
 
       let data = {};
 
-      if (this.hasParsedBiography) {
-        data.biography = $('.js-settings-biography-input').val();
+      if (!Utils.validBiography($('.ql-editor').html())) {
+        this.showStatusMessage('Error: That is not a valid biography. There is a ' + Constants.BIOGRAPHY_MAX_LENGTH + ' character limit on biographies, after styling insertions.', 'message-failure');
+        return;
       }
+
+      data.biography = $('.ql-editor').html();
 
       if ($('#js-avatar-url').val()) {
         data.avatarURL = $('#js-avatar-url').val();
@@ -52,7 +55,8 @@ class Settings {
         if (err && err.responseJSON) {
           this.showStatusMessage('Error: ' + err.responseJSON.err, 'message-failure');
         } else {
-          this.showStatusMessage('Error: ' + err.responseText || 'unknown. Please check console.', 'message-failure');
+          let errMsg = err.responseText ? err.responseText : 'unknown. Please check console.';
+          this.showStatusMessage('Error: ' +  errMsg, 'message-failure');
         }
         this.performingAction = false;
       });
@@ -60,17 +64,16 @@ class Settings {
   }
 
   getSignedRequest(file) {
-    console.log('Getting a signed url...');
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `/sign-s3?file-type=${file.type}&file-name=${file.name}`);
     xhr.onreadystatechange = () => {
       if(xhr.readyState === 4){
         if(xhr.status === 200){
           const response = JSON.parse(xhr.responseText);
-          console.log('Got signed URL!', response.url);
+          console.log('response:', response);
           this.uploadFile(file, response.signedRequest, response.url);
         } else {
-          alert('Could not get signed URL to upload your photo. Please refresh & try again.');
+          alert('Server error uploading your file. Please wait a few minutes, refresh & try again.');
         }
       }
     };
@@ -83,7 +86,6 @@ class Settings {
     xhr.onreadystatechange = () => {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
-          console.log('Got successful posted image response from s3');
           document.getElementById('js-avatar-preview').src = url;
           document.getElementById('js-avatar-url').value = url;
           if ($('#js-avatar-preview').hasClass('hide')) {
@@ -101,7 +103,7 @@ class Settings {
 
   startListening() {
     // When the users type into the text fields, hide the last shown message, unless we are currently performing an action.
-    $('.js-settings-biography-input').keypress(() => {
+    $('.ql-editor').keypress(() => {
       if (!this.performingAction) {
         this.hideStatusMessage();
       }
@@ -117,7 +119,7 @@ class Settings {
       const files = document.getElementById('js-avatar-input').files;
       const file = files[0];
       if (file == null) {
-        alert('No file selected.');
+        // The exited without choosing a file.
         return;
       } 
 
@@ -131,9 +133,6 @@ class Settings {
         return;
       }
 
-      console.log('file:');
-      console.log(file);
-
       this.getSignedRequest(file);
     });
   }
@@ -145,20 +144,6 @@ export default {
       const settings = new Settings();
 
       settings.startListening();
-
-      // const und = new upndown();
-      // const biographyText = $('.js-settings-biography-input').val();
-      // und.convert(biographyText || '', (err, markdown) => {
-      //   if (err) {
-      //     console.log('Error from parsing the biography:');
-      //     console.log(err); 
-      //     settings.showStatusMessage('Unable parse your biography. Try refreshing. Contact us if that doesn\'t solve it.', 'message-failure');
-      //   } else { 
-      //     settings.hasParsedBiography = true;
-      //     $('.js-settings-biography-input').removeClass('hide');
-      //     $('.js-settings-biography-input').val(markdown);
-      //   }
-      // });
     });
   }
 };

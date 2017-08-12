@@ -29,7 +29,7 @@ $forum-top-padding: 8px;
   margin: 4px;
   padding: 6px;
 
-  border: 1px solid $flat-clouds;
+  border: 1px solid #ccc;
   background-color: white;
 
   ol {
@@ -103,7 +103,7 @@ $forum-top-padding: 8px;
 .categories-selection-page {
   position: relative;
 
-  margin-top: 4px;
+  margin-top: 8px;
 }
 
 .forum-header {
@@ -111,10 +111,10 @@ $forum-top-padding: 8px;
 
   display: flex;
 
-  padding: 6px;
+  padding: 6px 0px;
   margin-top: 4px;
 
-  border: 1px solid $flat-clouds;
+  border: 1px solid #ccc;
   background-color: #FBFBFB;
 }
 .forum-header:hover {
@@ -133,7 +133,7 @@ $forum-top-padding: 8px;
 
   margin-top: 4px;
 
-  border: 1px solid $flat-clouds;
+  border: 1px solid #ccc;
   border-radius: 3px;
   background-color: white;
 }

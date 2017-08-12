@@ -1,6 +1,6 @@
 import _ from 'underscore';
+import sanitizeHTML from 'sanitize-html';
 import sync from 'synchronize';
-import xss from 'xss';
 
 import db from './Database';
 import Environment from '../shared/Environment';
@@ -68,10 +68,16 @@ export default {
     return lightThread;
   },
 
-  // Converts the passed text to html and prevents against xss.
-  sanitizeAndMarkdown: (text) => {
-    const sanitizedText = xss(text);
+  // Prevents against xss in html.
+  sanitize: (dirty) => {
+    const clean = sanitizeHTML(dirty, {
+      allowedTags: sanitizeHTML.defaults.allowedTags.concat(['span', 'img', 'h1', 'pre', 'h2', 'h3', 'h4', 'h5', 'h6', 'code', 'strike', 'em', 'strong']),
+      allowedAttributes: {
+        '*': ['style'],
+        'img': ['src']
+      }
+    });
 
-    return sanitizedText;
+    return clean;
   }
 };

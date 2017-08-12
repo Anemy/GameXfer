@@ -4,6 +4,8 @@
 module.exports = {
   TEST_MONGODB_URL: 'mongodb://localhost:27017/gamexfer_test',
 
+  S3_BUCKET: 'gamexfer',
+
   SIGNUP_HASH: 1,
   LOGIN_HASH: 2
 };

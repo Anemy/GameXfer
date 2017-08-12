@@ -1,3 +1,6 @@
+// This has been edited and hacked to allow image url insertions.
+
+
 /*!
  * Quill Editor v1.3.1
  * https://quilljs.com/
@@ -6615,7 +6618,7 @@ BaseTheme.DEFAULTS = (0, _extend2.default)(true, {}, _theme2.default.DEFAULTS, {
           const errorMessage = 'That was not a valid image url. Please try again. ';
           while (true) {
             imageURL = prompt((showError ? errorMessage : '') + 'Enter an image URL', 'http://');
-            const regex = /^http:\/\/.*\.(jpeg|jpg|gif|png)$/gi;
+            const regex = /^https?:\/\/.*\.(jpeg|jpg|gif|png)*/gi;
 
             if (!imageURL) {
               return;

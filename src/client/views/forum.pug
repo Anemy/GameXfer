@@ -36,11 +36,11 @@ html(lang='en')
       if threads ? threads.length === 0 : false
         .thread-header.center-text
           .col-md-12
-            p.
+            p.mt-2.
               No threads found :'(
             br
             a(href='/f/'+forum.forumId+'/create-thread')
-              p.
+              p.mb-2.
                 Create a new thread :D
       else
         each thread in threads

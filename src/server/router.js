@@ -45,10 +45,10 @@ const basicLimiter = new RateLimit({
   max: 100
 });
 
-const imageUploadLimiter = new RateLimit({
-  windowMs: 10*60*1000, // 10 minute window.
+const profileImageUploadLimiter = new RateLimit({
+  windowMs: 3*60*1000, // 3 minute window.
   delayMs: 0, // Slow down subsequent responses by 1 second per request.
-  max: 3, // Start blocking after 5 requests.
+  max: 6, // Start blocking after 5 requests.
   message: 'Too many image change requests from this IP, you may try again in 10 minutes.'
 });
 
@@ -176,7 +176,7 @@ router.get('/settings', requireAuth, (req, res) => {
     mostRecentCommentForumId: 1
   });
 });
-router.get('/sign-s3', imageUploadLimiter, requireAuth, signS3);
+router.get('/sign-s3', profileImageUploadLimiter, requireAuth, signS3);
 
 router.get('/contact', (req, res) => {
   res.render('contact');

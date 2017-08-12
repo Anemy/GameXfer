@@ -1,7 +1,8 @@
 import aws from 'aws-sdk';
 
+import ServerConstants from '../ServerConstants';
+
 aws.config.region = 'us-east-2';
-const S3_BUCKET = 'gamexfer';
 
 export default (req, res) => {
   if (!req.query) {
@@ -20,6 +21,7 @@ export default (req, res) => {
 
   // Ensure the file extension is allowed.
   const regex = /^((jpg)|(png)|(jpeg)|(gif))$/gi;
+  
   // Ensure the type of the file is valid.
   if (!regex.test(fileExtension)) {
     res.status(400).send({
@@ -31,7 +33,7 @@ export default (req, res) => {
   const avatarURL = `avatar/${req.username}.${fileExtension}`;
 
   const s3Params = {
-    Bucket: S3_BUCKET,
+    Bucket: ServerConstants.S3_BUCKET,
     Key: avatarURL,
     Expires: 60,
     ContentType: fileType,
@@ -47,7 +49,7 @@ export default (req, res) => {
     }
     const returnData = {
       signedRequest: data,
-      url: `https://${S3_BUCKET}.s3.amazonaws.com/${avatarURL}`
+      url: `https://${ServerConstants.S3_BUCKET}.s3.amazonaws.com/${avatarURL}`
     };
     res.write(JSON.stringify(returnData));
     res.end();

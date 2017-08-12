@@ -42,17 +42,24 @@ html(lang='en')
         p(class='js-create-new-comment  forum-ui-button').
           Add Comment
         a(href='/f/'+thread.forumId+'/create-thread' class='forum-ui-button').
-          New Thread
+          New Thread #{autoscroll}
       if thread.comments && thread.comments.length > 0
         each comment in thread.comments
-          .comment-panel
+          .comment-panel(id='c-'+comment.commentId)
             if comment.author
-              .comment-author
+              .comment-author.comment-top-item
                 a(href='/u/'+comment.author.username)
                   p.inline-block.underline.
                     #{comment.author.displayUsername}
                 p.inline-block.comment-time.
                   &nbsp;-&nbsp;#{moment(comment.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
+            .comment-action-bar
+              .comment-action.js-report-comment.comment-top-item.
+                Report
+              a.comment-action.comment-top-item(href='?lc='+comment.commentId)
+                i(class='fa fa-link')
+              .comment-action.js-quote-comment.comment-top-item.
+                Quote
             .comment-inner-panel
               if comment.author
                 .comment-author-information.col-md-2
@@ -113,7 +120,9 @@ html(lang='en')
         .inline-create-comment-container
           .comment-author.
             New Comment
-          textarea.inline-create-comment(class='js-create-comment-text' data-provide='markdown' type='text' placeholder='Comment')
+          //- .create-comment-container
+          .inline-create-comment
+            div#editor(data-placeholder='First comment - 10 character minimum.')
           div(class='ui-panel-display-message animated fadeIn hide js-create-comment-message')
           .center-text
             p(class='js-create-comment  forum-ui-button  inline-add-comment-button').

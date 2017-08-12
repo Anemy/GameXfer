@@ -37,7 +37,7 @@ html(lang='en')
                 p.inline-block.text-underline.
                   #{moment(profile.mostRecentCommentTime).format('MMMM Do, YYYY')}
         .col-md-6
-          p.profile-bio!=profile.biography
+          .profile-bio!=profile.biography
         .col-md-2
           if user && user.username === profile.username
             a(href='/settings')

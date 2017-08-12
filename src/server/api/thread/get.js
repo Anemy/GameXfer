@@ -1,6 +1,7 @@
 // Get a thread to view.
 
-// Sends the user thread with an optional commentId.
+// Sends the user thread with an optional commentId which we refer the page number from.
+// And optional linked-comment to autoscroll to.
 
 // TODO: Decide if it's worth caching these.
 

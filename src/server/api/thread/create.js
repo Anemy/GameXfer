@@ -50,7 +50,7 @@ export default (req, res) => {
     return;
   }
 
-  text = ServerUtils.sanitizeAndMarkdown(text);
+  text = ServerUtils.sanitize(text);
 
   sync.fiber(() => {
     const currentTime = new Date();

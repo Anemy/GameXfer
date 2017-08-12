@@ -10,7 +10,8 @@ html(lang='en')
     include header
     .spacer
       img.top-left-accent(src='/images/topleft.png')
-      img.top-right-accent(src='/images/topright.png')
+      .top-right-accent-container
+        img.top-right-accent(src='/images/topright.png')
     .forums-page
       .col-md-2.pr-0
         .leaderboard-panel-container
@@ -98,7 +99,7 @@ html(lang='en')
                             #{forum.mostRecentCommentThreadTitle}
                       if forum.mostRecentCommentAuthor
                         a(href='/u/'+forum.mostRecentCommentAuthor.username)
-                          p.inline-block.
+                          p.inline-block.text-underline.
                             #{forum.mostRecentCommentAuthor.displayUsername}
                       if forum.mostRecentCommentTime
                         p(class='inline-block  forum-header-info').

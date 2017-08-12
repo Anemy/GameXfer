@@ -40,21 +40,21 @@ class Utils {
   }
 
   static validBiography(text) {
-    return text && text.length > 0 && text.length < Constants.BIOGRAPHY_TEXT_MAX_LENGTH;
+    return text && text.length < Constants.BIOGRAPHY_TEXT_MAX_LENGTH;
   }
 
   // @return {Boolean} - If the supplied subject is valid for a message.
   static validMessageSubject(subject) {
-    return subject && subject.length > 0 && subject.length < Constants.MESSAGE_SUBJECT_MAX_LENGTH;
+    return subject && subject.length > 10 && subject.length < Constants.MESSAGE_SUBJECT_MAX_LENGTH;
   }
 
   // @return {Boolean} - If the supplied text is valid for a message.
   static validMessageText(text) {
-    return text && text.length > 0 && text.length < Constants.MESSAGE_TEXT_MAX_LENGTH;
+    return text && text.length > 10 && text.length < Constants.MESSAGE_TEXT_MAX_LENGTH;
   }
 
   static validThreadTitle(title) {
-    return title && title.length > 0 && title.length < Constants.THREAD_TITLE_MAX_LENGTH;
+    return title && title.length > 10 && title.length < Constants.THREAD_TITLE_MAX_LENGTH;
   }
 
   static validThreadDescription(description) {
@@ -62,7 +62,7 @@ class Utils {
   }
 
   static validCommentText(text) {
-    return text && text.length > 0 && text.length < Constants.COMMENT_TEXT_MAX_LENGTH;
+    return text && text.length > 5 && text.length < Constants.COMMENT_TEXT_MAX_LENGTH;
   }
 
   static getParameterByName(name, url) {

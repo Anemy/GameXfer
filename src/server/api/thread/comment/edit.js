@@ -36,15 +36,7 @@ export default (req, res) => {
   }
 
   // Format the comment.
-  text = ServerUtils.sanitizeAndMarkdown(text);
-
-  // Ensure the comment still conforms to the guidelines after being formatted.
-  if (!Utils.validCommentText(text)) {
-    res.status(400).send({
-      err: 'Invalid edit comment attempt. Please try again and follow the guidelines.'
-    });
-    return;
-  }
+  text = ServerUtils.sanitize(text);
 
   if (Utils.isNumber(commentId)) {
     commentId = Number(commentId);

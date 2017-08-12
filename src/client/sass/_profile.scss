@@ -20,6 +20,13 @@
   margin-bottom: 1px;
 }
 
+.profile-bio {
+  overflow-x: scroll;
+  overflow-y: auto;
+
+  max-height: 1600px;
+}
+
 .save-settings-button {
   border-radius: 3px;
 

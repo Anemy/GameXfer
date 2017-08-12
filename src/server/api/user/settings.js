@@ -4,11 +4,11 @@ import sync from 'synchronize';
 import url from 'url';
 
 import db from '../../Database';
+import ServerConstants from '../../ServerConstants';
 import ServerUtils from '../../ServerUtils';
 import Utils from '../../../shared/Utils';
 
 export default (req, res) => {
-  console.log('Performing the save action on a user\'s settings');
   if (!req || !req.body) {
     res.status(400).send({
       err: 'Invalid settings save request.'
@@ -19,21 +19,18 @@ export default (req, res) => {
   let changeObject = {};
 
   if (req.body.biography && Utils.validBiography(req.body.biography)) {    
-    changeObject.biography = ServerUtils.sanitizeAndMarkdown(req.body.biography);
+    changeObject.biography = ServerUtils.sanitize(req.body.biography);
   }
 
-  // TODO: Check if it's a valid avatarURL.
-  // Otherwise this is a big security problem?
+  // Ensure it's a valid avatarURL.
   if (req.body.avatarURL) {
     const parsedAvatarURL = url.parse(req.body.avatarURL);
-    console.log('parsedAvatarURL:');
-    console.log(parsedAvatarURL);
-    changeObject.avatarURL = req.body.avatarURL;
+    if (parsedAvatarURL && parsedAvatarURL.host === ServerConstants.S3_BUCKET + '.s3.amazonaws.com') {
+      changeObject.avatarURL = req.body.avatarURL;
+    }
   }
 
   sync.fiber(() => {
-    console.log('change object:', changeObject);
-
     // Try to update the user to save the settings.
     const updateUserResult = sync.await(db.collection('users').update({
       username: req.username
