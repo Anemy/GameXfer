@@ -14,6 +14,7 @@ import Utils from '../../../shared/Utils';
 export default (req, res) => {
   const forumId = req.params.forumId;
   const requestedForumPage = req.params.forumPage; // Optional.
+  const requestedThreadTypes = req.query ? req.query['thread-type'] : null; // Optional.
 
   // Ensure the request has the proper attributes.
   if (forumId === undefined) {
@@ -26,6 +27,13 @@ export default (req, res) => {
   let forumPage = 0;
   if (requestedForumPage && Utils.isNumber(requestedForumPage)) {
     forumPage = Number(requestedForumPage)-1 /* Subtract 1 so the forum is 0 indexed. */;
+  }
+
+  if (requestedThreadTypes && !Utils.validThreadType(requestedThreadTypes)) {
+    res.status(400).send({
+      err: 'Invalid thread type. Please specify a valid thread-type.'
+    });
+    return;
   }
 
   sync.fiber(() => {
@@ -48,10 +56,18 @@ export default (req, res) => {
     // Copy all of the data about the forum onto our locally pulled one.
     _.extend(forum, forumInfo);
 
-    // Find the threads for that forum.
-    let threads = sync.await(db.collection('threads').find({
+    let forumSearch = {
       forumId: forumId
-    }, {
+    };
+
+    if (requestedThreadTypes) {
+      _.extend(forumSearch, {
+        type: requestedThreadTypes
+      });
+    }
+
+    // Find the threads for that forum.
+    let threads = sync.await(db.collection('threads').find(forumSearch, {
       threadId: 1,
       forumId: 1,
       title: 1,
@@ -82,6 +98,8 @@ export default (req, res) => {
 
     res.status(200);
     res.render('forum', {
+      typeView: requestedThreadTypes ? requestedThreadTypes : 'all',
+      THREAD_TYPES: Constants.THREAD_TYPES,
       THREADS_PER_PAGE: Constants.THREADS_PER_PAGE,
       forumPage: forumPage + 1 /* Add one so it's no longer 0 indexed. */,
       forum: forum,

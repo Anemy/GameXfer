@@ -19,6 +19,55 @@
   background-color: #FAFAFA;
 }
 
+.thread-view-options {
+  padding-left: 20px;
+  margin-top: 4px;
+
+  position: relative;
+}
+
+.thread-view-type {
+  position: relative;
+  margin-bottom: -2px;
+  margin-left: 8px;
+
+  background-color: #FAFAFA;
+
+  padding: 0px 4px;
+  padding-top: 3px;
+  padding-bottom: 1px;
+
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+
+  display: inline-block;
+
+  border: 2px solid $accent-dark;
+
+  color: $text-secondary;
+
+  &:hover {
+    cursor: pointer;
+    color: #333;
+
+    border-color: #777;
+    border-bottom: 2px solid $accent-dark;
+  }
+} 
+.current-view-type {
+  color: #333;
+  border-bottom: 2px solid #FAFAFA;
+}
+
+.forum-threads-panel {
+  margin: 4px;
+  margin-top: 0;
+
+  padding: 4px;
+  border: 2px solid $accent-dark;
+  border-radius: 4px;
+}
+
 .thread-bottom-bar {
   position: relative;
 }
