@@ -1,0 +1,31 @@
+mixin thread-list(threads)
+  each thread in threads
+    .thread-header
+      .col-md-1
+        if thread.type
+          .center-text
+            img.thread-type-img(src='/images/thread-types/'+thread.type+'-32.png' title=thread.type)
+      .col-md-15
+        a(href='/f/'+thread.forumId+'/t/'+thread.threadId)
+          p(class='thread-header-title').
+            #{thread.title}
+          p(class='thread-header-description').
+            #{thread.description}
+        .thread-header-author-time
+          if thread.author
+            a(href='/u/'+thread.author.username)
+              p(class='thread-header-author inline-block').
+                #{thread.author.displayUsername}
+            p.inline-block.
+              &nbsp;
+          p(class='thread-header-info  inline-block')=moment(thread.createdAt).fromNow()
+      .col-md-2.
+        #{thread.commentsLength}
+      .col-md-2.
+        #{thread.views}
+      .col-md-4
+        if thread.mostRecentCommentAuthor
+          a(href='/u/'+thread.mostRecentCommentAuthor.username)
+            p.thread-header-author.
+              #{thread.mostRecentCommentAuthor.displayUsername}
+          p(class='thread-header-info')=moment(thread.mostRecentCommentTime).fromNow()

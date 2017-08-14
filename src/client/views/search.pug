@@ -1,0 +1,89 @@
+doctype html
+html(lang='en')
+  head
+    link(rel='stylesheet' href='/style/index.css')
+    script(src='/js/build.js')
+    title='Thread Search - GameXfer'
+
+    link(rel='icon' type='image/png' href='/images/treasure-64.png')
+  body
+    include header
+    - let authorQueryString = author ? `author=${author.username}&` : '';
+    - let forumQueryString = forumId ? `forumId=${forumId}&` : '';
+    - let typeQueryString = typeView !== 'all' ? `thread-type=${typeView}&` : '';
+    - let isFirstPage = searchPage === 1;
+    .forum-page
+      .forum-title
+        p.inline-block.
+          Threads&nbsp;
+        if author
+          p.inline-block.
+            by&nbsp;
+          a(href='/u/'+author.username)
+            p.inline-block.text-underline.
+              #{author.displayUsername}
+          p.inline-block.
+            &nbsp;
+        if forumId
+          p.inline-block.
+            in #{forumId}&nbsp;
+        if typeView !== 'all'
+          p.inline-block.
+            of type #{typeView}&nbsp;
+        if searchText
+          p.inline-block.
+            matching <span class='text-mute'>`#{searchText}`</span>
+      p.forum-information.
+        Showing #{threads ? threads.length : 0} threads
+      .thread-view-options
+        a(href='/thread/search?'+authorQueryString+forumQueryString+(!isFirstPage?`page=${searchPage}`:''))
+          p.thread-view-type(class=(typeView==='all')?'current-view-type':'').
+            All
+        for type in THREAD_TYPES
+          a(href='/thread/search?'+authorQueryString+forumQueryString+(!isFirstPage?`page=${searchPage}&`:'')+'thread-type='+type.abrv)
+            p.thread-view-type(class=(typeView===type.abrv)?'current-view-type':'').
+              #{type.abrv}
+      .forum-threads-panel
+        .thread-table-header
+          .col-md-1
+            .center-text.pl-3.
+              Type
+          .col-md-15.
+            Title &amp; Description
+          .col-md-2.
+            Comments
+          .col-md-2.
+            Views
+          .col-md-4.
+            Last Comment
+        if threads ? threads.length === 0 : false
+          .thread-header.center-text
+            .col-md-24
+              p.mt-2.
+                No threads found in your search :'(
+              if forumId
+                br
+                a(href='/f/'+forumId+'/create-thread')
+                  p.mb-2.
+                    Create a new thread :D
+        else
+          include thread-list
+          +thread-list(threads)
+      .forum-bottom-bar
+        .page-selector
+          p.page-selection-text.
+            Page #{searchPage} of #{(isFirstPage && (!threads || threads.length < THREADS_PER_PAGE)) ? '1' : '?'}
+          if !isFirstPage || (threads && threads.length >= THREADS_PER_PAGE)
+            a(href='/thread/search?'+authorQueryString+forumQueryString+typeQueryString)
+                p.page-selection-item(class=isFirstPage?'page-selected':null).
+                  1
+            if searchPage > 5
+              p.inline-block.
+                ...
+            - let pageNumber = (searchPage-3 > 1) ? (searchPage-3) : 2;
+            - let pagesDisplayedEnd = pageNumber + 3;
+            while pageNumber <= pagesDisplayedEnd
+              a(href='/thread/search?'+authorQueryString+forumQueryString+typeQueryString+`page=${pageNumber}`)
+                p.page-selection-item(class=(pageNumber===searchPage)?'page-selected':null).
+                  #{pageNumber++}
+    include footer

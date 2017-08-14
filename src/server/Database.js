@@ -11,20 +11,24 @@ import ServerUtils from './ServerUtils';
 const db = mongojs(ServerUtils.getMongoDBURL());
 
 // Ensure the indexes of the database. This keeps duplicates out and speeds up the process.
-db.collection('threads').ensureIndex({ 
+db.collection('threads').createIndex({ 
   threadId: 1,
   forumId: 1
 }, {
   unique: true
 });
 
-db.collection('users').ensureIndex({ 
+db.collection('threads').createIndex({ 
+  author: 1
+});
+
+db.collection('users').createIndex({ 
   username: 1 
 }, {
   unique: true
 });
 
-db.collection('forums').ensureIndex({
+db.collection('forums').createIndex({
   forumId: 1
 }, {
   unique: true

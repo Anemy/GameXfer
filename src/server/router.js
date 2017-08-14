@@ -12,6 +12,7 @@ import getThread from './api/thread/get';
 import createThread from './api/thread/create';
 import createThreadPage from './api/thread/createThreadPage';
 import trackThread from './api/thread/track';
+import threadSearch from './api/thread/search';
 
 import tracker from './api/thread/trackerPage';
 
@@ -127,6 +128,8 @@ router.get('/f/:forumId/t/:threadId/create-comment', requireAuth, createCommentP
 router.get('/f/:forumId/t/:threadId', getThread);
 router.get('/f/:forumId/create-thread', requireAuth, createThreadPage);
 router.get('/f/:forumId/t/:threadId/c/:commentId', getThread);
+router.get('/f/:forumId/t/search', requireAuth, basicLimiter, threadSearch);
+router.get('/thread/search', requireAuth, basicLimiter, threadSearch);
 router.post('/thread/create', createThreadLimiter, requireAuth, createThread);
 router.post('/thread/track', requireAuth, basicLimiter, trackThread);
 
@@ -165,9 +168,11 @@ router.get('/signup', (req, res) => {
 router.get('/forgot-password', requireAuth, (req, res) => {
   renderWithUser(req, res, 'forgot-password');
 });
-router.get('/posts', requireAuth, (req, res) => {
-  renderWithUser(req, res, 'posts');
-});
+router.get('/posts', requireAuth, basicLimiter, (req, res, next) => {
+  req.query.author = req.username;
+  next();
+}, threadSearch);
+
 router.get('/tracker', requireAuth, basicLimiter, tracker);
 router.get('/settings', requireAuth, (req, res) => {
   renderWithUser(req, res, 'settings', {
