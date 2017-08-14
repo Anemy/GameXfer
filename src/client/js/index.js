@@ -1,12 +1,14 @@
 import auth from './auth';
 import comment from './comment';
 import forum from './forum';
+import inbox from './inbox';
 import settings from './settings';
 import texteditor from './texteditor';
 import thread from './thread';
 
 auth.enable();
 comment.enable();
+inbox.enable();
 forum.enable();
 settings.enable();
 texteditor.enable();

@@ -26,13 +26,18 @@ html(lang='en')
             &nbsp;
         if forumId
           p.inline-block.
-            in #{forumId}&nbsp;
+            in&nbsp;
+          a(href='/f/'+forumId)
+            p.inline-block.text-underline.
+              #{forumId}
+          p.inline-block.
+            &nbsp;
         if typeView !== 'all'
           p.inline-block.
-            of type #{typeView}&nbsp;
+            of type '#{typeView}'&nbsp;
         if searchText
           p.inline-block.
-            matching <span class='text-mute'>`#{searchText}`</span>
+            matching <span class='text-mute'>'#{searchText}'</span>
       p.forum-information.
         Showing #{threads ? threads.length : 0} threads
       .thread-view-options

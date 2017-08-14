@@ -22,6 +22,7 @@
     "moment": "^2.18.1",
     "mongojs": "^2.4.0",
     "pug": "^2.0.0-rc.2",
+    "raven": "^2.1.1",
     "sanitize-html": "^1.14.1",
     "synchronize": "^2.0.0",
     "underscore": "^1.8.3",

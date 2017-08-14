@@ -17,8 +17,12 @@ import path from 'path';
 import session from 'express-session';
 
 import Environment from '../shared/Environment';
+import Raven from './Raven';
 import router from './router';
 import ServerUtils from './ServerUtils';
+
+// Catch errors for sentry.
+Raven.capture();
 
 // Load in the environment variables.
 dotenv.load();

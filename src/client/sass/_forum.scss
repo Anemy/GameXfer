@@ -7,8 +7,6 @@ $forum-top-padding: 8px;
 .forums-page-title-area {
   position: relative;
 
-  margin-left: 10px;
-  margin-right: 20px;
   padding: 10px;
 
   margin-bottom: -10px;
@@ -62,6 +60,7 @@ $forum-top-padding: 8px;
 .forums-title {
   font-size: 18px;
   font-weight: 600;
+  margin-left: 10px;
 
   margin-top: 6px;
 
@@ -91,7 +90,7 @@ $forum-top-padding: 8px;
 .forums-info {
   font-size: 14px;
   
-  padding: 4px;
+  padding: 8px;
   margin-top: 4px;
 
   color: $text-primary;
