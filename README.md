@@ -58,6 +58,7 @@ $ browser https://localhost:3000
   - trackedThreads `Array` - An array of the thread ids the user has tracked. Can hold up to 50 tracks at a time.
     - threadId `String` - Unique in combination with forumId.
     - forumId `String` - Unique in combination with threadId.
+    - uniqueThreadId `String` - The thread's individual id not related to forumId.
     - trackedAt `Date`
 
 #### Forums - The info about certain forums is contained in `src/shared/Forums.js`

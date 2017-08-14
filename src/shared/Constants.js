@@ -19,7 +19,7 @@ module.exports = {
   MAX_INBOX_LENGTH: 100,
 
   MAX_TRACKED_LENGTH: 50,
-  SHOW_TRACKING_LIMIT: 45, // When we start showing the message that we delete a user's old trackers.
+  SHOW_TRACKING_LIMIT: 45, // When we start showing the message that we auto delete a user's old trackers.
   TRACKING_LIMIT_WARNING_TIMES: 5,
 
   THREADS_PER_PAGE: 10,

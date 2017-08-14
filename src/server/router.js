@@ -13,6 +13,8 @@ import createThread from './api/thread/create';
 import createThreadPage from './api/thread/createThreadPage';
 import trackThread from './api/thread/track';
 
+import tracker from './api/thread/trackerPage';
+
 // Forum
 import getForum from './api/forum/get';
 import getAllForums from './api/forum/getAll';
@@ -166,9 +168,7 @@ router.get('/forgot-password', requireAuth, (req, res) => {
 router.get('/posts', requireAuth, (req, res) => {
   renderWithUser(req, res, 'posts');
 });
-router.get('/tracker', requireAuth, (req, res) => {
-  renderWithUser(req, res, 'tracker');
-});
+router.get('/tracker', requireAuth, basicLimiter, tracker);
 router.get('/settings', requireAuth, (req, res) => {
   renderWithUser(req, res, 'settings', {
     biography: 1,

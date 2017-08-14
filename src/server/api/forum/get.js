@@ -87,6 +87,7 @@ export default (req, res) => {
       .skip(forumPage * Constants.THREADS_PER_PAGE)
       .limit(Constants.THREADS_PER_PAGE).toArray(sync.defer()));
 
+    // TODO: Make these lookups run in parallel.
     _.each(threads, (thread) => {
       if (thread && thread.mostRecentCommentAuthor) {
         thread.mostRecentCommentAuthor = ServerUtils.getLightUserForUsername(thread.mostRecentCommentAuthor);

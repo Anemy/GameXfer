@@ -42,6 +42,20 @@ export default (req, res) => {
       return;
     }
 
+    const thread = sync.await(db.collection('threads').findOne({
+      threadId: threadId,
+      forumId: forumId
+    }, {
+      _id: 1
+    }, sync.defer()));
+
+    if (!thread) {
+      res.status(400).send({
+        err: 'Unable to track thread: That thread does not exist.'
+      });
+      return;
+    }
+
     let update = {};
 
     // TODO: Clean up these ugly if elses.
@@ -76,6 +90,7 @@ export default (req, res) => {
         const newTrackedThread = {
           forumId: forumId,
           threadId: threadId,
+          uniqueThreadId: thread._id,
           trackedAt: currentTime
         };
 
