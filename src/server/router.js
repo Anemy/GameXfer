@@ -11,6 +11,7 @@ import createCommentPage from './api/thread/comment/createCommentPage';
 import getThread from './api/thread/get';
 import createThread from './api/thread/create';
 import createThreadPage from './api/thread/createThreadPage';
+import trackThread from './api/thread/track';
 
 // Forum
 import getForum from './api/forum/get';
@@ -38,9 +39,9 @@ import requireAuth from './requireAuth';
 
 import ServerUtils from './ServerUtils';
 
-// 100 messages max over 10 minutes.
+// 100 messages max over 5 minutes.
 const basicLimiter = new RateLimit({
-  windowMs: 10*60*1000, // 10 minute window.
+  windowMs: 5*60*1000, // 5 minute window.
   delayMs: 0,
   max: 100
 });
@@ -125,6 +126,7 @@ router.get('/f/:forumId/t/:threadId', getThread);
 router.get('/f/:forumId/create-thread', requireAuth, createThreadPage);
 router.get('/f/:forumId/t/:threadId/c/:commentId', getThread);
 router.post('/thread/create', createThreadLimiter, requireAuth, createThread);
+router.post('/thread/track', requireAuth, basicLimiter, trackThread);
 
 // Forum
 router.get('/f/:forumId/p/:forumPage', getForum);

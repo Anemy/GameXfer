@@ -9,6 +9,9 @@ html(lang='en')
     link(rel='icon' type='image/png' href='/images/treasure-64.png')
   body
     include header
+    .js-user(class='hide' data-user=user)
+    .js-forum-id(class='hide' data-forum-id=thread.forumId)
+    .js-thread-id(class='hide' data-thread-id=thread.threadId)
     ul.nav-bar
       li
         a(href='/forums').
@@ -41,6 +44,16 @@ html(lang='en')
       .thread-action-buttons.mr-3
         p(class='js-create-new-comment  forum-ui-button').
           Add Comment
+        if trackedThread
+          .forum-ui-button.inverted-forum-ui-button.js-track-button
+            i.js-track-icon(class='fa  fa-minus')
+            p.pl-1.inline-block.js-track-text.
+              Untrack Thread
+        else 
+          .forum-ui-button.js-track-button
+            i.js-track-icon(class='fa  fa-plus')
+            p.pl-1.inline-block.js-track-text.
+              Track Thread
         a(href='/f/'+thread.forumId+'/create-thread' class='forum-ui-button').
           New Thread #{autoscroll}
       if thread.comments && thread.comments.length > 0
@@ -112,15 +125,22 @@ html(lang='en')
         .thread-action-buttons.mr-3
           p(class='js-create-new-comment  forum-ui-button').
             Add Comment
+          if trackedThread
+            .forum-ui-button.inverted-forum-ui-button.js-track-button
+              i.js-track-icon(class='fa  fa-minus')
+              p.pl-1.inline-block.js-track-text.
+                Untrack Thread
+          else 
+            .forum-ui-button.js-track-button
+              i.js-track-icon(class='fa  fa-plus')
+              p.pl-1.inline-block.js-track-text.
+                Track Thread
           a(href='/f/'+thread.forumId+'/create-thread' class='forum-ui-button').
             New Thread
       .js-inline-comment-creator.hide
-        .js-forum-id(class='hide' data-forum-id=thread.forumId)
-        .js-thread-id(class='hide' data-thread-id=thread.threadId)
         .inline-create-comment-container
           .comment-author.
             New Comment
-          //- .create-comment-container
           .inline-create-comment
             div#editor(data-placeholder='First comment - 10 character minimum.')
           div(class='ui-panel-display-message animated fadeIn hide js-create-comment-message')

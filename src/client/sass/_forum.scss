@@ -214,14 +214,30 @@ $forum-top-padding: 8px;
   padding: 4px;
   padding-left: 6px;
   padding-right: 6px;
+
+  i {
+    font-size: 14px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    border: 1px solid $text-primary;
+    color: black;
+  }
 }
 
-.forum-ui-button:hover {
-  cursor: pointer;
+.inverted-forum-ui-button {
+  color: white;
 
   border: 1px solid $text-primary;
 
-  color: black;
+  background-color: $text-primary;
+
+  &:hover {
+    background-color: #111;
+    cursor: pointer;
+    color: white;
+  }
 }
 
 .forums-page {

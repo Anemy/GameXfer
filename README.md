@@ -54,6 +54,11 @@ $ browser https://localhost:3000
     - sentAt `Date`
     - readAt `Date` - Set when the message has been read.
   - deletedMessages - `Array of messages ^` - Stores last 5 deleted messages in a queue.
+  - timesShownTrackingLimitWarning `Number` - We warn a user when they're tracking the max amount of threads. This makes them warn a limited amount.
+  - trackedThreads `Array` - An array of the thread ids the user has tracked. Can hold up to 50 tracks at a time.
+    - threadId `String` - Unique in combination with forumId.
+    - forumId `String` - Unique in combination with threadId.
+    - trackedAt `Date`
 
 #### Forums - The info about certain forums is contained in `src/shared/Forums.js`
 

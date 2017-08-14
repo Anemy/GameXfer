@@ -104,6 +104,34 @@ export default (req, res) => {
       }
     });
 
+    let user = null;
+    let tracked = false;
+
+    // Get the user's info when they're signed in.
+    if (req.session && req.session.username) {
+      user = sync.await(db.collection('users').findOne({
+        username: req.session.username
+      }, {
+        username: 1,
+        displayUsername: 1,
+        posts: 1,
+        xferCoin: 1,
+        avatarURL: 1,
+        trackedThreads: 1,
+        hasUnread: 1
+      }, sync.defer()));
+
+      if (user) {
+        // See if the user is currently tracking the post.
+        _.each(user.trackedThreads, (trackedThread) => {
+          if (trackedThread.forumId === forumId && trackedThread.threadId === threadId) {
+            tracked = true;
+          }
+        });
+      }
+    }
+
+
     res.status(200);
     res.render('thread', {
       // This is a user supplied param so we need to be careful with how we use it.
@@ -111,8 +139,9 @@ export default (req, res) => {
       commentId: commentId,
       COMMENTS_PER_PAGE: Constants.COMMENTS_PER_PAGE,
       forum: thread ? Forums.getForumInfoById(thread.forumId) : null,
-      thread: thread, 
-      user: req.session.username ? ServerUtils.getLightUserForUsername(req.session.username) : null
+      thread: thread,
+      trackedThread: tracked,
+      user: user
     });
   });
 };

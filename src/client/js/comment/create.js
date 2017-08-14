@@ -68,16 +68,30 @@ class CreateComment {
     }
   }
 
+  openInlineCommentCreator() {
+    if ($('.js-inline-comment-creator').hasClass('hide')) {
+      $('.js-inline-comment-creator').removeClass('hide');
+    }
+
+    // Auto scroll to the type field and make the user automatically be focused in it.
+    setTimeout(() => {
+      $(window).scrollTop($('.js-inline-comment-creator').offset().top);
+      $('.ql-editor').focus();
+    });
+  }
+
   startListening() {
     // Activate the inline comment creation when the user clicks the button.
     $('.js-create-new-comment').on('click', () => {
-      if ($('.js-inline-comment-creator').hasClass('hide')) {
-        $('.js-inline-comment-creator').removeClass('hide');
+      // Check if the user is logged in before we do anything.
+      // When they aren't logged in we redirect them to log in.
+      if (!$('.js-user').attr('data-user')) {
+        window.location.replace('/login?re=' + window.location.pathname);
+
+        return;
       }
-      setTimeout(() => {
-        $(window).scrollTop($('.js-inline-comment-creator').offset().top);
-        $('.ql-editor').focus();
-      });
+
+      this.openInlineCommentCreator();
     });
 
     // When the users type into the text fields, hide the last shown message, unless we are currently performing an action.

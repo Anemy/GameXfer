@@ -24,6 +24,11 @@ $header-height: 46px;
   }
 }
 
+.header-text {
+  position: relative;
+  top: -2px;
+}
+
 @keyframes blink {
     0% { box-shadow: none; }
     50% { box-shadow: 0 0 3px rgba($link-text, 0.5); }

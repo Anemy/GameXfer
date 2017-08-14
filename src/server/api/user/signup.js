@@ -103,6 +103,8 @@ export default (req, res) => {
           messagesLength: 0,
           hasUnread: false,
 
+          trackedThreadIds: [],
+
           createdAt: currentTime,
           savedAt: currentTime
         }, sync.defer()));
