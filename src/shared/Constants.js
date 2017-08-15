@@ -17,6 +17,7 @@ module.exports = {
   AVATAR_MAX_FILE_SIZE: 1048576/2 /* 1 MB */,
 
   MAX_INBOX_LENGTH: 100,
+  MAX_TRASH_SIZE: 100,
 
   MAX_TRACKED_LENGTH: 50,
   SHOW_TRACKING_LIMIT: 45, // When we start showing the message that we auto delete a user's old trackers.

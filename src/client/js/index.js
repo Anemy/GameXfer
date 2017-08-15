@@ -1,15 +1,15 @@
 import auth from './auth';
 import comment from './comment';
 import forum from './forum';
-import inbox from './inbox';
+import messages from './message';
 import settings from './settings';
 import texteditor from './texteditor';
 import thread from './thread';
 
 auth.enable();
 comment.enable();
-inbox.enable();
 forum.enable();
+messages.enable();
 settings.enable();
 texteditor.enable();
 thread.enable();

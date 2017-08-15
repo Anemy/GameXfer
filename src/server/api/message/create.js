@@ -1,7 +1,6 @@
 // Handles the request to create/send a message.
 
 import sync from 'synchronize';
-import uuidv1 from 'uuid/v1';
 
 import Constants from '../../../shared/Constants';
 import db from '../../Database';
@@ -49,10 +48,11 @@ export default (req, res) => {
   sync.fiber(() => {
     const currentTime = new Date();
 
-    const user = sync.await(db.collection('users').find({
+    const user = sync.await(db.collection('users').findOne({
       username: destination
     }, {
-      messsagesRecievedTotal: 1
+      username: 1,
+      messagesLength: 1
     }, sync.defer()));
 
     if (!user) {
@@ -62,11 +62,18 @@ export default (req, res) => {
       return;
     }
 
-    const newMessage = {
-      // Give the message a unique id to reference.
-      messageId: uuidv1(),
+    console.log('user.messagesLength ', user.messagesLength, ' > Constants.MAX_INBOX_LENGTH', Constants.MAX_INBOX_LENGTH);
 
+    if (user.messagesLength >= Constants.MAX_INBOX_LENGTH) {
+      res.status(400).send({
+        err: 'Unable to send message: That user\'s inbox is full.'
+      });
+      return;
+    }
+
+    const newMessage = {
       sender: req.username,
+      destination: destination,
 
       subject: subject,
       text: text,
@@ -74,20 +81,22 @@ export default (req, res) => {
       sentAt: currentTime
     };
 
+    // Create the new message in the messages database.
+    const addedMessage = sync.await(db.collection('messages').insert(newMessage, sync.defer()));
+
+    if (!addedMessage || !addedMessage._id) { 
+      res.status(400).send({
+        err: 'Unable to create message. Please refresh and try again.'
+      });
+      return;
+    }
+
     // Save the new message into the destination user's inbox.
     const updatedUser = sync.await(db.collection('users').update({
       username: destination,
-      
-      // Ensure the user has room in their inbox.
-      messagesLength: {
-        $lt: Constants.MAX_INBOX_LENGTH
-      }
     }, {
       $set: {
         hasUnread: true
-      },
-      $push: { 
-        messages: newMessage 
       },
       $inc: { 
         messagesLength: 1,
@@ -104,8 +113,10 @@ export default (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
     res.status(200);
-    // TODO: Render the user's inbox after sending a message, or the page they were just at.
-    res.redirect('/');
+
+    res.send({
+      err: false
+    });
   });
 };
 

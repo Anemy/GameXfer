@@ -5,12 +5,12 @@ import sync from 'synchronize';
 // Comment
 import editComment from './api/thread/comment/edit';
 import createComment from './api/thread/comment/create';
-import createCommentPage from './api/thread/comment/createCommentPage';
+import createCommentPage from './api/thread/comment/createPage';
 
 // Thread
 import getThread from './api/thread/get';
 import createThread from './api/thread/create';
-import createThreadPage from './api/thread/createThreadPage';
+import createThreadPage from './api/thread/createPage';
 import trackThread from './api/thread/track';
 import threadSearch from './api/thread/search';
 
@@ -33,6 +33,7 @@ import signS3 from './api/signS3';
 import sendCoin from './api/coin/send';
 
 // Messages
+import createMessagePage from './api/message/createPage';
 import getMessages from './api/message/get';
 import readMessage from './api/message/read';
 import sendMessage from './api/message/create';
@@ -142,6 +143,8 @@ router.get('/', getAllForums);
 // Messages
 router.get('/inbox', basicLimiter, requireAuth, getMessages);
 router.post('/message', sendMessageLimiter, requireAuth, sendMessage);
+router.post('/message/create', sendMessageLimiter, requireAuth, sendMessage);
+router.get('/message/create', basicLimiter, requireAuth, createMessagePage);
 router.post('/message/read', basicLimiter, requireAuth, readMessage);
 router.post('/message/delete', basicLimiter, requireAuth, deleteMessages);
 

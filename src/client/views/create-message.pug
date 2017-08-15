@@ -1,0 +1,30 @@
+html
+  head
+    title='Send a Message - GameXfer'
+    link(href='/style/index.css' rel='stylesheet' type='text/css')
+
+    script(src='/js/build.js' async='true')
+      
+    link(rel='icon' type='image/png' href='/images/treasure-64.png')
+  body
+    include header
+    .create-message-page
+      .ui-panel.medium-ui-panel
+        .ui-panel-header
+          div(class='left logo').
+            <span>Game</span>Xfer
+        form.js-create-message-form
+          .ui-panel-body
+            .ui-panel-subtitle
+              p.
+                Send a message to someone.
+            input(class='js-create-message-destination' type='text' placeholder='Username to send to')
+            input(class='js-create-message-subject' type='email' placeholder='Subject')
+            .create-comment-container
+              div#editor(data-placeholder='Type your message here.')
+          .ui-panel-footer
+            a(href='/inbox' class='left').
+              Inbox
+            input(class='submit-ui-panel-button js-create-message' type='submit' value='Send')
+        div(class='ui-panel-display-message animated fadeIn hide js-create-message-message')
+    include footer

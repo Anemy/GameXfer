@@ -50,12 +50,8 @@ $header-height: 46px;
   color: $link-text;
 
   &:hover {
+    cursor: pointer;
     color: #333;
-    // animation: blink 0.5s linear infinite;
-    //   -o-animation: blink 0.5s linear infinite;
-    //   -ms-animation: blink 0.5s linear infinite;
-    //   -moz-animation: blink 0.5s linear infinite;
-    //   -webkit-animation: blink 0.5s linear infinite;
   }
 }
 

@@ -10,9 +10,48 @@ $check-color: #333;
   margin-right: 10%;
 }
 
-.message-actions {
+.inbox-actions {
   position: relative;
   display: flex;
+  height: 10px;
+}
+
+.right-message-actions {
+  position: absolute;
+
+  top: 0;
+  right: 10px;
+
+  color: $text-secondary;
+  font-size: 14px;
+}
+
+.left-message-actions {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+}
+
+.inbox-action {
+  position: relative;
+
+  font-size: 14px;
+
+  display: inline-block;
+  color: $text-secondary;
+
+  +.inbox-action:before {
+    color: $text-secondary;
+    content: ' | ';
+    display: inline-block;
+    margin: 0 6px;
+  }
+
+  &:hover {
+    color: black;
+    cursor: pointer;
+  }
 }
 
 .inbox-message-col {
@@ -36,8 +75,14 @@ $check-color: #333;
 
 
 .message-sent-time {
-  color: $text-secondary;
   font-size: 14px;
+}
+
+.unread-message {
+  color: black;
+}
+.read-message {
+  color: $text-secondary;
 }
 
 .message-selector:hover {

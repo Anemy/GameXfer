@@ -12,57 +12,54 @@ export default (req, res) => {
     return;
   }
 
-  const messageId = req.body.messageId;
+  const messagesToMarkRequested = req.body.messagesToMark;
+  // Cast to boolean.
+  const markAsRead = req.body.markAsRead === 'true';
 
   // Ensure the request has the proper attributes.
-  if (messageId === undefined) {
+  if (!messagesToMarkRequested || !Array.isArray(messagesToMarkRequested)) {
     res.status(400).send({
-      err: 'Invalid message to send.'
+      err: 'Invalid message to mark.'
     });
     return;
   }
 
+  const messagesToMark = Object.keys(messagesToMarkRequested).map((key) => {
+    return messagesToMarkRequested[key];
+  });
+
   sync.fiber(() => {
     const currentTime = new Date();
 
+    let update = {};
+    if (markAsRead) {
+      // Mark it as unread.
+      update.$set = {
+        readAt: currentTime
+      };
+    } else {
+      // Mark it as unread.
+      update.$unset = {
+        readAt: 1
+      };
+    }
+
     // When we've successfully deleted a message then we update the new messages length.
-    const updatedUser = sync.await(db.collection('users').update({
-      username: req.username,
-      messages: {
-        $elemMatch: {
-          messageId: messageId
-        }
+    const updatedMessages = sync.await(db.collection('messages').update({
+      destination: req.username,
+      _id: {
+        $in: messagesToMark
       }
-    }, {
-      $set: {
-        'messages.$.readAt': currentTime
-      }
+    }, update, {
+      multi: true
     }, sync.defer()));    
 
-    if (!updatedUser || updatedUser.nModified !== 1) { 
+    if (!updatedMessages || updatedMessages.n !== messagesToMark.length) { 
       res.status(400).send({
-        err: 'Unable to update message for readAt.'
+        err: 'Unable to update message(s).'
       });
       return;
     }
-
-    // Try to mark all as unread
-    sync.await(db.collection('users').update({
-      username: req.username,
-      messages: {
-        $not: {
-          $elemMatch: {
-            readAt: {
-              $exists: false
-            }
-          }
-        }
-      }
-    }, {
-      $set: {
-        hasUnread: false
-      }
-    }, sync.defer()));
 
     res.setHeader('Content-Type', 'application/json');
     res.status(200);
@@ -70,6 +67,27 @@ export default (req, res) => {
       err: false,
       msg: 'success'
     });
+
+    // See if we can mark the user as having no unread.
+    if (markAsRead) {
+      const unreadCount = sync.await(db.collection('messages').count({
+        destination: req.username,
+        readAt: {
+          $exists: false
+        },
+        deletedAt: {
+          $exists: false
+        }
+      }, sync.defer()));
+
+      if (unreadCount === 0) {
+        db.collection('users').update({
+          username: req.username
+        }, {
+          hasUnread: (unreadCount !== 0)
+        });    
+      }
+    }
   });
 };
 

@@ -11,8 +11,15 @@ html(lang='en')
     .inbox-page
       h1.center-text.
         📮 Inbox
-      .message-actions
-        .right
+      .inbox-actions
+        .left-message-actions.js-inbox-actions.hide
+          p.inbox-action.js-mark-as-read.ml-m.
+            Mark as read
+          p.inbox-action.js-mark-as-unread.
+            Mark as unread
+          p.inbox-action.js-delete-messages.
+            Delete message(s)
+        .right-message-actions
           p.
             Filled: #{messages ? messages.length : 0}/#{MAX_INBOX_LENGTH}
       .inbox-messages-panel
@@ -31,9 +38,9 @@ html(lang='en')
               Delete
           .messages-table
             each message in messages
-              .inbox-message-row
+              .inbox-message-row(class=message.readAt ? ' read-message' : ' unread-message' id=message._id)
                 .col-md-1.center-text
-                  input(class='inbox-checkbox  js-inbox-checkbox' type='checkbox' data-messageId=message.messageId)
+                  input(class='inbox-checkbox  js-inbox-checkbox' type='checkbox' data-messageId=message._id)
                 .col-md-3.inbox-message-col
                   a.inline-block(href='/u/'+message.sender)
                     p.
@@ -44,7 +51,7 @@ html(lang='en')
                 .col-md-5.inbox-message-col
                   p.message-sent-time.
                     #{moment(message.sentAt).format('MMMM Do YYYY, h:mm a')}
-                .col-md-2.inbox-message-col.center-text
+                .col-md-2.inbox-message-col.center-text.js-delete-message(data-messageId=message._id)
                   i(class='fa  fa-trash  fa-md  message-trash')
         else 
           p.center-text.mt-2.mb-2.

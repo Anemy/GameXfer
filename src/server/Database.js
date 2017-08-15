@@ -34,6 +34,14 @@ db.collection('forums').createIndex({
   unique: true
 });
 
+db.collection('messages').createIndex({
+  sender: 1
+});
+
+db.collection('messages').createIndex({
+  destination: 1
+});
+
 // TODO: Remove this hack.
 setTimeout(() => {
   ensureDatabaseCollections.populateForums();

@@ -1,7 +1,9 @@
 // Handles the request to delete inbox message(s).
-
+import { ObjectId } from 'mongojs';
+// var ObjectId = mongojs.ObjectId;
 import sync from 'synchronize';
 
+import Constants from '../../../shared/Constants';
 import db from '../../Database';
 
 export default (req, res) => {
@@ -12,58 +14,90 @@ export default (req, res) => {
     return;
   }
 
-  const messagesToDelete = req.body.messagesToDelete;
+  const messagesToDeleteRequest = req.body.messagesToDelete;
 
   // Ensure the request has the proper attributes.
-  if (!messagesToDelete || !Array.isArray(messagesToDelete)) {
+  if (!messagesToDeleteRequest || !Array.isArray(messagesToDeleteRequest)) {
     res.status(400).send({
-      err: 'Invalid message to send.'
+      err: 'Invalid message to delete.'
     });
     return;
   }
 
   sync.fiber(() => {
-    // Delete the messages from the user's inbox.
-    const updatedUser = sync.await(db.collection('users').findAndModify({
-      query: {
-        username: req.username,
-      }, 
-      update: {
-        $pull: { 
-          messages: {
-            messageId: {
-              $in: messagesToDelete
-            }
-          }
-        }
-      },
-      fields: {
-        messages: 1
-      },
-      new: 1
+    const currentTime = new Date();
+
+    const messagesToDelete = Object.keys(messagesToDeleteRequest).map((key) => {
+      return ObjectId(messagesToDeleteRequest[key]);
+    });
+
+    // Mark the messages as deleted.
+    const deletedMessages = sync.await(db.collection('messages').update({
+      destination: req.username,
+      _id: {
+        $in: messagesToDelete
+      }
+    }, {
+      $set: { 
+        deletedAt: currentTime
+      }
+    }, {
+      multi: true 
     }, sync.defer()));
 
-    if (!updatedUser) { 
+    if (!deletedMessages || deletedMessages.nModified !== messagesToDelete.length) { 
       res.status(400).send({
         err: 'Error: Unable to delete message(s).'
       });
       return;
     }
 
+    // Count the amount of messages in the user's inbox.
+    const messageCount = sync.await(db.collection('messages').count({
+      username: req.username,
+      deletedAt: {
+        $exists: false
+      }
+    }, sync.defer()));
+
     // When we've successfully deleted a message then we update the new messages length.
     sync.await(db.collection('users').update({
       username: req.username,
     }, {
       $set: {
-        messagesLength: updatedUser.messages.length
+        messagesLength: messageCount
       }
     }, sync.defer()));
 
     res.setHeader('Content-Type', 'application/json');
     res.status(200);
     
-    // TODO: Render the user's inbox after deleting a message, or the page they were just at.
-    res.redirect('/');
+    res.send({
+      err: false
+    });
+
+    // Clean the excess trash.
+    // Find the old messages over the max inbox size.
+    const messagesToFullyDelete = sync.await(db.collection('messages').find({
+      destination: req.username,
+      deletedAt: {
+        $exists: true
+      }
+    }, {
+      _id : 1
+    }).sort({
+      deletedAt: 1
+    })
+      .skip(Constants.MAX_TRASH_SIZE)
+      .map(function(doc) { 
+        return doc._id; 
+      }, sync.defer())); // Pull out just the _ids of the ones to exterminate.
+
+    db.collection('messages').remove({
+      _id: {
+        $in: messagesToFullyDelete
+      }
+    }, sync.defer());
   });
 };
 
