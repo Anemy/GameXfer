@@ -42,7 +42,7 @@ export default (req, res) => {
     });
 
     // Find the threads for that forum.
-    let threads = sync.await(db.collection('threads').find(threadQuery, {
+    let threads = _.isEmpty(threadQuery) ? [] : sync.await(db.collection('threads').find(threadQuery, {
       threadId: 1,
       forumId: 1,
       title: 1,

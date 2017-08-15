@@ -4,6 +4,7 @@ import sync from 'synchronize';
 
 import Constants from '../../../shared/Constants';
 import db from '../../Database';
+import ServerUtils from '../../ServerUtils';
 import Utils from '../../../shared/Utils';
 
 export default (req, res) => {
@@ -41,6 +42,9 @@ export default (req, res) => {
     });
     return;
   }
+
+  // Format the comment.
+  text = ServerUtils.sanitize(text);
 
   // Make sure the username is lowercase for the search.
   destination = destination.toLowerCase();

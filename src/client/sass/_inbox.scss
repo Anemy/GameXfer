@@ -79,7 +79,8 @@ $check-color: #333;
 }
 
 .unread-message {
-  color: black;
+  color: $text-primary;
+  font-weight: bold;
 }
 .read-message {
   color: $text-secondary;

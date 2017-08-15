@@ -1,10 +1,10 @@
 // Handles the request to delete inbox message(s).
 import { ObjectId } from 'mongojs';
-// var ObjectId = mongojs.ObjectId;
 import sync from 'synchronize';
 
 import Constants from '../../../shared/Constants';
 import db from '../../Database';
+import ServerUtils from '../../ServerUtils';
 
 export default (req, res) => {
   if (!req || !req.body) {
@@ -98,6 +98,8 @@ export default (req, res) => {
         $in: messagesToFullyDelete
       }
     }, sync.defer());
+
+    ServerUtils.setUnreadOnUser(req.username);   
   });
 };
 

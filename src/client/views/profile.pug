@@ -38,11 +38,13 @@ html(lang='en')
                   #{moment(profile.mostRecentCommentTime).format('MMMM Do, YYYY')}
         .col-md-12
           .profile-bio!=profile.biography
-        .col-md-4
+        .col-md-1
           if user && user.username === profile.username
             a(href='/settings')
               p.
                 Settings
+        .col-md-2
+          //- Empty
     else
       .center-text
         h3.mt-4.

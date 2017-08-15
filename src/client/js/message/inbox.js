@@ -51,6 +51,48 @@ class Inbox {
     return checked;
   }
 
+  markMessagesRead(messageIds) {
+    for (let i = 0; i < messageIds.length; i++) {
+      $(`#${messageIds[i]}`).removeClass('unread-message');
+      $(`#${messageIds[i]}`).addClass('read-message');
+    }
+
+    this.ensureHeaderEnvelope();
+  }
+
+  markMessagesUnread(messageIds) {
+    for (let i = 0; i < messageIds.length; i++) {
+      $(`#${messageIds[i]}`).removeClass('read-message');
+      $(`#${messageIds[i]}`).addClass('unread-message');
+    }
+
+    this.ensureHeaderEnvelope();
+  }
+
+  // Make sure the envelope in the header shows the correct state.
+  ensureHeaderEnvelope() {
+    $('.js-header-envelope').removeClass('fa-envelope');
+    $('.js-header-envelope').removeClass('fa-envelope-o');
+
+    if (this.areThereUnread()) {
+      $('.js-header-envelope').addClass('fa-envelope');
+    } else {
+      $('.js-header-envelope').addClass('fa-envelope-o');
+    }
+  }
+
+  areThereUnread() {
+    let areUnread = false;
+    $('.js-message-row').each(function(){
+      if ($(this).hasClass('unread-message') && !$(this).hasClass('hide')) {
+        areUnread = true;
+        return false; // break;
+      }
+    });
+
+    return areUnread;
+  }
+
   toggleAllBoxes() {
     if (this.areAllBoxesChecked()) {
       // Uncheck all of the boxes.
@@ -66,7 +108,7 @@ class Inbox {
   }
 
   performDeleteMessageRequest(messageIds) {
-    if (!this.performingAction) {
+    if (!this.performingAction && messageIds && messageIds.length > 0) {
       if (messageIds.length < 2 || confirm(deleteMessageText)) {
         this.performingAction = true;        
 
@@ -76,6 +118,9 @@ class Inbox {
           for (let i = 0; i < messageIds.length; i++) {
             $(`#${messageIds[i]}`).addClass('hide');
           }
+
+          this.ensureHeaderEnvelope();
+
           this.performingAction = false;
         }).fail((err) => {
           let errMsg = err.responseText ? err.responseText : 'unknown. Please check console.';
@@ -88,7 +133,7 @@ class Inbox {
 
   // Send a request to the server to mark messages as read or unread based on the passed messageIds.
   performMarkMessageRequest(messageIds, markAsRead) {
-    if (!this.performingAction) {
+    if (!this.performingAction && messageIds && messageIds.length > 0) {
       this.performingAction = true;        
 
       $.post('/message/read', {
@@ -103,7 +148,7 @@ class Inbox {
         
         this.performingAction = false;
       }).fail(() => {
-        alert('Unable to delete message(s). Please refresh and try again.');
+        alert('Unable to mark message(s). Please refresh and try again.');
         this.performingAction = false;
       });
     }
@@ -117,9 +162,6 @@ class Inbox {
         messageIds.push($(this).attr('data-messageId'));
       }
     });
-
-    console.log('selected messageIds');
-    console.log(messageIds);
 
     return messageIds;
   }
@@ -141,6 +183,14 @@ class Inbox {
       } else {
         this.hideActions();
       }
+    });
+
+    $('.js-mark-as-read').click(() => {
+      this.performMarkMessageRequest(this.getAllSelectedMessageIds(), true /* Mark them as read. */);
+    });
+
+    $('.js-mark-as-unread').click(() => {
+      this.performMarkMessageRequest(this.getAllSelectedMessageIds(), false /* Mark them as unread. */);
     });
 
     $('.js-delete-messages').click(() => {

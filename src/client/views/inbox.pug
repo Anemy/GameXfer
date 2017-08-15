@@ -38,7 +38,7 @@ html(lang='en')
               Delete
           .messages-table
             each message in messages
-              .inbox-message-row(class=message.readAt ? ' read-message' : ' unread-message' id=message._id)
+              .inbox-message-row.js-message-row(class=message.readAt ? ' read-message' : ' unread-message' id=message._id)
                 .col-md-1.center-text
                   input(class='inbox-checkbox  js-inbox-checkbox' type='checkbox' data-messageId=message._id)
                 .col-md-3.inbox-message-col
@@ -53,6 +53,13 @@ html(lang='en')
                     #{moment(message.sentAt).format('MMMM Do YYYY, h:mm a')}
                 .col-md-2.inbox-message-col.center-text.js-delete-message(data-messageId=message._id)
                   i(class='fa  fa-trash  fa-md  message-trash')
+              .inbox-message-text-row.hide.js-message-text(data-messageId=message._id)
+                .col-md-3
+                  //-Empty
+                .col-md-18
+                  p!=message.text
+                .col-md-3
+                  //- Empty
         else 
           p.center-text.mt-2.mb-2.
             No messages in your inbox

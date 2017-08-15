@@ -79,5 +79,30 @@ export default {
     });
 
     return clean;
+  },
+
+  // Needs to be in fiber.
+  // Sets the user as having no unread or unread depending.
+  setUnreadOnUser(username) {
+    // Mark the user for having unread messages if they have any.
+    const unreadCount = sync.await(db.collection('messages').count({
+      destination: username,
+      readAt: {
+        $exists: false
+      },
+      deletedAt: {
+        $exists: false
+      }
+    }, sync.defer()));
+
+    console.log('unread counted:', unreadCount);
+
+    db.collection('users').update({
+      username: username
+    }, {
+      $set: {
+        hasUnread: unreadCount > 0
+      }
+    }); 
   }
 };

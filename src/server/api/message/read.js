@@ -1,8 +1,11 @@
 // Handles when a user views a message for the first time.
 
+import _ from 'underscore';
+import { ObjectId } from 'mongojs';
 import sync from 'synchronize';
 
 import db from '../../Database';
+import ServerUtils from '../../ServerUtils';
 
 export default (req, res) => {
   if (!req || !req.body) {
@@ -25,7 +28,7 @@ export default (req, res) => {
   }
 
   const messagesToMark = Object.keys(messagesToMarkRequested).map((key) => {
-    return messagesToMarkRequested[key];
+    return ObjectId(messagesToMarkRequested[key]);
   });
 
   sync.fiber(() => {
@@ -45,7 +48,7 @@ export default (req, res) => {
     }
 
     // When we've successfully deleted a message then we update the new messages length.
-    const updatedMessages = sync.await(db.collection('messages').update({
+    const updatedMessages = _.isEmpty(messagesToMark) ? [] : sync.await(db.collection('messages').update({
       destination: req.username,
       _id: {
         $in: messagesToMark
@@ -56,7 +59,7 @@ export default (req, res) => {
 
     if (!updatedMessages || updatedMessages.n !== messagesToMark.length) { 
       res.status(400).send({
-        err: 'Unable to update message(s).'
+        err: 'Unable to update message(s). Please refresh and try again.'
       });
       return;
     }
@@ -68,26 +71,7 @@ export default (req, res) => {
       msg: 'success'
     });
 
-    // See if we can mark the user as having no unread.
-    if (markAsRead) {
-      const unreadCount = sync.await(db.collection('messages').count({
-        destination: req.username,
-        readAt: {
-          $exists: false
-        },
-        deletedAt: {
-          $exists: false
-        }
-      }, sync.defer()));
-
-      if (unreadCount === 0) {
-        db.collection('users').update({
-          username: req.username
-        }, {
-          hasUnread: (unreadCount !== 0)
-        });    
-      }
-    }
+    ServerUtils.setUnreadOnUser(req.username);   
   });
 };
 

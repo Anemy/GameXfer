@@ -8,10 +8,10 @@ html(lang='en')
     link(rel='icon' type='image/png' href='/images/treasure-64.png')
   body
     include header
-    .settings-page.row.mt-l
-      .col-md-4
+    .settings-page.mt-m
+      .col-md-2
         //- Empty
-      .col-md-16
+      .col-md-18
         h2.
           Settings
         p.settings-option-title.
@@ -19,7 +19,7 @@ html(lang='en')
         img.avatar-image(id='js-avatar-preview' src=user.avatarURL)
         br
         input(type='file' id='js-avatar-input' accept='image/*')
-        label.choose-avatar-label(for='js-avatar-input').
+        //- label.choose-avatar-label(for='js-avatar-input').
           Upload new picture
         form.js-settings-form
           input(type='hidden' id='js-avatar-url' name='avatarURL')

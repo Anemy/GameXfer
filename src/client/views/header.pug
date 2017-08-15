@@ -11,7 +11,7 @@
     include logout
     ul(class='bar-list  right')
       li
-        a(href='/u/'+user.username class='bold-text  header-link  header-username').
+        a(href=`/u/${user.username}` class='bold-text  header-link  header-username').
           #{user.displayUsername}
       li
         a(href='/coins'  class='header-link  header-xfer-coin')
@@ -21,10 +21,7 @@
           .coin-underline
       li
         a.header-envelope(href='/inbox')
-          if user.hasUnread
-            i(class='fa  fa-envelope  header-envelope')
-          else
-            i(class='fa  fa-envelope-o  header-envelope')
+          i.js-header-envelope(class='fa  header-envelope  fa-envelope'+(user.hasUnread?'':'-o'))
       li
         a(class='logout-button  js-logout  header-link  header-small-text').
           Logout
