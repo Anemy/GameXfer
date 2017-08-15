@@ -7,7 +7,7 @@ export default {
     $(document).ready(() => {
       // Only run quill when the editor is on the page.
       if ($('#editor').length) {
-        new Quill('#editor', {
+        window.quill = new Quill('#editor', {
           modules: {
             toolbar: [
               [{ header: [1, 2, 3, 4, 5, false] }],

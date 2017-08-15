@@ -29,7 +29,7 @@ export default (req, res) => {
   // Ensure the comment text conforms to the guidelines. 
   if (!Utils.validCommentText(text)) {
     res.status(400).send({
-      err: 'Invalid thread comment attempt. Please try again and follow the guidelines.'
+      err: 'Invalid thread comment attempt. Please try again, the message may be too long.'
     });
     return;
   }
@@ -40,7 +40,7 @@ export default (req, res) => {
   // Ensure the comment still conforms to the guidelines after being formatted.
   if (!Utils.validCommentText(text)) {
     res.status(400).send({
-      err: 'Invalid thread comment attempt. Please try again and follow the guidelines.'
+      err: 'Invalid thread comment attempt. Please try again, the message may be too long.'
     });
     return;
   }

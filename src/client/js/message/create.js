@@ -1,5 +1,6 @@
 import $ from 'jquery';
 
+import Constants from '../../../shared/Constants';
 import Utils from '../../../shared/Utils';
 
 class CreateMessage {
@@ -43,7 +44,7 @@ class CreateMessage {
 
       if (!Utils.validMessageSubject(subject)) {
         this.performingAction = false;
-        this.showStatusMessage('Error: That\'s an invalid message subjec.', 'message-failure');
+        this.showStatusMessage(`Error: That's an invalid message subject. Minimum 5 characters, max ${Constants.MESSAGE_SUBJECT_MAX_LENGTH}.`, 'message-failure');
         return;
       }
 

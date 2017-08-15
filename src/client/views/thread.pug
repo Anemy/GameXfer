@@ -71,8 +71,6 @@ html(lang='en')
                 Report
               a.comment-action.comment-top-item(href='?lc='+comment.commentId)
                 i(class='fa fa-link')
-              .comment-action.js-quote-comment.comment-top-item.
-                Quote
             .comment-inner-panel
               if comment.author
                 .comment-author-information.col-md-4
@@ -86,7 +84,7 @@ html(lang='en')
                   p.inline-block.
                     Coins: #{comment.author.xferCoin}
                   img(src='/images/coins-32.png' class='inline-block  xfer-coin-image')
-              .comment-text(class=comment.author?'col-md-20':'col-md-24')!=comment.text
+              .comment-text.rendered-message-area(class=comment.author?'col-md-20':'col-md-24' id=comment.commentId)!=comment.text
       else 
         .comment-panel.center-text
           p.

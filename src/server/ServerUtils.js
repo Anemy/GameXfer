@@ -95,8 +95,6 @@ export default {
       }
     }, sync.defer()));
 
-    console.log('unread counted:', unreadCount);
-
     db.collection('users').update({
       username: username
     }, {

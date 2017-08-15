@@ -66,8 +66,6 @@ export default (req, res) => {
       return;
     }
 
-    console.log('user.messagesLength ', user.messagesLength, ' > Constants.MAX_INBOX_LENGTH', Constants.MAX_INBOX_LENGTH);
-
     if (user.messagesLength >= Constants.MAX_INBOX_LENGTH) {
       res.status(400).send({
         err: 'Unable to send message: That user\'s inbox is full.'

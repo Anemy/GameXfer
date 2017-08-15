@@ -22,7 +22,8 @@ export default (req, res) => {
       subject: 1,
       text: 1,
 
-      sentAt: 1
+      sentAt: 1,
+      readAt: 1
     }).toArray(sync.defer()));
 
     if (!messages) { 

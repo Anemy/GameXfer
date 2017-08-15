@@ -172,6 +172,20 @@ class Inbox {
     }
   }
 
+  toggleViewMessage(messageId) {
+    let $el = $(`.js-message-text[data-messageId='${messageId}']`);
+    if ($el.hasClass('hide')) {
+      $el.removeClass('hide');
+    } else {
+      $el.addClass('hide');
+    }
+
+    // If the message was unread, tell the server to mark it as read.
+    if ($(`#${messageId}`).hasClass('unread-message')) {
+      this.performMarkMessageRequest([messageId], true /* Read it */);
+    }
+  }
+
   startListening() {
     $('.js-inbox-top-checkbox').click(() => {
       this.toggleAllBoxes();
@@ -183,6 +197,10 @@ class Inbox {
       } else {
         this.hideActions();
       }
+    });
+
+    $('.js-select-message').click((e) => {
+      this.toggleViewMessage($(e.currentTarget).attr('data-messageId'));
     });
 
     $('.js-mark-as-read').click(() => {

@@ -98,20 +98,23 @@
 }
 
 .comment-text {
-  overflow: hidden;
-  position: relative;
-  padding: 6px;
-
-  max-height: 1600px;
-  max-width: 100%;
-
-  background-color: white;
   border-top: 1px solid #ddd;
   border-left: 1px solid #ddd;
 
   margin-top: -1px;
 
   z-index: 4;
+}
+
+.rendered-message-area {
+  max-width: 100%;
+  background-color: white;
+
+  overflow: hidden;
+  position: relative;
+  padding: 6px;
+
+  max-height: 1600px;
 
   pre {
     background-color: #23241f;
@@ -122,6 +125,10 @@
     margin-top: 5px;
     padding: 5px 10px;
     border-radius: 3px;
+  }
+
+  quote {
+    border: 1px solid red;
   }
 }
 

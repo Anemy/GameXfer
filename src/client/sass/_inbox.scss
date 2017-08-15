@@ -4,6 +4,7 @@ $checkbox-border-color: #a3b9c3;
 $check-color: #333;
 
 .inbox-page {
+  position: relative;
   margin-top: 16px;
 
   margin-left: 10%;
@@ -14,6 +15,24 @@ $check-color: #333;
   position: relative;
   display: flex;
   height: 10px;
+}
+
+.inbox-action-buttons {
+  position: absolute;
+
+  right: 4px;
+  top: 0;
+}
+
+.inbox-bottom {
+  position: relative;
+}
+
+.inbox-bottom-action-buttons {
+  position: absolute;
+
+  top: 8px;
+  right: 4px;
 }
 
 .right-message-actions {
@@ -64,13 +83,9 @@ $check-color: #333;
   margin-top: 10px;
   border: 1px solid $flat-clouds;
 
-  background-color: white;
+  background-color: $flat-clouds;
 
   border-radius: 4px;
-
-  -webkit-box-shadow: 0 10px 6px -6px $flat-clouds;
-   -moz-box-shadow: 0 10px 6px -6px $flat-clouds;
-        box-shadow: 0 10px 6px -6px $flat-clouds;
 }
 
 
@@ -93,35 +108,59 @@ $check-color: #333;
 .messages-table-headers {
   display: flex;
 
-  padding: 6px 0;
+  padding-top: 6px;
   padding-bottom: 2px;
 
   border-bottom: 1px solid $flat-clouds;
+
+  background-color: white;
 }
 
 .inbox-header-col {
-  padding: 2px 6px;
+  // padding: 4px 4px;
+  // padding-left: 4px;
+}
+
+.inbox-message-text-row {
+  position: relative;
+
+  margin: 0 20px;
+  margin-top: -1px;
+  margin-bottom: 6px;
+
+  text-align: left;
+
+  padding: 10px 6px;
+
   display: flex;
 
   overflow: hidden;
+  border: 1px solid $flat-clouds;
+
+  background-color: white;
 }
 
 .inbox-message-row {
+  position: relative;
+  margin-top: -1px;
+
   padding: 2px 0;
   display: flex;
 
   overflow: hidden;
+  border: 1px solid $flat-clouds;
+
+  background-color: white;
 
   &:hover {
     background-color: $flat-clouds;
-    border-color: grey;
+
+    border: 1px solid $accent-dark;
+    z-index: 2;
   }
   &:hover .inbox-message-col+.inbox-message-col {
     border-left: 1px dotted $checkbox-border-color;
   }
-}
-.inbox-message-row+.inbox-message-row {
-  border-top: 1px dotted $flat-clouds;
 }
 
 .inbox-message-col+.inbox-message-col {
@@ -139,7 +178,8 @@ $check-color: #333;
 .top-checkbox-container {
   position: relative;
   text-align: center;
-  top: -4px;
+  top: -5px;
+  left: 3px;
 }
 
 .inbox-checkbox {

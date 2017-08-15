@@ -45,7 +45,7 @@ class Utils {
 
   // @return {Boolean} - If the supplied subject is valid for a message.
   static validMessageSubject(subject) {
-    return subject && subject.length > 10 && subject.length < Constants.MESSAGE_SUBJECT_MAX_LENGTH;
+    return subject && subject.length > 5 && subject.length < Constants.MESSAGE_SUBJECT_MAX_LENGTH;
   }
 
   // @return {Boolean} - If the supplied text is valid for a message.
