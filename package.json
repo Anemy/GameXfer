@@ -4,8 +4,8 @@
   "description": "Trading pixels like they're cowrie shells",
   "scripts": {
     "start": "echo \"Error: You must specify dev or prod, ex: npm run start:dev\"",
-    "start:dev": "NODE_ENV=development gulp dev",
-    "start:prod": "NODE_ENV=production node ./build/server/index.js",
+    "start-dev": "NODE_ENV=development gulp dev",
+    "start-prod": "NODE_ENV=production node ./build/server/index.js",
     "prebuild": "rm -rf build/*",
     "build": "npm run build-js && npm run build-sass && npm run build-server",
     "build-js": "gulp build-js-prod && gulp uglify-js-prod",

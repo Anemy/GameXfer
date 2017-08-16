@@ -22,8 +22,10 @@ $ npm install -g nodemon
 #### Development
 
 ```bash
-$ mongod # Ensure mongodb is running on the system.
-$ npm run start:dev
+$ mongod # Ensure mongodb is running on the system. Look below if you need to create collections.
+$        # Mongo looks for the database `gamexfer_test` on development.
+$        # I'll write a script soon, for now just ask me how to do this.
+$ npm run start-dev
 $ browser https://localhost:3000
 ```
 

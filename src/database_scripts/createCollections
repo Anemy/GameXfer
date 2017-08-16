@@ -1,0 +1,7 @@
+use gamexfer_test
+db.createCollection('users');
+db.createCollection('forums');
+db.createCollection('threads');
+db.createCollection('messages');
+db.createCollection('sessions');
+db.createCollection('transactions');

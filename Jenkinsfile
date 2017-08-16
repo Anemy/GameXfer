@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Deploy') {
           steps {
-            npm run start:prod
+            npm run start-prod
           }
         }
     }
