@@ -5,7 +5,7 @@ import sync from 'synchronize';
 import bcrypt from '../../bcrypt/Bcrypt';
 import Constants from '../../ServerConstants';
 import db from '../../Database';
-import Utils from '../../../Shared/Utils';
+import Utils from '../../../shared/Utils';
 
 export default (req, res) => {
   if (!req || !req.body) {
