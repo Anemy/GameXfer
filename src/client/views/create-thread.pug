@@ -1,49 +1,45 @@
-html
-  head
-    title='Post a Thread - GameXfer'
-    link(href='/style/index.css' rel='stylesheet' type='text/css')
+extends layout
 
-    script(src='/js/build.js' async='true')
-      
-    link(rel='icon' type='image/png' href='/images/treasure-64.png')
-  body
-    include header
-    if forum
-      .create-thread-page
-        .ui-panel.medium-ui-panel
-          
-          .ui-panel-header
-            div(class='left logo').
-              <span>Game</span>Xfer
-          form.js-create-thread-form
-            .js-forum-id(class='hide' data-forum-id=forum.forumId)
-            .ui-panel-body
-              .ui-panel-subtitle
+block head
+  title='Post a Thread - GameXfer'
+block body
+  include header
+  if forum
+    .create-thread-page
+      .ui-panel.medium-ui-panel
+        
+        .ui-panel-header
+          div(class='left logo').
+            <span>Game</span>Xfer
+        form.js-create-thread-form
+          .js-forum-id(class='hide' data-forum-id=forum.forumId)
+          .ui-panel-body
+            .ui-panel-subtitle
+              p.inline-block.
+                Create a new thread in&nbsp;
+              a(href='/f/'+forum.forumId).
+                #{forum.title}
+            input(class='js-create-thread-title' type='text' placeholder='Title')
+            .ui-panel-dropdown
+              .ui-panel-dropdown-descriptor.js-chosen-thread-type
                 p.inline-block.
-                  Create a new thread in&nbsp;
-                a(href='/f/'+forum.forumId).
-                  #{forum.title}
-              input(class='js-create-thread-title' type='text' placeholder='Title')
-              .ui-panel-dropdown
-                .ui-panel-dropdown-descriptor.js-chosen-thread-type
-                  p.inline-block.
-                    Thread Type
-                  i(class='inline-block  fa  fa-caret-down  ml-2')
-                .ui-panel-dropdown-content.js-thread-type-dropdown
-                  for threadType in THREAD_TYPES
-                    .js-thread-type-choice.ui-panel-dropdown-item(data-thread-type=threadType.abrv)
-                      img.choose-thread-type-img(src='/images/thread-types/'+threadType.abrv+'-32.png')
-                      p.inline-block.ml-2.
-                        #{threadType.title} <span class='text-mute'>(#{threadType.abrv})</span>
-              input(class='js-create-thread-description' type='email' placeholder='Description')
-              .create-comment-container
-                div#editor(data-placeholder='First comment - 10 character minimum.')
-            .ui-panel-footer
-              a(href='/f/'+forum.forumId class='left').
-                Back
-              input(class='submit-ui-panel-button js-create-thread' type='submit' value='Submit')
-          div(class='ui-panel-display-message animated fadeIn hide js-create-thread-message')
-    else
-      p.
-        Invalid thread.
-    include footer
+                  Thread Type
+                i(class='inline-block  fa  fa-caret-down  ml-2')
+              .ui-panel-dropdown-content.js-thread-type-dropdown
+                for threadType in THREAD_TYPES
+                  .js-thread-type-choice.ui-panel-dropdown-item(data-thread-type=threadType.abrv)
+                    img.choose-thread-type-img(src='/images/thread-types/'+threadType.abrv+'-32.png')
+                    p.inline-block.ml-2.
+                      #{threadType.title} <span class='text-mute'>(#{threadType.abrv})</span>
+            input(class='js-create-thread-description' type='email' placeholder='Description')
+            .create-comment-container
+              div#editor(data-placeholder='First comment - 10 character minimum.')
+          .ui-panel-footer
+            a(href='/f/'+forum.forumId class='left').
+              Back
+            input(class='submit-ui-panel-button js-create-thread' type='submit' value='Submit')
+        div(class='ui-panel-display-message animated fadeIn hide js-create-thread-message')
+  else
+    p.
+      Invalid thread.
+  include footer

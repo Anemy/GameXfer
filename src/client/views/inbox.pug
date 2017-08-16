@@ -1,72 +1,69 @@
-doctype html
-html(lang='en')
-  head
-    link(rel='stylesheet' href='/style/index.css')
-    script(src='/js/build.js')
+extends layout
+
+block head
     title='Inbox - GameXfer'
 
-    link(rel='icon' type='image/png' href='/images/treasure-64.png')
-  body
-    include header
-    .inbox-page
-      h1.center-text.
-        📮 Inbox
-      .inbox-action-buttons
+block body
+  include header
+  .inbox-page
+    h1.center-text.
+      📮 Inbox
+    .inbox-action-buttons
+      a(href='/message/create' class='forum-ui-button').
+        New Message
+    .inbox-actions
+      .left-message-actions.js-inbox-actions.hide
+        p.inbox-action.js-mark-as-read.ml-m.
+          Mark as read
+        p.inbox-action.js-mark-as-unread.
+          Mark as unread
+        p.inbox-action.js-delete-messages.
+          Delete message(s)
+      .right-message-actions
+        p.
+          Filled: #{messages ? messages.length : 0}/#{MAX_INBOX_LENGTH}
+    .inbox-messages-panel
+      if messages && messages.length > 0
+        .messages-table-headers
+          .col-md-1.center-text
+            .top-checkbox-container
+              input(class='inbox-checkbox  js-inbox-top-checkbox' type='checkbox')
+          .col-md-3.inbox-header-col
+            p.
+              Sender
+          .col-md-13.inbox-header-col
+            p.
+              Subject
+          .col-md-5.inbox-header-col
+            p.
+              Sent At
+          .col-md-2.center-text
+            p.
+              Delete
+        .messages-table
+          each message in messages
+            .inbox-message-row.js-message-row(class=message.readAt ? ' read-message' : ' unread-message' id=message._id)
+              .col-md-1.center-text
+                input(class='inbox-checkbox  js-inbox-checkbox' type='checkbox' data-messageId=message._id)
+              .col-md-3.inbox-message-col
+                a.inline-block(href='/u/'+message.sender)
+                  p.
+                    #{message.sender}
+              .col-md-13.inbox-message-col.js-select-message.message-selector(data-messageId=message._id)
+                p.
+                  #{message.subject}
+              .col-md-5.inbox-message-col
+                p.message-sent-time.
+                  #{moment(message.sentAt).format('MMMM Do YYYY, h:mm a')}
+              .col-md-2.inbox-message-col.center-text.js-delete-message(data-messageId=message._id)
+                i(class='fa  fa-trash  fa-md  message-trash')
+            .inbox-message-text-row.hide.js-message-text(data-messageId=message._id)
+              .rendered-message-area.col-md-24
+                p!=message.text
+      else 
+        p.center-text.mt-2.mb-2.
+          No messages in your inbox
+    .inbox-bottom
+      .inbox-bottom-action-buttons
         a(href='/message/create' class='forum-ui-button').
           New Message
-      .inbox-actions
-        .left-message-actions.js-inbox-actions.hide
-          p.inbox-action.js-mark-as-read.ml-m.
-            Mark as read
-          p.inbox-action.js-mark-as-unread.
-            Mark as unread
-          p.inbox-action.js-delete-messages.
-            Delete message(s)
-        .right-message-actions
-          p.
-            Filled: #{messages ? messages.length : 0}/#{MAX_INBOX_LENGTH}
-      .inbox-messages-panel
-        if messages && messages.length > 0
-          .messages-table-headers
-            .col-md-1.center-text
-              .top-checkbox-container
-                input(class='inbox-checkbox  js-inbox-top-checkbox' type='checkbox')
-            .col-md-3.inbox-header-col
-              p.
-                Sender
-            .col-md-13.inbox-header-col
-              p.
-                Subject
-            .col-md-5.inbox-header-col
-              p.
-                Sent At
-            .col-md-2.center-text
-              p.
-                Delete
-          .messages-table
-            each message in messages
-              .inbox-message-row.js-message-row(class=message.readAt ? ' read-message' : ' unread-message' id=message._id)
-                .col-md-1.center-text
-                  input(class='inbox-checkbox  js-inbox-checkbox' type='checkbox' data-messageId=message._id)
-                .col-md-3.inbox-message-col
-                  a.inline-block(href='/u/'+message.sender)
-                    p.
-                      #{message.sender}
-                .col-md-13.inbox-message-col.js-select-message.message-selector(data-messageId=message._id)
-                  p.
-                    #{message.subject}
-                .col-md-5.inbox-message-col
-                  p.message-sent-time.
-                    #{moment(message.sentAt).format('MMMM Do YYYY, h:mm a')}
-                .col-md-2.inbox-message-col.center-text.js-delete-message(data-messageId=message._id)
-                  i(class='fa  fa-trash  fa-md  message-trash')
-              .inbox-message-text-row.hide.js-message-text(data-messageId=message._id)
-                .rendered-message-area.col-md-24
-                  p!=message.text
-        else 
-          p.center-text.mt-2.mb-2.
-            No messages in your inbox
-      .inbox-bottom
-        .inbox-bottom-action-buttons
-          a(href='/message/create' class='forum-ui-button').
-            New Message

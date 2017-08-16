@@ -4,8 +4,13 @@
   "description": "Trading pixels like they're cowrie shells",
   "scripts": {
     "start": "echo \"Error: You must specify dev or prod, ex: npm run start:dev\"",
-    "start:dev": "gulp dev",
-    "start:prod": "gulp prod"
+    "start:dev": "NODE_ENV=development gulp dev",
+    "start:prod": "NODE_ENV=production node ./build/server/index.js",
+    "prebuild": "rm -rf build/*",
+    "build": "npm run build-js && npm run build-sass && npm run build-server",
+    "build-js": "gulp build-js-prod && gulp uglify-js-prod",
+    "build-sass": "gulp style",
+    "build-server": "babel -d ./build/server ./src/server && babel -d ./build/shared ./src/shared"
   },
   "license": "SEE LICENSE IN LICENSE.txt",
   "repository": "https://github.com/Anemy/GameXfer",
@@ -18,6 +23,7 @@
     "express": "^4.15.3",
     "express-rate-limit": "^2.8.0",
     "express-session": "^1.15.4",
+    "gulp-uglifyjs": "^0.6.2",
     "jquery": "^3.2.1",
     "moment": "^2.18.1",
     "mongojs": "^2.4.0",

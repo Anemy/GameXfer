@@ -1,35 +1,32 @@
-doctype html
-html(lang='en')
-  head
-    link(rel='stylesheet' href='/style/index.css')
-    script(src='/js/build.js')
-    title.
-      Settings #{user.displayUsername} - GameXfer
-    link(rel='icon' type='image/png' href='/images/treasure-64.png')
-  body
-    include header
-    .settings-page.mt-m
-      .col-md-2
-        //- Empty
-      .col-md-18
-        h2.
-          Settings
+extends layout
+
+block head
+  title.
+    Settings #{user.displayUsername} - GameXfer
+block body
+  include header
+  .settings-page.mt-m
+    .col-md-2
+      //- Empty
+    .col-md-18
+      h2.
+        Settings
+      p.settings-option-title.
+        Profile Picture<span class='text-small  text-mute'> 500 KB max, shown at 64x64</span>
+      img.avatar-image(id='js-avatar-preview' src=user.avatarURL)
+      br
+      input(type='file' id='js-avatar-input' accept='image/*')
+      //- label.choose-avatar-label(for='js-avatar-input').
+        Upload new picture
+      form.js-settings-form
+        input(type='hidden' id='js-avatar-url' name='avatarURL')
         p.settings-option-title.
-          Profile Picture<span class='text-small  text-mute'> 500 KB max, shown at 64x64</span>
-        img.avatar-image(id='js-avatar-preview' src=user.avatarURL)
-        br
-        input(type='file' id='js-avatar-input' accept='image/*')
-        //- label.choose-avatar-label(for='js-avatar-input').
-          Upload new picture
-        form.js-settings-form
-          input(type='hidden' id='js-avatar-url' name='avatarURL')
-          p.settings-option-title.
-            Biography
-          //- This is hidden at first so that we parse html > markdown.
-          .create-comment-container
-            div#editor(data-placeholder='Tell us a bit about yourself')!=user.biography
-          input.js-settings-submit.mt-2(type='submit' value='Save Settings' class='save-settings-button')
-        div(class='mt-2  ui-panel-display-message  animated  fadeIn  hide  js-settings-status-message')
-      .col-md-4
-        //- Empty
-    include footer
+          Biography
+        //- This is hidden at first so that we parse html > markdown.
+        .create-comment-container
+          div#editor(data-placeholder='Tell us a bit about yourself')!=user.biography
+        input.js-settings-submit.mt-2(type='submit' value='Save Settings' class='save-settings-button')
+      div(class='mt-2  ui-panel-display-message  animated  fadeIn  hide  js-settings-status-message')
+    .col-md-4
+      //- Empty
+  include footer

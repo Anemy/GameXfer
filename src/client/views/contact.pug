@@ -1,25 +1,21 @@
-html
-  head
-    title='Contact - GameXfer'
-    link(href='/style/index.css' rel='stylesheet' type='text/css')
+extends layout
 
-    script(src='/js/build.js' async='true')
-
-    link(rel='icon' type='image/png' href='/images/treasure-64.png')
-  body
-    .contact-page
-      .ui-panel.medium-ui-panel
-        .ui-panel-header
-          div(class='left logo')
-            <span>Game</span>Xfer
-        .ui-panel-body
-          .ui-panel-subtitle.
-            Send us a message
-          input.js-contact-email-input(type='email' name='_replyto' placeholder='Email')
-          textarea.js-contact-text-input.contact-message-textarea(type='text' name='name' placeholder='Message')
-        .ui-panel-footer
-          a(href='/' class='left').
-            Home
-          a(class='submit-ui-panel-button  js-contact-submit').
-            Send
-        div(class='ui-panel-display-message  animated  fadeIn  hide  js-contact-status-message')
+block head
+  title='Contact - GameXfer'
+block body
+  .contact-page
+    .ui-panel.medium-ui-panel
+      .ui-panel-header
+        div(class='left logo')
+          <span>Game</span>Xfer
+      .ui-panel-body
+        .ui-panel-subtitle.
+          Send us a message
+        input.js-contact-email-input(type='email' name='_replyto' placeholder='Email')
+        textarea.js-contact-text-input.contact-message-textarea(type='text' name='name' placeholder='Message')
+      .ui-panel-footer
+        a(href='/' class='left').
+          Home
+        a(class='submit-ui-panel-button  js-contact-submit').
+          Send
+      div(class='ui-panel-display-message  animated  fadeIn  hide  js-contact-status-message')

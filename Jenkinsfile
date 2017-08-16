@@ -7,10 +7,22 @@ pipeline {
     }
 
     stages {
+        stage('Install') {
+            steps {
+                echo 'Installing...'
+                npm install --production
+            }
+        }
+        stage('Prebuild') {
+            steps {
+                echo 'Prebuilding (Cleaning slate)...'
+                npm run prebuild
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building...'
-                sh 'npm install'
+                npm run build
             }
         }
         stage('Test') {
@@ -20,7 +32,7 @@ pipeline {
         }
         stage('Deploy') {
           steps {
-            echo 'Taking off...'
+            npm run start:prod
           }
         }
     }

@@ -1,16 +1,15 @@
-doctype html
-html(lang='en')
-  head
-    link(rel='stylesheet' href='/style/index.css')
-    script(src='/js/build.js')
-    title='Coins Page - GameXfer'
+extends layout
 
-    link(rel='icon' type='image/png' href='/images/treasure-64.png')
-  body
-    include header
-    .coins-page
+block head
+  link(rel='stylesheet' href='/style/index.css')
+  script(src='/js/build.js')
+  title='Coins Page - GameXfer'
 
-      img(class='coins-chest' src='/images/treasure-64.png')
-      .coins-page-title.
-        #{user.xferCoin} XferCoin
+  link(rel='icon' type='image/png' href='/images/treasure-64.png')
+block body
+  include header
+  .coins-page
+    img(class='coins-chest' src='/images/treasure-64.png')
+    .coins-page-title.
+      #{user.xferCoin} XferCoin
         

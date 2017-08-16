@@ -13,4 +13,6 @@ RUN npm install --unsafe-perm || \
   ((if [ -f npm-debug.log ]; then \
       cat npm-debug.log; \
     fi) && false)
+CMD npm run prebuild
+CMD npm run build
 CMD npm run start:prod

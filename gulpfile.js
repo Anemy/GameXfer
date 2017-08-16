@@ -6,12 +6,14 @@ const eslint = require('gulp-eslint');
 const nodemon = require('gulp-nodemon');
 const livereload = require('gulp-livereload');
 const sass = require('gulp-sass');
+const uglify = require('gulp-uglifyjs');
 
 const config = {
   clientJsEntry: [
     'src/client/js/index.js'
   ],
   clientJsPath: 'src/client/js/**/*.js',
+  clientJsBuildDir: 'build',
   clientJsDestDir: 'public/js',
   cssDestDir: 'public/style',
   jsToLintPath: [
@@ -35,10 +37,6 @@ const config = {
 
 const clientWebpackConfig = {
   cache: true,
-  output: {
-    path: __dirname + config.jsDestDir,
-    filename: 'build.js'
-  },
   module: {
     loaders: [{
       test: /\.js$/,
@@ -65,8 +63,6 @@ gulp.task('dev', ['server-dev', 'js-client-dev', 'style', 'lint'], () => {
     livereload.changed(file.path);
   });
 });
-
-gulp.task('prod', ['style', 'js-client-prod', 'server-prod']);
 
 gulp.task('style', () => {
   return gulp.src(config.sassEntryPath)
@@ -97,10 +93,24 @@ gulp.task('js-client-dev', () => {
     .pipe(gulp.dest(config.clientJsDestDir));
 });
 
-// TODO: Make prod build client - uglify etc.
-gulp.task('js-client-prod', ['js-client-dev']);
+gulp.task('build-js-prod', () => {
+  // Build in the client code starting from the entry point.
+  return gulp.src(config.clientJsEntry)
+    .pipe(webpack(clientWebpackConfig))
+    .on('error', function handleError() {
+      this.emit('end'); // Recover from errors.
+    })
+    .pipe(concat('build.js'))
+    .pipe(gulp.dest(config.clientJsBuildDir));
+});
 
-function nodemonServer(environment) {
+gulp.task('uglify-js-prod', () => {
+  gulp.src(config.clientJsBuildDir+'/*.js')
+    .pipe(uglify())
+    .pipe(gulp.dest(config.clientJsDestDir));
+});
+
+gulp.task('server-dev', () => {
   // Watch for changes in server code and restart the server.
   nodemon({
     script: config.serverJsEntry,
@@ -108,23 +118,12 @@ function nodemonServer(environment) {
     // Use babel for compiling ES6 server code.
     exec: 'babel-node',
     args: ['--presets', 'es2015,stage-2'],
-    watch: [config.serverJsPath, config.sharedJsPath],
-    env: { 
-      'NODE_ENV': environment
-    }
+    watch: [config.serverJsPath, config.sharedJsPath]
   }).on('restart', () => {
     setTimeout(() => {
       livereload.reload();
     }, 2000 /* 2s - Let the last instance shutdown */ );
   });
-}
-
-gulp.task('server-dev', () => {
-  nodemonServer('development');
-});
-
-gulp.task('server-prod', () => {
-  nodemonServer('production');
 });
 
 gulp.task('default', () => {

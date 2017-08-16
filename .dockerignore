@@ -13,6 +13,10 @@
 # limitations under the License.
 
 node_modules
+build
+local
+public/js/build.js
+public/style/index.css
 .dockerignore
 Dockerfile
 npm-debug.log

@@ -58,7 +58,13 @@ if (!Environment.isDev() && cluster.isMaster) {
   let certOptions;
 
   // Use the local cert in dev.
-  if (Environment.isDev()) {
+  if (Environment.isProd()) {
+    certOptions = {
+      key: fs.readFileSync('/etc/letsencrypt/live/gamexfer.com/privkey.pem'),
+      cert: fs.readFileSync('/etc/letsencrypt/live/gamexfer.com/cert.pem'),
+      ca: fs.readFileSync('/etc/letsencrypt/live/gamexfer.com/chain.pem')
+    };
+  } else {
     certOptions = {
       key: fs.readFileSync('./key.pem'),
       cert: fs.readFileSync('./cert.pem'),

@@ -1,46 +1,121 @@
-doctype html
-html(lang='en')
-  head
-    link(rel='stylesheet' href='/style/index.css')
-    script(src='/js/build.js')
-    title.
-      #{thread.title} - GameXfer
+extends layout
 
-    link(rel='icon' type='image/png' href='/images/treasure-64.png')
-  body
-    include header
-    .js-user(class='hide' data-user=user)
-    .js-forum-id(class='hide' data-forum-id=thread.forumId)
-    .js-thread-id(class='hide' data-thread-id=thread.threadId)
-    ul.nav-bar
-      li
-        a(href='/forums').
-          forums
-      li
-        a(href='/f/'+thread.forumId).
-          #{thread.forumId}
-      li
-        a(href='/f/'+thread.forumId+'/t/'+thread.threadId)
-          p.inline-block.
-            #{thread.title}
-    .thread-page
-      .thread-page-header
-        p.thread-title.
+block head
+  title.
+    #{thread.title} - GameXfer
+block body
+  include header
+  .js-user(class='hide' data-user=user)
+  .js-forum-id(class='hide' data-forum-id=thread.forumId)
+  .js-thread-id(class='hide' data-thread-id=thread.threadId)
+  ul.nav-bar
+    li
+      a(href='/forums').
+        forums
+    li
+      a(href='/f/'+thread.forumId).
+        #{thread.forumId}
+    li
+      a(href='/f/'+thread.forumId+'/t/'+thread.threadId)
+        p.inline-block.
           #{thread.title}
-        p.thread-page-description.
-          #{thread.description}
-        .thread-page-information
-          p.inline-block.
-            Thread in&nbsp;
-          a.inline-block(href='/f/'+thread.forumId)
+  .thread-page
+    .thread-page-header
+      p.thread-title.
+        #{thread.title}
+      p.thread-page-description.
+        #{thread.description}
+      .thread-page-information
+        p.inline-block.
+          Thread in&nbsp;
+        a.inline-block(href='/f/'+thread.forumId)
+          p.
+            #{forum.title}
+        p.inline-block.
+          &nbsp;posted #{moment(thread.createdAt).fromNow()} by&nbsp;
+        if thread.author
+          a.inline-block(href='/u/'+thread.author.username)
             p.
-              #{forum.title}
-          p.inline-block.
-            &nbsp;posted #{moment(thread.createdAt).fromNow()} by&nbsp;
-          if thread.author
-            a.inline-block(href='/u/'+thread.author.username)
-              p.
-                #{thread.author.displayUsername}
+              #{thread.author.displayUsername}
+    .thread-action-buttons.mr-3
+      p(class='js-create-new-comment  forum-ui-button').
+        Add Comment
+      if trackedThread
+        .forum-ui-button.inverted-forum-ui-button.js-track-button
+          i.js-track-icon(class='fa  fa-minus')
+          p.pl-1.inline-block.js-track-text.
+            Untrack Thread
+      else 
+        .forum-ui-button.js-track-button
+          i.js-track-icon(class='fa  fa-plus')
+          p.pl-1.inline-block.js-track-text.
+            Track Thread
+      a(href='/f/'+thread.forumId+'/create-thread' class='forum-ui-button').
+        New Thread #{autoscroll}
+    if thread.comments && thread.comments.length > 0
+      each comment in thread.comments
+        .comment-panel(id='c-'+comment.commentId)
+          if comment.author
+            .comment-author.comment-top-item
+              a(href='/u/'+comment.author.username)
+                p.inline-block.underline.
+                  #{comment.author.displayUsername}
+              p.inline-block.comment-time.
+                &nbsp;-&nbsp;#{moment(comment.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
+          .comment-action-bar
+            .comment-action.js-report-comment.comment-top-item.
+              Report
+            a.comment-action.comment-top-item(href='?lc='+comment.commentId)
+              i(class='fa fa-link')
+          .comment-inner-panel
+            if comment.author
+              .comment-author-information.col-md-4
+                if comment.author.avatarURL
+                  img.avatar-image(id='js-avatar-preview' src=comment.author.avatarURL)
+                  br
+                p.inline-block.
+                  Joined:&nbsp;#{moment(comment.author.createdAt).format('MMMM Do, YYYY')}
+                p.
+                  Posts: #{comment.author.posts}
+                p.inline-block.
+                  Coins: #{comment.author.xferCoin}
+                img(src='/images/coins-32.png' class='inline-block  xfer-coin-image')
+            .comment-text.rendered-message-area(class=comment.author?'col-md-20':'col-md-24' id=comment.commentId)!=comment.text
+    else 
+      .comment-panel.center-text
+        p.
+          Comments not found :'(
+        br
+        p.inline-block.
+          Try this:&nbsp;
+        a.inline-block(href='/f/'+thread.forumId+'/t/'+thread.threadId)
+          p.
+            Thread start page.
+    .thread-bottom-bar
+      .page-selector
+        - const lastPage = Math.floor((thread.commentsLength-1)/COMMENTS_PER_PAGE)+1;
+        - const currentPage = Math.floor(commentId/COMMENTS_PER_PAGE)+1;
+        p.page-selection-text.
+          Page #{currentPage} of #{lastPage}
+        if thread.commentsLength > COMMENTS_PER_PAGE
+          a(href='/f/'+thread.forumId+'/t/'+thread.threadId)
+              p.page-selection-item(class=(commentId===0)?'page-selected':null).
+                1
+          if currentPage > 5
+            p.inline-block.
+              ...
+          - let pageNumber = (currentPage-3 > 1) ? (currentPage-3) : 2;
+          - let pagesDisplayedEnd = (currentPage+3 < lastPage) ? (currentPage+3) : lastPage;
+          while pageNumber < pagesDisplayedEnd
+            a(href='/f/'+thread.forumId+'/t/'+thread.threadId+'/c/'+((pageNumber-1)*COMMENTS_PER_PAGE))
+              p.page-selection-item(class=(pageNumber===currentPage)?'page-selected':null).
+                #{pageNumber++}
+          if currentPage < lastPage - 3
+            p.inline-block.
+              ...
+          a(href='/f/'+thread.forumId+'/t/'+thread.threadId+'/c/'+((lastPage-1)*COMMENTS_PER_PAGE))
+              p.page-selection-item(class=(currentPage===lastPage)?'page-selected':null).
+                #{lastPage}
       .thread-action-buttons.mr-3
         p(class='js-create-new-comment  forum-ui-button').
           Add Comment
@@ -55,94 +130,15 @@ html(lang='en')
             p.pl-1.inline-block.js-track-text.
               Track Thread
         a(href='/f/'+thread.forumId+'/create-thread' class='forum-ui-button').
-          New Thread #{autoscroll}
-      if thread.comments && thread.comments.length > 0
-        each comment in thread.comments
-          .comment-panel(id='c-'+comment.commentId)
-            if comment.author
-              .comment-author.comment-top-item
-                a(href='/u/'+comment.author.username)
-                  p.inline-block.underline.
-                    #{comment.author.displayUsername}
-                p.inline-block.comment-time.
-                  &nbsp;-&nbsp;#{moment(comment.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
-            .comment-action-bar
-              .comment-action.js-report-comment.comment-top-item.
-                Report
-              a.comment-action.comment-top-item(href='?lc='+comment.commentId)
-                i(class='fa fa-link')
-            .comment-inner-panel
-              if comment.author
-                .comment-author-information.col-md-4
-                  if comment.author.avatarURL
-                    img.avatar-image(id='js-avatar-preview' src=comment.author.avatarURL)
-                    br
-                  p.inline-block.
-                    Joined:&nbsp;#{moment(comment.author.createdAt).format('MMMM Do, YYYY')}
-                  p.
-                    Posts: #{comment.author.posts}
-                  p.inline-block.
-                    Coins: #{comment.author.xferCoin}
-                  img(src='/images/coins-32.png' class='inline-block  xfer-coin-image')
-              .comment-text.rendered-message-area(class=comment.author?'col-md-20':'col-md-24' id=comment.commentId)!=comment.text
-      else 
-        .comment-panel.center-text
-          p.
-            Comments not found :'(
-          br
-          p.inline-block.
-            Try this:&nbsp;
-          a.inline-block(href='/f/'+thread.forumId+'/t/'+thread.threadId)
-            p.
-              Thread start page.
-      .thread-bottom-bar
-        .page-selector
-          - const lastPage = Math.floor((thread.commentsLength-1)/COMMENTS_PER_PAGE)+1;
-          - const currentPage = Math.floor(commentId/COMMENTS_PER_PAGE)+1;
-          p.page-selection-text.
-            Page #{currentPage} of #{lastPage}
-          if thread.commentsLength > COMMENTS_PER_PAGE
-            a(href='/f/'+thread.forumId+'/t/'+thread.threadId)
-                p.page-selection-item(class=(commentId===0)?'page-selected':null).
-                  1
-            if currentPage > 5
-              p.inline-block.
-                ...
-            - let pageNumber = (currentPage-3 > 1) ? (currentPage-3) : 2;
-            - let pagesDisplayedEnd = (currentPage+3 < lastPage) ? (currentPage+3) : lastPage;
-            while pageNumber < pagesDisplayedEnd
-              a(href='/f/'+thread.forumId+'/t/'+thread.threadId+'/c/'+((pageNumber-1)*COMMENTS_PER_PAGE))
-                p.page-selection-item(class=(pageNumber===currentPage)?'page-selected':null).
-                  #{pageNumber++}
-            if currentPage < lastPage - 3
-              p.inline-block.
-                ...
-            a(href='/f/'+thread.forumId+'/t/'+thread.threadId+'/c/'+((lastPage-1)*COMMENTS_PER_PAGE))
-                p.page-selection-item(class=(currentPage===lastPage)?'page-selected':null).
-                  #{lastPage}
-        .thread-action-buttons.mr-3
-          p(class='js-create-new-comment  forum-ui-button').
-            Add Comment
-          if trackedThread
-            .forum-ui-button.inverted-forum-ui-button.js-track-button
-              i.js-track-icon(class='fa  fa-minus')
-              p.pl-1.inline-block.js-track-text.
-                Untrack Thread
-          else 
-            .forum-ui-button.js-track-button
-              i.js-track-icon(class='fa  fa-plus')
-              p.pl-1.inline-block.js-track-text.
-                Track Thread
-          a(href='/f/'+thread.forumId+'/create-thread' class='forum-ui-button').
-            New Thread
-      .js-inline-comment-creator.hide
-        .inline-create-comment-container
-          .comment-author.
-            New Comment
-          .inline-create-comment
-            div#editor(data-placeholder='First comment - 10 character minimum.')
-          div(class='ui-panel-display-message animated fadeIn hide js-create-comment-message')
-          .center-text
-            p(class='js-create-comment  forum-ui-button  inline-add-comment-button').
-              Post Comment
-    include footer
+          New Thread
+    .js-inline-comment-creator.hide
+      .inline-create-comment-container
+        .comment-author.
+          New Comment
+        .inline-create-comment
+          div#editor(data-placeholder='First comment - 10 character minimum.')
+        div(class='ui-panel-display-message animated fadeIn hide js-create-comment-message')
+        .center-text
+          p(class='js-create-comment  forum-ui-button  inline-add-comment-button').
+            Post Comment
+  include footer

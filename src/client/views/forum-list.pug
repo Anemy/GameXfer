@@ -1,107 +1,103 @@
-doctype html
-html(lang='en')
-  head
-    link(rel='stylesheet' href='style/index.css')
-    script(src='/js/build.js')
-    title='Forums - GameXfer'
+extends layout
 
-    link(rel='icon' type='image/png' href='/images/treasure-64.png')
-  body
-    include header
-    .spacer
-      img.top-left-accent(src='/images/topleft.png')
-      .top-right-accent-container
-        img.top-right-accent(src='/images/topright.png')
-    .forums-page
-      .col-md-4.pr-0
-        .leaderboard-panel-container
-          h3.pl-2.
-            Leaderboard
-          .leaderboard-panel
-            p.leaderboard-title.
-              Top Posters
-            ol
-              each leaderboardUser, index in topPosters
-                li
-                  p.inline-block.
-                    <span class='text-mute text-small'>#{index+1}.</span>&nbsp;
-                  a(href='/u/'+leaderboardUser.username)
-                    p.inline-block.text-underline.
-                      #{leaderboardUser.displayUsername}
-                  p.inline-block.
-                    : #{leaderboardUser.posts}
-          .leaderboard-panel
-            p.leaderboard-title.
-              Top XferCoin
-            ol
-              each leaderboardUser, index in topCoin
-                li
-                  p.inline-block.
-                    <span class='text-mute text-small'>#{index+1}.</span>&nbsp;
-                  a(href='/u/'+leaderboardUser.username)
-                    p.inline-block.text-underline.
-                      #{leaderboardUser.displayUsername}
-                  p.inline-block.
-                    : #{leaderboardUser.xferCoin}
-                  img(src='/images/coins-32.png' class='inline-block  xfer-coin-image')
-      .col-md-20
-        .forums-page-title-area.js-forums-info-selector
-          .forums-title
-            h3.inline-block.
-              <span>The</span> Forums&nbsp;
-            p(class='forums-title-dropdown-icon  js-forums-info-selector-icon').
-              v
-          div(class='forums-info  hide  js-forums-info')
-            p.
-              GameXfer is a forums and trading community for digital items and services. We strive to offer a positive and inclusive atmosphere for online discussions.
-            br
-            p.
-              Come <a href='/signup'>join</a> us! We use a currency called XferCoin to facilitate trades across a wide variety of games from our many users.
-        if !categories
-          p.center-text.
-            Error: Unable to find forums and categories. Please refresh.
-        else
-          .categories-selection-page
-            each category, categoryId in categories
-              .forum-category-panel
-                p.forum-category-title.
-                  #{categoryId}
-                each forum in category.length ? category : ['No forums found.']
-                  a(href='/f/' + forum.forumId class='inline-block  forum-in-category').
-                    #{forum.title}
-                  p.inline-block.
-                    &nbsp;
-          .forums-list-panel
-            .forums-table-header
-              .col-md-14.pl-m.
-                Forum Title
-              .col-md-4.
-                Thread Count
-              .col-md-6.
-                Recent Activity
-            if forums ? forums.length === 0 : false
-              .forum-header.center-text.
-                No forums found
-            else
-              each forum in forums
-                .forum-header
-                  .col-md-14.forum-header-col
-                    p(class='forum-header-title')
-                      a(href='/f/'+forum.forumId).
-                        #{forum.title}
-                  .col-md-4.forum-header-col.
-                    #{forum.threadsCreatedTotal}
-                  .col-md-6.forum-header-col
-                    .forum-most-recent-thread
-                      if forum.mostRecentCommentThreadTitle
-                        a(href='/f/'+forum.forumId+'/t/'+forum.mostRecentCommentThreadId)
-                          p.most-recent-comment-thread-title.
-                            #{forum.mostRecentCommentThreadTitle}
-                      if forum.mostRecentCommentAuthor
-                        a(href='/u/'+forum.mostRecentCommentAuthor.username)
-                          p.inline-block.text-underline.
-                            #{forum.mostRecentCommentAuthor.displayUsername}
-                      if forum.mostRecentCommentTime
-                        p(class='inline-block  forum-header-info').
-                          &nbsp;#{moment(forum.mostRecentCommentTime).fromNow()}
-    include footer
+block head
+  title='Forums - GameXfer'
+block body
+  include header
+  .spacer
+    img.top-left-accent(src='/images/topleft.png')
+    .top-right-accent-container
+      img.top-right-accent(src='/images/topright.png')
+  .forums-page
+    .col-md-4.pr-0
+      .leaderboard-panel-container
+        h3.pl-2.
+          Leaderboard
+        .leaderboard-panel
+          p.leaderboard-title.
+            Top Posters
+          ol
+            each leaderboardUser, index in topPosters
+              li
+                p.inline-block.
+                  <span class='text-mute text-small'>#{index+1}.</span>&nbsp;
+                a(href='/u/'+leaderboardUser.username)
+                  p.inline-block.text-underline.
+                    #{leaderboardUser.displayUsername}
+                p.inline-block.
+                  : #{leaderboardUser.posts}
+        .leaderboard-panel
+          p.leaderboard-title.
+            Top XferCoin
+          ol
+            each leaderboardUser, index in topCoin
+              li
+                p.inline-block.
+                  <span class='text-mute text-small'>#{index+1}.</span>&nbsp;
+                a(href='/u/'+leaderboardUser.username)
+                  p.inline-block.text-underline.
+                    #{leaderboardUser.displayUsername}
+                p.inline-block.
+                  : #{leaderboardUser.xferCoin}
+                img(src='/images/coins-32.png' class='inline-block  xfer-coin-image')
+    .col-md-20
+      .forums-page-title-area.js-forums-info-selector
+        .forums-title
+          h3.inline-block.
+            <span>The</span> Forums&nbsp;
+          p(class='forums-title-dropdown-icon  js-forums-info-selector-icon').
+            v
+        div(class='forums-info  hide  js-forums-info')
+          p.
+            GameXfer is a forums and trading community for digital items and services. We strive to offer a positive and inclusive atmosphere for online discussions.
+          br
+          p.
+            Come <a href='/signup'>join</a> us! We use a currency called XferCoin to facilitate trades across a wide variety of games from our many users.
+      if !categories
+        p.center-text.
+          Error: Unable to find forums and categories. Please refresh.
+      else
+        .categories-selection-page
+          each category, categoryId in categories
+            .forum-category-panel
+              p.forum-category-title.
+                #{categoryId}
+              each forum in category.length ? category : ['No forums found.']
+                a(href='/f/' + forum.forumId class='inline-block  forum-in-category').
+                  #{forum.title}
+                p.inline-block.
+                  &nbsp;
+        .forums-list-panel
+          .forums-table-header
+            .col-md-14.pl-m.
+              Forum Title
+            .col-md-4.
+              Thread Count
+            .col-md-6.
+              Recent Activity
+          if forums ? forums.length === 0 : false
+            .forum-header.center-text.
+              No forums found
+          else
+            each forum in forums
+              .forum-header
+                .col-md-14.forum-header-col
+                  p(class='forum-header-title')
+                    a(href='/f/'+forum.forumId).
+                      #{forum.title}
+                .col-md-4.forum-header-col.
+                  #{forum.threadsCreatedTotal}
+                .col-md-6.forum-header-col
+                  .forum-most-recent-thread
+                    if forum.mostRecentCommentThreadTitle
+                      a(href='/f/'+forum.forumId+'/t/'+forum.mostRecentCommentThreadId)
+                        p.most-recent-comment-thread-title.
+                          #{forum.mostRecentCommentThreadTitle}
+                    if forum.mostRecentCommentAuthor
+                      a(href='/u/'+forum.mostRecentCommentAuthor.username)
+                        p.inline-block.text-underline.
+                          #{forum.mostRecentCommentAuthor.displayUsername}
+                    if forum.mostRecentCommentTime
+                      p(class='inline-block  forum-header-info').
+                        &nbsp;#{moment(forum.mostRecentCommentTime).fromNow()}
+  include footer

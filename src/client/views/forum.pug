@@ -1,81 +1,78 @@
-doctype html
-html(lang='en')
-  head
-    link(rel='stylesheet' href='/style/index.css')
-    script(src='/js/build.js')
-    title=forum.title+' GameXfer'
+extends layout
 
-    link(rel='icon' type='image/png' href='/images/treasure-64.png')
-  body
-    include header
-    ul.nav-bar
-      li
-        a(href='/forums').
-          forums
-      li
-        a(href='/f/'+forum.forumId).
-          #{forum.forumId}
-          
-    .forum-page
-      p.forum-title.
-        #{forum.title}
-      p.forum-information.
-        #{forum.threadsCreatedTotal} threads
+block head
+  title=forum.title+' GameXfer'
+
+block body
+  include header
+  ul.nav-bar
+    li
+      a(href='/forums').
+        forums
+    li
+      a(href='/f/'+forum.forumId).
+        #{forum.forumId}
+        
+  .forum-page
+    p.forum-title.
+      #{forum.title}
+    p.forum-information.
+      #{forum.threadsCreatedTotal} threads
+    .forum-action-buttons
+      a(href='/f/'+forum.forumId+'/create-thread' class='forum-ui-button').
+        Create Thread
+    .thread-view-options
+      a(href='/f/'+forum.forumId+(forumPage!==1?('/p/'+forumPage):''))
+        p.thread-view-type(class=(typeView==='all')?'current-view-type':'').
+          All
+      for type in THREAD_TYPES
+        a(href='/f/'+forum.forumId+(forumPage!==1?('/p/'+forumPage):'')+'?thread-type='+type.abrv)
+          p.thread-view-type(class=(typeView===type.abrv)?'current-view-type':'').
+            #{type.abrv}
+    .forum-threads-panel
+      .thread-table-header
+        .col-md-1
+          .center-text.pl-3.
+            Type
+        .col-md-15.
+          Title &amp; Description
+        .col-md-2.
+          Comments
+        .col-md-2.
+          Views
+        .col-md-4.
+          Last Comment
+      if threads ? threads.length === 0 : false
+        .thread-header.center-text
+          .col-md-24
+            p.mt-2.
+              No threads found :'(
+            br
+            a(href='/f/'+forum.forumId+'/create-thread')
+              p.mb-2.
+                Create a new thread :D
+      else
+        include thread-list
+        +thread-list(threads)
+    .forum-bottom-bar
+      .page-selector
+        - const lastPage = forum.threadsCreatedTotal ? Math.floor((forum.threadsCreatedTotal-1)/THREADS_PER_PAGE)+1 : 1;
+        p.page-selection-text.
+          Page #{forumPage} of #{lastPage}
+        if forum.threadsCreatedTotal > THREADS_PER_PAGE
+          a(href='/f/'+forum.forumId)
+              p.page-selection-item(class=(forumPage===1)?'page-selected':null).
+                1
+          if forumPage > 5
+            p.inline-block.
+              ...
+          - let pageNumber = (forumPage-3 > 1) ? (forumPage-3) : 2;
+          - let pagesDisplayedEnd = (forumPage+3 < lastPage) ? (forumPage+3) : lastPage;
+          while pageNumber <= pagesDisplayedEnd
+            a(href='/f/'+forum.forumId+'/p/'+pageNumber)
+              p.page-selection-item(class=(pageNumber===forumPage)?'page-selected':null).
+                #{pageNumber++}
       .forum-action-buttons
         a(href='/f/'+forum.forumId+'/create-thread' class='forum-ui-button').
           Create Thread
-      .thread-view-options
-        a(href='/f/'+forum.forumId+(forumPage!==1?('/p/'+forumPage):''))
-          p.thread-view-type(class=(typeView==='all')?'current-view-type':'').
-            All
-        for type in THREAD_TYPES
-          a(href='/f/'+forum.forumId+(forumPage!==1?('/p/'+forumPage):'')+'?thread-type='+type.abrv)
-            p.thread-view-type(class=(typeView===type.abrv)?'current-view-type':'').
-              #{type.abrv}
-      .forum-threads-panel
-        .thread-table-header
-          .col-md-1
-            .center-text.pl-3.
-              Type
-          .col-md-15.
-            Title &amp; Description
-          .col-md-2.
-            Comments
-          .col-md-2.
-            Views
-          .col-md-4.
-            Last Comment
-        if threads ? threads.length === 0 : false
-          .thread-header.center-text
-            .col-md-24
-              p.mt-2.
-                No threads found :'(
-              br
-              a(href='/f/'+forum.forumId+'/create-thread')
-                p.mb-2.
-                  Create a new thread :D
-        else
-          include thread-list
-          +thread-list(threads)
-      .forum-bottom-bar
-        .page-selector
-          - const lastPage = forum.threadsCreatedTotal ? Math.floor((forum.threadsCreatedTotal-1)/THREADS_PER_PAGE)+1 : 1;
-          p.page-selection-text.
-            Page #{forumPage} of #{lastPage}
-          if forum.threadsCreatedTotal > THREADS_PER_PAGE
-            a(href='/f/'+forum.forumId)
-                p.page-selection-item(class=(forumPage===1)?'page-selected':null).
-                  1
-            if forumPage > 5
-              p.inline-block.
-                ...
-            - let pageNumber = (forumPage-3 > 1) ? (forumPage-3) : 2;
-            - let pagesDisplayedEnd = (forumPage+3 < lastPage) ? (forumPage+3) : lastPage;
-            while pageNumber <= pagesDisplayedEnd
-              a(href='/f/'+forum.forumId+'/p/'+pageNumber)
-                p.page-selection-item(class=(pageNumber===forumPage)?'page-selected':null).
-                  #{pageNumber++}
-        .forum-action-buttons
-          a(href='/f/'+forum.forumId+'/create-thread' class='forum-ui-button').
-            Create Thread
-    include footer
+  include footer

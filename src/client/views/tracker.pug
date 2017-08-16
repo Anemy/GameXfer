@@ -1,46 +1,46 @@
-doctype html
-html(lang='en')
-  head
-    link(rel='stylesheet' href='/style/index.css')
-    script(src='/js/build.js')
-    title='Thread Tracker - GameXfer'
+extends layout
 
-    link(rel='icon' type='image/png' href='/images/treasure-64.png')
-  body
-    include header
-    .forum-page
-      p.forum-title.
-        Thread Tracker
-      p.forum-information.
-        This view shows all of the threads you are currently tracking.
-      .thread-table-header
-        .col-md-1
-          .center-text.pl-3.
-            Type
-        .col-md-15.
-          Title &amp; Description
-        .col-md-2.
-          Comments
-        .col-md-2.
-          Views
-        .col-md-4.
-          Last Comment
-      if threads ? threads.length === 0 : false
-        .thread-header.center-text
-          .col-md-24
-            p.mt-2.
-              No threads currently tracked.
-            br
-            p.inline-block.
-              You can track threads by clicking the 
-            .forum-ui-button.inline-block
-              i(class='fa  fa-plus')
-              p.pl-1.inline-block.
-                Track Thread
-            p.inline-block.
-              &nbsp;button which is present when viewing threads.
+block head
+  link(rel='stylesheet' href='/style/index.css')
+  script(src='/js/build.js')
+  title='Thread Tracker - GameXfer'
 
-      else
-        include thread-list
-        +thread-list(threads)
-    include footer
+  link(rel='icon' type='image/png' href='/images/treasure-64.png')
+block body
+  include header
+  .forum-page
+    p.forum-title.
+      Thread Tracker
+    p.forum-information.
+      This view shows all of the threads you are currently tracking.
+    .thread-table-header
+      .col-md-1
+        .center-text.pl-3.
+          Type
+      .col-md-15.
+        Title &amp; Description
+      .col-md-2.
+        Comments
+      .col-md-2.
+        Views
+      .col-md-4.
+        Last Comment
+    if threads ? threads.length === 0 : false
+      .thread-header.center-text
+        .col-md-24
+          p.mt-2.
+            No threads currently tracked.
+          br
+          p.inline-block.
+            You can track threads by clicking the 
+          .forum-ui-button.inline-block
+            i(class='fa  fa-plus')
+            p.pl-1.inline-block.
+              Track Thread
+          p.inline-block.
+            &nbsp;button which is present when viewing threads.
+
+    else
+      include thread-list
+      +thread-list(threads)
+  include footer

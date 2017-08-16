@@ -1,11 +1,9 @@
-html
-  head
-    title="404 - GameXfer"
-    link(href='/style/index.css' rel='stylesheet' type='text/css')
+extends layout
 
-    link(rel="icon" type="image/png" href="/images/treasure-64.png")
-  body
-    div(class="not-found-page")
-      a(href="/")
-        h1(class= "title").
-          404 - That page was not found. Click me to go home!
+block head
+  title='404 - GameXfer'
+block body
+  div(class='not-found-page')
+    a(href='/')
+      h3.ml-l.mt-l.
+        404 - That page was not found. Click me to go home!
