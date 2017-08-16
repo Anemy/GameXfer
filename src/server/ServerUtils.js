@@ -8,10 +8,12 @@ import ServerConstants from './ServerConstants';
 
 export default {
   getMongoDBURL: () => {
-    if (Environment.isDev()) {
-      return ServerConstants.TEST_MONGODB_URL;
-    } else if (process.env.GAMEXFER_MONGO_URL) {
+    if (process.env.GAMEXFER_MONGO_URL) {
       return process.env.GAMEXFER_MONGO_URL;
+    } else if (Environment.isDev()) {
+      return ServerConstants.TEST_MONGODB_URL;
+    } else if (Environment.isProd()) {
+      return ServerConstants.PROD_MONGODB_URL;
     } else {
       return ServerConstants.TEST_MONGODB_URL;
     }
