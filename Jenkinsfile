@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-pipeline {
+node {
     stages {
         stage('Install') {
             steps {
