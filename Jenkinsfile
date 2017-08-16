@@ -2,31 +2,21 @@
 
 node {
     stage('Install') {
-        steps {
-            echo 'Installing...'
-            sh 'npm install --production'
-        }
+        echo 'Installing...'
+        sh 'npm install --production'
     }
     stage('Prebuild') {
-        steps {
-            echo 'Prebuilding (Cleaning slate)...'
-            sh 'npm run prebuild'
-        }
+        echo 'Prebuilding (Cleaning slate)...'
+        sh 'npm run prebuild'
     }
     stage('Build') {
-        steps {
-            echo 'Building...'
-            sh 'npm run build'
-        }
+        echo 'Building...'
+        sh 'npm run build'
     }
     stage('Test') {
-        steps {
-            echo 'lol'
-        }
+        echo 'lol'
     }
     stage('Deploy') {
-        steps {
-            sh 'npm run start-prod'
-        }
+        sh 'npm run start-prod'
     }
 }
