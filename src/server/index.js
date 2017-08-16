@@ -10,6 +10,7 @@ import connectMongo from 'connect-mongo';
 import express from 'express';
 import dotenv from 'dotenv';
 import fs from 'fs';
+import http from 'http';
 import https from 'https';
 import moment from 'moment';
 import os from 'os';
@@ -55,24 +56,6 @@ if (!Environment.isDev() && cluster.isMaster) {
 
   const MongoStore = connectMongo(session);
 
-  let certOptions;
-
-  // Use the local cert in dev.
-  if (Environment.isProd()) {
-    certOptions = {
-      key: fs.readFileSync('/etc/letsencrypt/live/gamexfer.com/privkey.pem'),
-      cert: fs.readFileSync('/etc/letsencrypt/live/gamexfer.com/cert.pem'),
-      ca: fs.readFileSync('/etc/letsencrypt/live/gamexfer.com/chain.pem')
-    };
-  } else {
-    certOptions = {
-      key: fs.readFileSync('./key.pem'),
-      cert: fs.readFileSync('./cert.pem'),
-      requestCert: false,
-      rejectUnauthorized: false
-    };
-  }
-
   // Set up session storing.
   app.use(session({
     secret: 'GameXfer...SECRET_12321!...kittens',
@@ -99,7 +82,22 @@ if (!Environment.isDev() && cluster.isMaster) {
 
   app.use('/', router);
 
-  https.createServer(certOptions, app).listen(PORT, () => {
-    console.log('Pid', process.pid, Environment.get(), 'server listening on port', PORT, '\\o/');
-  });
+  if (Environment.isProd()) {
+    // Our server uses nginx for cert things so we can just use http.
+    http.createServer(app).listen(PORT, () => {
+      console.log('Pid', process.pid, Environment.get(), 'server listening on port', PORT, '\\o/');
+    });
+  } else {
+    // Use the local cert in dev.
+    const certOptions = {
+      key: fs.readFileSync('./key.pem'),
+      cert: fs.readFileSync('./cert.pem'),
+      requestCert: false,
+      rejectUnauthorized: false
+    };
+
+    https.createServer(certOptions, app).listen(PORT, () => {
+      console.log('Pid', process.pid, Environment.get(), 'server listening on port', PORT, '\\o/');
+    });
+  }
 }

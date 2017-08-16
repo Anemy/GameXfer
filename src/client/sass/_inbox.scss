@@ -108,17 +108,12 @@ $check-color: #333;
 .messages-table-headers {
   display: flex;
 
-  padding-top: 6px;
-  padding-bottom: 2px;
+  padding-top: 12px;
+  padding-bottom: 3px;
 
   border-bottom: 1px solid $flat-clouds;
 
   background-color: white;
-}
-
-.inbox-header-col {
-  // padding: 4px 4px;
-  // padding-left: 4px;
 }
 
 .inbox-message-text-row {
