@@ -1,3 +1,5 @@
+#!/usr/bin/env groovy
+
 pipeline {
     agent {
         docker {
@@ -10,30 +12,30 @@ pipeline {
         stage('Install') {
             steps {
                 echo 'Installing...'
-                npm install --production
+                sh 'npm install --production'
             }
         }
         stage('Prebuild') {
             steps {
                 echo 'Prebuilding (Cleaning slate)...'
-                npm run prebuild
+                sh 'npm run prebuild'
             }
         }
         stage('Build') {
             steps {
                 echo 'Building...'
-                npm run build
+                sh 'npm run build'
             }
         }
         stage('Test') {
-          steps {
-            echo 'lol'
-          }
+            steps {
+                echo 'lol'
+            }
         }
         stage('Deploy') {
-          steps {
-            npm run start-prod
-          }
+            steps {
+                sh 'npm run start-prod'
+            }
         }
     }
 }
