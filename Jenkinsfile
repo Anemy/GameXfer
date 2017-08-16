@@ -1,22 +1,41 @@
 #!/usr/bin/env groovy
 
-node {
-    stage('Install') {
-        echo 'Installing...'
-        sh 'npm install --production'
+pipeline {
+    agent {
+        docker {
+            image 'node'
+            args '-u root'
+        }
     }
-    stage('Prebuild') {
-        echo 'Prebuilding (Cleaning slate)...'
-        sh 'npm run prebuild'
-    }
-    stage('Build') {
-        echo 'Building...'
-        sh 'npm run build'
-    }
-    stage('Test') {
-        echo 'lol'
-    }
-    stage('Deploy') {
-        sh 'npm run start-prod'
+
+    stages {
+        stage('Install') {
+            steps {
+                echo 'Installing...'
+                sh 'npm install --production'
+            }
+        }
+        stage('Prebuild') {
+            steps {
+                echo 'Prebuilding (Cleaning slate)...'
+                sh 'npm run prebuild'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Building...'
+                sh 'npm run build'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'lol'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'npm run start-prod'
+            }
+        }
     }
 }
