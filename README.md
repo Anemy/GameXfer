@@ -47,14 +47,7 @@ $ browser https://localhost:3000
   - mostRecentCommentThreadId `String`
   - mostRecentCommentForumId `String`
   - messagesRecievedTotal `Number`
-  - messagesLength `Number` - The amount of messages in the user's inbox. Saves counting operation time.
-  - messages `Array` - An array of the user's messages. Can hold up to 100 messages at a time.
-    - messageId `String` - Uuid timestamped.
-    - sender `String` - The _id of the user who sent the message.
-    - subject `String`
-    - text `String`
-    - sentAt `Date`
-    - readAt `Date` - Set when the message has been read.
+  - messagesLength `Number` - The amount of messages in the user's inbox. Saves counting operation time. Counted via the messages collection.
   - deletedMessages - `Array of messages ^` - Stores last 5 deleted messages in a queue.
   - timesShownTrackingLimitWarning `Number` - We warn a user when they're tracking the max amount of threads. This makes them warn a limited amount.
   - trackedThreads `Array` - An array of the thread ids the user has tracked. Can hold up to 50 tracks at a time.
@@ -94,6 +87,17 @@ $ browser https://localhost:3000
    - author `String`
    - text `String` - Stored as HTML, edited as markdown.
    - createdAt `Date`
+
+#### Messages
+
+- messages
+  - messageId `String` - Uuid timestamped.
+  - sender `String` - The username of the user who sent the message.
+  - destination `String` - The username of the user who sent the message.
+  - subject `String`
+  - text `String`
+  - sentAt `Date`
+  - readAt `Date` - When the message was read. (If the message is unread this is unset.)
 
 #### Transactions
 
