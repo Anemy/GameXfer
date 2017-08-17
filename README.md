@@ -12,9 +12,10 @@ We use `dotenv` for storing environment variables around confidential/secret tok
 
 ```bash
 $ npm install
-$ npm install -g eslint # Might be optional - I need to test.
-$ npm install -g babel-cli # for scripts # Might be optional - I need to test.
-$ npm install -g nodemon # Might be optional - I need to test.
+$ npm install -g gulp
+$ npm install -g eslint
+$ npm install -g babel-cli # For one off scripts. # Might be optional - I need to test.
+$ npm install -g nodemon
 ```
 
 ## Deployment
