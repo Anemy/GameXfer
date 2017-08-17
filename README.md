@@ -93,10 +93,11 @@ $ browser https://localhost:3000
 - messages
   - messageId `String` - Uuid timestamped.
   - sender `String` - The username of the user who sent the message.
-  - destination `String` - The username of the user who sent the message.
+  - destination `String` - The username of the user who recieved the message.
   - subject `String`
   - text `String`
   - sentAt `Date`
+  - deletedAt `Date` - When the message was deleted. There is a max amount of these per destination
   - readAt `Date` - When the message was read. (If the message is unread this is unset.)
 
 #### Transactions
