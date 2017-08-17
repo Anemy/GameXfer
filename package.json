@@ -23,6 +23,7 @@
     "express": "^4.15.3",
     "express-rate-limit": "^2.8.0",
     "express-session": "^1.15.4",
+    "forever-monitor": "^1.7.1",
     "gulp-uglifyjs": "^0.6.2",
     "jquery": "^3.2.1",
     "moment": "^2.18.1",
