@@ -1,13 +1,17 @@
 node {
-  stage 'Install'
-  sh 'npm install'
+  stage ('Install') {
+    sh 'npm install'
+  }
 
-  stage 'Prebuild'
-  sh 'npm run prebuild'
+  stage ('Prebuild') {
+    sh 'npm run prebuild'
+  }
 
-  stage 'Build'
-  sh 'npm run build'
+  stage ('Build') {
+    sh 'npm run build'
+  }
 
-  stage 'Deploy'
-  sh 'npm run start-prod'
+  stage ('Deploy') {
+    sh 'npm run start-prod'
+  }
 }
