@@ -1,4 +1,4 @@
-node {
+pipeline {
   stage ('Install') {
     sh 'npm install'
   }
