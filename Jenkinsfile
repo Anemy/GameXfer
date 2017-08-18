@@ -1,6 +1,6 @@
 node {
   stage 'Install'
-  sh 'npm install --production'
+  sh 'npm install'
 
   stage 'Prebuild'
   sh 'npm run prebuild'
