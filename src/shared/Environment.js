@@ -11,7 +11,6 @@ class Environment {
     if (this.server) {
       this.environment = process.env.NODE_ENV;
     } else {
-      // TODO: Pull environment from the server somehow.
       this.environment = DEVELOPMENT;
     }
   }
