@@ -75,12 +75,12 @@ if (!Environment.isDev() && cluster.isMaster) {
     limit: '100mb'
   }));
 
-  const publicFolderDir = path.join(__dirname, '/../../public');
+  const publicFolderDir = path.resolve(__dirname + '/../../public');
   app.use(express.static(publicFolderDir));
 
   // HACK: On prod we run in an extra build folder so this is how we ref some things correctly.
   // TODO: Make prod n dev work nicely together. Sharing is caring.
-  const viewsFolderDir = path.join(__dirname, '/..' + (Environment.isProd()?'/../src/':'') + '/client/views');
+  const viewsFolderDir = path.resolve(__dirname + '/..' + (Environment.isProd()?'/../src/':'') + '/client/views');
   app.set('views', viewsFolderDir);
   app.set('view engine', 'pug');
 
