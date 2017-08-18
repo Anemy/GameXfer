@@ -1,3 +1,5 @@
+# This is how you set up mongodb with the collections for gamexfer.
+
 use gamexfer_test
 db.createCollection('users');
 db.createCollection('forums');
