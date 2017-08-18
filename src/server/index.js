@@ -77,7 +77,7 @@ if (!Environment.isDev() && cluster.isMaster) {
 
   // HACK: On prod we run in an extra build folder so this is how we ref some things correctly.
   // TODO: Make prod n dev work nicely together. Sharing is caring.
-  let projectDirRef = Environment.isProd() ? '/../..' : '/..';
+  let projectDirRef = Environment.isProd() ? '/../../..' : '/..';
 
   app.use(express.static(path.join(__dirname, projectDirRef + '/../public')));
 
