@@ -1,17 +1,29 @@
 pipeline {
-  stage ('Install') {
-    sh 'npm install'
-  }
+  agent none
 
-  stage ('Prebuild') {
-    sh 'npm run prebuild'
-  }
+  stages {
+    stage ('Install') {
+      steps {
+        sh 'npm install'
+      }  
+    }
 
-  stage ('Build') {
-    sh 'npm run build'
-  }
+    stage ('Prebuild') {
+      steps {
+        sh 'npm run prebuild'
+      }  
+    }
 
-  stage ('Deploy') {
-    sh 'npm run start-prod'
+    stage ('Build') {
+      steps {
+        sh 'npm run build'
+      }  
+    }
+
+    stage ('Deploy') {
+      steps {
+        sh 'npm run start-prod'
+      }  
+    }
   }
 }
