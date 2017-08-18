@@ -1,5 +1,6 @@
 # GameXfer
 [Gamexfer.com](http://gamexfer.com)
+
 See `LICENSE.txt` for the license.
 
 ## Installation
@@ -113,4 +114,3 @@ $ browser https://localhost:3000
   - sentAt `Date`
   - completedAt `Date`
 
-  
