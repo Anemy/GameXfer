@@ -79,9 +79,9 @@ if (!Environment.isDev() && cluster.isMaster) {
   // TODO: Make prod n dev work nicely together. Sharing is caring.
   let projectDirRef = Environment.isProd() ? '/../..' : '/..';
 
-  app.use(express.static(path.join(__dirname, projectDirRef + '/../public')));
+  app.use(express.static('/../public')); // path.join(__dirname, projectDirRef + 
 
-  app.set('views', path.join(__dirname + projectDirRef, '/client/views'));
+  app.set('views', '/client/views'); // path.join(__dirname + projectDirRef, 
   app.set('view engine', 'pug');
 
   app.use('/', router);
