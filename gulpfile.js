@@ -48,7 +48,11 @@ const clientWebpackConfig = {
       },
     }]
   },
-  target: 'node'
+  target: 'node',
+  node: {
+    fs: 'empty',
+    fileSystem: 'empty'
+  }
 };
 
 gulp.task('dev', ['server-dev', 'js-client-dev', 'style', 'lint'], () => {
