@@ -13,7 +13,7 @@ const config = {
     'src/client/js/index.js'
   ],
   clientJsPath: 'src/client/js/**/*.js',
-  clientJsBuildDir: 'build',
+  clientJsBuildDir: 'build/client',
   clientJsDestDir: 'public/js',
   cssDestDir: 'public/style',
   jsToLintPath: [
@@ -105,7 +105,7 @@ gulp.task('build-js-prod', () => {
 });
 
 gulp.task('uglify-js-prod', () => {
-  gulp.src(config.clientJsBuildDir+'/*.js')
+  gulp.src(config.clientJsBuildDir + '/build.js')
     .pipe(uglify())
     .pipe(gulp.dest(config.clientJsDestDir));
 });

@@ -1,5 +1,6 @@
 node {
   stage ('Install') {
+    sh 'git pull'
     sh 'npm install'
   }
 
