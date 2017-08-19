@@ -9,12 +9,8 @@ module.exports = {
       },
     }]
   },
-  // target: 'node',
-  // node: {
-  //   fs: false,
-  //   fileSystem: false
-  // }
-  entry: './src/client/js/index.js',
+  target: 'node',
+  entry: __dirname + '/src/client/js/index.js',
   output: {
     path: __dirname + '/build/client',
     filename: 'build.js'
