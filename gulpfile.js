@@ -41,17 +41,12 @@ const clientWebpackConfig = {
     loaders: [{
       test: /\.js$/,
       loader: 'babel-loader',
-      exclude: 'node_modules',
+      exclude: /node_modules/,
       query: {
         cacheDirectory: true,
         presets: ['es2015']
       },
     }]
-  },
-  target: 'node',
-  node: {
-    fs: 'empty',
-    fileSystem: 'empty'
   }
 };
 
@@ -99,16 +94,6 @@ gulp.task('js-client-dev', () => {
     .pipe(gulp.dest(config.clientJsDestDir));
 });
 
-gulp.task('build-js-prod', () => {
-  // Build in the client code starting from the entry point.
-  return gulp.src(config.clientJsEntry)
-    .pipe(webpack(clientWebpackConfig))
-    .on('error', function handleError() {
-      this.emit('end'); // Recover from errors.
-    })
-    .pipe(concat('build.js'))
-    .pipe(gulp.dest(config.clientJsBuildDir));
-});
 
 gulp.task('uglify-js-prod', () => {
   gulp.src(config.clientJsBuildDir + '/build.js')
