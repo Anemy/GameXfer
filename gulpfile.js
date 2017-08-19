@@ -41,12 +41,14 @@ const clientWebpackConfig = {
     loaders: [{
       test: /\.js$/,
       loader: 'babel-loader',
+      exclude: 'node_modules',
       query: {
         cacheDirectory: true,
         presets: ['es2015']
       },
     }]
-  }
+  },
+  target: 'node'
 };
 
 gulp.task('dev', ['server-dev', 'js-client-dev', 'style', 'lint'], () => {
