@@ -13,7 +13,6 @@ We use `dotenv` for storing environment variables around confidential/secret tok
 
 ```bash
 $ npm install
-$ npm install -g webpack
 $ npm install -g gulp
 $ npm install -g eslint
 $ npm install -g babel-cli # For one off scripts. # Might be optional - I need to test.
