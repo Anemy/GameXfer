@@ -1,19 +1,18 @@
 module.exports = {
+  entry: './src/client/js/index.js',
+  output: {
+    path: __dirname + '/build/client',
+    filename: 'build.js'
+  },
+  cache: true,
   module: {
     loaders: [{
       test: /\.js$/,
       loader: 'babel-loader',
-      exclude: /node_modules/,
       query: {
+        cacheDirectory: true,
         presets: ['es2015']
       },
     }]
-  },
-  target: 'node',
-  entry: __dirname + '/src/client/js/index.js',
-  output: {
-    path: __dirname + '/build/client',
-    filename: 'build.js'
   }
 };
-
