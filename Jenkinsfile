@@ -1,31 +1,17 @@
-#!/usr/bin/env groovy
+node {
+  stage ('Install') {
+    sh 'npm install'
+  }
 
-pipeline {
-  agent none
+  stage ('Prebuild') {
+    sh 'npm run prebuild'
+  }
 
-  stages {
-    stage ('Install') {
-      steps {
-        sh 'npm install'
-      }  
-    }
+  stage ('Build') {
+    sh 'npm run build'
+  }
 
-    stage ('Prebuild') {
-      steps {
-        sh 'npm run prebuild'
-      }  
-    }
-
-    stage ('Build') {
-      steps {
-        sh 'npm run build'
-      }  
-    }
-
-    stage ('Deploy') {
-      steps {
-        sh 'npm run start-prod'
-      }  
-    }
+  stage ('Deploy') {
+    sh 'npm run start-prod'
   }
 }
