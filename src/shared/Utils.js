@@ -70,7 +70,7 @@ class Utils {
   }
 
   static validThreadTitle(title) {
-    return title && title.length > 10 && title.length < Constants.THREAD_TITLE_MAX_LENGTH;
+    return title && title.length > 5 && title.length < Constants.THREAD_TITLE_MAX_LENGTH;
   }
 
   static validThreadDescription(description) {

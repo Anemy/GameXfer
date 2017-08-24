@@ -44,6 +44,7 @@ $ browser https://localhost:3000
   - xferCoin `Number`
   - createdAt `Date`
   - posts: `Number`
+  - threads: `Number`
   - mostRecentCommentTime `Date`
   - mostRecentCommentId `String`
   - mostRecentCommentThreadId `String`

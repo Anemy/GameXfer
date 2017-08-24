@@ -1,5 +1,6 @@
 import aws from 'aws-sdk';
 
+import Raven from '../Raven';
 import ServerConstants from '../ServerConstants';
 
 aws.config.region = 'us-east-2';
@@ -42,6 +43,8 @@ export default (req, res) => {
 
   s3.getSignedUrl('putObject', s3Params, (err, data) => {
     if (err) {
+      Raven.logError(err);
+
       res.status(500).send({
         err: 'Unable to communicate with servers to store your image. Refresh and retry. Please contact one of the site administrators if it still doesn\'t work'
       });

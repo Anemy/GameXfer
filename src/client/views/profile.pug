@@ -23,7 +23,9 @@ block body
             Joined:&nbsp;#{moment(profile.createdAt).format('MMMM Do, YYYY')}
           a(href=`/thread/search?author=${profile.username}`)
             p.
-              Posts: #{profile.posts}
+              Threads: #{profile.threads}
+          p.
+            Posts: #{profile.posts}
           p.inline-block.
             Coins: #{profile.xferCoin}
           img(src='/images/coins-32.png' class='inline-block  xfer-coin-image')

@@ -139,7 +139,8 @@ export default (req, res) => {
         mostRecentCommentForumId: forumId,
       },
       $inc: {
-        posts: 1
+        posts: 1,
+        threads: 1
       }
     }, sync.defer()));
 

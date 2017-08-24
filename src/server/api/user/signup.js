@@ -103,6 +103,9 @@ export default (req, res) => {
           messagesLength: 0,
           hasUnread: false,
 
+          posts: 0,
+          threads: 0,
+
           trackedThreadIds: [],
 
           createdAt: currentTime,

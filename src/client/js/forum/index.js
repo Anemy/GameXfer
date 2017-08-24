@@ -21,7 +21,7 @@ export default {
       // Set up the display if it does not currently exist.
       const displayForumsInfo = JSON.parse(localStorage.getItem(showForumsInfoLocalVariable));
 
-      if (displayForumsInfo === undefined || displayForumsInfo) {
+      if (displayForumsInfo == undefined || displayForumsInfo) {
         toggleForumsInfo();
       }
 

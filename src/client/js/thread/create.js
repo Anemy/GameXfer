@@ -48,7 +48,7 @@ class CreateThread {
       // Ensure the title of the message conforms to the guidelines. 
       if (!Utils.validThreadTitle(title)) {
         this.performingAction = false;
-        this.showStatusMessage('Error: Invalid thread title.', 'message-failure');
+        this.showStatusMessage('Error: Invalid thread title. Max 120 characters, min of 5.', 'message-failure');
         return;
       }
 

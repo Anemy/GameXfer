@@ -19,6 +19,13 @@ db.collection('threads').createIndex({
 });
 
 db.collection('threads').createIndex({ 
+  forumId: 1,
+  threadId: 1
+}, {
+  unique: true
+});
+
+db.collection('threads').createIndex({ 
   author: 1
 });
 

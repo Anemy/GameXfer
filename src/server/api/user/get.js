@@ -25,6 +25,7 @@ export default (req, res) => {
       posts: 1,
       xferCoin: 1,
       biography: 1,
+      threads: 1,
       avatarURL: 1,
       mostRecentCommentTime: 1,
       mostRecentCommentId: 1,
