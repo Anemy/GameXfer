@@ -36,15 +36,15 @@ class Contact {
       }
 
       $.post('//formspree.io/rhysh@live.com', {
-        username: $('.js-contact-text-input').val(),
-        password: $('.js-contact-email-input').val(),
+        email: $('.js-contact-email-input').val(),
+        text: $('.js-contact-text-input').val(),
       }).done(() => {
-        this.showStatusMessage('Success! Redirecting in 3 seconds.', 'message-success');
+        this.showStatusMessage('Success! Redirecting home in 3 seconds.', 'message-success');
         setTimeout(() => {
-          this.showStatusMessage('Success! Redirecting in 2 seconds.', 'message-success');
+          this.showStatusMessage('Success! Redirecting home in 2 seconds.', 'message-success');
         }, 1000 /* 1s */);
         setTimeout(() => {
-          this.showStatusMessage('Success! Redirecting in 1 second.', 'message-success');
+          this.showStatusMessage('Success! Redirecting home in 1 second.', 'message-success');
         }, 2000 /* 2s */);
         setTimeout(() => {
           // TODO: Replace with an optional redirect string param.

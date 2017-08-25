@@ -168,7 +168,7 @@ router.get('/login', (req, res) => {
 router.get('/signup', (req, res) => {
   renderWithUser(req, res, 'signup');
 });
-router.get('/forgot-password', requireAuth, (req, res) => {
+router.get('/forgot-password', (req, res) => {
   renderWithUser(req, res, 'forgot-password');
 });
 router.get('/posts', requireAuth, basicLimiter, (req, res, next) => {

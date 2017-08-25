@@ -4,11 +4,19 @@ block head
   title='Forums - GameXfer'
 block body
   include header
+  .bottom-right-triangle
   .spacer
-    img.top-left-accent(src='/images/topleft.png')
+    .top-left-triangle.one
+    .top-left-triangle.two
+    .top-left-triangle.three
+    .top-left-triangle.four
+    .top-left-triangle.five
+    .top-left-triangle.six
+    //- img.top-left-accent(src='/images/topleft.png')
     .top-right-accent-container
       img.top-right-accent(src='/images/topright.png')
   .forums-page
+    .col-md-1
     .col-md-4.pr-0
       .leaderboard-panel-container
         h3.pl-2.
@@ -40,7 +48,7 @@ block body
                 p.inline-block.
                   : #{leaderboardUser.xferCoin}
                 img(src='/images/coins-32.png' class='inline-block  xfer-coin-image')
-    .col-md-20
+    .col-md-17
       .forums-page-title-area.js-forums-info-selector
         .forums-title
           h3.inline-block.
@@ -100,4 +108,5 @@ block body
                     if forum.mostRecentCommentTime
                       p(class='inline-block  forum-header-info').
                         &nbsp;#{moment(forum.mostRecentCommentTime).fromNow()}
+    .col-md-2
   include footer

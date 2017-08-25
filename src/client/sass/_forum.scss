@@ -12,6 +12,52 @@ $forum-top-padding: 8px;
   margin-bottom: -10px;
 }
 
+.top-left-triangle {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+$first-triangle: 290px;
+$triangle-line-size: 10px;
+$distance-between-triangles: 8px;
+$second-triangle: ($first-triangle - $triangle-line-size - $distance-between-triangles);
+$third-triangle: ($second-triangle - $triangle-line-size - $distance-between-triangles);
+
+.top-left-triangle.one {
+  border-width: $first-triangle $first-triangle 0 0;
+  border-color: #f6d41f transparent transparent transparent;
+}
+
+.top-left-triangle.two {
+  border-width: ($first-triangle - $triangle-line-size) ($first-triangle - $triangle-line-size) 0 0;
+  border-color: #FAFAFA transparent transparent transparent;
+}
+
+.top-left-triangle.three {
+  border-width: $second-triangle $second-triangle 0 0;
+  border-color: $text-primary transparent transparent transparent;
+}
+
+.top-left-triangle.four {
+  border-width: ($second-triangle - $triangle-line-size) ($second-triangle - $triangle-line-size) 0 0;
+  border-color: #FAFAFA transparent transparent transparent;
+}
+
+.top-left-triangle.five {
+  border-width: $third-triangle $third-triangle 0 0;
+  border-color: #f6d41f transparent transparent transparent;
+}
+
+.top-left-triangle.six {
+  border-width: ($third-triangle - $triangle-line-size) ($third-triangle - $triangle-line-size) 0 0;
+  border-color: #FAFAFA transparent transparent transparent;
+}
+
 .leaderboard-title {
   border-bottom: 1px solid $accent-dark;
   font-size: 16px;
@@ -128,7 +174,7 @@ $forum-top-padding: 8px;
   overflow: hidden;
 
   padding: 10px 12px;
-  padding-top: 2px;
+  padding-top: 4px;
 
   margin-top: 4px;
 
@@ -145,7 +191,7 @@ $forum-top-padding: 8px;
 }
 
 .forums-table-header {
-  color: $text-secondary;
+  color: $text-primary;
 
   display: flex;
 }
@@ -160,6 +206,7 @@ $forum-top-padding: 8px;
 
 .forum-in-category {
   font-size: 12px;
+  margin-right: 3px;
 }
 
 .thread-table-header {
