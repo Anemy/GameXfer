@@ -1,4 +1,7 @@
+# node
 node_modules
+npm-debug.log
+
 .env
 
 # Mac OS
@@ -6,7 +9,7 @@ node_modules
 
 local
 
-# Built files
-build/**/*.*
+# built files
+build
 public/js/build.js
 public/style/index.css

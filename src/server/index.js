@@ -9,9 +9,7 @@ import cluster from 'cluster';
 import connectMongo from 'connect-mongo';
 import express from 'express';
 import dotenv from 'dotenv';
-import fs from 'fs';
 import http from 'http';
-import https from 'https';
 import moment from 'moment';
 import os from 'os';
 import path from 'path'; 
@@ -92,15 +90,19 @@ if (!Environment.isDev() && cluster.isMaster) {
       console.log('Pid', process.pid, Environment.get(), 'server listening on port', PORT, '\\o/');
     });
   } else {
-    // Use the local cert in dev.
-    const certOptions = {
-      key: fs.readFileSync('./key.pem'),
-      cert: fs.readFileSync('./cert.pem'),
-      requestCert: false,
-      rejectUnauthorized: false
-    };
+    // Use the local cert in dev. - Commented to allow easier dev.
+    // const certOptions = {
+    //   key: fs.readFileSync('./key.pem'),
+    //   cert: fs.readFileSync('./cert.pem'),
+    //   requestCert: false,
+    //   rejectUnauthorized: false
+    // };
 
-    https.createServer(certOptions, app).listen(PORT, () => {
+    // https.createServer(certOptions, app).listen(PORT, () => {
+    //   console.log('Pid', process.pid, Environment.get(), 'server listening on port', PORT, '\\o/');
+    // });
+
+    http.createServer(app).listen(PORT, () => {
       console.log('Pid', process.pid, Environment.get(), 'server listening on port', PORT, '\\o/');
     });
   }
