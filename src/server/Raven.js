@@ -4,7 +4,11 @@ import Raven from 'raven';
 export default {
   capture: () => {
     if (Environment.isProd()) {
-      Raven.config('https://5ed37515bfdc49afa08a347506af29e8:4f0f344d05d64bcb910ceedb4ae59383@sentry.io/197712').install();
+      if (!process.env.RAVEN_KEY) {
+        throw new Error('ERROR: Raven key not defined in environment.');
+      } else {
+        Raven.config(process.env.RAVEN_KEY).install();
+      }
     }
   },
 
