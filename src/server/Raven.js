@@ -16,6 +16,6 @@ export default {
 //     if (Environment.isProd()) {
 //       Raven.captureException(err);
 //     }
-    console.log('an error occured': err);
+    console.log('an error occured', err);
   }
 };
