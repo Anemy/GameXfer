@@ -45,7 +45,7 @@ if (!Environment.isDev() && cluster.isMaster) {
     console.log(`Worker ${worker.process.pid} died.`);
   });
 } else {
-  const PORT = 3000;
+  const PORT = process.env.PORT || 3000;
 
   const app = express();
 
